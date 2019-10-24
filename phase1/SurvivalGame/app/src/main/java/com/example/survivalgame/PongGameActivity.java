@@ -9,30 +9,34 @@ import android.view.WindowManager;
 public class PongGameActivity extends AppCompatActivity {
     PongGameThread pongGameThread;
     PongGameView pongGameView;
+    RunningGameView runningGameView;
     User user;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        pongGameView = new PongGameView(this);
-        setContentView(pongGameView);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//
+//        pongGameView = new PongGameView(this);
+        runningGameView = new RunningGameView(this);
+//        setContentView(pongGameView);
+        setContentView(runningGameView);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        pongGameView.onResume();
-
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        pongGameView.onResume();
+//
+//    }
 
     @Override
     protected void onPause() {
         super.onPause();
-        pongGameView.onPause();
+//        pongGameView.onPause();
+        runningGameView.thread.running = false;
+        finish();
     }
 }
