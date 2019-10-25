@@ -32,7 +32,7 @@ class Spikes {
 
     private void Update() {
         x -= RunningGameView.globalxSpeed;
-        y = view.getHeight() - ground.height - spikesBmp.getHeight();
+        y = view.getHeight() - Ground.height - spikesBmp.getHeight();
     }
 
     int getX() {

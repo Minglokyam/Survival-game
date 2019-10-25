@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-class coin {
+class Coin {
 
     // the first and second coordinate of the coin.
     private int x;
@@ -33,7 +33,7 @@ class coin {
     /**
      * Build a coin.
      */
-    coin(RunningGameView view, Bitmap bmp, int x, int y) {
+    Coin(RunningGameView view, Bitmap bmp, int x, int y) {
         this.x = x;
         this.y2 = y;
 
@@ -48,7 +48,7 @@ class coin {
      */
     void update() {
         x += xspeed;
-        y = view.getHeight() - y2 - ground.height - bmp.getHeight();
+        y = view.getHeight() - y2 - Ground.height - bmp.getHeight();
 
         if (currentFrame >= columnWidth - 1) {
             currentFrame = 0;

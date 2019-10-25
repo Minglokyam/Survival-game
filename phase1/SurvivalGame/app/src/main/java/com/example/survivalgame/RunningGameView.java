@@ -27,19 +27,19 @@ class RunningGameView extends SurfaceView {
     Bitmap runnerBmp;
 
     // a list of runner.
-    private List<runner> runner = new ArrayList<>();
+    private List<Runner> runner = new ArrayList<>();
 
     // the image holder of the coin.
     Bitmap coinBmp;
 
     // a list of coin.
-    private List<coin> coin = new ArrayList<>();
+    private List<Coin> coin = new ArrayList<>();
 
     // the image holder of the ground.
     Bitmap groundBmp;
 
     // ground.
-    private ground ground;
+    private Ground ground;
 
     // the image holder of the spike.
     Bitmap spikesBmp;
@@ -95,15 +95,15 @@ class RunningGameView extends SurfaceView {
         spikesBmp = BitmapFactory.decodeResource(getResources(), R.drawable.spikes);
 
         // add runner and ground to the game.
-        runner.add(new runner(this, runnerBmp, 50, 50));
-        ground = new ground(this, groundBmp, 0, 0);
+        runner.add(new Runner(this, runnerBmp, 50, 50));
+        ground = new Ground(this, groundBmp, 0, 0);
     }
 
     /**
      * make the runner jump and restart the game once touching on the screen.
      */
     public boolean onTouchEvent(MotionEvent event) {
-        for (runner runners : runner) {
+        for (Runner runners : runner) {
             runners.onTouch();
         }
 
@@ -176,18 +176,18 @@ class RunningGameView extends SurfaceView {
                     int currentCoin = 1;
                     int xx = 1;
                     while (currentCoin <= 5) {
-                        coin.add(new coin(this, coinBmp, this.getWidth() + (64 * xx), 130));
+                        coin.add(new Coin(this, coinBmp, this.getWidth() + (64 * xx), 130));
                         currentCoin++;
                         xx++;
                     }
                     break;
 
                 case 2:
-                    coin.add(new coin(this, coinBmp, this.getWidth() + 32, 150));
-                    coin.add(new coin(this, coinBmp, this.getWidth() + 96, 130));
-                    coin.add(new coin(this, coinBmp, this.getWidth() + 160, 150));
-                    coin.add(new coin(this, coinBmp, this.getWidth() + 224, 130));
-                    coin.add(new coin(this, coinBmp, this.getWidth() + 288, 150));
+                    coin.add(new Coin(this, coinBmp, this.getWidth() + 32, 150));
+                    coin.add(new Coin(this, coinBmp, this.getWidth() + 96, 130));
+                    coin.add(new Coin(this, coinBmp, this.getWidth() + 160, 150));
+                    coin.add(new Coin(this, coinBmp, this.getWidth() + 224, 130));
+                    coin.add(new Coin(this, coinBmp, this.getWidth() + 288, 150));
             }
             timerCoins = 0;
         }
@@ -197,7 +197,7 @@ class RunningGameView extends SurfaceView {
      * make the game start.
      */
     public void startGame() {
-        runner.add(new runner(this, runnerBmp, 50, 50));
+        runner.add(new Runner(this, runnerBmp, 50, 50));
     }
 
     /**
@@ -240,7 +240,7 @@ class RunningGameView extends SurfaceView {
             //        canvas.drawText("Running time: " + System.currentTimeMillis(), 0, 96, paintText);
 
             // draw the runner.
-            for (runner runners : runner) {
+            for (Runner runners : runner) {
                 runners.onDraw(canvas);
             }
 

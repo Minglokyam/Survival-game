@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-class runner {
+class Runner {
     // the first and second coordinate of the runner.
     private static int x;
     private static int y;
@@ -35,9 +35,9 @@ class runner {
     /**
      * Build a runner.
      */
-    runner(RunningGameView view, Bitmap bmp, int x, int y) {
-        runner.x = x;
-        runner.y = y;
+    Runner(RunningGameView view, Bitmap bmp, int x, int y) {
+        Runner.x = x;
+        Runner.y = y;
         this.view = view;
         this.bmp = bmp;
 
@@ -63,14 +63,14 @@ class runner {
      * change the speed when hitting the ground and when jumping at highest point.
      */
     private void checkGround() {
-        if (y < view.getHeight() - ground.height - runnerHeight) {
+        if (y < view.getHeight() - Ground.height - runnerHeight) {
             vSpeed += gravity;
-            if (y > view.getHeight() - ground.height - runnerHeight - vSpeed) {
-                vSpeed = view.getHeight() - ground.height - runnerHeight;
+            if (y > view.getHeight() - Ground.height - runnerHeight - vSpeed) {
+                vSpeed = view.getHeight() - Ground.height - runnerHeight;
             }
         } else if (vSpeed > 0) {
             vSpeed = 0;
-            y = view.getHeight() - ground.height - runnerHeight;
+            y = view.getHeight() - Ground.height - runnerHeight;
         }
         y += vSpeed;
     }
@@ -79,7 +79,7 @@ class runner {
      * make the runner jump when touching the screen.
      */
     void onTouch() {
-        if (y >= view.getHeight() - ground.height - runnerHeight) {
+        if (y >= view.getHeight() - Ground.height - runnerHeight) {
             vSpeed = jumppower;
         }
     }
@@ -88,7 +88,7 @@ class runner {
      * get the rectangle of the runner.
      */
     Rect getBounds() {
-        return new Rect(runner.x, runner.y, runner.x + width, runner.y + height);
+        return new Rect(Runner.x, Runner.y, Runner.x + width, Runner.y + height);
     }
 }
 
