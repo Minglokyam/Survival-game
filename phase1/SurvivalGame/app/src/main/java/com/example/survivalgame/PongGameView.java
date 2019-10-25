@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class PongGameView extends SurfaceView implements Runnable {
+public class PongGameView extends SurfaceView{
     /**
      * The screen width
      */
@@ -22,11 +22,11 @@ public class PongGameView extends SurfaceView implements Runnable {
      */
     int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    Thread thread = null;
+    PongGameThread thread;
 
     volatile boolean playing;
 
-    boolean pause = true;
+    private boolean pause = true;
 
     private long fps;
 
@@ -48,12 +48,14 @@ public class PongGameView extends SurfaceView implements Runnable {
         paint.setTypeface(Typeface.DEFAULT_BOLD);
     }
 
-    public void update(long fps) {
+    public void update() {
         pongGameManager.update(fps);
         if(User.getLife() == 0){
             pause = true;
         }
     }
+
+
 
     public void draw() {
         canvas = null;
@@ -81,20 +83,6 @@ public class PongGameView extends SurfaceView implements Runnable {
         }
     }
 
-    @Override
-    public void run() {
-        while (playing) {
-            long startTime = System.currentTimeMillis();
-            if (!pause) {
-                update(fps);
-            }
-            draw();
-            long timeInterval = System.currentTimeMillis() - startTime;
-            if (timeInterval > 1) {
-                fps = 1000 / timeInterval;
-            }
-        }
-    }
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
@@ -118,6 +106,7 @@ public class PongGameView extends SurfaceView implements Runnable {
     public void onPause() {
         playing = false;
         try {
+            thread.setRun(playing);
             thread.join();
         } catch (InterruptedException e) {
             Log.e("Error:", "joining thread");
@@ -126,7 +115,16 @@ public class PongGameView extends SurfaceView implements Runnable {
 
     public void onResume() {
         playing = true;
-        thread = new Thread(this);
+        thread = new PongGameThread(this);
+        thread.setRun(playing);
         thread.start();
+    }
+
+    public void setFps(long n) {
+        fps = n;
+    }
+
+    public boolean getPause(){
+        return pause;
     }
 }
