@@ -1,27 +1,45 @@
 package com.example.survivalgame;
 
+import java.io.Serializable;
 import java.sql.Time;
 
-public class User {
-    private static String name;
-    private static int id;
+class User implements Serializable {
+
+    private String username;
+    private String password;
+
     private static int score;
-    private static int life = 3;
+    private static int life;
     private static Time time;
     private static int gameStage;
-    private final int JUMP = 0;
+
+    private final int RUNNING = 0;
     private final int DODGE = 1;
     private final int PONG = 2;
-    public static int getScore(){
-        return score;
+
+    User(String username, String password){
+        this.username = username;
+        this.password = password;
+        score = 0;
+        life = 3;
+        gameStage = 0;
     }
-    public static void setScore(int newScore){
-        score = newScore;
-    }
-    public static int getLife(){
-        return life;
-    }
-    public static void setLife(int newLife){
-        life = newLife;
-    }
+
+    String getUsername(){return username;}
+
+    String getPassword(){return password;}
+
+    public static int getScore(){return score;}
+
+    public static void setScore(int newScore){score = newScore;}
+
+    public static int getLife(){return life;}
+
+    public static void setLife(int newLife){life = newLife;}
+
+    public static int getGameStage(){return gameStage;}
+
+    public static void setGameStage(int stage){gameStage = stage;}
+
 }
+
