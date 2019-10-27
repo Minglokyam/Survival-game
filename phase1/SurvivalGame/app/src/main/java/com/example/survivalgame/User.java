@@ -13,9 +13,9 @@ class User implements Serializable {
     private static Duration totalDuration;
     private static int gameStage;
 
-    private final int RUNNING = 0;
-    private final int PONG = 1;
-    private final int DODGE = 2;
+    public static final int RUNNING = 0;
+    public static final int PONG = 1;
+    public static final int DODGE = 2;
 
 
     User(String username, String password){

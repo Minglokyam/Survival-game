@@ -27,8 +27,8 @@ public class PongGameActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        User.setGameStage(User.PONG);
         pongGameView.onResume();
-
     }
 
     @Override
