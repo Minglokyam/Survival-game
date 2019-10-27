@@ -17,7 +17,7 @@ import java.io.ObjectOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
-    private UserManager Manager;
+    private UserManager userManager;
 
     public static User user;
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Manager = new UserManager();
+        userManager = new UserManager();
         System.out.println(getFilesDir());
     }
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                this.Manager = (UserManager) input.readObject();
+                this.userManager = (UserManager) input.readObject();
                 inputStream.close();
             }
 //            UserManager temp = (UserManager)inputStream.readObject();
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(Manager);
+            outputStream.writeObject(userManager);
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
@@ -72,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
         String username = usernameInput.getText().toString();
         String password = passwordInput.getText().toString();
         if(!(username.trim().equals("") || password.trim().equals(""))){
-            if(!Manager.userExists(username)){
+            if(!userManager.userExists(username)){
                 User newUser = new User(username, password);
-                Manager.addUser(newUser);
+                userManager.addUser(newUser);
                 saveFile(USER_FILE);
                 String msg = "User creation successful";
                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
         }
         System.out.println("size:");
-        System.out.println(Manager.numUsers());
+        System.out.println(userManager.numUsers());
 
     }
 
@@ -98,9 +98,9 @@ public class MainActivity extends AppCompatActivity {
         String username = usernameInput.getText().toString();
         String password = passwordInput.getText().toString();
         if(!(username.trim().equals("") || password.trim().equals(""))){
-            System.out.println(Manager.userExists(username));
-            if(Manager.userExists(username)){
-                 User temp = Manager.getUser(username);
+            System.out.println(userManager.userExists(username));
+            if(userManager.userExists(username)){
+                 User temp = userManager.getUser(username);
                 if(temp.getUsername().equals(username) && temp.getPassword().equals(password)){
                     System.out.println("login success");
                     user = temp;
