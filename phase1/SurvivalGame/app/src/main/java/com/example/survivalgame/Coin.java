@@ -19,7 +19,7 @@ class Coin {
     private int columnHeight = 1;
 
     // the speed of the coin moves in x-coordinate.
-    private int xspeed = -RunningGameView.globalxSpeed;
+    private int xspeed = -RunningGameView.movingSpeed;
 
     private int currentFrame = 0;
 
