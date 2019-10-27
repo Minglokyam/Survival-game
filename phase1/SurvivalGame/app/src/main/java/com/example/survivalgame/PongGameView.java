@@ -21,6 +21,7 @@ public class PongGameView extends SurfaceView{
     /** The screen height */
     int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
+    /** A Pong Game Thread */
     PongGameThread thread;
 
     private boolean stop = true;

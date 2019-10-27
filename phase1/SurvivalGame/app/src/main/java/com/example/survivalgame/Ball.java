@@ -2,9 +2,6 @@ package com.example.survivalgame;
 
 import android.graphics.Color;
 
-/**
- * An interesting ball.
- */
 public class Ball extends GameItemCircle {
     /**
      * The horizontal velocity of this ball
