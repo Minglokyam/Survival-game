@@ -126,7 +126,7 @@ public class PongGameView extends SurfaceView{
         return true;
     }
 
-    public void onPause() {
+    public void pause() {
         try {
             thread.setPlaying(false);
             thread.join();
@@ -135,7 +135,7 @@ public class PongGameView extends SurfaceView{
         }
     }
 
-    public void onResume() {
+    public void resume() {
         thread = new PongGameThread(this);
         thread.start();
     }
