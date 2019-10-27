@@ -8,7 +8,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class PongGameActivity extends AppCompatActivity {
-    PongGameThread pongGameThread;
     PongGameView pongGameView;
     User user;
 
