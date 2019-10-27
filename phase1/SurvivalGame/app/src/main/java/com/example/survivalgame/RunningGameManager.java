@@ -100,28 +100,26 @@ class RunningGameManager {
         // randomly generate coins.
         if (timerCoins >= 100) {
             Random randomCoin = new Random();
-            int random;
-            random = randomCoin.nextInt(3);
+            int random = randomCoin.nextInt(2);
 
             switch (random) {
-                case 1:
+                case 0:
                     int currentCoin = 1;
-                    int multiplier = 1;
-                    while (currentCoin <= 3) {
+                    while (currentCoin <= 5) {
                         coin.add(new Coin(RunningGameView, RunningGameView.coinBmp,
-                                RunningGameView.getWidth() + (64 * multiplier), 130));
+                                RunningGameView.getWidth() + (64 * currentCoin), 130));
                         currentCoin++;
-                        multiplier++;
                     }
                     break;
 
-                case 2:
+                case 1:
                     coin.add(new Coin(RunningGameView, RunningGameView.coinBmp,
                             RunningGameView.getWidth() + 32, 150));
                     coin.add(new Coin(RunningGameView, RunningGameView.coinBmp,
                             RunningGameView.getWidth() + 96, 130));
                     coin.add(new Coin(RunningGameView, RunningGameView.coinBmp,
                             RunningGameView.getWidth() + 160, 150));
+                    break;
             }
             timerCoins = 0;
         }
