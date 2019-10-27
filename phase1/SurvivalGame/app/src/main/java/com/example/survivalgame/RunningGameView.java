@@ -219,7 +219,7 @@ class RunningGameView extends SurfaceView {
 
         runner.remove(0);
 
-        Intent intent = new Intent(getContext(), PongGameActivity.class);
+        Intent intent = new Intent(getContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getContext().startActivity(intent);
     }
