@@ -73,7 +73,7 @@ class RunningGameView extends SurfaceView {
      */
     public RunningGameView(Context context) {
         super(context);
-        runningDuration = Duration.ofSeconds(180);
+        runningDuration = Duration.ofSeconds(15);
 
         thread = new RunningGameThread(this);
         holder = getHolder();
@@ -241,7 +241,7 @@ class RunningGameView extends SurfaceView {
 
         runner.remove(0);
 
-        Intent intent = new Intent(getContext(), PongGameActivity.class);
+        Intent intent = new Intent(getContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getContext().startActivity(intent);
     }
@@ -303,11 +303,20 @@ class RunningGameView extends SurfaceView {
 
                 // end the game once the runner touches the spikes.
                 if (spikes.get(i).checkCollision(runner1, spike1)) {
-                    endGame();
-                    break;
+                    User.setLife(User.getLife() - 1);
+                    spikes.remove(i);
+                    i--;
+                    if (User.getLife() == 0) {
+                        endGame();
+                        break;
+                    }
                 }
             }
-
+            if (runningDuration.getSeconds() <= 0) {
+                Intent intent = new Intent(getContext(), PongGameActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getContext().startActivity(intent);
+            }
             // draw the ground.
             ground.onDraw(canvas);
         }
