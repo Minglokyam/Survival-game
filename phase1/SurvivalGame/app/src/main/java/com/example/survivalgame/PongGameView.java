@@ -34,9 +34,9 @@ public class PongGameView extends SurfaceView{
 
     private PongGameManager pongGameManager;
 
-    Paint paintText;
+    private Paint paintText;
 
-    Duration pongDuration;
+    private Duration pongDuration;
 
     public Duration getPongDuration(){
         return pongDuration;
@@ -63,8 +63,6 @@ public class PongGameView extends SurfaceView{
         if(User.getLife() == 0){
             stop = true;
             thread.setPlaying(false);
-            thread.interrupt();
-
             Intent intent = new Intent(getContext(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(intent);
@@ -72,7 +70,6 @@ public class PongGameView extends SurfaceView{
         }else if(pongDuration.getSeconds() <= 0){
             stop = true;
             thread.setPlaying(false);
-            thread.interrupt();
             Intent intent = new Intent(getContext(), DodgeGameActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(intent);
@@ -86,10 +83,12 @@ public class PongGameView extends SurfaceView{
                 canvas = surfaceHolder.lockCanvas();
                 canvas.drawColor(Color.rgb(255, 255, 255));
 
-                canvas.drawText("Life: " + User.getLife(), 0, 32, paintText);
-                canvas.drawText("Total time: " + User.getTotalDuration().getSeconds(), 0, 64, paintText);
-                canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
-                canvas.drawText("Score: " + User.getScore(), 0, 128, paintText);
+                if(!stop){
+                    canvas.drawText("Life: " + User.getLife(), 0, 32, paintText);
+                    canvas.drawText("Total time: " + User.getTotalDuration().getSeconds(), 0, 64, paintText);
+                    canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
+                    canvas.drawText("Score: " + User.getScore(), 0, 128, paintText);
+                }
 
                 pongGameManager.draw(canvas);
             }

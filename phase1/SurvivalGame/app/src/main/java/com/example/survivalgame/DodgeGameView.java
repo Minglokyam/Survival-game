@@ -62,7 +62,7 @@ public class DodgeGameView extends SurfaceView{
         });
     }
 
-    // This method updates all objects in the arraylist!
+    // This method updates all objects in the ArrayList!
     public void update(Canvas canvas){
         enemyGen.Generate();
         for(int i=0;i<shells.size();i++){
@@ -87,7 +87,6 @@ public class DodgeGameView extends SurfaceView{
     public void draw(Canvas canvas){
         super.draw(canvas);
         canvas.drawColor(Color.rgb(255, 255, 255));
-        plane.draw(canvas);
         for(int i=0;i<shells.size();i++){
             shells.get(i).draw(canvas);
         }
