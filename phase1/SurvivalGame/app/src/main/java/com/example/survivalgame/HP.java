@@ -17,7 +17,9 @@ public class HP implements instance{
     }
 
     public void update(Canvas canvas) {
-        length = 6 * hp + 5;
+        if (hp >= 0){ length = 6 * hp + 5; } else{
+            length = 0;
+        }
     }
     public int getHp(){ return this.hp; }
     public void setHp(int hp){ this.hp = hp; }
