@@ -4,27 +4,27 @@ public class PongGameThread extends Thread {
 
     private boolean playing = true;
 
-    private PongGameView myView;
+    private PongGameView pongGameView;
 
-    public PongGameThread(PongGameView view) {
-        this.myView = view;
+    public PongGameThread(PongGameView newPongGameView) {
+        this.pongGameView = newPongGameView;
     }
 
     @Override
     public void run() {
         while (playing) {
             long startTime = System.currentTimeMillis();
-            if (!myView.getStop()) {
-            myView.update();
+            if (!pongGameView.getStop()) {
+                pongGameView.update();
             }
-            myView.draw();
+            pongGameView.draw();
             long timeInterval = System.currentTimeMillis() - startTime;
-            if (!myView.getStop()) {
+            if (!pongGameView.getStop()) {
             User.setTotalDuration(User.getTotalDuration().plusMillis(timeInterval));
-            myView.setPongDuration(myView.getPongDuration().minusMillis(timeInterval));
+                pongGameView.setPongDuration(pongGameView.getPongDuration().minusMillis(timeInterval));
         }
             if (timeInterval > 1) {
-                myView.setFPS(1000 / timeInterval);
+                pongGameView.setFPS(1000 / timeInterval);
             }
         }
     }
