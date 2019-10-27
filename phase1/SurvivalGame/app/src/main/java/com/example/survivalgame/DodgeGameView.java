@@ -11,6 +11,7 @@ import android.view.SurfaceView;
 import java.util.ArrayList;
 import java.util.List;
 import android.view.SurfaceView;
+import android.content.Intent;
 public class DodgeGameView extends SurfaceView{
     private HP hp;
     private GameThread gameThread;
@@ -96,6 +97,11 @@ public class DodgeGameView extends SurfaceView{
             shells.get(i).draw(c);
         }
 
+    }
+    public void endGame(){
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getContext().startActivity(intent);
     }
 
 }
