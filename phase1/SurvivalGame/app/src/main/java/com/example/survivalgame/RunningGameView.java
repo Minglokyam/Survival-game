@@ -28,35 +28,14 @@ class RunningGameView extends SurfaceView {
     // the image holder of the runner.
     Bitmap runnerBmp;
 
-    // a list of runner.
-    private List<Runner> runner = new ArrayList<>();
-
     // the image holder of the coin.
     Bitmap coinBmp;
-
-    // a list of coin.
-    private List<Coin> coin = new ArrayList<>();
 
     // the image holder of the ground.
     Bitmap groundBmp;
 
-    // ground.
-    private Ground ground;
-
     // the image holder of the spike.
     Bitmap spikesBmp;
-
-    // a list of spikes.
-    private List<Spikes> spikes = new ArrayList<>();
-
-    // the timer of the coin.
-    private int timerCoins = 0;
-
-    // the timer of the spike.
-    private int timerSpike = 0;
-
-    // random timer of the spike.
-    private int timerRandomSpikes = 0;
 
     // the duration time of the running game.
     private Duration runningDuration;
@@ -68,13 +47,17 @@ class RunningGameView extends SurfaceView {
 
     private User user;
 
+    RunningGameManager manager;
+
+    private Paint paintText = new Paint();
+
     /**
      * set up the GameView.
      */
     public RunningGameView(Context context, User user) {
         super(context);
         this.user = user;
-        runningDuration = Duration.ofSeconds(2);
+        runningDuration = Duration.ofSeconds(30);
         runningGameActivity = (RunningGameActivity) context;
         thread = new RunningGameThread(this, user);
         holder = getHolder();
@@ -99,9 +82,7 @@ class RunningGameView extends SurfaceView {
         groundBmp = BitmapFactory.decodeResource(getResources(), R.drawable.ground);
         spikesBmp = BitmapFactory.decodeResource(getResources(), R.drawable.spikes);
 
-        // add runner and ground to the game.
-        runner.add(new Runner(this, runnerBmp, 50, 50));
-        ground = new Ground(this, groundBmp, 0, 0);
+        manager = new RunningGameManager(this);
     }
 
     /**
@@ -134,9 +115,7 @@ class RunningGameView extends SurfaceView {
      * make the runner jump and restart the game once touching on the screen.
      */
     public boolean onTouchEvent(MotionEvent event) {
-        for (Runner runners : runner) {
-            runners.onTouch();
-        }
+        manager.runner.onTouch();
         return false;
     }
 
@@ -145,7 +124,7 @@ class RunningGameView extends SurfaceView {
      */
     public void update() {
         user.setScore(user.getScore() + 1);
-        updateTimers();
+        manager.update();
         updateCoin();
         updateSpike();
 
@@ -156,90 +135,18 @@ class RunningGameView extends SurfaceView {
     }
 
     /**
-     * update the timers to randomly generate the coins and spikes.
-     */
-    private void updateTimers() {
-
-        timerCoins++;
-
-        timerSpike++;
-
-        // randomly generate spikes.
-        switch (timerRandomSpikes) {
-            case 0:
-                if (timerSpike >= 125) {
-                    spikes.add(new Spikes(this, spikesBmp, this.getWidth() + 24, 0));
-                    Random randomSpikes = new Random();
-                    timerRandomSpikes = randomSpikes.nextInt(3);
-                    timerSpike = 0;
-                }
-                break;
-
-            case 1:
-                if (timerSpike >= 175) {
-                    spikes.add(new Spikes(this, spikesBmp, this.getWidth() + 24, 0));
-                    Random randomSpikes = new Random();
-                    timerRandomSpikes = randomSpikes.nextInt(3);
-                    timerSpike = 0;
-                }
-                break;
-            case 2:
-                if (timerSpike >= 100) {
-                    spikes.add(new Spikes(this, spikesBmp, this.getWidth() + 24, 0));
-                    Random randomSpikes = new Random();
-                    timerRandomSpikes = randomSpikes.nextInt(3);
-                    timerSpike = 0;
-                }
-                break;
-        }
-
-        // randomly generate coins.
-        if (timerCoins >= 100) {
-            Random randomCoin = new Random();
-            int random;
-            random = randomCoin.nextInt(5);
-
-            switch (random) {
-                case 1:
-                    int currentCoin = 1;
-                    int xx = 1;
-                    while (currentCoin <= 5) {
-                        coin.add(new Coin(this, coinBmp, this.getWidth() + (64 * xx), 130));
-                        currentCoin++;
-                        xx++;
-                    }
-                    break;
-
-                case 2:
-                    coin.add(new Coin(this, coinBmp, this.getWidth() + 32, 150));
-                    coin.add(new Coin(this, coinBmp, this.getWidth() + 96, 130));
-                    coin.add(new Coin(this, coinBmp, this.getWidth() + 160, 150));
-                    coin.add(new Coin(this, coinBmp, this.getWidth() + 224, 130));
-                    coin.add(new Coin(this, coinBmp, this.getWidth() + 288, 150));
-            }
-            timerCoins = 0;
-        }
-    }
-
-    /**
      * update the coin when it moves out of the screen or the runner touches it.
      */
     public void updateCoin() {
-        for (int i = 0; i < coin.size(); i++) {
-            Rect runner1 = runner.get(0).getBounds();
-            Rect coin1 = coin.get(i).getBounds();
-
-            if (coin.get(i).getX() < -80) {
-                coin.remove(i);
-                i--;
-            }
-
-            if (coin.get(i).CheckCollision(runner1, coin1)) {
+        for (int i = 0; i < manager.coin.size(); i++) {
+            Rect runner1 = manager.runner.getBounds();
+            Rect coin1 = manager.coin.get(i).getBounds();
+            if (manager.coin.get(i).CheckCollision(runner1, coin1)) {
                 // remove the coin once the runner touch this coin.
-                coin.remove(i);
-
+                manager.coin.remove(i);
                 // add points to the score when the runner touches a coin.
                 user.setScore(user.getScore() + 100);
+                break;
             }
         }
     }
@@ -248,20 +155,13 @@ class RunningGameView extends SurfaceView {
      * update the spike when it moves out of the screen or the runner touches it.
      */
     public void updateSpike() {
-        for (int i = 0; i < spikes.size(); i++) {
-
-            Rect runner1 = runner.get(0).getBounds();
-            Rect spike1 = spikes.get(i).GetBounds();
-
-            if (spikes.get(i).getX() < -80) {
-                spikes.remove(i);
-                break;
-            }
-
+        for (int i = 0; i < manager.spikes.size(); i++) {
+            Rect runner1 = manager.runner.getBounds();
+            Rect spike1 = manager.spikes.get(i).GetBounds();
             // end the game once the runner touches the spikes.
-            if (spikes.get(i).checkCollision(runner1, spike1)) {
+            if (manager.spikes.get(i).checkCollision(runner1, spike1)) {
                 user.setLife(user.getLife() - 1);
-                spikes.remove(i);
+                manager.spikes.remove(i);
                 i--;
                 if (user.getLife() == 0) {
                    runningGameActivity.toMain();
@@ -274,7 +174,6 @@ class RunningGameView extends SurfaceView {
     /**
      * Draw all the objects on the screen.
      */
-    Paint paintText = new Paint();
     public void draw(Canvas canvas) {
         super.draw(canvas);
         update();
@@ -287,22 +186,20 @@ class RunningGameView extends SurfaceView {
         canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
 
         // draw the runner.
-        for (Runner runners : runner) {
-            runners.onDraw(canvas);
-        }
+        manager.runner.onDraw(canvas);
 
         // draw the coin
-        for (int i = 0; i < coin.size(); i++) {
-            coin.get(i).onDraw(canvas);
+        for (int i = 0; i < manager.coin.size(); i++) {
+            manager.coin.get(i).onDraw(canvas);
         }
 
         // draw the spikes
-        for (int i = 0; i < spikes.size(); i++) {
-            spikes.get(i).onDraw(canvas);
+        for (int i = 0; i < manager.spikes.size(); i++) {
+            manager.spikes.get(i).onDraw(canvas);
         }
 
         // draw the ground.
-        ground.onDraw(canvas);
+        manager.ground.onDraw(canvas);
     }
 }
 
