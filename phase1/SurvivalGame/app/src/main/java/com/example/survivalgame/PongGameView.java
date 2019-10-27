@@ -15,21 +15,15 @@ import android.view.SurfaceView;
 import java.time.Duration;
 
 public class PongGameView extends SurfaceView{
-    /**
-     * The screen width
-     */
+    /** The screen width */
     int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
 
-    /**
-     * The screen height
-     */
+    /** The screen height */
     int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
     PongGameThread thread;
 
-    volatile boolean playing;
-
-    private boolean pause = true;
+    private boolean stop = true;
 
     private long fps;
 
@@ -43,6 +37,14 @@ public class PongGameView extends SurfaceView{
 
     Duration pongDuration;
 
+    public Duration getPongDuration(){
+        return pongDuration;
+    }
+
+    public void setPongDuration(Duration newPongDuration){
+        pongDuration = newPongDuration;
+    }
+
     public PongGameView(Context context) {
         super(context);
         pongGameManager = new PongGameManager(screenWidth, screenHeight);
@@ -54,29 +56,19 @@ public class PongGameView extends SurfaceView{
         pongDuration = Duration.ofSeconds(180);
     }
 
-    public Duration getPongDuration(){
-        return pongDuration;
-    }
-
-    public void setPongDuration(Duration newPongDuration){
-        pongDuration = newPongDuration;
-    }
-
     public void update() {
         pongGameManager.update(fps);
         if(User.getLife() == 0){
-            pause = true;
-            playing = false;
-            thread.setRun(playing);
+            stop = true;
+            thread.setPlaying(false);
 
             Intent intent = new Intent(getContext(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(intent);
 
         }else if(pongDuration.getSeconds() <= 0){
-            pause = true;
-            playing = false;
-            thread.setRun(playing);
+            stop = true;
+            thread.setPlaying(false);
         }
     }
 
@@ -113,7 +105,7 @@ public class PongGameView extends SurfaceView{
         RectPaddle rectPaddle = pongGameManager.getRectPaddle();
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                pause = false;
+                stop = false;
                 if (motionEvent.getX() > rectPaddle.getXCoordinate() + rectPaddle.getWidth() / 2) {
                     pongGameManager.paddleMoveRight();
                 } else {
@@ -128,9 +120,8 @@ public class PongGameView extends SurfaceView{
     }
 
     public void onPause() {
-        playing = false;
         try {
-            thread.setRun(playing);
+            thread.setPlaying(false);
             thread.join();
         } catch (InterruptedException e) {
             Log.e("Error:", "joining thread");
@@ -138,9 +129,7 @@ public class PongGameView extends SurfaceView{
     }
 
     public void onResume() {
-        playing = true;
         thread = new PongGameThread(this);
-        thread.setRun(playing);
         thread.start();
     }
 
@@ -148,7 +137,7 @@ public class PongGameView extends SurfaceView{
         fps = n;
     }
 
-    public boolean getPause(){
-        return pause;
+    public boolean getStop(){
+        return stop;
     }
 }
