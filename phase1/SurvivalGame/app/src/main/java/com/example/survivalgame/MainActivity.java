@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,62 +31,41 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.Manager = new UserManager();
-        System.out.println(Manager);;
+        Manager = new UserManager();
         System.out.println(getFilesDir());
-        loadFile(USER_FILE);
-        System.out.println(Manager);
-//        System.out.println("size:");
-//        System.out.println(userManager.numUsers());
     }
 
     private void loadFile(String fileName){
 
-        FileInputStream fis = null;
-
         try {
-            fis= this.openFileInput(fileName);
-            ObjectInputStream is = new ObjectInputStream(fis);
-            this.Manager = (UserManager) is.readObject();
-            System.out.println("size:");
-            System.out.println(Manager.numUsers());
-        } catch (FileNotFoundException e) {
-            System.out.println("File Not Found");
-        } catch (IOException e) {
-            System.out.println("Error initializing stream");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                if (fis != null) fis.close();
-            }catch(IOException e) {
-                Log.e("Exception", "File write failed: " + e.toString());
+            InputStream inputStream = this.openFileInput(fileName);
+            if (inputStream != null) {
+                ObjectInputStream input = new ObjectInputStream(inputStream);
+                this.Manager = (UserManager) input.readObject();
+                inputStream.close();
             }
+//            UserManager temp = (UserManager)inputStream.readObject();
+            System.out.println(getFilesDir());
+//            temp.userExists("david");
+//            objectInputStream.close();
+        } catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        } catch (ClassNotFoundException e) {
+            Log.e("login activity", "File contained unexpected data type: " + e.toString());
         }
     }
 
     public void saveFile(String fileName) {
 
-        FileOutputStream fos = null;
-
         try {
-            fos = this.openFileOutput(fileName, this.MODE_PRIVATE);
-            ObjectOutputStream os = new ObjectOutputStream(fos);
-            os.writeObject(this.Manager);
-            System.out.println("size:");
-            System.out.println(Manager.numUsers());
-            Toast.makeText(MainActivity.this,"saved to:"+getFilesDir()+USER_FILE, Toast.LENGTH_LONG).show();
-            os.close();
-            fos.close();
-
+            ObjectOutputStream outputStream = new ObjectOutputStream(
+                    this.openFileOutput(fileName, MODE_PRIVATE));
+            outputStream.writeObject(Manager);
+            outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
-        }finally {
-            try {
-                if (fos != null) fos.close();
-            }catch(IOException e) {
-                Log.e("Exception", "File write failed: " + e.toString());
-            }
         }
     }
 
@@ -100,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
                 User newUser = new User(username, password);
                 Manager.addUser(newUser);
                 saveFile(USER_FILE);
-//                String msg = "User creation successful";
-//                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                String msg = "User creation successful";
+                Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
             }else{
                 String msg = "User already exists";
                 Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
@@ -122,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         String username = usernameInput.getText().toString();
         String password = passwordInput.getText().toString();
         if(!(username.trim().equals("") || password.trim().equals(""))){
+            System.out.println(Manager.userExists(username));
             if(Manager.userExists(username)){
                  User temp = Manager.getUser(username);
                 if(temp.getUsername().equals(username) && temp.getPassword().equals(password)){
