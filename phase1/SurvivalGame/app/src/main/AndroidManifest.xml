@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DodgeGameActivity"></activity>
+        <activity android:name=".ScoreBoardActivty"></activity>
+        <activity android:name=".DodgeGameActivity" />
         <activity android:name=".RunningGameActivity" />
         <activity android:name=".PongGameActivity" />
         <activity android:name=".MainActivity">

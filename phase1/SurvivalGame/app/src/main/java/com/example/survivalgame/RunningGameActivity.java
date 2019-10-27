@@ -15,8 +15,6 @@ public class RunningGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_running_game);
 
-        RunningGameActivity RA = this;
-
         Intent intent = getIntent();
         user = (User)intent.getSerializableExtra("userID");
 
