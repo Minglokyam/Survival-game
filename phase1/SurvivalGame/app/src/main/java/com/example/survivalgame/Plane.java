@@ -27,40 +27,25 @@ public class Plane implements instance {
 
     public void draw(Canvas c){
         if(!hit) {
-            Path p = new Path();
-            p.moveTo(this.x, this.y);
-            p.lineTo(this.x - 60, this.y + 200);
-            p.lineTo(this.x, this.y + 120);
-            p.lineTo(this.x + 60, this.y + 200);
-            p.lineTo(this.x, this.y);
-            c.drawPath(p, paint);
             x += xSpeed;
             y += ySpeed;
 
         }else if(counter%20 <= 10){
             counter++;
-            Path p = new Path();
-            p.moveTo(this.x, this.y);
-            p.lineTo(this.x - 60, this.y + 200);
-            p.lineTo(this.x, this.y + 120);
-            p.lineTo(this.x + 60, this.y + 200);
-            p.lineTo(this.x, this.y);
             paint.setColor(Color.RED);
-            c.drawPath(p, paint);
         }else if(counter%20 > 10){
             counter++;
             System.out.println("==========================");
             System.out.println(counter);
-
-            Path p = new Path();
-            p.moveTo(this.x, this.y);
-            p.lineTo(this.x - 60, this.y + 200);
-            p.lineTo(this.x, this.y + 120);
-            p.lineTo(this.x + 60, this.y + 200);
-            p.lineTo(this.x, this.y);
             paint.setColor(Color.YELLOW);
-            c.drawPath(p, paint);
         }
+        Path p = new Path();
+        p.moveTo(this.x, this.y);
+        p.lineTo(this.x - 60, this.y + 200);
+        p.lineTo(this.x, this.y + 120);
+        p.lineTo(this.x + 60, this.y + 200);
+        p.lineTo(this.x, this.y);
+        c.drawPath(p, paint);
     }
 
     public void update(Canvas canvas){
