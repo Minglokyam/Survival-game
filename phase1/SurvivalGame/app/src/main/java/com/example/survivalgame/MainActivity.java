@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                this.userManager = (UserManager) input.readObject();
+                this.userManager.update((UserManager) input.readObject());
                 inputStream.close();
             }
 //            UserManager temp = (UserManager)inputStream.readObject();

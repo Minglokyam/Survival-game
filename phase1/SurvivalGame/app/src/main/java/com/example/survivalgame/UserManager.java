@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager implements Serializable {
-    private static List<User> userList;
+    List<User> userList;
 
     UserManager() {
         userList = new ArrayList<>();
@@ -33,5 +33,8 @@ public class UserManager implements Serializable {
             if (user.getUsername().equals(username)) return user;
         }
         return null;
+    }
+    public void update(UserManager newManager) {
+        this.userList = newManager.userList;
     }
 }
