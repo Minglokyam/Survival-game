@@ -12,7 +12,7 @@ public class DodgeGameActivity extends AppCompatActivity {
 
     static int HEIGHT, WIDTH;
     private DodgeGameView gameView;
-    private int prevX, prevY;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,8 @@ public class DodgeGameActivity extends AppCompatActivity {
         HEIGHT = size.y;
         WIDTH = size.x;
         gameView = new DodgeGameView(this);
+        Intent intent = getIntent();
+        user = (User)intent.getSerializableExtra("userID");
         setContentView(gameView);
     }
 

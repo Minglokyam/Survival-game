@@ -1,9 +1,11 @@
 package com.example.survivalgame;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.SurfaceHolder;
@@ -60,7 +62,7 @@ public class DodgeGameView extends SurfaceView{
     }
 
     protected void onDraw(Canvas canvas){
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.WHITE);
         draw(canvas);
         update(canvas);
 
@@ -74,10 +76,11 @@ public class DodgeGameView extends SurfaceView{
             if(shells.get(i).getY() > (DodgeGameActivity.HEIGHT + 100)){   // This statement removes the object outside the screen.
                 shells.remove(i);
             }
-            if(shells.get(i).getRect().intersect(player.getRect())){   //COLLIDES, Player is destroyed
+            if(shells.get(i).getRect().intersect(player.getRect())){
                 if(shells.get(i) != player){
                     player.setHit(true);
-                    //shells.remove(player);
+                    shells.remove(player);
+                    endGame();
                 }
             }
             shells.get(i).update(canvas);
@@ -88,6 +91,12 @@ public class DodgeGameView extends SurfaceView{
             shells.get(i).draw(c);
         }
 
+    }
+
+    public void endGame(){
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getContext().startActivity(intent);
     }
 
 }
