@@ -1,7 +1,7 @@
 package com.example.survivalgame;
 
 import java.io.Serializable;
-import java.sql.Time;
+import java.time.Duration;
 
 class User implements Serializable {
 
@@ -10,7 +10,7 @@ class User implements Serializable {
 
     private static int score;
     private static int life;
-    private static Time time;
+    private static Duration totalDuration;
     private static int gameStage;
 
     private final int RUNNING = 0;
@@ -23,6 +23,7 @@ class User implements Serializable {
         score = 0;
         life = 3;
         gameStage = 0;
+        totalDuration = Duration.ofSeconds(0);
     }
 
     String getUsername(){return username;}
@@ -39,7 +40,11 @@ class User implements Serializable {
 
     public static int getGameStage(){return gameStage;}
 
-    public static void setGameStage(int stage){gameStage = stage;}
+    public static void setGameStage(int newGameStage){gameStage = newGameStage;}
+
+    public static Duration getTotalDuration(){return totalDuration;}
+
+    public static void setTotalDuration(Duration newTotalDuration){totalDuration = newTotalDuration;}
 
 }
 

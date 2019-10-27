@@ -1,15 +1,10 @@
 package com.example.survivalgame;
 
-import android.util.Log;
-import android.view.SurfaceHolder;
-
-public class PongGameThread extends Thread{
+public class PongGameThread extends Thread {
 
     private boolean playing;
 
     private PongGameView myView;
-
-
 
     public PongGameThread(PongGameView view) {
         this.myView = view;
@@ -24,15 +19,15 @@ public class PongGameThread extends Thread{
             }
             myView.draw();
             long timeInterval = System.currentTimeMillis() - startTime;
+            User.setTotalDuration(User.getTotalDuration().plusMillis(timeInterval));
+            myView.setPongDuration(myView.getPongDuration().minusMillis(timeInterval));
             if (timeInterval > 1) {
                 myView.setFps(1000 / timeInterval);
             }
         }
     }
 
-
     void setRun(boolean toRun) {
         playing = toRun;
     }
-
 }

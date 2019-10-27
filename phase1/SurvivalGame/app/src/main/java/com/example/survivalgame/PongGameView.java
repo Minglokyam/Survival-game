@@ -1,6 +1,7 @@
 package com.example.survivalgame;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import java.time.Duration;
 
 public class PongGameView extends SurfaceView{
     /**
@@ -38,6 +41,8 @@ public class PongGameView extends SurfaceView{
 
     Paint paint;
 
+    Duration pongDuration;
+
     public PongGameView(Context context) {
         super(context);
         pongGameManager = new PongGameManager(screenWidth, screenHeight);
@@ -46,16 +51,34 @@ public class PongGameView extends SurfaceView{
         paint = new Paint();
         paint.setTextSize(36);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
+        pongDuration = Duration.ofSeconds(180);
+    }
+
+    public Duration getPongDuration(){
+        return pongDuration;
+    }
+
+    public void setPongDuration(Duration newPongDuration){
+        pongDuration = newPongDuration;
     }
 
     public void update() {
         pongGameManager.update(fps);
         if(User.getLife() == 0){
             pause = true;
+            playing = false;
+            thread.setRun(playing);
+
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getContext().startActivity(intent);
+
+        }else if(pongDuration.getSeconds() <= 0){
+            pause = true;
+            playing = false;
+            thread.setRun(playing);
         }
     }
-
-
 
     public void draw() {
         canvas = null;
@@ -63,7 +86,9 @@ public class PongGameView extends SurfaceView{
             synchronized (surfaceHolder) {
                 canvas = surfaceHolder.lockCanvas();
                 canvas.drawColor(Color.argb(255, 255, 255, 255));
-                canvas.drawText("Life: " + User.getLife(), screenWidth / 10, screenHeight / 10, paint);
+                canvas.drawText("Life: " + User.getLife(), screenWidth / 10, screenHeight / 20, paint);
+                canvas.drawText("Total time: " + User.getTotalDuration().getSeconds(), 3 * screenWidth / 20, screenHeight / 20, paint);
+                canvas.drawText("Game time: " + pongDuration.getSeconds(), 15 * screenWidth / 20, screenHeight / 20, paint);
                 pongGameManager.draw(canvas);
             }
         } catch (Exception e) {
@@ -82,7 +107,6 @@ public class PongGameView extends SurfaceView{
             pongGameManager.draw(canvas);
         }
     }
-
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
