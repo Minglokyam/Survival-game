@@ -92,35 +92,40 @@ public class Ball extends GameItemCircle {
         setYCoordinate(newYCoordinate);
     }
 
-    private void reverseXVelocity() {
-        xVelocity = -xVelocity;
+    private void moveUp(){
+        yVelocity = -Math.abs(yVelocity);
     }
-
-    private void reverseYVelocity() {
-        yVelocity = -yVelocity;
+    private void moveDown(){
+        yVelocity = Math.abs(yVelocity);
+    }
+    private void moveLeft(){
+        xVelocity = -Math.abs(xVelocity);
+    }
+    private void moveRight(){
+        xVelocity = Math.abs(xVelocity);
     }
 
     private void hitTop() {
-        if (getYCoordinate() <= 0) {
-            reverseYVelocity();
+        if (getYCoordinate() - getRadius() <= 0) {
+            moveDown();
         }
     }
 
     private void hitLeft() {
-        if (getXCoordinate() <= 0) {
-            reverseXVelocity();
+        if (getXCoordinate() - getRadius() <= 0) {
+            moveRight();
         }
     }
 
     private void hitRight() {
         if (this.getXCoordinate() + getRadius() >= getPongGameManager().getScreenWidth()) {
-            reverseXVelocity();
+            moveLeft();
         }
     }
 
     private void hitPaddle() {
         if (checkHitPaddle()) {
-            reverseYVelocity();
+            moveUp();
         }
     }
 
@@ -132,7 +137,7 @@ public class Ball extends GameItemCircle {
     }
 
     private void hitBottom() {
-        if (this.getYCoordinate() + getRadius() >= getPongGameManager().getScreenHeight() - 150) {
+        if (this.getYCoordinate() + getRadius() >= getPongGameManager().getScreenHeight()) {
             User.setLife(User.getLife() - 1);
             resetSpeed();
             resetCoordinate();
