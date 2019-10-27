@@ -1,11 +1,9 @@
 package com.example.survivalgame;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.SurfaceHolder;
@@ -14,21 +12,25 @@ import java.util.ArrayList;
 import java.util.List;
 import android.view.SurfaceView;
 public class DodgeGameView extends SurfaceView{
+    private HP hp;
     private GameThread gameThread;
     private SurfaceHolder holder;
     private GenerateEnemy enemyGen;
     public static List<instance> shells;
     public Paint paint;
-    public Plane player = new Plane();
+    public Plane player;
 
     public DodgeGameView(Context context){
         super(context);
+        hp = new HP();
+        player = new Plane();
         shells = new ArrayList<>();
         enemyGen = new GenerateEnemy();
         gameThread = new GameThread(this);
         paint = new Paint();
         paint.setColor(Color.BLUE);
         holder = getHolder();
+        shells.add(hp);
         shells.add(player);
         holder.addCallback(new SurfaceHolder.Callback() {
 
@@ -76,11 +78,14 @@ public class DodgeGameView extends SurfaceView{
             if(shells.get(i).getY() > (DodgeGameActivity.HEIGHT + 100)){   // This statement removes the object outside the screen.
                 shells.remove(i);
             }
-            if(shells.get(i).getRect().intersect(player.getRect())){
-                if(shells.get(i) != player){
-                    player.setHit(true);
-                    shells.remove(player);
-                    endGame();
+            if(shells.get(i).getRect().intersect(player.getRect())){   //COLLIDES, Player is destroyed
+                if(shells.get(i) != player && shells.get(i) != hp){
+                    if(player.getHp() > 0){
+                        player.setHp(player.getHp() - 10);
+                        hp.setHp(player.getHp() - 10);
+                        shells.remove(shells.get(i));
+                        //VIBRATION IMPLEMENTATION?
+                    }
                 }
             }
             shells.get(i).update(canvas);
@@ -91,12 +96,6 @@ public class DodgeGameView extends SurfaceView{
             shells.get(i).draw(c);
         }
 
-    }
-
-    public void endGame(){
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getContext().startActivity(intent);
     }
 
 }

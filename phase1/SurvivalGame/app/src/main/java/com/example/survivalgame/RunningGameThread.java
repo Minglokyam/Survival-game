@@ -5,9 +5,6 @@ import android.graphics.Canvas;
 class RunningGameThread extends Thread {
     private RunningGameView view;
 
-    // the fps of the game
-    private static final long FPS = 30;
-
     // check whether the runner is running
     boolean running;
 
@@ -21,10 +18,9 @@ class RunningGameThread extends Thread {
 
     @Override
     public void run() {
-        long ticksPS = 1000 / FPS;
-        long startTime = 0;
         long sleepTime;
         while (running) {
+            long startTime = System.currentTimeMillis();
             Canvas canvas = null;
             try {
                 canvas = view.getHolder().lockCanvas();
@@ -36,7 +32,7 @@ class RunningGameThread extends Thread {
                     view.getHolder().unlockCanvasAndPost(canvas);
                 }
             }
-            sleepTime = ticksPS - (System.currentTimeMillis() - startTime);
+            sleepTime = view.getFps() - (System.currentTimeMillis() - startTime);
             try {
                 if (sleepTime > 0) {
                     sleep(sleepTime);
@@ -44,6 +40,12 @@ class RunningGameThread extends Thread {
                     sleep(10);
                 }
             } catch (Exception e) {
+            }
+            long timeInterval = System.currentTimeMillis() - startTime;
+            User.setTotalDuration(User.getTotalDuration().plusMillis(timeInterval));
+            view.setRunningDuration(view.getRunningDuration().minusMillis(timeInterval));
+            if (timeInterval > 1) {
+                view.setFps(1000 / timeInterval);
             }
         }
     }
