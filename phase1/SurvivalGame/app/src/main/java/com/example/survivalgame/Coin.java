@@ -15,9 +15,6 @@ class Coin {
     private Bitmap bmp;
     private RunningGameView view;
 
-    private int columnWidth = 4;
-    private int columnHeight = 1;
-
     // the speed of the coin moves in x-coordinate.
     private int xspeed = -RunningGameView.movingSpeed;
 
@@ -26,9 +23,6 @@ class Coin {
     // the width and height of the screen.
     private int width;
     private int height;
-
-    private Rect runner;
-    private Rect coin;
 
     /**
      * Build a coin.
@@ -39,8 +33,8 @@ class Coin {
 
         this.view = view;
         this.bmp = bmp;
-        this.width = bmp.getWidth() / columnWidth;
-        this.height = bmp.getHeight() / columnHeight;
+        this.width = bmp.getWidth() / 4;
+        this.height = bmp.getHeight();
     }
 
     /**
@@ -50,7 +44,7 @@ class Coin {
         x += xspeed;
         y = view.getHeight() - y2 - Ground.height - bmp.getHeight();
 
-        if (currentFrame >= columnWidth - 1) {
+        if (currentFrame >= 3) {
             currentFrame = 0;
         } else {
             currentFrame += 1;
@@ -83,8 +77,6 @@ class Coin {
      * check whether the runner touched the coin
      */
     boolean CheckCollision(Rect runner, Rect coin) {
-        this.runner = runner;
-        this.coin = coin;
         return Rect.intersects(runner, coin);
     }
 

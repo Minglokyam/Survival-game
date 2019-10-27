@@ -70,7 +70,7 @@ class RunningGameManager {
             case 0:
                 if (timerSpike >= 100) {
                     spikes.add(new Spikes(RunningGameView, RunningGameView.spikesBmp,
-                            RunningGameView.getWidth() + 24, 0));
+                            RunningGameView.getWidth() + 24));
                     Random randomSpikes = new Random();
                     timerRandomSpikes = randomSpikes.nextInt(3);
                     timerSpike = 0;
@@ -80,7 +80,7 @@ class RunningGameManager {
             case 1:
                 if (timerSpike >= 125) {
                     spikes.add(new Spikes(RunningGameView, RunningGameView.spikesBmp,
-                            RunningGameView.getWidth() + 24, 0));
+                            RunningGameView.getWidth() + 24));
                     Random randomSpikes = new Random();
                     timerRandomSpikes = randomSpikes.nextInt(3);
                     timerSpike = 0;
@@ -89,7 +89,7 @@ class RunningGameManager {
             case 2:
                 if (timerSpike >= 150) {
                     spikes.add(new Spikes(RunningGameView, RunningGameView.spikesBmp,
-                            RunningGameView.getWidth() + 24, 0));
+                            RunningGameView.getWidth() + 24));
                     Random randomSpikes = new Random();
                     timerRandomSpikes = randomSpikes.nextInt(3);
                     timerSpike = 0;

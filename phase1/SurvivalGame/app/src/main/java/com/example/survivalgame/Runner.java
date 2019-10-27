@@ -15,9 +15,8 @@ class Runner {
     // the running speed.
     private static int vSpeed = 1;
 
-    // the runner's height and width.
+    // the runner's height.
     private static int runnerHeight;
-    private static int runnerWidth;
 
     // the height this runner will jump.
     private static int jumppower = -20;
@@ -29,9 +28,6 @@ class Runner {
     private int width;
     private int height;
 
-    private int columnHeight = 1;
-    private int columnWidth = 1;
-
     /**
      * Build a runner.
      */
@@ -41,8 +37,8 @@ class Runner {
         this.view = view;
         this.bmp = bmp;
 
-        this.width = bmp.getWidth() / columnWidth;
-        this.height = bmp.getHeight() / columnHeight;
+        this.width = bmp.getWidth();
+        this.height = bmp.getHeight();
 
         runnerHeight = bmp.getHeight();
     }

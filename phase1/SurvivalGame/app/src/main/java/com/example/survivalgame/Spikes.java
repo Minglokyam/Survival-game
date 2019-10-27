@@ -9,20 +9,14 @@ class Spikes {
     private int x, y;
     private Bitmap spikesBmp;
     private RunningGameView view;
-    private Rect runner;
-    private Rect spikes;
 
-    Spikes(RunningGameView view, Bitmap spikesBmp, int x, int y) {
+    Spikes(RunningGameView view, Bitmap spikesBmp, int x) {
         this.view = view;
         this.spikesBmp = spikesBmp;
         this.x = x;
     }
 
     boolean checkCollision(Rect runner, Rect spikes) {
-
-        this.runner = runner;
-        this.spikes = spikes;
-
         return Rect.intersects(runner, spikes);
     }
 
@@ -41,8 +35,7 @@ class Spikes {
 
     void onDraw(Canvas canvas) {
         Update();
-        int srcX = spikesBmp.getWidth();
-        Rect src = new Rect(0, 0, srcX, spikesBmp.getHeight());
+        Rect src = new Rect(0, 0, spikesBmp.getWidth(), spikesBmp.getHeight());
         Rect dst = new Rect(x, y, x + spikesBmp.getWidth(), y + spikesBmp.getHeight());
         canvas.drawBitmap(spikesBmp, src, dst, null);
     }
