@@ -8,10 +8,10 @@ class User implements Serializable {
     private String username;
     private String password;
 
-    private static int score;
-    private static int life;
-    private static Duration totalDuration;
-    private static int gameStage;
+    private int score;
+    private int life;
+    private Duration totalDuration;
+    private int gameStage;
 
     public static final int RUNNING = 0;
     public static final int PONG = 1;
@@ -31,20 +31,20 @@ class User implements Serializable {
 
     String getPassword(){return password;}
 
-    public static int getScore(){return score;}
+    public int getScore(){return score;}
 
-    public static void setScore(int newScore){score = newScore;}
+    public void setScore(int newScore){score = newScore;}
 
-    public static int getLife(){return life;}
+    public int getLife(){return life;}
 
-    public static void setLife(int newLife){life = newLife;}
+    public void setLife(int newLife){life = newLife;}
 
-    public static int getGameStage(){return gameStage;}
+    public int getGameStage(){return gameStage;}
 
-    public static void setGameStage(int newGameStage){gameStage = newGameStage;}
+    public void setGameStage(int newGameStage){gameStage = newGameStage;}
 
-    public static Duration getTotalDuration(){return totalDuration;}
+    public Duration getTotalDuration(){return totalDuration;}
 
-    public static void setTotalDuration(Duration newTotalDuration){totalDuration = newTotalDuration;}
+    public void setTotalDuration(Duration newTotalDuration){totalDuration = newTotalDuration;}
 }
 

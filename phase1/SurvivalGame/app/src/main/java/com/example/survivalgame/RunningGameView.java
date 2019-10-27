@@ -1,6 +1,5 @@
 package com.example.survivalgame;
 
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
@@ -59,23 +58,25 @@ class RunningGameView extends SurfaceView {
     // random timer of the spike.
     private int timerRandomSpikes = 0;
 
-    // the current status of the game: "Running" or "MainMenu"
-    private String Menu = "Running";
-
     // the duration time of the running game.
-    Duration runningDuration;
+    private Duration runningDuration;
 
     // the fps of the running game.
     private long fps;
 
+    private RunningGameActivity runningGameActivity;
+
+    private User user;
+
     /**
      * set up the GameView.
      */
-    public RunningGameView(Context context) {
+    public RunningGameView(Context context, User user) {
         super(context);
-        runningDuration = Duration.ofSeconds(15);
-
-        thread = new RunningGameThread(this);
+        this.user = user;
+        runningDuration = Duration.ofSeconds(30);
+        runningGameActivity = (RunningGameActivity) context;
+        thread = new RunningGameThread(this, user);
         holder = getHolder();
         holder.addCallback(
                 new Callback() {
@@ -104,23 +105,27 @@ class RunningGameView extends SurfaceView {
     }
 
     /**
-     * getter and setter of the runningDuration
+     * getter of the runningDuration
      */
     public Duration getRunningDuration() {
         return runningDuration;
     }
 
+    /**
+     * setter of the runningDuration.
+     */
     public void setRunningDuration(Duration newRunningDuration) {
         runningDuration = newRunningDuration;
     }
 
     /**
-     * getter and setter the fps of the running game.
+     * setter of the fps in the running game.
      */
     public void setFps(long n) {
         fps = n;
     }
 
+    /** getter of the fps in the running game. */
     public long getFps() {
         return fps;
     }
@@ -132,22 +137,22 @@ class RunningGameView extends SurfaceView {
         for (Runner runners : runner) {
             runners.onTouch();
         }
-
-        if (Menu == "MainMenu") {
-            Menu = "Running";
-            startGame();
-        }
         return false;
     }
 
     /**
-     * update the score, highest score and those timers.
+     * update the objects and current game status.
      */
     public void update() {
-        User.setScore(User.getScore() + 1);
-
+        user.setScore(user.getScore() + 1);
         updateTimers();
+        updateCoin();
+        updateSpike();
 
+        // when the game time runs out, jump to next game.
+        if (runningDuration.getSeconds() <= 0) {
+           runningGameActivity.toPong();
+        }
     }
 
     /**
@@ -217,109 +222,87 @@ class RunningGameView extends SurfaceView {
     }
 
     /**
-     * make the game start.
+     * update the coin when it moves out of the screen or the runner touches it.
      */
-    public void startGame() {
-        runner.add(new Runner(this, runnerBmp, 50, 50));
+    public void updateCoin() {
+        for (int i = 0; i < coin.size(); i++) {
+            Rect runner1 = runner.get(0).getBounds();
+            Rect coin1 = coin.get(i).getBounds();
+
+            if (coin.get(i).getX() < -80) {
+                coin.remove(i);
+                i--;
+            }
+
+            if (coin.get(i).CheckCollision(runner1, coin1)) {
+                // remove the coin once the runner touch this coin.
+                coin.remove(i);
+
+                // add points to the score when the runner touches a coin.
+                user.setScore(user.getScore() + 100);
+            }
+        }
     }
 
     /**
-     * remove all objects in the screen once the runner is dead.
+     * update the spike when it moves out of the screen or the runner touches it.
      */
-    public void endGame() {
-        Menu = "MainMenu";
-
-        timerCoins = 0;
-        timerSpike = 0;
-
-        for (int i = 0; i < coin.size(); i++) {
-            coin.remove(i);
-        }
+    public void updateSpike() {
         for (int i = 0; i < spikes.size(); i++) {
-            spikes.remove(i);
+
+            Rect runner1 = runner.get(0).getBounds();
+            Rect spike1 = spikes.get(i).GetBounds();
+
+            if (spikes.get(i).getX() < -80) {
+                spikes.remove(i);
+                break;
+            }
+
+            // end the game once the runner touches the spikes.
+            if (spikes.get(i).checkCollision(runner1, spike1)) {
+                user.setLife(user.getLife() - 1);
+                spikes.remove(i);
+                i--;
+                if (user.getLife() == 0) {
+                   runningGameActivity.toMain();
+                    break;
+                }
+            }
         }
-
-        runner.remove(0);
-
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getContext().startActivity(intent);
     }
-
-    Paint paintText = new Paint();
 
     /**
      * Draw all the objects on the screen.
      */
+    Paint paintText = new Paint();
     public void draw(Canvas canvas) {
         super.draw(canvas);
         update();
         canvas.drawColor(Color.WHITE);
+        paintText.setTextSize(40);
+        // draw the score and highest score.
+        canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
+        canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
+        canvas.drawText("Game time: " + runningDuration.getSeconds(), 0, 96, paintText);
+        canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
 
-        if (Menu.equals("Running")) {
-
-            paintText.setTextSize(40);
-
-            // draw the score and highest score.
-            canvas.drawText("Life: " + User.getLife(), 0, 32, paintText);
-            canvas.drawText("Total time: " + User.getTotalDuration().getSeconds(), 0, 64, paintText);
-            canvas.drawText("Game time: " + runningDuration.getSeconds(), 0, 96, paintText);
-            canvas.drawText("Score: " + User.getScore(), 0, 128, paintText);
-
-            // draw the runner.
-            for (Runner runners : runner) {
-                runners.onDraw(canvas);
-            }
-
-            // draw the coin
-            for (int i = 0; i < coin.size(); i++) {
-                coin.get(i).onDraw(canvas);
-                Rect runner1 = runner.get(0).getBounds();
-                Rect coin1 = coin.get(i).getBounds();
-
-                if (coin.get(i).getX() < 0 - 32) {
-                    coin.remove(i);
-                }
-
-                if (coin.get(i).CheckCollision(runner1, coin1)) {
-                    // remove the coin once the runner touch this coin.
-                    coin.remove(i);
-
-                    // add points to the score when the runner touches a coin.
-                    User.setScore(User.getScore() + 100);
-                }
-            }
-
-            // draw the spikes
-            for (int i = 0; i < spikes.size(); i++) {
-                spikes.get(i).onDraw(canvas);
-                Rect runner1 = runner.get(0).getBounds();
-                Rect spike1 = spikes.get(i).GetBounds();
-
-                if (spikes.get(i).getX() < 0 - 32) {
-                    spikes.remove(i);
-                    break;
-                }
-
-                // end the game once the runner touches the spikes.
-                if (spikes.get(i).checkCollision(runner1, spike1)) {
-                    User.setLife(User.getLife() - 1);
-                    spikes.remove(i);
-                    i--;
-                    if (User.getLife() == 0) {
-                        endGame();
-                        break;
-                    }
-                }
-            }
-            if (runningDuration.getSeconds() <= 0) {
-                Intent intent = new Intent(getContext(), PongGameActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getContext().startActivity(intent);
-            }
-            // draw the ground.
-            ground.onDraw(canvas);
+        // draw the runner.
+        for (Runner runners : runner) {
+            runners.onDraw(canvas);
         }
+
+        // draw the coin
+        for (int i = 0; i < coin.size(); i++) {
+            coin.get(i).onDraw(canvas);
+        }
+
+        // draw the spikes
+        for (int i = 0; i < spikes.size(); i++) {
+            spikes.get(i).onDraw(canvas);
+        }
+
+        // draw the ground.
+        ground.onDraw(canvas);
     }
 }
 

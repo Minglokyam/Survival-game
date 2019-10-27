@@ -17,10 +17,12 @@ public class PongGameManager {
 
     private RectPaddle rectPaddle;
 
-    public PongGameManager(int screenWidth, int screenHeight) {
+    private User user;
+
+    public PongGameManager(int screenWidth, int screenHeight, User user) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-        ball = new Ball(this, 10, screenWidth / 2, screenHeight / 2, screenWidth / 3, -screenHeight / 3);
+        ball = new Ball(this, 10, screenWidth / 2, screenHeight / 2, screenWidth / 3, -screenHeight / 3, user);
         rectPaddle = new RectPaddle(this, screenWidth / 5, screenWidth / 4, screenHeight / 25, screenWidth / 6, screenHeight * 7 / 8);
     }
 
