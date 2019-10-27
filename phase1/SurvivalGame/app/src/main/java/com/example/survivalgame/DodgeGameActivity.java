@@ -31,8 +31,8 @@ public class DodgeGameActivity extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent event){
         if(event.getAction() == MotionEvent.ACTION_MOVE) {
 
-            gameView.player.setxSpeed((int)((event.getX() - gameView.player.getX())/6));
-            int spdY = (int)((event.getY() - 300 - gameView.player.getY())/15);
+            gameView.plane.setxSpeed((int)((event.getX() - gameView.plane.getX())/6));
+            int spdY = (int)((event.getY() - 300 - gameView.plane.getY())/15);
             if(spdY > 20){
                 spdY = 20;
             }else if(spdY > 0 && spdY < 8){
@@ -42,7 +42,7 @@ public class DodgeGameActivity extends AppCompatActivity {
             }else if(spdY < -20){
                 spdY = -20;
             }
-            gameView.player.setySpeed(spdY);
+            gameView.plane.setySpeed(spdY);
         }
         return true;
     }

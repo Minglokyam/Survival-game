@@ -4,42 +4,40 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import java.util.ArrayList;
 import java.util.List;
-import android.view.SurfaceView;
+
 import android.content.Intent;
 public class DodgeGameView extends SurfaceView{
     private HP hp;
-    private GameThread gameThread;
+    private DodgeGameThread dodgeGameThread;
     private SurfaceHolder holder;
     private GenerateEnemy enemyGen;
     public static List<instance> shells;
     public Paint paint;
-    public Plane player;
+    public Plane plane;
 
     public DodgeGameView(Context context){
         super(context);
         hp = new HP();
-        player = new Plane();
+        plane = new Plane();
         shells = new ArrayList<>();
         enemyGen = new GenerateEnemy();
-        gameThread = new GameThread(this);
+        dodgeGameThread = new DodgeGameThread(this);
         paint = new Paint();
         paint.setColor(Color.BLUE);
         holder = getHolder();
         shells.add(hp);
-        shells.add(player);
+        shells.add(plane);
         holder.addCallback(new SurfaceHolder.Callback() {
 
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                gameThread.setRunning(true);
-                gameThread.start();
+                dodgeGameThread.setRunning(true);
+                dodgeGameThread.start();
 
             }
 
@@ -51,10 +49,10 @@ public class DodgeGameView extends SurfaceView{
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
                 boolean retry = true;
-                gameThread.setRunning(false);
+                dodgeGameThread.setRunning(false);
                 while(retry){
                     try{
-                        gameThread.join();
+                        dodgeGameThread.join();
                         retry = false;
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -64,26 +62,18 @@ public class DodgeGameView extends SurfaceView{
         });
     }
 
-    protected void onDraw(Canvas canvas){
-        canvas.drawColor(Color.WHITE);
-        draw(canvas);
-        update(canvas);
-
-
-    }
-
-    // This method updates all objects in the arraylist!
+    // This method updates all objects in the ArrayList!
     public void update(Canvas canvas){
         enemyGen.Generate();
         for(int i=0;i<shells.size();i++){
             if(shells.get(i).getY() > (DodgeGameActivity.HEIGHT + 100)){   // This statement removes the object outside the screen.
                 shells.remove(i);
             }
-            if(shells.get(i).getRect().intersect(player.getRect())){   //COLLIDES, Player is destroyed
-                if(shells.get(i) != player && shells.get(i) != hp){
-                    if(player.getHp() > 0){
-                        player.setHp(player.getHp() - 10);
-                        hp.setHp(player.getHp() - 10);
+            if(shells.get(i).getRect().intersect(plane.getRect())){   //COLLIDES, Player is destroyed
+                if(shells.get(i) != plane && shells.get(i) != hp){
+                    if(plane.getHp() > 0){
+                        plane.setHp(plane.getHp() - 10);
+                        hp.setHp(plane.getHp() - 10);
                         shells.remove(shells.get(i));
                         //VIBRATION IMPLEMENTATION?
                     }
@@ -92,9 +82,13 @@ public class DodgeGameView extends SurfaceView{
             shells.get(i).update(canvas);
         }
     }
-    public void draw(Canvas c){
+
+    @Override
+    public void draw(Canvas canvas){
+        super.draw(canvas);
+        canvas.drawColor(Color.rgb(255, 255, 255));
         for(int i=0;i<shells.size();i++){
-            shells.get(i).draw(c);
+            shells.get(i).draw(canvas);
         }
 
     }
