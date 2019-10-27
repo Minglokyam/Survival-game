@@ -60,7 +60,7 @@ public class DodgeGameView extends SurfaceView{
     }
 
     protected void onDraw(Canvas canvas){
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.WHITE);
         draw(canvas);
         update(canvas);
 
