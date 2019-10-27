@@ -12,21 +12,25 @@ import java.util.ArrayList;
 import java.util.List;
 import android.view.SurfaceView;
 public class DodgeGameView extends SurfaceView{
+    private HP hp;
     private GameThread gameThread;
     private SurfaceHolder holder;
     private GenerateEnemy enemyGen;
     public static List<instance> shells;
     public Paint paint;
-    public Plane player = new Plane();
+    public Plane player;
 
     public DodgeGameView(Context context){
         super(context);
+        hp = new HP();
+        player = new Plane();
         shells = new ArrayList<>();
         enemyGen = new GenerateEnemy();
         gameThread = new GameThread(this);
         paint = new Paint();
         paint.setColor(Color.BLUE);
         holder = getHolder();
+        shells.add(hp);
         shells.add(player);
         holder.addCallback(new SurfaceHolder.Callback() {
 
@@ -75,9 +79,13 @@ public class DodgeGameView extends SurfaceView{
                 shells.remove(i);
             }
             if(shells.get(i).getRect().intersect(player.getRect())){   //COLLIDES, Player is destroyed
-                if(shells.get(i) != player){
-                    player.setHit(true);
-                    //shells.remove(player);
+                if(shells.get(i) != player && shells.get(i) != hp){
+                    if(player.getHp() > 0){
+                        player.setHp(player.getHp() - 10);
+                        hp.setHp(player.getHp() - 10);
+                        shells.remove(shells.get(i));
+                        //VIBRATION IMPLEMENTATION?
+                    }
                 }
             }
             shells.get(i).update(canvas);

@@ -16,22 +16,24 @@ public class Plane implements instance {
     private int xSpeed;
     private int ySpeed;
     private Paint paint;
+    private  int hp;
     public Plane(){
         paint = new Paint();
-        paint.setColor(Color.YELLOW);
+        paint.setColor(Color.BLACK);
         this.x = DodgeGameActivity.WIDTH/2;
         this.y = DodgeGameActivity.HEIGHT - 600; // max = 1800
+        hp = 100;
         this.hit = false;
         counter = 0;
     }
 
     public void draw(Canvas c){
-        if(!hit) {
+        if(hp != 0) {
             Path p = new Path();
             p.moveTo(this.x, this.y);
-            p.lineTo(this.x - 60, this.y + 200);
-            p.lineTo(this.x, this.y + 120);
-            p.lineTo(this.x + 60, this.y + 200);
+            p.lineTo(this.x - 40, this.y + 100);
+            p.lineTo(this.x, this.y + 60);
+            p.lineTo(this.x + 40, this.y + 100);
             p.lineTo(this.x, this.y);
             c.drawPath(p, paint);
             x += xSpeed;
@@ -39,28 +41,19 @@ public class Plane implements instance {
 
         }else if(counter%20 <= 10){
             counter++;
-            Path p = new Path();
-            p.moveTo(this.x, this.y);
-            p.lineTo(this.x - 60, this.y + 200);
-            p.lineTo(this.x, this.y + 120);
-            p.lineTo(this.x + 60, this.y + 200);
-            p.lineTo(this.x, this.y);
-            paint.setColor(Color.RED);
-            c.drawPath(p, paint);
+            paint.setColor(Color.YELLOW);
         }else if(counter%20 > 10){
             counter++;
-            System.out.println("==========================");
             System.out.println(counter);
-
-            Path p = new Path();
-            p.moveTo(this.x, this.y);
-            p.lineTo(this.x - 60, this.y + 200);
-            p.lineTo(this.x, this.y + 120);
-            p.lineTo(this.x + 60, this.y + 200);
-            p.lineTo(this.x, this.y);
-            paint.setColor(Color.YELLOW);
-            c.drawPath(p, paint);
+            paint.setColor(Color.RED);
         }
+        Path p = new Path();
+        p.moveTo(this.x, this.y);
+        p.lineTo(this.x - 40, this.y + 100);
+        p.lineTo(this.x, this.y + 60);
+        p.lineTo(this.x + 40, this.y + 100);
+        p.lineTo(this.x, this.y);
+        c.drawPath(p, paint);
     }
 
     public void update(Canvas canvas){
@@ -79,4 +72,6 @@ public class Plane implements instance {
     public void setxSpeed(int xSpeed) { this.xSpeed = xSpeed; }
     public void setySpeed(int ySpeed) { this.ySpeed = ySpeed; }
     public void setHit(boolean hit) { this.hit = hit; }
+    public int getHp(){ return this.hp; }
+    public void setHp(int hp){ this.hp = hp; }
 }

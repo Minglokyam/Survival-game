@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import android.os.Vibrator;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,9 +21,7 @@ import java.io.ObjectOutputStream;
 public class MainActivity extends AppCompatActivity {
 
     private UserManager Manager;
-
     public static User user;
-
     private final String USER_FILE = "user_file.ser";
 
     @Override
@@ -35,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(getFilesDir());
         loadFile(USER_FILE);
         System.out.println(Manager);
-//        System.out.println("size:");
-//        System.out.println(userManager.numUsers());
     }
 
     private void loadFile(String fileName){
