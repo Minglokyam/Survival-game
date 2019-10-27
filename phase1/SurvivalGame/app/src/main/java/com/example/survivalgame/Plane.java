@@ -8,7 +8,10 @@ import android.graphics.Rect;
 import android.hardware.SensorEvent;
 import android.view.MotionEvent;
 
+import java.time.Duration;
+
 public class Plane implements instance {
+    private Duration runningDuration;
     private int counter;
     private boolean hit;
     private int x;
@@ -17,6 +20,7 @@ public class Plane implements instance {
     private int ySpeed;
     private Paint paint;
     private  int hp;
+
     public Plane(){
         paint = new Paint();
         paint.setColor(Color.BLACK);
@@ -27,7 +31,9 @@ public class Plane implements instance {
         counter = 0;
     }
 
+
     public void draw(Canvas c){
+
         if(hp != 0) {
             Path p = new Path();
             p.moveTo(this.x, this.y);

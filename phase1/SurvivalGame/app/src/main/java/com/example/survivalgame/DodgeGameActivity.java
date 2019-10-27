@@ -26,7 +26,7 @@ public class DodgeGameActivity extends AppCompatActivity {
         display.getSize(size);
         HEIGHT = size.y;
         WIDTH = size.x;
-        gameView = new DodgeGameView(this);
+        gameView = new DodgeGameView(this, user);
         setContentView(gameView);
     }
 
