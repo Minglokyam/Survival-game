@@ -1,5 +1,6 @@
 package com.example.survivalgame;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
@@ -217,6 +218,10 @@ class RunningGameView extends SurfaceView {
         }
 
         runner.remove(0);
+
+        Intent intent = new Intent(getContext(), PongGameActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getContext().startActivity(intent);
     }
 
     Paint paintText = new Paint();

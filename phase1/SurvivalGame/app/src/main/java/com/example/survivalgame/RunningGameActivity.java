@@ -21,8 +21,6 @@ public class RunningGameActivity extends AppCompatActivity {
         runningGameView = new RunningGameView(this);
         setContentView(runningGameView);
     }
-
-
     @Override
     protected void onPause() {
         super.onPause();
