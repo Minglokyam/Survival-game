@@ -53,7 +53,7 @@ public class PongGameView extends SurfaceView{
         paint = new Paint();
         paint.setTextSize(36);
         paint.setTypeface(Typeface.DEFAULT_BOLD);
-        pongDuration = Duration.ofSeconds(180);
+        pongDuration = Duration.ofSeconds(15);
     }
 
     public void update() {
@@ -69,6 +69,9 @@ public class PongGameView extends SurfaceView{
         }else if(pongDuration.getSeconds() <= 0){
             stop = true;
             thread.setPlaying(false);
+            Intent intent = new Intent(getContext(), DodgeGameActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getContext().startActivity(intent);
         }
     }
 
