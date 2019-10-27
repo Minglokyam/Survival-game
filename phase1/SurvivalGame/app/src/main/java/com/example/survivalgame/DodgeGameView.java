@@ -73,7 +73,7 @@ public class DodgeGameView extends SurfaceView{
     }
 
     // This method updates all objects in the arraylist!
-    public void update(Canvas canvas){
+    public void update(Canvas canvas) throws IndexOutOfBoundsException{
         enemyGen.Generate();
         for(int i=0;i<shells.size();i++){
             if(shells.get(i).getY() > (DodgeGameActivity.HEIGHT + 100)){   // This statement removes the object outside the screen.
@@ -87,9 +87,10 @@ public class DodgeGameView extends SurfaceView{
                         shells.remove(shells.get(i));
                         //VIBRATION IMPLEMENTATION?
                     }
+                    shells.get(i).update(canvas);
                 }
             }
-            shells.get(i).update(canvas);
+
         }
     }
     public void draw(Canvas c){

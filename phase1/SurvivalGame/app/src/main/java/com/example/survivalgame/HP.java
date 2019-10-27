@@ -12,7 +12,7 @@ public class HP implements instance{
         hp = 100;
     }
     public void draw(Canvas c) {
-        RectF hpBar = new RectF(10, 10, 110, 10 + this.length);
+        RectF hpBar = new RectF(DodgeGameActivity.WIDTH - 10, 10, DodgeGameActivity.WIDTH - 110, 10 + this.length);
         c.drawRect(hpBar, paint);
     }
 
