@@ -24,7 +24,7 @@ public class PongGameThread extends Thread {
             myView.setPongDuration(myView.getPongDuration().minusMillis(timeInterval));
         }
             if (timeInterval > 1) {
-                myView.setFps(1000 / timeInterval);
+                myView.setFPS(1000 / timeInterval);
             }
         }
     }

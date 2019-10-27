@@ -25,7 +25,7 @@ public class PongGameView extends SurfaceView{
 
     private boolean stop = true;
 
-    private long fps;
+    private long FPS;
 
     private SurfaceHolder surfaceHolder;
 
@@ -57,7 +57,7 @@ public class PongGameView extends SurfaceView{
     }
 
     public void update() {
-        pongGameManager.update(fps);
+        pongGameManager.update(FPS);
         if(User.getLife() == 0){
             stop = true;
             thread.setPlaying(false);
@@ -133,8 +133,8 @@ public class PongGameView extends SurfaceView{
         thread.start();
     }
 
-    public void setFps(long n) {
-        fps = n;
+    public void setFPS(long newFPS) {
+        FPS = newFPS;
     }
 
     public boolean getStop(){
