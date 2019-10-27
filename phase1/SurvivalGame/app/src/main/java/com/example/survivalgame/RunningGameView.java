@@ -17,12 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import java.time.Duration;
+
 class RunningGameView extends SurfaceView {
     RunningGameThread thread;
     private SurfaceHolder holder;
 
     // the moving speed of the objects in the game.
-    public static int globalxSpeed = 10;
+    public static int movingSpeed = 10;
 
     // the image holder of the runner.
     Bitmap runnerBmp;
@@ -51,9 +53,6 @@ class RunningGameView extends SurfaceView {
     // current score in the game.
     public static int score = 0;
 
-    // the highest score.
-    public static int highScore;
-
     // the timer of the coin.
     private int timerCoins = 0;
 
@@ -66,11 +65,18 @@ class RunningGameView extends SurfaceView {
     // the current status of the game: "Running" or "MainMenu"
     private String Menu = "Running";
 
+    // the duration time of the running game.
+    Duration runningDuration;
+
+    // the fps of the running game.
+    private long fps;
+
     /**
      * set up the GameView.
      */
     public RunningGameView(Context context) {
         super(context);
+        runningDuration = Duration.ofSeconds(180);
 
         thread = new RunningGameThread(this);
         holder = getHolder();
@@ -101,6 +107,28 @@ class RunningGameView extends SurfaceView {
     }
 
     /**
+     * getter and setter of the runningDuration
+     */
+    public Duration getRunningDuration() {
+        return runningDuration;
+    }
+
+    public void setRunningDuration(Duration newRunningDuration) {
+        runningDuration = newRunningDuration;
+    }
+
+    /**
+     * getter and setter the fps of the running game.
+     */
+    public void setFps(long n) {
+        fps = n;
+    }
+
+    public long getFps() {
+        return fps;
+    }
+
+    /**
      * make the runner jump and restart the game once touching on the screen.
      */
     public boolean onTouchEvent(MotionEvent event) {
@@ -123,9 +151,6 @@ class RunningGameView extends SurfaceView {
 
         updateTimers();
 
-        if (score > highScore) {
-            highScore = score;
-        }
     }
 
     /**
@@ -239,10 +264,10 @@ class RunningGameView extends SurfaceView {
             paintText.setTextSize(40);
 
             // draw the score and highest score.
-            canvas.drawText("Score: " + score, 0, 32, paintText);
-            canvas.drawText("Highest Score: " + highScore, 0, 64, paintText);
-            // 怎么计时？
-            //        canvas.drawText("Running time: " + System.currentTimeMillis(), 0, 96, paintText);
+            canvas.drawText("Life: " + User.getLife(), 0, 32, paintText);
+            canvas.drawText("Total time: " + User.getTotalDuration().getSeconds(), 0, 64, paintText);
+            canvas.drawText("Game time: " + runningDuration.getSeconds(), 0, 96, paintText);
+            canvas.drawText("Score: " + score, 0, 128, paintText);
 
             // draw the runner.
             for (Runner runners : runner) {
