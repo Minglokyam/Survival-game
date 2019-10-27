@@ -27,13 +27,13 @@ public class PongGameActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        pongGameView.onResume();
-
+        User.setGameStage(User.PONG);
+        pongGameView.resume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        pongGameView.onPause();
+        pongGameView.pause();
     }
 }

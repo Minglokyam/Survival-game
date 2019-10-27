@@ -1,6 +1,7 @@
 package com.example.survivalgame;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,24 +12,21 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.time.Duration;
+
 public class PongGameView extends SurfaceView{
-    /**
-     * The screen width
-     */
+    /** The screen width */
     int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
 
-    /**
-     * The screen height
-     */
+    /** The screen height */
     int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
+    /** A Pong Game Thread */
     PongGameThread thread;
 
-    volatile boolean playing;
+    private boolean stop = true;
 
-    private boolean pause = true;
-
-    private long fps;
+    private long FPS;
 
     private SurfaceHolder surfaceHolder;
 
@@ -36,26 +34,48 @@ public class PongGameView extends SurfaceView{
 
     private PongGameManager pongGameManager;
 
-    Paint paint;
+    Paint paintText;
+
+    Duration pongDuration;
+
+    public Duration getPongDuration(){
+        return pongDuration;
+    }
+
+    public void setPongDuration(Duration newPongDuration){
+        pongDuration = newPongDuration;
+    }
 
     public PongGameView(Context context) {
         super(context);
         pongGameManager = new PongGameManager(screenWidth, screenHeight);
         surfaceHolder = getHolder();
         setFocusable(true);
-        paint = new Paint();
-        paint.setTextSize(36);
-        paint.setTypeface(Typeface.DEFAULT_BOLD);
+        paintText = new Paint();
+        paintText.setTextSize(36);
+        paintText.setTypeface(Typeface.DEFAULT_BOLD);
+        pongDuration = Duration.ofSeconds(15);
     }
 
     public void update() {
-        pongGameManager.update(fps);
+        pongGameManager.update(FPS);
+        User.setScore(User.getScore() + 1);
         if(User.getLife() == 0){
-            pause = true;
+            stop = true;
+            thread.setPlaying(false);
+
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getContext().startActivity(intent);
+
+        }else if(pongDuration.getSeconds() <= 0){
+            stop = true;
+            thread.setPlaying(false);
+            Intent intent = new Intent(getContext(), DodgeGameActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getContext().startActivity(intent);
         }
     }
-
-
 
     public void draw() {
         canvas = null;
@@ -63,7 +83,12 @@ public class PongGameView extends SurfaceView{
             synchronized (surfaceHolder) {
                 canvas = surfaceHolder.lockCanvas();
                 canvas.drawColor(Color.argb(255, 255, 255, 255));
-                canvas.drawText("Life: " + User.getLife(), screenWidth / 10, screenHeight / 10, paint);
+
+                canvas.drawText("Life: " + User.getLife(), 0, 32, paintText);
+                canvas.drawText("Total time: " + User.getTotalDuration().getSeconds(), 0, 64, paintText);
+                canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
+                canvas.drawText("Score: " + User.getScore(), 0, 128, paintText);
+
                 pongGameManager.draw(canvas);
             }
         } catch (Exception e) {
@@ -83,13 +108,12 @@ public class PongGameView extends SurfaceView{
         }
     }
 
-
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
         RectPaddle rectPaddle = pongGameManager.getRectPaddle();
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                pause = false;
+                stop = false;
                 if (motionEvent.getX() > rectPaddle.getXCoordinate() + rectPaddle.getWidth() / 2) {
                     pongGameManager.paddleMoveRight();
                 } else {
@@ -103,28 +127,25 @@ public class PongGameView extends SurfaceView{
         return true;
     }
 
-    public void onPause() {
-        playing = false;
+    public void pause() {
         try {
-            thread.setRun(playing);
+            thread.setPlaying(false);
             thread.join();
         } catch (InterruptedException e) {
             Log.e("Error:", "joining thread");
         }
     }
 
-    public void onResume() {
-        playing = true;
+    public void resume() {
         thread = new PongGameThread(this);
-        thread.setRun(playing);
         thread.start();
     }
 
-    public void setFps(long n) {
-        fps = n;
+    public void setFPS(long newFPS) {
+        FPS = newFPS;
     }
 
-    public boolean getPause(){
-        return pause;
+    public boolean getStop(){
+        return stop;
     }
 }

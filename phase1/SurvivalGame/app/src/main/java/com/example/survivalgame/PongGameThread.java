@@ -1,38 +1,35 @@
 package com.example.survivalgame;
 
-import android.util.Log;
-import android.view.SurfaceHolder;
+public class PongGameThread extends Thread {
 
-public class PongGameThread extends Thread{
+    private boolean playing = true;
 
-    private boolean playing;
+    private PongGameView pongGameView;
 
-    private PongGameView myView;
-
-
-
-    public PongGameThread(PongGameView view) {
-        this.myView = view;
+    public PongGameThread(PongGameView newPongGameView) {
+        this.pongGameView = newPongGameView;
     }
 
     @Override
     public void run() {
         while (playing) {
             long startTime = System.currentTimeMillis();
-            if (!myView.getPause()) {
-                myView.update();
+            if (!pongGameView.getStop()) {
+                pongGameView.update();
             }
-            myView.draw();
+            pongGameView.draw();
             long timeInterval = System.currentTimeMillis() - startTime;
+            if (!pongGameView.getStop()) {
+                User.setTotalDuration(User.getTotalDuration().plusMillis(timeInterval));
+                pongGameView.setPongDuration(pongGameView.getPongDuration().minusMillis(timeInterval));
+            }
             if (timeInterval > 1) {
-                myView.setFps(1000 / timeInterval);
+                pongGameView.setFPS(1000 / timeInterval);
             }
         }
     }
 
-
-    void setRun(boolean toRun) {
-        playing = toRun;
+    void setPlaying(boolean newPlaying) {
+        playing = newPlaying;
     }
-
 }
