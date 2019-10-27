@@ -42,7 +42,6 @@ public class DodgeGameActivity extends AppCompatActivity {
             }
             gameView.player.setySpeed(spdY);
         }
-        gameView.invalidate();
-        return super.onTouchEvent(event);
+        return true;
     }
 }
