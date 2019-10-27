@@ -9,12 +9,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -124,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 User user = Manager.getUser(username);
                 if(user.getUsername().equals(username) && user.getPassword().equals(password)){
                     System.out.println("login success");
-                    LaunchGame(user);
+                    launchGame(user);
                 }else {
                     String msg = "Username/password does not match";
                     Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
@@ -139,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void LaunchGame(User user) {
+    private void launchGame(User user) {
         int gameStage = user.getGameStage();
         if(gameStage == 0){
             Intent toJumpGame = new Intent(this, RunningGameActivity.class);
