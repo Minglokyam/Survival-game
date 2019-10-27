@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private UserManager Manager;
 
+    public static User user;
+
     private final String USER_FILE = "user_file.ser";
 
     @Override
@@ -121,10 +123,11 @@ public class MainActivity extends AppCompatActivity {
         String password = passwordInput.getText().toString();
         if(!(username.trim().equals("") || password.trim().equals(""))){
             if(Manager.userExists(username)){
-                User user = Manager.getUser(username);
-                if(user.getUsername().equals(username) && user.getPassword().equals(password)){
+                 User temp = Manager.getUser(username);
+                if(temp.getUsername().equals(username) && temp.getPassword().equals(password)){
                     System.out.println("login success");
-                    LaunchGame(user);
+                    user = temp;
+                    launchGame();
                 }else {
                     String msg = "Username/password does not match";
                     Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
@@ -139,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void LaunchGame(User user) {
+    private void launchGame() {
         int gameStage = user.getGameStage();
         if(gameStage == 0){
             Intent toJumpGame = new Intent(this, RunningGameActivity.class);
