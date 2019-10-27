@@ -63,6 +63,7 @@ public class PongGameView extends SurfaceView{
         if(User.getLife() == 0){
             stop = true;
             thread.setPlaying(false);
+            thread.interrupt();
 
             Intent intent = new Intent(getContext(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -71,6 +72,7 @@ public class PongGameView extends SurfaceView{
         }else if(pongDuration.getSeconds() <= 0){
             stop = true;
             thread.setPlaying(false);
+            thread.interrupt();
             Intent intent = new Intent(getContext(), DodgeGameActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             getContext().startActivity(intent);
@@ -82,7 +84,7 @@ public class PongGameView extends SurfaceView{
         try {
             synchronized (surfaceHolder) {
                 canvas = surfaceHolder.lockCanvas();
-                canvas.drawColor(Color.argb(255, 255, 255, 255));
+                canvas.drawColor(Color.rgb(255, 255, 255));
 
                 canvas.drawText("Life: " + User.getLife(), 0, 32, paintText);
                 canvas.drawText("Total time: " + User.getTotalDuration().getSeconds(), 0, 64, paintText);
