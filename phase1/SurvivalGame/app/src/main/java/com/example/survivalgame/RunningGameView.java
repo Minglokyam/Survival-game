@@ -60,10 +60,12 @@ class RunningGameView extends SurfaceView {
     private int timerRandomSpikes = 0;
 
     // the duration time of the running game.
-    Duration runningDuration;
+    private Duration runningDuration;
 
     // the fps of the running game.
     private long fps;
+
+    private RunningGameActivity runningGameActivity;
 
     /**
      * set up the GameView.
@@ -71,7 +73,7 @@ class RunningGameView extends SurfaceView {
     public RunningGameView(Context context) {
         super(context);
         runningDuration = Duration.ofSeconds(30);
-
+        runningGameActivity = (RunningGameActivity) context;
         thread = new RunningGameThread(this);
         holder = getHolder();
         holder.addCallback(
@@ -147,9 +149,7 @@ class RunningGameView extends SurfaceView {
 
         // when the game time runs out, jump to next game.
         if (runningDuration.getSeconds() <= 0) {
-            Intent intent = new Intent(getContext(), PongGameActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getContext().startActivity(intent);
+           runningGameActivity.toPong();
         }
     }
 
@@ -262,9 +262,7 @@ class RunningGameView extends SurfaceView {
                 spikes.remove(i);
                 i--;
                 if (User.getLife() == 0) {
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getContext().startActivity(intent);
+                   runningGameActivity.toMain();
                     break;
                 }
             }
