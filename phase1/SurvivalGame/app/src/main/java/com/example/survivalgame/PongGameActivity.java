@@ -36,4 +36,18 @@ public class PongGameActivity extends AppCompatActivity {
         super.onPause();
         pongGameView.pause();
     }
+
+    public void toDodge(){
+        Intent intent = new Intent(this, DodgeGameActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    public void toMain(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
 }

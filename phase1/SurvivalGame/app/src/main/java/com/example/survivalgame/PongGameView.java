@@ -1,5 +1,6 @@
 package com.example.survivalgame;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -42,12 +43,15 @@ public class PongGameView extends SurfaceView{
         return pongDuration;
     }
 
+    PongGameActivity pongGameActivity;
+
     public void setPongDuration(Duration newPongDuration){
         pongDuration = newPongDuration;
     }
 
     public PongGameView(Context context) {
         super(context);
+        pongGameActivity = (PongGameActivity) context;
         pongGameManager = new PongGameManager(screenWidth, screenHeight);
         surfaceHolder = getHolder();
         setFocusable(true);
@@ -63,16 +67,11 @@ public class PongGameView extends SurfaceView{
         if(User.getLife() == 0){
             stop = true;
             thread.setPlaying(false);
-            Intent intent = new Intent(getContext(), MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getContext().startActivity(intent);
-
+            pongGameActivity.toMain();
         }else if(pongDuration.getSeconds() <= 0){
             stop = true;
             thread.setPlaying(false);
-            Intent intent = new Intent(getContext(), DodgeGameActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getContext().startActivity(intent);
+            pongGameActivity.toDodge();
         }
     }
 
