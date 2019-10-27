@@ -20,9 +20,9 @@ public class PongGameThread extends Thread {
             pongGameView.draw();
             long timeInterval = System.currentTimeMillis() - startTime;
             if (!pongGameView.getStop()) {
-            User.setTotalDuration(User.getTotalDuration().plusMillis(timeInterval));
+                User.setTotalDuration(User.getTotalDuration().plusMillis(timeInterval));
                 pongGameView.setPongDuration(pongGameView.getPongDuration().minusMillis(timeInterval));
-        }
+            }
             if (timeInterval > 1) {
                 pongGameView.setFPS(1000 / timeInterval);
             }
