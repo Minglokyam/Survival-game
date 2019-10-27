@@ -16,9 +16,9 @@ public class RunningGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_running_game);
 
         Intent intent = getIntent();
-        user = (User)intent.getSerializableExtra("userID");
-
-        runningGameView = new RunningGameView(this);
+        user = (User)intent.getSerializableExtra("user");
+        user.setGameStage(User.RUNNING);
+        runningGameView = new RunningGameView(this, user);
         setContentView(runningGameView);
     }
     @Override
@@ -30,6 +30,7 @@ public class RunningGameActivity extends AppCompatActivity {
 
     public void toPong(){
         Intent intent = new Intent(this, PongGameActivity.class);
+        intent.putExtra("user", user);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();

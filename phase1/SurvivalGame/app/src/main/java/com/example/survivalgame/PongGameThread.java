@@ -6,7 +6,10 @@ public class PongGameThread extends Thread {
 
     private PongGameView pongGameView;
 
-    public PongGameThread(PongGameView newPongGameView) {
+    private User user;
+
+    public PongGameThread(PongGameView newPongGameView, User user) {
+        this.user = user;
         this.pongGameView = newPongGameView;
     }
 
@@ -20,7 +23,7 @@ public class PongGameThread extends Thread {
             pongGameView.draw();
             long timeInterval = System.currentTimeMillis() - startTime;
             if (!pongGameView.getStop()) {
-                User.setTotalDuration(User.getTotalDuration().plusMillis(timeInterval));
+                user.setTotalDuration(user.getTotalDuration().plusMillis(timeInterval));
                 pongGameView.setPongDuration(pongGameView.getPongDuration().minusMillis(timeInterval));
             }
             if (timeInterval > 1) {

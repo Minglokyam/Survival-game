@@ -13,10 +13,14 @@ public class DodgeGameActivity extends AppCompatActivity {
     static int HEIGHT, WIDTH;
     private DodgeGameView gameView;
     private int prevX, prevY;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        user = (User)intent.getSerializableExtra("user");
+        user.setGameStage(User.DODGE);
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);

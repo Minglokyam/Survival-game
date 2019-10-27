@@ -1,6 +1,5 @@
 package com.example.survivalgame;
 
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
@@ -67,14 +66,17 @@ class RunningGameView extends SurfaceView {
 
     private RunningGameActivity runningGameActivity;
 
+    private User user;
+
     /**
      * set up the GameView.
      */
-    public RunningGameView(Context context) {
+    public RunningGameView(Context context, User user) {
         super(context);
+        this.user = user;
         runningDuration = Duration.ofSeconds(30);
         runningGameActivity = (RunningGameActivity) context;
-        thread = new RunningGameThread(this);
+        thread = new RunningGameThread(this, user);
         holder = getHolder();
         holder.addCallback(
                 new Callback() {
@@ -142,7 +144,7 @@ class RunningGameView extends SurfaceView {
      * update the objects and current game status.
      */
     public void update() {
-        User.setScore(User.getScore() + 1);
+        user.setScore(user.getScore() + 1);
         updateTimers();
         updateCoin();
         updateSpike();
@@ -237,7 +239,7 @@ class RunningGameView extends SurfaceView {
                 coin.remove(i);
 
                 // add points to the score when the runner touches a coin.
-                User.setScore(User.getScore() + 100);
+                user.setScore(user.getScore() + 100);
             }
         }
     }
@@ -258,10 +260,10 @@ class RunningGameView extends SurfaceView {
 
             // end the game once the runner touches the spikes.
             if (spikes.get(i).checkCollision(runner1, spike1)) {
-                User.setLife(User.getLife() - 1);
+                user.setLife(user.getLife() - 1);
                 spikes.remove(i);
                 i--;
-                if (User.getLife() == 0) {
+                if (user.getLife() == 0) {
                    runningGameActivity.toMain();
                     break;
                 }
@@ -279,10 +281,10 @@ class RunningGameView extends SurfaceView {
         canvas.drawColor(Color.WHITE);
         paintText.setTextSize(40);
         // draw the score and highest score.
-        canvas.drawText("Life: " + User.getLife(), 0, 32, paintText);
-        canvas.drawText("Total time: " + User.getTotalDuration().getSeconds(), 0, 64, paintText);
+        canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
+        canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
         canvas.drawText("Game time: " + runningDuration.getSeconds(), 0, 96, paintText);
-        canvas.drawText("Score: " + User.getScore(), 0, 128, paintText);
+        canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
 
         // draw the runner.
         for (Runner runners : runner) {

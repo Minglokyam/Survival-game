@@ -9,11 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -125,21 +121,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void launchGame() {
         int gameStage = user.getGameStage();
-        if(gameStage == 0){
+        if(gameStage == User.RUNNING){
             Intent toJumpGame = new Intent(this, RunningGameActivity.class);
-            toJumpGame.putExtra("userID", user);
+            toJumpGame.putExtra("user", user);
             System.out.println("ready to launch");
             startActivity(toJumpGame);
         }
-        else if(gameStage == 1){
+        else if(gameStage == User.PONG){
             Intent toPongGame = new Intent(this, PongGameActivity.class);
-            toPongGame.putExtra("userID", user);
+            toPongGame.putExtra("user", user);
             System.out.println("ready to launch");
             startActivity(toPongGame);
         }
-        else if(gameStage == 2){
+        else if(gameStage == User.DODGE){
             Intent toDodgeGame = new Intent(this, DodgeGameActivity.class);
-            toDodgeGame.putExtra("userID", user);
+            toDodgeGame.putExtra("user", user);
             System.out.println("ready to launch");
             startActivity(toDodgeGame);
         }

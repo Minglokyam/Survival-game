@@ -33,6 +33,8 @@ public class Ball extends GameItemCircle {
      */
     private float initialYCoordinate;
 
+    User user;
+
     /**
      * A getter of xVelocity
      */
@@ -61,8 +63,9 @@ public class Ball extends GameItemCircle {
         this.yVelocity = newYVelocity;
     }
 
-    public Ball(PongGameManager pongGameManager, float radius, float xCoordinate, float yCoordinate, float xVelocity, float yVelocity) {
+    public Ball(PongGameManager pongGameManager, float radius, float xCoordinate, float yCoordinate, float xVelocity, float yVelocity, User user) {
         super(pongGameManager, radius, xCoordinate, yCoordinate);
+        this.user = user;
         initialXVelocity = xVelocity;
         initialYVelocity = yVelocity;
         initialXCoordinate = xCoordinate;
@@ -138,7 +141,7 @@ public class Ball extends GameItemCircle {
 
     private void hitBottom() {
         if (this.getYCoordinate() + getRadius() >= getPongGameManager().getScreenHeight()) {
-            User.setLife(User.getLife() - 1);
+            user.setLife(user.getLife() - 1);
             resetSpeed();
             resetCoordinate();
         }

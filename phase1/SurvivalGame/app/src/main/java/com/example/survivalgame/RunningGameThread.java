@@ -8,13 +8,16 @@ class RunningGameThread extends Thread {
     // check whether the runner is running
     boolean running;
 
-    public RunningGameThread(RunningGameView view) {
+    public RunningGameThread(RunningGameView view, User user) {
         this.view = view;
+        this.user = user;
     }
 
     public void setRunning() {
         this.running = true;
     }
+
+    private User user;
 
     @Override
     public void run() {
@@ -42,7 +45,7 @@ class RunningGameThread extends Thread {
             } catch (Exception e) {
             }
             long timeInterval = System.currentTimeMillis() - startTime;
-            User.setTotalDuration(User.getTotalDuration().plusMillis(timeInterval));
+            user.setTotalDuration(user.getTotalDuration().plusMillis(timeInterval));
             view.setRunningDuration(view.getRunningDuration().minusMillis(timeInterval));
             if (timeInterval > 1) {
                 view.setFps(1000 / timeInterval);
