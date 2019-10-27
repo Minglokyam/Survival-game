@@ -82,7 +82,7 @@ public class PongGameView extends SurfaceView{
         try {
             synchronized (surfaceHolder) {
                 canvas = surfaceHolder.lockCanvas();
-                canvas.drawColor(Color.rgb(255, 255, 255));
+                canvas.drawColor(Color.WHITE);
 
                 if(!stop){
                     canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
