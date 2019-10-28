@@ -39,4 +39,9 @@ public class UserManager implements Serializable {
     public void update(UserManager newManager) {
         this.userList = newManager.userList;
     }
+    public void printList(){
+        for(User user: userList){
+            System.out.println(user);
+        }
+    }
 }

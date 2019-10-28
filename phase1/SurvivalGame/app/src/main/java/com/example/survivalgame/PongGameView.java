@@ -60,7 +60,7 @@ public class PongGameView extends SurfaceView{
         paintText.setTextSize(36);
         paintText.setTypeface(Typeface.DEFAULT_BOLD);
         //=======================================
-        pongDuration = Duration.ofSeconds(2);
+        pongDuration = Duration.ofSeconds(10);
     }
 
     public void update() {
@@ -82,8 +82,7 @@ public class PongGameView extends SurfaceView{
         try {
             synchronized (surfaceHolder) {
                 canvas = surfaceHolder.lockCanvas();
-                canvas.drawColor(Color.WHITE);
-
+                canvas.drawColor(Color.rgb(255, 255, 255));
                 if(!stop){
                     canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
                     canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);

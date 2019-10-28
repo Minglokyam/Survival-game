@@ -20,9 +20,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private UserManager userManager;
+    UserManager userManager;
 
-    public static User user;
+    public User user;
 
     private final String USER_FILE = "user_file.ser";
 
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userManager = new UserManager();
+        FileManager.setMainActivity(this);
         setContentView(R.layout.activity_main);
 
         System.out.println(getFilesDir());
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             fos = this.openFileOutput(fileName, this.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
+            userManager.printList();
             os.writeObject(userManager.userList);
             os.close();
         } catch (IOException e) {
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         String password = passwordInput.getText().toString();
         if(!(username.trim().equals("") || password.trim().equals(""))){
             if(!userManager.userExists(username)){
-                User newUser = new User(username, password);
+                User newUser = new User(username, password, userManager.numUsers());
                 userManager.addUser(newUser);
                 saveFile(USER_FILE);
                 String msg = "User creation successful";

@@ -9,6 +9,7 @@ class User implements Serializable {
     private String username;
     private String password;
 
+    private int id;
     private int score;
     private int life;
     private Duration totalDuration;
@@ -19,18 +20,21 @@ class User implements Serializable {
     public static final int DODGE = 2;
 
 
-    User(String username, String password){
+    User(String username, String password, int id){
         this.username = username;
         this.password = password;
         score = 0;
         life = 3;
         gameStage = RUNNING;
         totalDuration = Duration.ofSeconds(0);
+        this.id = id;
     }
 
     String getUsername(){return username;}
 
     String getPassword(){return password;}
+
+    public int getID(){ return id; }
 
     public int getScore(){return score;}
 
@@ -47,5 +51,9 @@ class User implements Serializable {
     public Duration getTotalDuration(){return totalDuration;}
 
     public void setTotalDuration(Duration newTotalDuration){totalDuration = newTotalDuration;}
+
+    public String toString(){
+        return username + gameStage;
+    }
 }
 
