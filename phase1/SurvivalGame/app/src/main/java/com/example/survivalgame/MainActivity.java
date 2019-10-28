@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadFile(String fileName){
 
+        FileInputStream fis = null;
+
         try {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
@@ -42,28 +46,39 @@ public class MainActivity extends AppCompatActivity {
                 userManager.userList = (ArrayList) input.readObject();
                 inputStream.close();
             }
-//            UserManager temp = (UserManager)inputStream.readObject();
-            System.out.println(getFilesDir());
-//            temp.userExists("david");
-//            objectInputStream.close();
         } catch (FileNotFoundException e) {
             Log.e("login activity", "File not found: " + e.toString());
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: " + e.toString());
         } catch (ClassNotFoundException e) {
             Log.e("login activity", "File contained unexpected data type: " + e.toString());
+        }finally {
+        try {
+            if (fis != null) fis.close();
+            }catch(IOException e) {
+                Log.e("Exception", "File write failed: " + e.toString());
+            }
         }
     }
 
     public void saveFile(String fileName) {
 
+
+        FileOutputStream fos = null;
+
         try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(
-                    this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(userManager.userList);
-            outputStream.close();
+            fos = this.openFileOutput(fileName, this.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(userManager.userList);
+            os.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
+        }finally {
+            try {
+                if (fos != null) fos.close();
+            }catch(IOException e) {
+                Log.e("Exception", "File write failed: " + e.toString());
+            }
         }
     }
 
