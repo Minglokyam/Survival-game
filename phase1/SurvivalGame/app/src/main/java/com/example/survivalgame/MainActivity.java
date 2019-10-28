@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         userManager = new UserManager();
+        setContentView(R.layout.activity_main);
+
         System.out.println(getFilesDir());
     }
 
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             InputStream inputStream = this.openFileInput(fileName);
             if (inputStream != null) {
                 ObjectInputStream input = new ObjectInputStream(inputStream);
-                this.userManager.update((UserManager) input.readObject());
+                userManager.userList = (ArrayList) input.readObject();
                 inputStream.close();
             }
 //            UserManager temp = (UserManager)inputStream.readObject();
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(
                     this.openFileOutput(fileName, MODE_PRIVATE));
-            outputStream.writeObject(userManager);
+            outputStream.writeObject(userManager.userList);
             outputStream.close();
         } catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());

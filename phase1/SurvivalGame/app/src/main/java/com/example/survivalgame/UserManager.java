@@ -7,9 +7,7 @@ import java.util.List;
 public class UserManager implements Serializable {
     List<User> userList;
 
-    UserManager() {
-        userList = new ArrayList<>();
-    }
+    UserManager(){userList = new ArrayList<>();}
 
     /* username and password cannot be empty*/
 
@@ -22,8 +20,12 @@ public class UserManager implements Serializable {
     }
 
     public boolean userExists(String username) {
+        try{
         for (User user : userList) {
             if (user.getUsername().equals(username)) return true;
+        }
+    } catch (Exception e) {
+      return false;
         }
         return false;
     }
