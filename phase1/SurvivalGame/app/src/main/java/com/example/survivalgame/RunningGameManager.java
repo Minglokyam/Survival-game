@@ -60,87 +60,86 @@ class RunningGameManager {
     timerSpike++;
 
     // randomly generate spikes.
-      randomGenerateSpikes();
+    randomGenerateSpikes();
     // randomly generate coins.
-      randomGenerateCoins();
-    }
+    randomGenerateCoins();
+  }
 
-    /**
-     * randomly generate the spikes in the running game.
-     */
-    private void randomGenerateSpikes() {
-        switch (timerRandomSpikes) {
-            // three different cases to generate spikes in different distances.
-            case 0:
-                if (timerSpike >= 100) {
-                    spikes.add(new Spike(RunningGameView, RunningGameView.spikesBmp,
-                            RunningGameView.getWidth() + 24));
-                    Random randomSpikes = new Random();
-                    timerRandomSpikes = randomSpikes.nextInt(3);
-                    timerSpike = 0;
-                }
-                break;
-
-            case 1:
-                if (timerSpike >= 125) {
-                    spikes.add(new Spike(RunningGameView, RunningGameView.spikesBmp,
-                            RunningGameView.getWidth() + 24));
-                    Random randomSpikes = new Random();
-                    timerRandomSpikes = randomSpikes.nextInt(3);
-                    timerSpike = 0;
-                }
-                break;
-            case 2:
-                if (timerSpike >= 150) {
-                    spikes.add(new Spike(RunningGameView, RunningGameView.spikesBmp,
-                            RunningGameView.getWidth() + 24));
-                    Random randomSpikes = new Random();
-                    timerRandomSpikes = randomSpikes.nextInt(3);
-                    timerSpike = 0;
-                }
-                break;
+  /** randomly generate the spikes in the running game. */
+  private void randomGenerateSpikes() {
+    switch (timerRandomSpikes) {
+        // three different cases to generate spikes in different distances.
+      case 0:
+        if (timerSpike >= 100) {
+          spikes.add(
+              new Spike(
+                  RunningGameView, RunningGameView.spikesBmp, RunningGameView.getWidth() + 24));
+          Random randomSpikes = new Random();
+          timerRandomSpikes = randomSpikes.nextInt(3);
+          timerSpike = 0;
         }
-    }
+        break;
 
-    /**
-     * randomly generate the coins in the running game.
-     */
-    private void randomGenerateCoins() {
-        if (timerCoins >= 100) {
-            // randomly generate int 0 and 1 to decide which case the coins are generated.
-            Random randomCoin = new Random();
-            int random = randomCoin.nextInt(2);
-
-            switch (random) {
-                case 0:
-                    // construct five consecutive coins in same height.
-                    int currentCoin = 1;
-                    while (currentCoin <= 5) {
-                        coin.add(
-                                new Coin(
-                                        RunningGameView,
-                                        RunningGameView.coinBmp,
-                                        RunningGameView.getWidth() + (64 * currentCoin),
-                                        130));
-                        currentCoin++;
-                    }
-                    break;
-
-                case 1:
-                    // construct three consecutive coins in different height.
-                    coin.add(
-                            new Coin(
-                                    RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 32, 150));
-                    coin.add(
-                            new Coin(
-                                    RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 96, 130));
-                    coin.add(
-                            new Coin(
-                                    RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 160, 150));
-                    break;
-            }
-            // reset the timer.
-            timerCoins = 0;
+      case 1:
+        if (timerSpike >= 125) {
+          spikes.add(
+              new Spike(
+                  RunningGameView, RunningGameView.spikesBmp, RunningGameView.getWidth() + 24));
+          Random randomSpikes = new Random();
+          timerRandomSpikes = randomSpikes.nextInt(3);
+          timerSpike = 0;
         }
+        break;
+      case 2:
+        if (timerSpike >= 150) {
+          spikes.add(
+              new Spike(
+                  RunningGameView, RunningGameView.spikesBmp, RunningGameView.getWidth() + 24));
+          Random randomSpikes = new Random();
+          timerRandomSpikes = randomSpikes.nextInt(3);
+          timerSpike = 0;
+        }
+        break;
     }
+  }
+
+  /** randomly generate the coins in the running game. */
+  private void randomGenerateCoins() {
+    if (timerCoins >= 100) {
+      // randomly generate int 0 and 1 to decide which case the coins are generated.
+      Random randomCoin = new Random();
+      int random = randomCoin.nextInt(2);
+
+      switch (random) {
+        case 0:
+          // construct five consecutive coins in same height.
+          int currentCoin = 1;
+          while (currentCoin <= 5) {
+            coin.add(
+                new Coin(
+                    RunningGameView,
+                    RunningGameView.coinBmp,
+                    RunningGameView.getWidth() + (64 * currentCoin),
+                    130));
+            currentCoin++;
+          }
+          break;
+
+        case 1:
+          // construct three consecutive coins in different height.
+          coin.add(
+              new Coin(
+                  RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 32, 150));
+          coin.add(
+              new Coin(
+                  RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 96, 130));
+          coin.add(
+              new Coin(
+                  RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 160, 150));
+          break;
+      }
+      // reset the timer.
+      timerCoins = 0;
+    }
+  }
 }

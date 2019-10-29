@@ -2,13 +2,13 @@ package com.example.survivalgame;
 
 import android.graphics.Canvas;
 
-public abstract class GameItemRect extends GameItem {
+public abstract class PongGameItemRect extends PongGameItem {
   /** The width of this rectangle */
   private float width;
   /** The height of this rectangle */
   private float height;
 
-  GameItemRect(
+  PongGameItemRect(
       PongGameManager pongGameManager,
       float width,
       float height,

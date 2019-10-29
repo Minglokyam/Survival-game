@@ -2,11 +2,11 @@ package com.example.survivalgame;
 
 import android.graphics.Canvas;
 
-public abstract class GameItemCircle extends GameItem {
+public abstract class PongGameItemCircle extends PongGameItem {
   /** The radius of this rectangle */
   private float radius;
 
-  GameItemCircle(
+  PongGameItemCircle(
       PongGameManager pongGameManager, float radius, float xCoordinate, float yCoordinate) {
     super(pongGameManager, xCoordinate, yCoordinate);
     this.radius = radius;

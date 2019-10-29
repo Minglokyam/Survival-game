@@ -2,31 +2,27 @@ package com.example.survivalgame;
 
 import android.graphics.Color;
 
-class RectPaddle extends GameItemRect {
+class RectPaddle extends PongGameItemRect {
   private final int STOP = 0;
   private final int LEFT = 1;
   private final int RIGHT = 2;
   private int movingStatus = STOP;
   private float xSpeed;
 
-  /**
-   * build the paddle.
-   */
+  /** build the paddle. */
   RectPaddle(
-          PongGameManager pongGameManager,
-          float xSpeed,
-          float width,
-          float height,
-          float xCoordinate,
-          float yCoordinate) {
+      PongGameManager pongGameManager,
+      float xSpeed,
+      float width,
+      float height,
+      float xCoordinate,
+      float yCoordinate) {
     super(pongGameManager, width, height, xCoordinate, yCoordinate);
     getPaint().setColor(Color.MAGENTA);
     this.xSpeed = xSpeed;
   }
 
-  /**
-   * move the paddle considering the current moving direction .
-   */
+  /** move the paddle considering the current moving direction . */
   void move(long fps) {
     if (!checkHitLeft() && movingStatus == LEFT) {
       xMoveLeft(fps);
@@ -57,16 +53,12 @@ class RectPaddle extends GameItemRect {
     return getXCoordinate() + getWidth() >= getPongGameManager().getScreenWidth();
   }
 
-  /**
-   * change the moving status to left.
-   */
+  /** change the moving status to left. */
   void moveLeft() {
     movingStatus = LEFT;
   }
 
-  /**
-   * change the moving status to right.
-   */
+  /** change the moving status to right. */
   void moveRight() {
     movingStatus = RIGHT;
   }

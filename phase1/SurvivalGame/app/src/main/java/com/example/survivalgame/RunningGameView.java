@@ -12,10 +12,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Paint;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import java.time.Duration;
 
 class RunningGameView extends SurfaceView {
@@ -156,7 +152,7 @@ class RunningGameView extends SurfaceView {
 
     update();
 
-      // draw the life, total time, game time and score.
+    // draw the life, total time, game time and score.
     canvas.drawColor(Color.WHITE);
     paintText.setTextSize(40);
     canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
@@ -178,6 +174,6 @@ class RunningGameView extends SurfaceView {
     }
 
     // draw the ground.
-      manager.ground.draw(canvas);
+    manager.ground.draw(canvas);
   }
 }

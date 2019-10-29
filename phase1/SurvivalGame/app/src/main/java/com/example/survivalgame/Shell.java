@@ -2,22 +2,18 @@ package com.example.survivalgame;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.view.*;
+import android.graphics.RectF;
 
-public class Shell implements instance {
-  private Paint paint;
-  private int x;
-  private int y;
-  private int xSpeed;
-  private int ySpeed;
-  private DodgeGameManager dodgeGameManager;
+import java.util.Random;
 
-  public Shell(DodgeGameManager dodgeGameManager) {
-    paint = new Paint();
-    paint.setColor(Color.BLUE);
-    this.dodgeGameManager = dodgeGameManager;
+public class Shell extends DodgeGameItem {
+  private float xSpeed;
+  private float ySpeed;
+
+  public Shell(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight) {
+    super(dodgeGameManager);
+    getPaint().setColor(Color.BLUE);
+    Random random = new Random();
     double rand = Math.random();
     if (rand > 0.5) {
       this.xSpeed = 8;
@@ -25,31 +21,29 @@ public class Shell implements instance {
       this.xSpeed = -8;
     }
     this.ySpeed = (int) (5 * rand) + 5;
-    this.x = (int) (Math.random() * DodgeGameActivity.WIDTH);
-    this.y = -10;
+    setXCoordinate(random.nextFloat() * screenWidth);
+    setYCoordinate(-10);
   }
 
   public void draw(Canvas c) {
-    c.drawOval(x, y, x + 50, y + 50, paint);
-    x += xSpeed;
-    y += ySpeed;
+    c.drawOval(
+        getXCoordinate(),
+        getYCoordinate(),
+        getXCoordinate() + 50,
+        getYCoordinate() + 50,
+        getPaint());
+    setXCoordinate(getXCoordinate() + xSpeed);
+    setYCoordinate(getYCoordinate() + ySpeed);
   }
 
   public void update() {
-    if (x < 0 || x + 60 >= dodgeGameManager.getScreenWidth()) {
+    if (getXCoordinate() < 0 || getXCoordinate() + 60 >= getDodgeGameManager().getScreenWidth()) {
       xSpeed *= -1;
     }
   }
 
-  public Rect getRect() {
-    return new Rect(x, y, x + 50, y + 50);
-  }
-
-  public int getX() {
-    return x;
-  }
-
-  public int getY() {
-    return y;
+  public RectF getRectF() {
+    return new RectF(
+        getXCoordinate(), getYCoordinate(), getXCoordinate() + 50, getYCoordinate() + 50);
   }
 }

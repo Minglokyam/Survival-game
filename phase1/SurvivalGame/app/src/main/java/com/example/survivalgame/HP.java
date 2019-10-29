@@ -2,24 +2,33 @@ package com.example.survivalgame;
 
 import android.graphics.*;
 
-public class HP implements instance {
-  private Paint paint;
+public class HP extends DodgeGameItem {
+  private int screenWidth;
+  private int screenHeight;
   private int length;
   private int hp;
 
-  HP() {
-    paint = new Paint();
-    paint.setColor(Color.GREEN);
+  HP(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight) {
+    super(dodgeGameManager);
+    getPaint().setColor(Color.GREEN);
     length = 600;
     hp = 100;
+    this.screenWidth = screenWidth;
+    this.screenHeight = screenHeight;
   }
 
-  public void draw(Canvas c) {
-    RectF hpBar =
-        new RectF(
-            DodgeGameActivity.WIDTH - 10, 10, DodgeGameActivity.WIDTH - 110, 10 + this.length);
+  public int getHP() {
+    return this.hp;
+  }
+
+  public void setHP(int hp) {
+    this.hp = hp;
+  }
+
+  public void draw(Canvas canvas) {
+    RectF hpBar = new RectF(screenWidth - 10, 10, screenWidth - 110, 10 + length);
     // RectF hpBar = new RectF(10, 10, 110, 10 + this.length);
-    c.drawRect(hpBar, paint);
+    canvas.drawRect(hpBar, getPaint());
   }
 
   public void update() {
@@ -29,24 +38,4 @@ public class HP implements instance {
       length = 0;
     }
   }
-
-  public int getHp() {
-    return this.hp;
-  }
-
-  public void setHp(int hp) {
-    this.hp = hp;
-  }
-
-  public int getX() {
-    return 10;
-  };
-
-  public int getY() {
-    return 10;
-  };
-
-  public Rect getRect() {
-    return new Rect(10, 10, 40, 10 + this.length);
-  };
 }

@@ -1,5 +1,7 @@
 package com.example.survivalgame;
 
+import java.util.List;
+
 class EnemyGenerator {
   private DodgeGameManager dodgeGameManager;
   private int counter;
@@ -9,11 +11,15 @@ class EnemyGenerator {
     counter = 1;
   }
 
-  void Generate() {
+  void generateShells(List<Shell> shells) {
     if (counter % 40 == 0) {
       int num = (int) (Math.random() * 0.5) + 1; // enemy generated this round
       for (int i = 0; i < num; i++) {
-        dodgeGameManager.shells.add(new Shell(dodgeGameManager));
+        shells.add(
+            new Shell(
+                dodgeGameManager,
+                dodgeGameManager.getScreenWidth(),
+                dodgeGameManager.getScreenHeight()));
         counter = 1;
       }
     } else {
