@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.view.Display;
 
 public class DodgeGameActivity extends AppCompatActivity {
-
-  static int HEIGHT, WIDTH;
   private DodgeGameView dodgeGameView;
   private User user;
 
@@ -23,15 +21,13 @@ public class DodgeGameActivity extends AppCompatActivity {
     Display display = getWindowManager().getDefaultDisplay();
     Point size = new Point();
     display.getSize(size);
-    WIDTH = size.x;
-    HEIGHT = size.y;
     dodgeGameView = new DodgeGameView(this, user, size.x, size.y);
     setContentView(dodgeGameView);
   }
 
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     startActivity(intent);
     finish();
   }
