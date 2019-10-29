@@ -8,7 +8,6 @@ public class UserUpdater {
     private static MainActivity mainActivity;
     private static List<User> userList;
     private static User user;
-    private static final String USER_FILE = "user_file.ser";
 
     public static void setMainActivity(Context context){
         mainActivity = (MainActivity)context;
@@ -16,10 +15,6 @@ public class UserUpdater {
 
     public static void setUserList(){
         userList = mainActivity.userManager.userList;
-    }
-
-    public static void saveFile(){
-        mainActivity.saveFile(USER_FILE);
     }
 
     public static void updateUser(User activityUser, int gameStage){

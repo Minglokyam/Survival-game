@@ -17,7 +17,7 @@ public class PongGameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         user = (User)intent.getSerializableExtra("user");
         UserUpdater.updateUser(user, User.PONG);
-        UserUpdater.saveFile();
+        IOManager.saveFile();
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         pongGameView = new PongGameView(this, user);
