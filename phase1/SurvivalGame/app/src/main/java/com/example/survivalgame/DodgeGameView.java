@@ -96,8 +96,8 @@ public class DodgeGameView extends SurfaceView {
   @Override
   public boolean onTouchEvent(MotionEvent event) {
     if (event.getAction() == MotionEvent.ACTION_MOVE) {
-      dodgeGameManager.plane.setxSpeed((int) ((event.getX() - dodgeGameManager.plane.getX()) / 6));
-      int spdY = (int) ((event.getY() - dodgeGameManager.plane.getY()) / 15);
+      dodgeGameManager.plane.setxSpeed((int) ((event.getX() - dodgeGameManager.plane.getXCoordinate()) / 6));
+      int spdY = (int) ((event.getY() - dodgeGameManager.plane.getYCoordinate()) / 15);
       if (spdY > 20) {
         spdY = 20;
       } else if (spdY > 0 && spdY < 8) {

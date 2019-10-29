@@ -14,7 +14,7 @@ public class UserUpdater {
   }
 
   public static void setUserList() {
-    userList = mainActivity.userManager.userList;
+    userList = mainActivity.userManager.getUserList();
   }
 
   public static void updateUser(User activityUser, int gameStage) {

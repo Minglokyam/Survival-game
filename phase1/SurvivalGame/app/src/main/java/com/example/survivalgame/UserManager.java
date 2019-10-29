@@ -39,4 +39,7 @@ public class UserManager implements Serializable {
         return userList;
     }
 
+    public static void setUserList(List<User> userList) {
+        UserManager.userList = userList;
+    }
 }
