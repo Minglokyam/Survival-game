@@ -27,13 +27,10 @@ class RunningGameView extends SurfaceView {
 
   // the image holder of the runner.
   Bitmap runnerBmp;
-
   // the image holder of the coin.
   Bitmap coinBmp;
-
   // the image holder of the ground.
   Bitmap groundBmp;
-
   // the image holder of the spike.
   Bitmap spikesBmp;
 
@@ -156,10 +153,12 @@ class RunningGameView extends SurfaceView {
   /** Draw all the objects on the screen. */
   public void draw(Canvas canvas) {
     super.draw(canvas);
+
     update();
+
+      // draw the life, total time, game time and score.
     canvas.drawColor(Color.WHITE);
     paintText.setTextSize(40);
-    // draw the score and highest score.
     canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
     canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
     canvas.drawText("Game time: " + runningDuration.getSeconds(), 0, 96, paintText);
@@ -179,6 +178,6 @@ class RunningGameView extends SurfaceView {
     }
 
     // draw the ground.
-    manager.ground.onDraw(canvas);
+      manager.ground.draw(canvas);
   }
 }
