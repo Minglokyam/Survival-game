@@ -20,9 +20,8 @@ public class DodgeGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         user = (User)intent.getSerializableExtra("user");
-        user.setGameStage(User.DODGE);
-        FileManager.setGameStage(user, User.DODGE);
-        FileManager.saveFile();
+        UserUpdater.updateUser(user, User.DODGE);
+        UserUpdater.saveFile();
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);

@@ -17,7 +17,8 @@ public class RunningGameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         user = (User)intent.getSerializableExtra("user");
-        FileManager.saveFile();
+        UserUpdater.updateUser(user, User.RUNNING);
+        UserUpdater.saveFile();
         runningGameView = new RunningGameView(this, user);
         setContentView(runningGameView);
     }

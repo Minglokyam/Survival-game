@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userManager = new UserManager();
-        FileManager.setMainActivity(this);
         setContentView(R.layout.activity_main);
 
         System.out.println(getFilesDir());
@@ -123,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
                 if(temp.getUsername().equals(username) && temp.getPassword().equals(password)){
                     System.out.println("login success");
                     user = temp;
+                    UserUpdater.setMainActivity(this);
+                    UserUpdater.setUserList();
                     launchGame();
                 }else {
                     String msg = "Username/password does not match";
