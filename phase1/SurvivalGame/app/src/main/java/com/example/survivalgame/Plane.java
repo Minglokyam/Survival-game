@@ -21,7 +21,7 @@ public class Plane implements instance {
   private Paint paint;
   private int hp;
 
-  public Plane() {
+    Plane() {
     paint = new Paint();
     paint.setColor(Color.BLACK);
     this.x = DodgeGameActivity.WIDTH / 2;
@@ -95,11 +95,11 @@ public class Plane implements instance {
     return ySpeed;
   }
 
-  public void setxSpeed(int xSpeed) {
+    void setxSpeed(int xSpeed) {
     this.xSpeed = xSpeed;
   }
 
-  public void setySpeed(int ySpeed) {
+    void setySpeed(int ySpeed) {
     this.ySpeed = ySpeed;
   }
 
@@ -107,11 +107,11 @@ public class Plane implements instance {
     this.hit = hit;
   }
 
-  public int getHp() {
+    int getHp() {
     return this.hp;
   }
 
-  public void setHp(int hp) {
+    void setHp(int hp) {
     this.hp = hp;
   }
 }
