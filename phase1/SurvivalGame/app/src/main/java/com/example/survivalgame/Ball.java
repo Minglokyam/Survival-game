@@ -2,7 +2,7 @@ package com.example.survivalgame;
 
 import android.graphics.Color;
 
-public class Ball extends GameItemCircle {
+public class Ball extends PongGameItemCircle {
   /** The horizontal velocity of this ball */
   private float xVelocity;
 

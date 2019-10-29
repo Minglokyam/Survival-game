@@ -3,10 +3,10 @@ package com.example.survivalgame;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public abstract class GameItem {
-  /** The x-coordinate of this GameItem */
+public abstract class PongGameItem {
+  /** The x-coordinate of this PongGameItem */
   private float xCoordinate;
-  /** The y-coordinate of this GameItem */
+  /** The y-coordinate of this PongGameItem */
   private float yCoordinate;
   /** An instance of PongGameManager */
   private PongGameManager pongGameManager;
@@ -14,12 +14,12 @@ public abstract class GameItem {
   private Paint paint;
 
   /**
-   * Create a GameItem.
+   * Create a PongGameItem.
    *
-   * @param xCoordinate the x-coordinate of this GameItem
-   * @param yCoordinate the y-coordinate of this GameItem
+   * @param xCoordinate the x-coordinate of this PongGameItem
+   * @param yCoordinate the y-coordinate of this PongGameItem
    */
-  GameItem(PongGameManager pongGameManager, float xCoordinate, float yCoordinate) {
+  PongGameItem(PongGameManager pongGameManager, float xCoordinate, float yCoordinate) {
     paint = new Paint();
     this.pongGameManager = pongGameManager;
     this.xCoordinate = xCoordinate;

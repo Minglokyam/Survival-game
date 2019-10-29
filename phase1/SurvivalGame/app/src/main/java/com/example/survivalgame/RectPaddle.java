@@ -2,7 +2,7 @@ package com.example.survivalgame;
 
 import android.graphics.Color;
 
-class RectPaddle extends GameItemRect {
+class RectPaddle extends PongGameItemRect {
   private final int STOP = 0;
   private final int LEFT = 1;
   private final int RIGHT = 2;
