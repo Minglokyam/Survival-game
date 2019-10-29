@@ -99,7 +99,9 @@ public class DodgeGameView extends SurfaceView{
                     }
                 }
             }
-            shells.get(i).update(canvas);
+            if (i < shells.size()) {
+                shells.get(i).update(canvas);
+            }
         }
     }
 
