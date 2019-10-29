@@ -5,43 +5,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager implements Serializable {
-    List<User> userList;
+  List<User> userList;
 
-    UserManager(){userList = new ArrayList<>();}
+  UserManager() {
+    userList = new ArrayList<>();
+  }
 
-    /* username and password cannot be empty*/
+  /* username and password cannot be empty*/
 
-    public int numUsers() {
-        return userList.size();
-    }
+  public int numUsers() {
+    return userList.size();
+  }
 
-    public void addUser(User user) {
-        userList.add(user);
-    }
+  public void addUser(User user) {
+    userList.add(user);
+  }
 
-    public boolean userExists(String username) {
-        try{
-        for (User user : userList) {
-            if (user.getUsername().equals(username)) return true;
-        }
+  public boolean userExists(String username) {
+    try {
+      for (User user : userList) {
+        if (user.getUsername().equals(username)) return true;
+      }
     } catch (Exception e) {
       return false;
-        }
-        return false;
     }
+    return false;
+  }
 
-    public User getUser(String username) {
-        for (User user : userList) {
-            if (user.getUsername().equals(username)) return user;
-        }
-        return null;
+  public User getUser(String username) {
+    for (User user : userList) {
+      if (user.getUsername().equals(username)) return user;
     }
-    public void update(UserManager newManager) {
-        this.userList = newManager.userList;
+    return null;
+  }
+
+  public void update(UserManager newManager) {
+    this.userList = newManager.userList;
+  }
+
+  public void printList() {
+    for (User user : userList) {
+      System.out.println(user);
     }
-    public void printList(){
-        for(User user: userList){
-            System.out.println(user);
-        }
-    }
+  }
 }

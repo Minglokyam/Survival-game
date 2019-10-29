@@ -60,10 +60,8 @@ class Coin {
         canvas.drawBitmap(bmp, a, b, null);
     }
 
-    /**
-     * check whether the runner touched the coin
-     */
-    boolean checkCollision(Rect runner, Rect coin) {
+  /** check whether the runner touched the coin */
+  boolean checkCollision(Rect runner, Rect coin) {
         return Rect.intersects(runner, coin);
     }
 

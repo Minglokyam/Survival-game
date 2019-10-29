@@ -48,10 +48,8 @@ class Runner {
         y += vSpeed;
     }
 
-    /**
-     * draw the runner.
-     */
-    void draw(Canvas canvas) {
+  /** draw the runner. */
+  void draw(Canvas canvas) {
         // first update the runner's position.
         update();
 
