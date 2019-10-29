@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 class Coin {
-
     // the first and second coordinate of the coin.
     private int x;
     private int y;
