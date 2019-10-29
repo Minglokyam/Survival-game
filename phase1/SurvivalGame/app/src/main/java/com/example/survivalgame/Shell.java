@@ -11,10 +11,12 @@ public class Shell implements instance{
     private int y;
     private int xSpeed;
     private int ySpeed;
+    private DodgeGameManager dodgeGameManager;
 
-    public Shell(){
+    public Shell(DodgeGameManager dodgeGameManager){
         paint = new Paint();
         paint.setColor(Color.BLUE);
+        this.dodgeGameManager = dodgeGameManager;
         double rand = Math.random();
         if(rand > 0.5){
             this.xSpeed = 8;
@@ -32,8 +34,8 @@ public class Shell implements instance{
         y += ySpeed;
     }
 
-    public void update(Canvas canvas){
-        if(x<0 || x+60 >=canvas.getWidth()){
+    public void update(){
+        if(x<0 || x+60 >=dodgeGameManager.getScreenWidth()){
             xSpeed *= -1;
 
         }

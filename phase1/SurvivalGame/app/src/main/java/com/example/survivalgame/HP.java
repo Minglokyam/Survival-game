@@ -17,7 +17,7 @@ public class HP implements instance{
         c.drawRect(hpBar, paint);
     }
 
-    public void update(Canvas canvas) {
+    public void update() {
         if (hp >= 0){ length = 6 * hp + 5; } else{
             length = 0;
         }

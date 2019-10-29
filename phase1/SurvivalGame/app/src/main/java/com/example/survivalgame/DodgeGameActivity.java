@@ -11,8 +11,7 @@ import android.view.MotionEvent;
 public class DodgeGameActivity extends AppCompatActivity {
 
     static int HEIGHT, WIDTH;
-    private DodgeGameView gameView;
-    private int prevX, prevY;
+    private DodgeGameView dodgeGameView;
     private User user;
 
     @Override
@@ -25,28 +24,16 @@ public class DodgeGameActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        HEIGHT = size.y;
         WIDTH = size.x;
-        gameView = new DodgeGameView(this, user);
-        setContentView(gameView);
+        HEIGHT = size.y;
+        dodgeGameView = new DodgeGameView(this, user, size.x, size.y);
+        setContentView(dodgeGameView);
     }
 
-    public boolean onTouchEvent(MotionEvent event){
-        if(event.getAction() == MotionEvent.ACTION_MOVE) {
-
-            gameView.plane.setxSpeed((int)((event.getX() - gameView.plane.getX())/6));
-            int spdY = (int)((event.getY() - 300 - gameView.plane.getY())/15);
-            if(spdY > 20){
-                spdY = 20;
-            }else if(spdY > 0 && spdY < 8){
-                spdY = 8;
-            }else if(spdY < 0 && spdY > -8){
-                spdY = -8;
-            }else if(spdY < -20){
-                spdY = -20;
-            }
-            gameView.plane.setySpeed(spdY);
-        }
-        return true;
+    public void toMain(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }

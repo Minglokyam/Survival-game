@@ -1,13 +1,19 @@
 package com.example.survivalgame;
 
-public class GenerateEnemy {
+public class EnemyGenerator {
+    DodgeGameManager dodgeGameManager;
     int counter;
-    GenerateEnemy(){ counter = 1; }
+
+    public EnemyGenerator(DodgeGameManager dodgeGameManager){
+        this.dodgeGameManager = dodgeGameManager;
+        counter = 1;
+    }
+
     public void Generate(){
         if(counter%40 == 0){
             int num = (int)(Math.random()* 0.5) + 1; //enemy generated this round
             for(int i = 0; i < num; i++) {
-                DodgeGameView.shells.add(new Shell());
+                dodgeGameManager.shells.add(new Shell(dodgeGameManager));
                 counter = 1;
             }
         }else{

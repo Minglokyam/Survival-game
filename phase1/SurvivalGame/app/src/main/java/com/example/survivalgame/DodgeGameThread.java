@@ -2,7 +2,7 @@ package com.example.survivalgame;
 
 import android.graphics.Canvas;
 
-public class DodgeGameThread extends Thread {
+public class DodgeGameThread extends Thread{
     private boolean running = false;
     private DodgeGameView dodgeGameView;
     private User user;
@@ -23,7 +23,7 @@ public class DodgeGameThread extends Thread {
             try{
                 canvas = dodgeGameView.getHolder().lockCanvas();
                 synchronized (dodgeGameView.getHolder()){
-                    dodgeGameView.update(canvas);
+                    dodgeGameView.update();
                     dodgeGameView.draw(canvas);
                 }
             }

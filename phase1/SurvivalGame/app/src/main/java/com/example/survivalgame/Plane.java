@@ -62,7 +62,7 @@ public class Plane implements instance {
         c.drawPath(p, paint);
     }
 
-    public void update(Canvas canvas){
+    public void update(){
         xSpeed *= 0.5;
         ySpeed *= 0.5;
     }
