@@ -10,6 +10,9 @@ class Spikes {
   private Bitmap bmp;
   private RunningGameView view;
 
+  /**
+   * build a spike.
+   */
   Spikes(RunningGameView view, Bitmap bmp, int x) {
     this.view = view;
     this.bmp = bmp;

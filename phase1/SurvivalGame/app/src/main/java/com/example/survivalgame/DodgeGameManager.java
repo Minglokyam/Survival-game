@@ -9,12 +9,12 @@ import java.util.List;
 public class DodgeGameManager {
   private int screenWidth;
   private int screenHeight;
-  public static List<instance> shells;
+  static List<instance> shells;
   private HP hp;
-  public Plane plane;
+  Plane plane;
   private EnemyGenerator enemyGenerator;
 
-  public DodgeGameManager(int screenWidth, int screenHeight) {
+  DodgeGameManager(int screenWidth, int screenHeight) {
     plane = new Plane();
     shells = new ArrayList<>();
     enemyGenerator = new EnemyGenerator(this);
@@ -25,7 +25,7 @@ public class DodgeGameManager {
     this.screenHeight = screenHeight;
   }
 
-  public int getScreenWidth() {
+  int getScreenWidth() {
     return screenWidth;
   }
 

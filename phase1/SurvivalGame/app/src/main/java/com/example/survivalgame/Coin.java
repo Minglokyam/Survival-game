@@ -33,16 +33,16 @@ class Coin {
     void update() {
         x -= RunningGameView.movingSpeed;
 
+        // check the condition when the x coordinate is less than 0.
+        if (x < 0) {
+            x = view.getWidth() + bmp.getWidth() / 4;
+        }
+
         // move the position in the coin's bmp to next
         if (currentPosition >= 3) {
             currentPosition = 0;
         } else {
             currentPosition += 1;
-        }
-
-        // check the condition when the x coordinate is less than 0.
-        if (x < 0) {
-            x = view.getWidth() + bmp.getWidth() / 4;
         }
     }
 

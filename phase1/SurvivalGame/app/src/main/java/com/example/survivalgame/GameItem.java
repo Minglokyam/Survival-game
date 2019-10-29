@@ -19,7 +19,7 @@ public abstract class GameItem {
    * @param xCoordinate the x-coordinate of this GameItem
    * @param yCoordinate the y-coordinate of this GameItem
    */
-  public GameItem(PongGameManager pongGameManager, float xCoordinate, float yCoordinate) {
+  GameItem(PongGameManager pongGameManager, float xCoordinate, float yCoordinate) {
     paint = new Paint();
     this.pongGameManager = pongGameManager;
     this.xCoordinate = xCoordinate;
@@ -27,31 +27,31 @@ public abstract class GameItem {
   }
 
   /** A getter of pongGameManager */
-  public PongGameManager getPongGameManager() {
+  PongGameManager getPongGameManager() {
     return pongGameManager;
   }
 
   /** A getter of xCoordinate */
-  public float getXCoordinate() {
+  float getXCoordinate() {
     return xCoordinate;
   }
 
   /** A setter of xCoordinate */
-  public void setXCoordinate(float newXCoordinate) {
+  void setXCoordinate(float newXCoordinate) {
     this.xCoordinate = newXCoordinate;
   }
 
   /** A getter of yCoordinate */
-  public float getYCoordinate() {
+  float getYCoordinate() {
     return yCoordinate;
   }
 
   /** A setter of yCoordinate */
-  public void setYCoordinate(float newYCoordinate) {
+  void setYCoordinate(float newYCoordinate) {
     this.yCoordinate = newYCoordinate;
   }
 
-  public Paint getPaint() {
+  Paint getPaint() {
     return paint;
   }
 

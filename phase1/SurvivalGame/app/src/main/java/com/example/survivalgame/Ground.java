@@ -16,15 +16,21 @@ class Ground {
 
   private RunningGameView view;
 
-  Ground(RunningGameView view, Bitmap bmp, int x, int y) {
-    this.x = x;
-    this.y = y;
-    this.groundBmp = bmp;
-    Ground.height = bmp.getHeight();
-    this.view = view;
-  }
+    /**
+     * build a ground.
+     */
+    Ground(RunningGameView view, Bitmap bmp, int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.groundBmp = bmp;
+        Ground.height = bmp.getHeight();
+        this.view = view;
+    }
 
-  void onDraw(Canvas canvas) {
+    /**
+     * draw the ground.
+     */
+    void draw(Canvas canvas) {
     canvas.drawBitmap(groundBmp, x, view.getHeight() - height, null);
   }
 }

@@ -6,14 +6,14 @@ public abstract class GameItemCircle extends GameItem {
   /** The radius of this rectangle */
   private float radius;
 
-  public GameItemCircle(
+  GameItemCircle(
       PongGameManager pongGameManager, float radius, float xCoordinate, float yCoordinate) {
     super(pongGameManager, xCoordinate, yCoordinate);
     this.radius = radius;
   }
 
   /** A getter of radius */
-  public float getRadius() {
+  float getRadius() {
     return radius;
   }
 

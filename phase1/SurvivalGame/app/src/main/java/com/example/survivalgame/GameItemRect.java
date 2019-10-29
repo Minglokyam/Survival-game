@@ -8,7 +8,7 @@ public abstract class GameItemRect extends GameItem {
   /** The height of this rectangle */
   private float height;
 
-  public GameItemRect(
+  GameItemRect(
       PongGameManager pongGameManager,
       float width,
       float height,
