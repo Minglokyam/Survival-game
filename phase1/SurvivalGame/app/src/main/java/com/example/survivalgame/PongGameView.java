@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.MotionEvent;
-
 import android.view.SurfaceView;
 
 import java.time.Duration;
