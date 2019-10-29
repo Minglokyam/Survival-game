@@ -15,7 +15,11 @@ class EnemyGenerator {
     if (counter % 40 == 0) {
       int num = (int) (Math.random() * 0.5) + 1; // enemy generated this round
       for (int i = 0; i < num; i++) {
-        shells.add(new Shell(dodgeGameManager, dodgeGameManager.getScreenWidth(), dodgeGameManager.getScreenHeight()));
+        shells.add(
+            new Shell(
+                dodgeGameManager,
+                dodgeGameManager.getScreenWidth(),
+                dodgeGameManager.getScreenHeight()));
         counter = 1;
       }
     } else {

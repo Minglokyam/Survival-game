@@ -43,9 +43,7 @@ public class Ball extends PongGameItemCircle {
     this.yVelocity = newYVelocity;
   }
 
-  /**
-   * build a ball.
-   */
+  /** build a ball. */
   Ball(
       PongGameManager pongGameManager,
       float radius,
@@ -65,9 +63,7 @@ public class Ball extends PongGameItemCircle {
     getPaint().setColor(Color.MAGENTA);
   }
 
-  /**
-   * move the ball when it hit top, left, right, paddle or bottom.
-   */
+  /** move the ball when it hit top, left, right, paddle or bottom. */
   void move(long fps) {
     hitTop();
     hitLeft();
@@ -78,17 +74,13 @@ public class Ball extends PongGameItemCircle {
     yMove(fps);
   }
 
-  /**
-   * move the ball in x direction.
-   */
+  /** move the ball in x direction. */
   private void xMove(long fps) {
     float newXCoordinate = getXCoordinate() + (xVelocity / fps);
     setXCoordinate(newXCoordinate);
   }
 
-  /**
-   * move the ball in y direction.
-   */
+  /** move the ball in y direction. */
   private void yMove(long fps) {
     float newYCoordinate = getYCoordinate() + (yVelocity / fps);
     setYCoordinate(newYCoordinate);
@@ -99,66 +91,50 @@ public class Ball extends PongGameItemCircle {
     yVelocity = -Math.abs(yVelocity);
   }
 
-  /**
-   * move the ball down.
-   */
+  /** move the ball down. */
   private void moveDown() {
     yVelocity = Math.abs(yVelocity);
   }
 
-  /**
-   * move the ball left.
-   */
+  /** move the ball left. */
   private void moveLeft() {
     xVelocity = -Math.abs(xVelocity);
   }
 
-  /**
-   * move the ball right.
-   */
+  /** move the ball right. */
   private void moveRight() {
     xVelocity = Math.abs(xVelocity);
   }
 
-  /**
-   * move down when the ball hits the top.
-   */
+  /** move down when the ball hits the top. */
   private void hitTop() {
     if (getYCoordinate() - getRadius() <= 0) {
       moveDown();
     }
   }
 
-  /**
-   * move right when the ball hits the left.
-   */
+  /** move right when the ball hits the left. */
   private void hitLeft() {
     if (getXCoordinate() - getRadius() <= 0) {
       moveRight();
     }
   }
 
-  /**
-   * move left when the ball hits the right.
-   */
+  /** move left when the ball hits the right. */
   private void hitRight() {
     if (this.getXCoordinate() + getRadius() >= getPongGameManager().getScreenWidth()) {
       moveLeft();
     }
   }
 
-  /**
-   * move up when the ball hits the paddle.
-   */
+  /** move up when the ball hits the paddle. */
   private void hitPaddle() {
     if (checkHitPaddle()) {
       moveUp();
     }
   }
 
-  /**
-   * reset the ball when it hits the bottom instead of hits the paddle.
-   */
+  /** reset the ball when it hits the bottom instead of hits the paddle. */
   private void hitBottom() {
     if (this.getYCoordinate() + getRadius() >= getPongGameManager().getScreenHeight()) {
       user.setLife(user.getLife() - 1);
@@ -167,14 +143,12 @@ public class Ball extends PongGameItemCircle {
     }
   }
 
-  /**
-   * check whether the ball hits the paddle.
-   */
+  /** check whether the ball hits the paddle. */
   private boolean checkHitPaddle() {
     RectPaddle rectPaddle = getPongGameManager().getRectPaddle();
     return getXCoordinate() >= rectPaddle.getXCoordinate()
-            && getXCoordinate() <= rectPaddle.getXCoordinate() + rectPaddle.getWidth()
-            && getYCoordinate() + getRadius() >= rectPaddle.getYCoordinate();
+        && getXCoordinate() <= rectPaddle.getXCoordinate() + rectPaddle.getWidth()
+        && getYCoordinate() + getRadius() >= rectPaddle.getYCoordinate();
   }
 
   /** reset the speed of the ball. */

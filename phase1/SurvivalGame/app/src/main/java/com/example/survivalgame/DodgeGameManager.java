@@ -28,15 +28,15 @@ public class DodgeGameManager {
     return screenWidth;
   }
 
-  int getScreenHeight(){
+  int getScreenHeight() {
     return screenHeight;
   }
 
-  public int getHP(){
+  public int getHP() {
     return hp.getHP();
   }
 
-  public void setHP(int newHP){
+  public void setHP(int newHP) {
     hp.setHP(newHP);
   }
 
@@ -44,19 +44,19 @@ public class DodgeGameManager {
     Shell shell;
     enemyGenerator.generateShells(shells);
     Iterator<Shell> shellsIterator = shells.iterator();
-    while(shellsIterator.hasNext()){
+    while (shellsIterator.hasNext()) {
       shell = shellsIterator.next();
       if (shell.getYCoordinate()
-              > (screenHeight
-              + 100)) { // This statement removes the object outside the screen.
+          > (screenHeight + 100)) { // This statement removes the object outside the screen.
         shellsIterator.remove();
-      }
-      else if (shell.getRectF().intersect(plane.getRectF())) {
+      } else if (shell.getRectF().intersect(plane.getRectF())) {
         if (hp.getHP() > 0) {
           hp.setHP(hp.getHP() - 20);
           shellsIterator.remove();
         }
-      } else{shell.update();}
+      } else {
+        shell.update();
+      }
     }
     hp.update();
   }

@@ -26,9 +26,7 @@ public class HP extends DodgeGameItem {
   }
 
   public void draw(Canvas canvas) {
-    RectF hpBar =
-        new RectF(
-            screenWidth - 10, 10, screenWidth - 110, 10 + length);
+    RectF hpBar = new RectF(screenWidth - 10, 10, screenWidth - 110, 10 + length);
     // RectF hpBar = new RectF(10, 10, 110, 10 + this.length);
     canvas.drawRect(hpBar, getPaint());
   }

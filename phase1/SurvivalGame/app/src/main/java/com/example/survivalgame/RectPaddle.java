@@ -9,24 +9,20 @@ class RectPaddle extends PongGameItemRect {
   private int movingStatus = STOP;
   private float xSpeed;
 
-  /**
-   * build the paddle.
-   */
+  /** build the paddle. */
   RectPaddle(
-          PongGameManager pongGameManager,
-          float xSpeed,
-          float width,
-          float height,
-          float xCoordinate,
-          float yCoordinate) {
+      PongGameManager pongGameManager,
+      float xSpeed,
+      float width,
+      float height,
+      float xCoordinate,
+      float yCoordinate) {
     super(pongGameManager, width, height, xCoordinate, yCoordinate);
     getPaint().setColor(Color.MAGENTA);
     this.xSpeed = xSpeed;
   }
 
-  /**
-   * move the paddle considering the current moving direction .
-   */
+  /** move the paddle considering the current moving direction . */
   void move(long fps) {
     if (!checkHitLeft() && movingStatus == LEFT) {
       xMoveLeft(fps);
@@ -57,16 +53,12 @@ class RectPaddle extends PongGameItemRect {
     return getXCoordinate() + getWidth() >= getPongGameManager().getScreenWidth();
   }
 
-  /**
-   * change the moving status to left.
-   */
+  /** change the moving status to left. */
   void moveLeft() {
     movingStatus = LEFT;
   }
 
-  /**
-   * change the moving status to right.
-   */
+  /** change the moving status to right. */
   void moveRight() {
     movingStatus = RIGHT;
   }

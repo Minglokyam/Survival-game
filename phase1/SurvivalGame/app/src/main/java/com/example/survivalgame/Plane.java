@@ -36,8 +36,9 @@ public class Plane extends DodgeGameItem {
     this.ySpeed = ySpeed;
   }
 
-  public RectF getRectF(){
-    return new RectF(getXCoordinate() - 60, getYCoordinate(), getXCoordinate() + 60, getYCoordinate() + 200);
+  public RectF getRectF() {
+    return new RectF(
+        getXCoordinate() - 60, getYCoordinate(), getXCoordinate() + 60, getYCoordinate() + 200);
   }
 
   public void draw(Canvas canvas) {

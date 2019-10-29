@@ -11,7 +11,7 @@ public class Shell extends DodgeGameItem {
   private float ySpeed;
 
   public Shell(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight) {
-   super(dodgeGameManager);
+    super(dodgeGameManager);
     getPaint().setColor(Color.BLUE);
     Random random = new Random();
     double rand = Math.random();
@@ -26,7 +26,12 @@ public class Shell extends DodgeGameItem {
   }
 
   public void draw(Canvas c) {
-    c.drawOval(getXCoordinate(), getYCoordinate(), getXCoordinate() + 50, getYCoordinate() + 50, getPaint());
+    c.drawOval(
+        getXCoordinate(),
+        getYCoordinate(),
+        getXCoordinate() + 50,
+        getYCoordinate() + 50,
+        getPaint());
     setXCoordinate(getXCoordinate() + xSpeed);
     setYCoordinate(getYCoordinate() + ySpeed);
   }
@@ -37,7 +42,8 @@ public class Shell extends DodgeGameItem {
     }
   }
 
-  public RectF getRectF(){
-    return new RectF(getXCoordinate(), getYCoordinate(), getXCoordinate() + 50, getYCoordinate() + 50);
+  public RectF getRectF() {
+    return new RectF(
+        getXCoordinate(), getYCoordinate(), getXCoordinate() + 50, getYCoordinate() + 50);
   }
 }
