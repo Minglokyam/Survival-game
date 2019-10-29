@@ -57,7 +57,7 @@ class RunningGameView extends SurfaceView {
     public RunningGameView(Context context, User user) {
         super(context);
         this.user = user;
-        runningDuration = Duration.ofSeconds(10);
+        runningDuration = Duration.ofSeconds(30);
         runningGameActivity = (RunningGameActivity) context;
         thread = new RunningGameThread(this, user);
         holder = getHolder();
@@ -139,9 +139,9 @@ class RunningGameView extends SurfaceView {
      */
     public void updateCoin() {
         for (int i = 0; i < manager.coin.size(); i++) {
-            Rect runner1 = manager.runner.getBounds();
-            Rect coin1 = manager.coin.get(i).getBounds();
-            if (manager.coin.get(i).CheckCollision(runner1, coin1)) {
+            Rect runner1 = manager.runner.getRect();
+            Rect coin1 = manager.coin.get(i).getRect();
+            if (manager.coin.get(i).checkCollision(runner1, coin1)) {
                 // remove the coin once the runner touch this coin.
                 manager.coin.remove(i);
                 // add points to the score when the runner touches a coin.
@@ -156,8 +156,8 @@ class RunningGameView extends SurfaceView {
      */
     public void updateSpike() {
         for (int i = 0; i < manager.spikes.size(); i++) {
-            Rect runner1 = manager.runner.getBounds();
-            Rect spike1 = manager.spikes.get(i).GetBounds();
+            Rect runner1 = manager.runner.getRect();
+            Rect spike1 = manager.spikes.get(i).getRect();
             // end the game once the runner touches the spikes.
             if (manager.spikes.get(i).checkCollision(runner1, spike1)) {
                 user.setLife(user.getLife() - 1);
@@ -186,16 +186,16 @@ class RunningGameView extends SurfaceView {
         canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
 
         // draw the runner.
-        manager.runner.onDraw(canvas);
+        manager.runner.draw(canvas);
 
         // draw the coin
         for (int i = 0; i < manager.coin.size(); i++) {
-            manager.coin.get(i).onDraw(canvas);
+            manager.coin.get(i).draw(canvas);
         }
 
         // draw the spikes
         for (int i = 0; i < manager.spikes.size(); i++) {
-            manager.spikes.get(i).onDraw(canvas);
+            manager.spikes.get(i).draw(canvas);
         }
 
         // draw the ground.
