@@ -18,7 +18,7 @@ class RunningGameManager {
   Ground ground;
 
   // a list of spikes.
-  List<Spikes> spikes = new ArrayList<>();
+  List<Spike> spikes = new ArrayList<>();
 
   // the timer of the coin.
   private int timerCoins = 0;
@@ -73,7 +73,7 @@ class RunningGameManager {
             // three different cases to generate spikes in different distances.
             case 0:
                 if (timerSpike >= 100) {
-                    spikes.add(new Spikes(RunningGameView, RunningGameView.spikesBmp,
+                    spikes.add(new Spike(RunningGameView, RunningGameView.spikesBmp,
                             RunningGameView.getWidth() + 24));
                     Random randomSpikes = new Random();
                     timerRandomSpikes = randomSpikes.nextInt(3);
@@ -83,7 +83,7 @@ class RunningGameManager {
 
             case 1:
                 if (timerSpike >= 125) {
-                    spikes.add(new Spikes(RunningGameView, RunningGameView.spikesBmp,
+                    spikes.add(new Spike(RunningGameView, RunningGameView.spikesBmp,
                             RunningGameView.getWidth() + 24));
                     Random randomSpikes = new Random();
                     timerRandomSpikes = randomSpikes.nextInt(3);
@@ -92,7 +92,7 @@ class RunningGameManager {
                 break;
             case 2:
                 if (timerSpike >= 150) {
-                    spikes.add(new Spikes(RunningGameView, RunningGameView.spikesBmp,
+                    spikes.add(new Spike(RunningGameView, RunningGameView.spikesBmp,
                             RunningGameView.getWidth() + 24));
                     Random randomSpikes = new Random();
                     timerRandomSpikes = randomSpikes.nextInt(3);

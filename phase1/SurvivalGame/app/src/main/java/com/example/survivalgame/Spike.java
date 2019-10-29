@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-class Spikes {
+class Spike {
 
   private int x, y;
   private Bitmap bmp;
@@ -13,7 +13,7 @@ class Spikes {
   /**
    * build a spike.
    */
-  Spikes(RunningGameView view, Bitmap bmp, int x) {
+  Spike(RunningGameView view, Bitmap bmp, int x) {
     this.view = view;
     this.bmp = bmp;
     this.x = x;

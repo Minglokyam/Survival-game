@@ -52,7 +52,7 @@ class RunningGameView extends SurfaceView {
   public RunningGameView(Context context, User user) {
     super(context);
     this.user = user;
-    runningDuration = Duration.ofSeconds(9);
+    runningDuration = Duration.ofSeconds(35);
     runningGameActivity = (RunningGameActivity) context;
     thread = new RunningGameThread(this, user);
     holder = getHolder();
