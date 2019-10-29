@@ -17,8 +17,6 @@ public class PongGameManager {
 
     private RectPaddle rectPaddle;
 
-    private User user;
-
     public PongGameManager(int screenWidth, int screenHeight, User user) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
