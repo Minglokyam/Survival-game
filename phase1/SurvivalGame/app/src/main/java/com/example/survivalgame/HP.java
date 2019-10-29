@@ -25,14 +25,6 @@ public class HP extends DodgeGameItem {
     this.hp = hp;
   }
 
-  public int getX() {
-    return 10;
-  };
-
-  public int getY() {
-    return 10;
-  };
-
   public void draw(Canvas canvas) {
     RectF hpBar =
         new RectF(

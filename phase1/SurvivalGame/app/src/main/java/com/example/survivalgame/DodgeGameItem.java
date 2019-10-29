@@ -4,26 +4,26 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 public abstract class DodgeGameItem {
-    /** The x-coordinate of this GameItem */
+    /** The x-coordinate of this PongGameItem */
     private float xCoordinate;
-    /** The y-coordinate of this GameItem */
+    /** The y-coordinate of this PongGameItem */
     private float yCoordinate;
     /** An instance of DodgeGameManager */
     private DodgeGameManager dodgeGameManager;
 
     private Paint paint;
 
-    /** Create a GameItem. */
+    /** Create a PongGameItem. */
     DodgeGameItem(DodgeGameManager dodgeGameManager) {
         paint = new Paint();
         this.dodgeGameManager = dodgeGameManager;
     }
 
     /**
-     * Create a GameItem.
+     * Create a PongGameItem.
      *
-     * @param xCoordinate the x-coordinate of this GameItem
-     * @param yCoordinate the y-coordinate of this GameItem
+     * @param xCoordinate the x-coordinate of this PongGameItem
+     * @param yCoordinate the y-coordinate of this PongGameItem
      */
     DodgeGameItem(DodgeGameManager dodgeGameManager, float xCoordinate, float yCoordinate) {
         paint = new Paint();
