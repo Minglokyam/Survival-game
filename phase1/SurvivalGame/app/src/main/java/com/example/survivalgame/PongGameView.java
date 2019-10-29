@@ -27,10 +27,6 @@ public class PongGameView extends SurfaceView{
 
     private long FPS;
 
-    private SurfaceHolder surfaceHolder;
-
-    private Canvas canvas;
-
     private PongGameManager pongGameManager;
 
     private Paint paintText;
@@ -54,7 +50,6 @@ public class PongGameView extends SurfaceView{
         pongGameActivity = (PongGameActivity) context;
         this.user = user;
         pongGameManager = new PongGameManager(screenWidth, screenHeight, user);
-        surfaceHolder = getHolder();
         setFocusable(true);
         paintText = new Paint();
         paintText.setTextSize(36);

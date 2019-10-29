@@ -3,11 +3,8 @@ package com.example.survivalgame;
 import android.graphics.Canvas;
 
 public class PongGameThread extends Thread {
-
     private boolean playing = true;
-
     private PongGameView pongGameView;
-
     private User user;
 
     public PongGameThread(PongGameView newPongGameView, User user) {
@@ -42,7 +39,6 @@ public class PongGameThread extends Thread {
                 }
 
             }
-
 
             long timeInterval = System.currentTimeMillis() - startTime;
             if (!pongGameView.getStop()) {
