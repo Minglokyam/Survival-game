@@ -1,5 +1,7 @@
 package com.example.survivalgame;
 
+import android.graphics.Canvas;
+
 public class PongGameThread extends Thread {
 
     private boolean playing = true;
@@ -20,7 +22,28 @@ public class PongGameThread extends Thread {
             if (!pongGameView.getStop()) {
                 pongGameView.update();
             }
-            pongGameView.draw();
+
+            Canvas canvas = null;
+            try {
+                canvas = pongGameView.getHolder().lockCanvas();
+                if (canvas != null) {
+                    synchronized (pongGameView.getHolder()) {
+                    pongGameView.draw(canvas);
+                    }
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                if (canvas != null) {
+                    pongGameView.getHolder().unlockCanvasAndPost(canvas);
+
+                }
+
+            }
+
+
             long timeInterval = System.currentTimeMillis() - startTime;
             if (!pongGameView.getStop()) {
                 user.setTotalDuration(user.getTotalDuration().plusMillis(timeInterval));

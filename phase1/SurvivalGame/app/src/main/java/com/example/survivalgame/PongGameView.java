@@ -77,36 +77,19 @@ public class PongGameView extends SurfaceView{
         }
     }
 
-    public void draw() {
-        canvas = null;
-        try {
-            synchronized (surfaceHolder) {
-                canvas = surfaceHolder.lockCanvas();
-                canvas.drawColor(Color.rgb(255, 255, 255));
-                if(!stop){
-                    canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
-                    canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
-                    canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
-                    canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
-                }
-
-                pongGameManager.draw(canvas);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (canvas != null) {
-                try {
-                    surfaceHolder.unlockCanvasAndPost(canvas);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    public void draw(Canvas canvas) {
         super.draw(canvas);
-        if (canvas != null) {
-            pongGameManager.draw(canvas);
-        }
+        canvas.drawColor(Color.rgb(255, 255, 255));
+    if (!stop) {
+      canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
+      canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
+      canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
+      canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
+         }
+
+
+    pongGameManager.draw(canvas);
+
     }
 
     @Override
