@@ -5,26 +5,32 @@ import android.graphics.Canvas;
 
 class Ground {
 
-    // the first and second coordinate of the ground.
-    private int x;
-    private int y;
+  // the first and second coordinate of the ground.
+  private int x;
+  private int y;
 
-    //
-    static int height;
+  // the height of the ground.
+  static int height;
 
-    private Bitmap bmp;
-    private RunningGameView view;
+  private Bitmap groundBmp;
 
+  private RunningGameView view;
+
+    /**
+     * build a ground.
+     */
     Ground(RunningGameView view, Bitmap bmp, int x, int y) {
-        this.view = view;
-        this.bmp = bmp;
         this.x = x;
         this.y = y;
+        this.groundBmp = bmp;
         Ground.height = bmp.getHeight();
+        this.view = view;
     }
 
-    void onDraw(Canvas canvas) {
-        canvas.drawBitmap(bmp, x, view.getHeight() - bmp.getHeight(), null);
-    }
+    /**
+     * draw the ground.
+     */
+    void draw(Canvas canvas) {
+    canvas.drawBitmap(groundBmp, x, view.getHeight() - height, null);
+  }
 }
-

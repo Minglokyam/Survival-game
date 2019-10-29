@@ -4,98 +4,110 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import java.util.ArrayList;
-import java.util.List;
 
-import android.content.Intent;
-public class DodgeGameView extends SurfaceView{
-    private HP hp;
-    private DodgeGameThread dodgeGameThread;
-    private SurfaceHolder holder;
-    private GenerateEnemy enemyGen;
-    public static List<instance> shells;
-    public Paint paint;
-    public Plane plane;
+import java.time.Duration;
 
-    public DodgeGameView(Context context){
-        super(context);
-        hp = new HP();
-        plane = new Plane();
-        shells = new ArrayList<>();
-        enemyGen = new GenerateEnemy();
-        dodgeGameThread = new DodgeGameThread(this);
-        paint = new Paint();
-        paint.setColor(Color.BLUE);
-        holder = getHolder();
-        shells.add(hp);
-        shells.add(plane);
-        holder.addCallback(new SurfaceHolder.Callback() {
+public class DodgeGameView extends SurfaceView {
+  private DodgeGameActivity dodgeGameActivity;
+  private DodgeGameManager dodgeGameManager;
+  private Duration dodgeDuration;
+  private DodgeGameThread dodgeGameThread;
+  private SurfaceHolder holder;
+  public Paint paint;
+  private User user;
+  private Paint paintText;
+  private int life;
+  private int score;
 
+  public DodgeGameView(Context context, User user, int screenWidth, int screenHeight) {
+    super(context);
+    dodgeGameActivity = (DodgeGameActivity) context;
+    dodgeGameManager = new DodgeGameManager(screenWidth, screenHeight);
+    this.user = user;
+    life = user.getLife();
+    score = user.getScore();
+    dodgeDuration = Duration.ofSeconds(9);
+    paintText = new Paint();
+    paintText.setTextSize(40);
+    dodgeGameThread = new DodgeGameThread(this, user);
+    paint = new Paint();
+    paint.setColor(Color.BLUE);
+    holder = getHolder();
+    holder.addCallback(
+        new SurfaceHolder.Callback() {
 
-            @Override
-            public void surfaceCreated(SurfaceHolder holder) {
-                dodgeGameThread.setRunning(true);
-                dodgeGameThread.start();
+          @Override
+          public void surfaceCreated(SurfaceHolder holder) {
+            dodgeGameThread.setRunning(true);
+            dodgeGameThread.start();
+          }
 
+          @Override
+          public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
+
+          @Override
+          public void surfaceDestroyed(SurfaceHolder holder) {
+            boolean retry = true;
+            dodgeGameThread.setRunning(false);
+            while (retry) {
+              try {
+                dodgeGameThread.join();
+                retry = false;
+              } catch (InterruptedException e) {
+                e.printStackTrace();
+              }
             }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-            }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
-                boolean retry = true;
-                dodgeGameThread.setRunning(false);
-                while(retry){
-                    try{
-                        dodgeGameThread.join();
-                        retry = false;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+          }
         });
-    }
+  }
 
-    // This method updates all objects in the ArrayList!
-    public void update(Canvas canvas){
-        enemyGen.Generate();
-        for(int i=0;i<shells.size();i++){
-            if(shells.get(i).getY() > (DodgeGameActivity.HEIGHT + 100)){   // This statement removes the object outside the screen.
-                shells.remove(i);
-            }
-            if(shells.get(i).getRect().intersect(plane.getRect())){   //COLLIDES, Player is destroyed
-                if(shells.get(i) != plane && shells.get(i) != hp){
-                    if(plane.getHp() > 0){
-                        plane.setHp(plane.getHp() - 10);
-                        hp.setHp(plane.getHp() - 10);
-                        shells.remove(shells.get(i));
-                        //VIBRATION IMPLEMENTATION?
-                    }
-                }
-            }
-            shells.get(i).update(canvas);
-        }
-    }
+  public Duration getDodgeDuration() {
+    return dodgeDuration;
+  }
 
-    @Override
-    public void draw(Canvas canvas){
-        super.draw(canvas);
-        canvas.drawColor(Color.rgb(255, 255, 255));
-        for(int i=0;i<shells.size();i++){
-            shells.get(i).draw(canvas);
-        }
+  public void setDodgeDuration(Duration newDodgeDuration) {
+    dodgeDuration = newDodgeDuration;
+  }
 
+  // This method updates all objects in the ArrayList!
+  public void update() {
+    dodgeGameManager.update();
+    if (dodgeDuration.getSeconds() <= 0 || life == 0) {
+      dodgeGameActivity.toMain();
     }
-    public void endGame(){
-        Intent intent = new Intent(getContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getContext().startActivity(intent);
-    }
+    score++;
+  }
 
+  @Override
+  public void draw(Canvas canvas) {
+    super.draw(canvas);
+    dodgeGameManager.draw(canvas);
+    paintText.setColor(Color.BLACK);
+    canvas.drawText("Life: " + life, 0, 32, paintText);
+    canvas.drawText("Total time: " + this.user.getTotalDuration().getSeconds(), 0, 64, paintText);
+    canvas.drawText("Game time: " + dodgeDuration.getSeconds(), 0, 96, paintText);
+    canvas.drawText("Score: " + score, 0, 128, paintText);
+  }
+
+  @Override
+  public boolean onTouchEvent(MotionEvent event) {
+    if (event.getAction() == MotionEvent.ACTION_MOVE) {
+      dodgeGameManager.plane.setxSpeed((int) ((event.getX() - dodgeGameManager.plane.getX()) / 6));
+      int spdY = (int) ((event.getY() - dodgeGameManager.plane.getY()) / 15);
+      if (spdY > 20) {
+        spdY = 20;
+      } else if (spdY > 0 && spdY < 8) {
+        spdY = 8;
+      } else if (spdY < 0 && spdY > -8) {
+        spdY = -8;
+      } else if (spdY < -20) {
+        spdY = -20;
+      }
+      dodgeGameManager.plane.setySpeed(spdY);
+    }
+    return true;
+  }
 }

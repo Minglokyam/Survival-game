@@ -1,7 +1,6 @@
 package com.example.survivalgame;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -21,16 +20,12 @@ public class PongGameView extends SurfaceView{
     /** The screen height */
     int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    /** A Pong Game Thread */
-    PongGameThread thread;
+  /** A Pong Game Thread */
+  PongGameThread thread;
 
     private boolean stop = true;
 
     private long FPS;
-
-    private SurfaceHolder surfaceHolder;
-
-    private Canvas canvas;
 
     private PongGameManager pongGameManager;
 
@@ -42,71 +37,54 @@ public class PongGameView extends SurfaceView{
         return pongDuration;
     }
 
+    private PongGameActivity pongGameActivity;
+
+    private User user;
+
     public void setPongDuration(Duration newPongDuration){
         pongDuration = newPongDuration;
     }
 
-    public PongGameView(Context context) {
+    public PongGameView(Context context, User user) {
         super(context);
-        pongGameManager = new PongGameManager(screenWidth, screenHeight);
-        surfaceHolder = getHolder();
+        pongGameActivity = (PongGameActivity) context;
+        this.user = user;
+        pongGameManager = new PongGameManager(screenWidth, screenHeight, user);
         setFocusable(true);
         paintText = new Paint();
         paintText.setTextSize(36);
         paintText.setTypeface(Typeface.DEFAULT_BOLD);
-        pongDuration = Duration.ofSeconds(15);
+        //=======================================
+        pongDuration = Duration.ofSeconds(9);
     }
 
     public void update() {
         pongGameManager.update(FPS);
-        User.setScore(User.getScore() + 1);
-        if(User.getLife() == 0){
+       user.setScore(user.getScore() + 1);
+        if(user.getLife() == 0){
             stop = true;
             thread.setPlaying(false);
-            Intent intent = new Intent(getContext(), MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getContext().startActivity(intent);
-
+            pongGameActivity.toMain();
         }else if(pongDuration.getSeconds() <= 0){
             stop = true;
             thread.setPlaying(false);
-            Intent intent = new Intent(getContext(), DodgeGameActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            getContext().startActivity(intent);
+            pongGameActivity.toDodge();
         }
     }
 
-    public void draw() {
-        canvas = null;
-        try {
-            synchronized (surfaceHolder) {
-                canvas = surfaceHolder.lockCanvas();
-                canvas.drawColor(Color.rgb(255, 255, 255));
-
-                if(!stop){
-                    canvas.drawText("Life: " + User.getLife(), 0, 32, paintText);
-                    canvas.drawText("Total time: " + User.getTotalDuration().getSeconds(), 0, 64, paintText);
-                    canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
-                    canvas.drawText("Score: " + User.getScore(), 0, 128, paintText);
-                }
-
-                pongGameManager.draw(canvas);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (canvas != null) {
-                try {
-                    surfaceHolder.unlockCanvasAndPost(canvas);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    public void draw(Canvas canvas) {
         super.draw(canvas);
-        if (canvas != null) {
-            pongGameManager.draw(canvas);
-        }
+        canvas.drawColor(Color.rgb(255, 255, 255));
+    if (!stop) {
+      canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
+      canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
+      canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
+      canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
+         }
+
+
+    pongGameManager.draw(canvas);
+
     }
 
     @Override
@@ -138,7 +116,7 @@ public class PongGameView extends SurfaceView{
     }
 
     public void resume() {
-        thread = new PongGameThread(this);
+        thread = new PongGameThread(this, user);
         thread.start();
     }
 
