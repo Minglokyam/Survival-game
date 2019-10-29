@@ -10,76 +10,73 @@ class Coin {
     private int x;
     private int y;
 
-    private int y2;
-
     private Bitmap bmp;
+
     private RunningGameView view;
 
-    // the speed of the coin moves in x-coordinate.
-    private int xspeed = -RunningGameView.movingSpeed;
-
-    private int currentFrame = 0;
-
-    // the width and height of the screen.
-    private int width;
-    private int height;
+    private int currentPosition = 0;
 
     /**
      * Build a coin.
      */
     Coin(RunningGameView view, Bitmap bmp, int x, int y) {
         this.x = x;
-        this.y2 = y;
+        this.y = view.getHeight() - y - Ground.height - bmp.getHeight();
 
         this.view = view;
         this.bmp = bmp;
-        this.width = bmp.getWidth() / 4;
-        this.height = bmp.getHeight();
     }
 
     /**
      * update the coin's speed, and make the coin move
      */
     void update() {
-        x += xspeed;
-        y = view.getHeight() - y2 - Ground.height - bmp.getHeight();
+        x -= RunningGameView.movingSpeed;
 
-        if (currentFrame >= 3) {
-            currentFrame = 0;
+        // move the position in the coin's bmp to next
+        if (currentPosition >= 3) {
+            currentPosition = 0;
         } else {
-            currentFrame += 1;
+            currentPosition += 1;
         }
 
+        // check the condition when the x coordinate is less than 0.
         if (x < 0) {
-            x = view.getWidth() + width;
+            x = view.getWidth() + bmp.getWidth() / 4;
         }
-    }
-
-    /**
-     * get the rectangle of the coin.
-     */
-    Rect getBounds() {
-        return new Rect(this.x, this.y, this.x + width, this.y + height);
     }
 
     /**
      * draw the coin.
      */
-    void onDraw(Canvas canvas) {
+    void draw(Canvas canvas) {
+        // first update the coin's status.
         update();
-        int srcX = currentFrame * width;
-        Rect src = new Rect(currentFrame * width, 0, srcX + width, 42);
-        Rect dst = new Rect(x, y, x + width, y + 42);
-        canvas.drawBitmap(bmp, src, dst, null);
+
+        // then draw the coin by the rect.
+        Rect a = new Rect(currentPosition * bmp.getWidth() / 4,
+                0, currentPosition * bmp.getWidth() / 4 + bmp.getWidth() / 4, 42);
+        Rect b = new Rect(x, y, x + bmp.getWidth() / 4, y + 42);
+        canvas.drawBitmap(bmp, a, b, null);
     }
 
     /**
      * check whether the runner touched the coin
      */
-    boolean CheckCollision(Rect runner, Rect coin) {
+    boolean checkCollision(Rect runner, Rect coin) {
         return Rect.intersects(runner, coin);
     }
 
+    /**
+     * get the rectangle of the coin.
+     */
+    Rect getRect() {
+        return new Rect(x, y, x + bmp.getWidth() / 4, y + bmp.getHeight());
+    }
+
+    /**
+     * the getter of first coordinate of coin.
+     */
     int getX() {
         return x;
     }
