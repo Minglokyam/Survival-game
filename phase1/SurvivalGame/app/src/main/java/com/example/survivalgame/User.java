@@ -1,77 +1,57 @@
 package com.example.survivalgame;
 
+import java.io.Serializable;
 import java.time.Duration;
-import java.io.*;
 
 class User implements Serializable {
-  private String username;
-  private String password;
 
-  private int id;
-  private int score;
-  private int life;
-  private Duration totalDuration;
-  private int gameStage;
+    private String username;
+    private String password;
 
-  public static final int RUNNING = 0;
-  public static final int PONG = 1;
-  public static final int DODGE = 2;
+    private static int score;
+    private static int life;
+    private static Duration totalDuration;
+    private static int gameStage;
 
-  User(String username, String password, int id) {
-    this.username = username;
-    this.password = password;
-    score = 0;
-    life = 3;
-    gameStage = RUNNING;
-    totalDuration = Duration.ofSeconds(0);
-    this.id = id;
-  }
+    public static final int RUNNING = 0;
+    public static final int PONG = 1;
+    public static final int DODGE = 2;
 
-  String getUsername() {
-    return username;
-  }
 
-  String getPassword() {
-    return password;
-  }
+    User(String username, String password){
+        this.username = username;
+        this.password = password;
+        score = 0;
+        life = 3;
+        gameStage = RUNNING;
+        totalDuration = Duration.ofSeconds(0);
+    }
 
-  public int getID() {
-    return id;
-  }
+    String getUsername(){return username;}
 
-  public int getScore() {
-    return score;
-  }
+    String getPassword(){return password;}
 
-  public void setScore(int newScore) {
-    score = newScore;
-  }
+    public static int getScore(){return score;}
 
-  public int getLife() {
-    return life;
-  }
+    public static void setScore(int newScore){score = newScore;}
 
-  public void setLife(int newLife) {
-    life = newLife;
-  }
+    public static int getLife(){return life;}
 
-  public int getGameStage() {
-    return gameStage;
-  }
+    public static void setLife(int newLife){life = newLife;}
 
-  public void setGameStage(int newGameStage) {
-    gameStage = newGameStage;
-  }
+    public static int getGameStage(){return gameStage;}
 
-  public Duration getTotalDuration() {
-    return totalDuration;
-  }
+    public static void setGameStage(int newGameStage){gameStage = newGameStage;}
 
-  public void setTotalDuration(Duration newTotalDuration) {
-    totalDuration = newTotalDuration;
-  }
+    public static Duration getTotalDuration(){return totalDuration;}
 
-  public String toString() {
-    return username + gameStage;
-  }
+    public static void setTotalDuration(Duration newTotalDuration){totalDuration = newTotalDuration;}
+
+    public boolean compare(User user){
+        if((this.username).equals(user.getUsername())&&(this.password).equals(user.getPassword())){
+            return true;
+        }
+        return false;
+    }
 }
+
