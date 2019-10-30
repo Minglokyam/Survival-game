@@ -2,6 +2,9 @@ package com.example.survivalgame;
 
 import android.graphics.Color;
 
+/**
+ * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+ */
 class RectPaddle extends PongGameItemRect {
   private final int STOP = 0;
   private final int LEFT = 1;

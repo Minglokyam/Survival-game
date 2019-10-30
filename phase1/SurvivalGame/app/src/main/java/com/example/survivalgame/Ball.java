@@ -53,14 +53,20 @@ public class Ball extends PongGameItemCircle {
     xMove(fps);
     yMove(fps);
   }
-
-  /** move the ball in x direction. */
+  
+  /**
+   * move the ball in x direction.
+   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+   */
   private void xMove(long fps) {
     float newXCoordinate = getXCoordinate() + (xVelocity / fps);
     setXCoordinate(newXCoordinate);
   }
 
-  /** move the ball in y direction. */
+  /**
+   * move the ball in y direction.
+   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+   */
   private void yMove(long fps) {
     float newYCoordinate = getYCoordinate() + (yVelocity / fps);
     setYCoordinate(newYCoordinate);

@@ -49,6 +49,9 @@ public class PongGameView extends SurfaceView {
     pongDuration = Duration.ofSeconds(15);
   }
 
+  /**
+   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+   */
   public void update() {
     pongGameManager.update(FPS);
     user.setScore(user.getScore() + 1);
@@ -77,6 +80,9 @@ public class PongGameView extends SurfaceView {
     pongGameManager.draw(canvas);
   }
 
+  /**
+   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+   */
   @Override
   public boolean onTouchEvent(MotionEvent motionEvent) {
     RectPaddle rectPaddle = pongGameManager.getRectPaddle();
@@ -96,6 +102,9 @@ public class PongGameView extends SurfaceView {
     return true;
   }
 
+  /**
+   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+   */
   public void pause() {
     try {
       thread.setPlaying(false);
@@ -105,6 +114,9 @@ public class PongGameView extends SurfaceView {
     }
   }
 
+  /**
+   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+   */
   public void resume() {
     thread = new PongGameThread(this, user);
     thread.start();

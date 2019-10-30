@@ -1,3 +1,4 @@
-The Pong Game refers to the game logic from the following website. 
+The Pong Game takes the following website as a reference. 
 http://gamecodeschool.com/android/programming-a-pong-game-for-android/
-However, the software structure is changed.
+
+However, the code is changed substantially to improve software architecture.
