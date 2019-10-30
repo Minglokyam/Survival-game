@@ -20,11 +20,10 @@ class Coin {
 
   /** Build a coin. */
   public Coin(RunningGameView view, Bitmap bmp, int x, int y) {
-    this.x = x;
-    this.y = view.getHeight() - y - Ground.height - bmp.getHeight();
-
     this.view = view;
     this.bmp = bmp;
+    this.x = x;
+    this.y = y;
   }
 
   /** update the coin's speed, and make the coin move */

@@ -24,13 +24,13 @@ public class RunningGameView extends SurfaceView {
   public int movingSpeed = 10;
 
   // the image holder of the runner.
-  public Bitmap runnerBmp;
+  private Bitmap runnerBMP;
   // the image holder of the coin.
-  public Bitmap coinBmp;
+  private Bitmap coinBMP;
   // the image holder of the ground.
-  public Bitmap groundBmp;
+  private Bitmap groundBMP;
   // the image holder of the spike.
-  public Bitmap spikesBmp;
+  private Bitmap spikeBMP;
 
   // the duration time of the running game.
   private Duration runningDuration;
@@ -57,23 +57,42 @@ public class RunningGameView extends SurfaceView {
     holder.addCallback(
         new Callback() {
 
+          @Override
           public void surfaceDestroyed(SurfaceHolder holder0) {}
 
+          @Override
           public void surfaceCreated(SurfaceHolder holder0) {
             thread.setRunning();
             thread.start();
           }
 
+          @Override
           public void surfaceChanged(SurfaceHolder holder0, int a, int b, int c) {}
         });
 
     // get the image of the objects.
-    runnerBmp = BitmapFactory.decodeResource(getResources(), R.drawable.runner);
-    coinBmp = BitmapFactory.decodeResource(getResources(), R.drawable.coin);
-    groundBmp = BitmapFactory.decodeResource(getResources(), R.drawable.ground);
-    spikesBmp = BitmapFactory.decodeResource(getResources(), R.drawable.spikes);
+    runnerBMP = BitmapFactory.decodeResource(getResources(), R.drawable.runner);
+    coinBMP = BitmapFactory.decodeResource(getResources(), R.drawable.coin);
+    groundBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ground);
+    spikeBMP = BitmapFactory.decodeResource(getResources(), R.drawable.spikes);
 
     runningGameManager = new RunningGameManager(this);
+  }
+
+  Bitmap getRunnerBMP() {
+    return runnerBMP;
+  }
+
+  Bitmap getCoinBMP() {
+    return coinBMP;
+  }
+
+  Bitmap getGroundBMP() {
+    return groundBMP;
+  }
+
+  Bitmap getSpikeBMP() {
+    return spikeBMP;
   }
 
   /** getter of the runningDuration */
