@@ -3,7 +3,7 @@ package com.example.survivalgame.dodgegame;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public abstract class DodgeGameItem {
+abstract class DodgeGameItem {
   /** The x-coordinate of this PongGameItem */
   private float xCoordinate;
   /** The y-coordinate of this PongGameItem */
@@ -14,13 +14,13 @@ public abstract class DodgeGameItem {
   private Paint paint;
 
   /** Create a PongGameItem. */
-  public DodgeGameItem(DodgeGameManager dodgeGameManager) {
+  DodgeGameItem(DodgeGameManager dodgeGameManager) {
     paint = new Paint();
     this.dodgeGameManager = dodgeGameManager;
   }
 
   /** A getter of dodgeGameManager */
-  public DodgeGameManager getDodgeGameManager() {
+  DodgeGameManager getDodgeGameManager() {
     return dodgeGameManager;
   }
 
@@ -30,21 +30,21 @@ public abstract class DodgeGameItem {
   }
 
   /** A setter of xCoordinate */
-  public void setXCoordinate(float newXCoordinate) {
+  void setXCoordinate(float newXCoordinate) {
     this.xCoordinate = newXCoordinate;
   }
 
   /** A getter of yCoordinate */
-  public float getYCoordinate() {
+  float getYCoordinate() {
     return yCoordinate;
   }
 
   /** A setter of yCoordinate */
-  public void setYCoordinate(float newYCoordinate) {
+  void setYCoordinate(float newYCoordinate) {
     this.yCoordinate = newYCoordinate;
   }
 
-  public Paint getPaint() {
+  Paint getPaint() {
     return paint;
   }
 

@@ -4,84 +4,74 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import com.example.survivalgame.runninggame.Ground;
-import com.example.survivalgame.runninggame.RunningGameView;
+class Coin {
+  /** citation: https://www.youtube.com/watch?v=HzP9jJNmzSY */
 
-public class Coin {
-    /**
-     * citation: https://www.youtube.com/watch?v=HzP9jJNmzSY
-     */
+  // the first and second coordinate of the coin.
+  private int x;
 
-    // the first and second coordinate of the coin.
-    private int x;
-    private int y;
+  private int y;
 
-    private Bitmap bmp;
+  private Bitmap bmp;
 
-    private RunningGameView view;
+  private RunningGameView view;
 
-    private int currentPosition = 0;
+  private int currentPosition = 0;
 
-    /**
-     * Build a coin.
-     */
-    public Coin(RunningGameView view, Bitmap bmp, int x, int y) {
-        this.x = x;
-        this.y = view.getHeight() - y - Ground.height - bmp.getHeight();
+  /** Build a coin. */
+  public Coin(RunningGameView view, Bitmap bmp, int x, int y) {
+    this.x = x;
+    this.y = view.getHeight() - y - Ground.height - bmp.getHeight();
 
-        this.view = view;
-        this.bmp = bmp;
+    this.view = view;
+    this.bmp = bmp;
+  }
+
+  /** update the coin's speed, and make the coin move */
+  void update() {
+    x -= RunningGameView.movingSpeed;
+
+    // check the condition when the x coordinate is less than 0.
+    if (x < 0) {
+      x = view.getWidth() + bmp.getWidth() / 4;
     }
 
-    /**
-     * update the coin's speed, and make the coin move
-     */
-    void update() {
-        x -= RunningGameView.movingSpeed;
-
-        // check the condition when the x coordinate is less than 0.
-        if (x < 0) {
-            x = view.getWidth() + bmp.getWidth() / 4;
-        }
-
-        // move the position in the coin's bmp to next
-        if (currentPosition >= 3) {
-            currentPosition = 0;
-        } else {
-            currentPosition += 1;
-        }
+    // move the position in the coin's bmp to next
+    if (currentPosition >= 3) {
+      currentPosition = 0;
+    } else {
+      currentPosition += 1;
     }
+  }
 
-    /**
-     * draw the coin.
-     */
-    public void draw(Canvas canvas) {
-        // first update the coin's status.
-        update();
+  /** draw the coin. */
+  public void draw(Canvas canvas) {
+    // first update the coin's status.
+    update();
 
-        // then draw the coin by the rect.
-        Rect a = new Rect(currentPosition * bmp.getWidth() / 4,
-                0, currentPosition * bmp.getWidth() / 4 + bmp.getWidth() / 4, 42);
-        Rect b = new Rect(x, y, x + bmp.getWidth() / 4, y + 42);
-        canvas.drawBitmap(bmp, a, b, null);
-    }
+    // then draw the coin by the rect.
+    Rect a =
+        new Rect(
+            currentPosition * bmp.getWidth() / 4,
+            0,
+            currentPosition * bmp.getWidth() / 4 + bmp.getWidth() / 4,
+            42);
+    Rect b = new Rect(x, y, x + bmp.getWidth() / 4, y + 42);
+    canvas.drawBitmap(bmp, a, b, null);
+  }
 
   /** check whether the runner touched the coin */
   public boolean checkCollision(Rect runner, Rect coin) {
-        return Rect.intersects(runner, coin);
-    }
+    return Rect.intersects(runner, coin);
+  }
 
-    /**
-     * get the rectangle of the coin.
-     */
-    public Rect getRect() {
-        return new Rect(x, y, x + bmp.getWidth() / 4, y + bmp.getHeight());
-    }
+  /** get the rectangle of the coin. */
+  public Rect getRect() {
+    return new Rect(x, y, x + bmp.getWidth() / 4, y + bmp.getHeight());
+  }
 
-    /**
-     * the getter of first coordinate of coin.
-     */
-    public int getX() {
-        return x;
-    }
+  /** the getter of first coordinate of coin. */
+  public int getX() {
+    return x;
+  }
 }

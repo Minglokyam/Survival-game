@@ -4,9 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.RectF;
 
-import com.example.survivalgame.dodgegame.DodgeGameItem;
-import com.example.survivalgame.dodgegame.DodgeGameManager;
-
 import java.util.Random;
 
 public class Shell extends DodgeGameItem {

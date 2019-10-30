@@ -4,10 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import com.example.survivalgame.runninggame.Ground;
-import com.example.survivalgame.runninggame.RunningGameView;
-
-public class Spike {
+class Spike {
 
   private int x, y;
   private Bitmap bmp;

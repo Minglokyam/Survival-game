@@ -4,7 +4,7 @@ import android.graphics.Color;
 
 import com.example.survivalgame.User;
 
-public class Ball extends PongGameItemCircle {
+class Ball extends PongGameItemCircle {
   /** The horizontal velocity of this ball */
   private float xVelocity;
 
@@ -23,7 +23,7 @@ public class Ball extends PongGameItemCircle {
   /** The initial y-coordinate of this ball */
   private float initialYCoordinate;
 
-  User user;
+  private User user;
 
   /** build a ball. */
   Ball(
@@ -57,8 +57,8 @@ public class Ball extends PongGameItemCircle {
   }
 
   /**
-   * move the ball in x direction.
-   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+   * move the ball in x direction. citation:
+   * http://gamecodeschool.com/android/programming-a-pong-game-for-android/
    */
   private void xMove(long fps) {
     float newXCoordinate = getXCoordinate() + (xVelocity / fps);
@@ -66,8 +66,8 @@ public class Ball extends PongGameItemCircle {
   }
 
   /**
-   * move the ball in y direction.
-   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+   * move the ball in y direction. citation:
+   * http://gamecodeschool.com/android/programming-a-pong-game-for-android/
    */
   private void yMove(long fps) {
     float newYCoordinate = getYCoordinate() + (yVelocity / fps);

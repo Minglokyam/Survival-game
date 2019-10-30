@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 
 import com.example.survivalgame.User;
 
-public class DodgeGameThread extends Thread {
+class DodgeGameThread extends Thread {
   private boolean running = false;
   private DodgeGameView dodgeGameView;
   private User user;

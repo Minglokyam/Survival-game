@@ -71,10 +71,10 @@ public class RunningGameManager {
     randomGenerateCoins();
   }
 
-    /**
-     * randomly generate the spikes in the running game.
-     * citation: https://www.youtube.com/watch?v=zyCZEaw3Gow&t=266s
-     */
+  /**
+   * randomly generate the spikes in the running game. citation:
+   * https://www.youtube.com/watch?v=zyCZEaw3Gow&t=266s
+   */
   private void randomGenerateSpikes() {
     switch (timerRandomSpikes) {
         // three different cases to generate spikes in different distances.
@@ -112,8 +112,9 @@ public class RunningGameManager {
     }
   }
 
-    /** randomly generate the coins in the running game.
-     * citation: https://www.youtube.com/watch?v=lmAmr8Efu34&t=492s
+  /**
+   * randomly generate the coins in the running game. citation:
+   * https://www.youtube.com/watch?v=lmAmr8Efu34&t=492s
    */
   private void randomGenerateCoins() {
     if (timerCoins >= 100) {

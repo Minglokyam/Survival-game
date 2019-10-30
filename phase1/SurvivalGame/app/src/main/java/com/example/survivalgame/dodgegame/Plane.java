@@ -24,14 +24,6 @@ public class Plane extends DodgeGameItem {
     this.hp = hp;
   }
 
-  public int getxSpeed() {
-    return xSpeed;
-  }
-
-  public int getySpeed() {
-    return ySpeed;
-  }
-
   public void setxSpeed(int xSpeed) {
     this.xSpeed = xSpeed;
   }

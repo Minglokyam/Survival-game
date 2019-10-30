@@ -32,18 +32,14 @@ public class PongGameActivity extends AppCompatActivity {
     setContentView(pongGameView);
   }
 
-  /**
-   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
-   */
+  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
   @Override
   protected void onResume() {
     super.onResume();
     pongGameView.resume();
   }
 
-  /**
-   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
-   */
+  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
   @Override
   protected void onPause() {
     super.onPause();

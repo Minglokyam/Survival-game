@@ -10,7 +10,7 @@ public abstract class PongGameItemCircle extends PongGameItem {
   private float radius;
 
   public PongGameItemCircle(
-          PongGameManager pongGameManager, float radius, float xCoordinate, float yCoordinate) {
+      PongGameManager pongGameManager, float radius, float xCoordinate, float yCoordinate) {
     super(pongGameManager, xCoordinate, yCoordinate);
     this.radius = radius;
   }

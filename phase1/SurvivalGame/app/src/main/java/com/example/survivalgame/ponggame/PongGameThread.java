@@ -15,9 +15,7 @@ public class PongGameThread extends Thread {
     this.pongGameView = newPongGameView;
   }
 
-  /**
-   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
-   */
+  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
   @Override
   public void run() {
     while (playing) {
@@ -53,9 +51,7 @@ public class PongGameThread extends Thread {
     }
   }
 
-  /**
-   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
-   */
+  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
   public void setPlaying(boolean newPlaying) {
     playing = newPlaying;
   }

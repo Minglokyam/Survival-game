@@ -6,40 +6,41 @@ import java.util.List;
 
 public class UserManager implements Serializable {
 
-    private static List<User> userList;
+  private static List<User> userList;
 
-    UserManager() {
-        userList = new ArrayList<>();
-    }
+  UserManager() {
+    userList = new ArrayList<>();
+  }
 
-    /* username and password cannot be empty*/
+  /* username and password cannot be empty*/
 
-    public int numUsers() {
-        return userList.size();
-    }
+  public int numUsers() {
+    return userList.size();
+  }
 
-    public void addUser(User user) {
-        userList.add(user);
-    }
+  public void addUser(User user) {
+    userList.add(user);
+  }
 
-    public boolean userExists(String username) {
-        for (User user : userList) {
-            if (user.getUsername().equals(username)) return true;
-        }
-        return false;
+  public boolean userExists(String username) {
+    for (User user : userList) {
+      if (user.getUsername().equals(username)) return true;
     }
+    return false;
+  }
 
-    public User getUser(String username) {
-        for (User user : userList) {
-            if (user.getUsername().equals(username)) return user;
-        }
-        return null;
+  public User getUser(String username) {
+    for (User user : userList) {
+      if (user.getUsername().equals(username)) return user;
     }
-    public List<User> getUserList(){
-        return userList;
-    }
+    return null;
+  }
 
-    public static void setUserList(List<User> userList) {
-        UserManager.userList = userList;
-    }
+  public List<User> getUserList() {
+    return userList;
+  }
+
+  public static void setUserList(List<User> userList) {
+    UserManager.userList = userList;
+  }
 }

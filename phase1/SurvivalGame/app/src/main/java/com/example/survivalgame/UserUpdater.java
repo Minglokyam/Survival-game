@@ -26,7 +26,7 @@ public class UserUpdater {
     user.setTotalDuration(activityUser.getTotalDuration());
   }
 
-  public static void resetUser(User activityUser){
+  public static void resetUser(User activityUser) {
     setUser(activityUser);
     user.setLife(3);
     user.setGameStage(User.RUNNING);

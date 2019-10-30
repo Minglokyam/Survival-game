@@ -31,8 +31,8 @@ public class IOManager {
       InputStream inputStream = mainActivity.openFileInput(USER_FILE);
       if (inputStream != null) {
         ObjectInputStream input = new ObjectInputStream(inputStream);
-        //userManager.userList = (ArrayList) input.readObject();
-        userManager.setUserList((ArrayList)input.readObject());
+        // userManager.userList = (ArrayList) input.readObject();
+        userManager.setUserList((ArrayList) input.readObject());
         inputStream.close();
       }
     } catch (FileNotFoundException e) {
@@ -55,7 +55,7 @@ public class IOManager {
     try {
       fos = mainActivity.openFileOutput(USER_FILE, mainActivity.MODE_PRIVATE);
       ObjectOutputStream os = new ObjectOutputStream(fos);
-      //userManager.printList();
+      // userManager.printList();
       os.writeObject(userManager.getUserList());
       os.close();
     } catch (IOException e) {

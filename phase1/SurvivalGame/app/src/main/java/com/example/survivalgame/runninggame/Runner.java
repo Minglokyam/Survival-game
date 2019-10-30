@@ -25,10 +25,9 @@ public class Runner {
     this.bmp = bmp;
   }
 
-
   /**
-   * change the speed when hitting the ground and when jumping at highest point.
-   * citation: https://www.youtube.com/watch?v=1WRNXLfT3F8
+   * change the speed when hitting the ground and when jumping at highest point. citation:
+   * https://www.youtube.com/watch?v=1WRNXLfT3F8
    */
   private void update() {
     if (y < view.getHeight() - Ground.height - bmp.getHeight()) {

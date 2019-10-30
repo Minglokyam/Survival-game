@@ -40,7 +40,9 @@ public class DodgeGameManager {
     hp.setHP(newHP);
   }
 
-  public Plane getPlane(){ return plane; }
+  public Plane getPlane() {
+    return plane;
+  }
 
   public void update() {
     Shell shell;

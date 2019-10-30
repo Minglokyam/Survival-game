@@ -25,7 +25,7 @@ public class RunningGameView extends SurfaceView {
   public static int movingSpeed = 10;
 
   // the image holder of the runner.
-  public  Bitmap runnerBmp;
+  public Bitmap runnerBmp;
   // the image holder of the coin.
   public Bitmap coinBmp;
   // the image holder of the ground.

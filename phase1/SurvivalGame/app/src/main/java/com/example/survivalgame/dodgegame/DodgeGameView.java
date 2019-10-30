@@ -18,7 +18,7 @@ public class DodgeGameView extends SurfaceView {
   private Duration dodgeDuration;
   private DodgeGameThread dodgeGameThread;
   private SurfaceHolder holder;
-  public Paint paint;
+  private Paint paint;
   private User user;
   private Paint paintText;
 
@@ -73,7 +73,7 @@ public class DodgeGameView extends SurfaceView {
   // This method updates all objects in the ArrayList!
   public void update() {
     dodgeGameManager.update();
-    if(dodgeGameManager.getHP() <= 0){
+    if (dodgeGameManager.getHP() <= 0) {
       user.setLife(user.getLife() - 1);
       dodgeGameManager.setHP(100);
     }
@@ -98,7 +98,9 @@ public class DodgeGameView extends SurfaceView {
   @Override
   public boolean onTouchEvent(MotionEvent event) {
     if (event.getAction() == MotionEvent.ACTION_MOVE) {
-      dodgeGameManager.getPlane().setxSpeed((int) ((event.getX() - dodgeGameManager.getPlane().getXCoordinate()) / 6));
+      dodgeGameManager
+          .getPlane()
+          .setxSpeed((int) ((event.getX() - dodgeGameManager.getPlane().getXCoordinate()) / 6));
       int spdY = (int) ((event.getY() - dodgeGameManager.getPlane().getYCoordinate()) / 15);
       if (spdY > 20) {
         spdY = 20;
