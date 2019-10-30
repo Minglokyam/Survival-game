@@ -1,8 +1,5 @@
 package com.example.survivalgame.dodgegame;
 
-import com.example.survivalgame.dodgegame.DodgeGameManager;
-import com.example.survivalgame.dodgegame.Shell;
-
 import java.util.List;
 
 public class EnemyGenerator {
