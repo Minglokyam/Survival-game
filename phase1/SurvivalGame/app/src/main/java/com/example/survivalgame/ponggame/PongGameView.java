@@ -58,10 +58,12 @@ public class PongGameView extends SurfaceView {
     if (user.getLife() == 0) {
       stop = true;
       thread.setPlaying(false);
+      thread.endGame();
       pongGameActivity.toMain();
     } else if (pongDuration.getSeconds() <= 0) {
       stop = true;
       thread.setPlaying(false);
+      thread.endGame();
       pongGameActivity.toDodge();
     }
   }
