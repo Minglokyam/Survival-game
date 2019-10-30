@@ -31,7 +31,7 @@ public class DodgeGameView extends SurfaceView {
     this.user = user;
     dodgeDuration = Duration.ofSeconds(30);
     paintText = new Paint();
-    paintText.setTextSize(40);
+    paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
     dodgeGameThread = new DodgeGameThread(this, user);
     paint = new Paint();

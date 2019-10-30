@@ -51,7 +51,7 @@ public class RunningGameView extends SurfaceView {
   public RunningGameView(Context context, User user) {
     super(context);
     paintText = new Paint();
-    paintText.setTextSize(40);
+    paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
     this.user = user;
     runningDuration = Duration.ofSeconds(30);
