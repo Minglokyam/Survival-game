@@ -16,6 +16,7 @@ import com.example.survivalgame.R;
 import com.example.survivalgame.User;
 
 import java.time.Duration;
+import java.util.Iterator;
 
 public class RunningGameView extends SurfaceView {
   public RunningGameThread thread;
@@ -51,7 +52,7 @@ public class RunningGameView extends SurfaceView {
   public RunningGameView(Context context, User user) {
     super(context);
     this.user = user;
-    runningDuration = Duration.ofSeconds(15);
+    runningDuration = Duration.ofSeconds(50);
     runningGameActivity = (RunningGameActivity) context;
     thread = new RunningGameThread(this, user);
     holder = getHolder();
@@ -118,33 +119,37 @@ public class RunningGameView extends SurfaceView {
 
   /** update the coin when it moves out of the screen or the runner touches it. */
   private void updateCoin() {
-    for (int i = 0; i < runningGameManager.coin.size(); i++) {
-      Rect runner1 = runningGameManager.runner.getRect();
-      Rect coin1 = runningGameManager.coin.get(i).getRect();
-      if (runningGameManager.coin.get(i).checkCollision(runner1, coin1)) {
+    boolean collide = false;
+    Iterator<Coin> coinIterator = runningGameManager.coins.iterator();
+    while (coinIterator.hasNext() && !collide) {
+      Coin coin = coinIterator.next();
+      Rect runnerRect = runningGameManager.runner.getRect();
+      Rect coinRect = coin.getRect();
+      if (coin.checkCollision(runnerRect, coinRect)) {
         // remove the coin once the runner touch this coin.
-        runningGameManager.coin.remove(i);
+        coinIterator.remove();
         // add points to the score when the runner touches a coin.
         user.setScore(user.getScore() + 100);
-        break;
+        collide = true;
       }
     }
   }
 
   /** update the spike when it moves out of the screen or the runner touches it. */
   private void updateSpike() {
-    for (int i = 0; i < runningGameManager.spikes.size(); i++) {
-      Rect runner1 = runningGameManager.runner.getRect();
-      Rect spike1 = runningGameManager.spikes.get(i).getRect();
-      // end the game once the runner touches the spikes.
-      if (runningGameManager.spikes.get(i).checkCollision(runner1, spike1)) {
+    boolean collide = false;
+    Iterator<Spike> spikeIterator = runningGameManager.spikes.iterator();
+    while (spikeIterator.hasNext() && !collide) {
+      Spike spike = spikeIterator.next();
+      Rect runnerRect = runningGameManager.runner.getRect();
+      Rect spikeRect = spike.getRect();
+      if (spike.checkCollision(runnerRect, spikeRect)) {
         user.setLife(user.getLife() - 1);
-        runningGameManager.spikes.remove(i);
-        i--;
-        if (user.getLife() == 0) {
-          runningGameActivity.toMain();
-          break;
-        }
+        spikeIterator.remove();
+      }
+      if (user.getLife() == 0) {
+        runningGameActivity.toMain();
+        collide = true;
       }
     }
   }
@@ -167,8 +172,8 @@ public class RunningGameView extends SurfaceView {
     runningGameManager.runner.draw(canvas);
 
     // draw the coin
-    for (int i = 0; i < runningGameManager.coin.size(); i++) {
-      runningGameManager.coin.get(i).draw(canvas);
+    for (int i = 0; i < runningGameManager.coins.size(); i++) {
+      runningGameManager.coins.get(i).draw(canvas);
     }
 
     // draw the spikes

@@ -12,7 +12,7 @@ class RunningGameManager {
   public Runner runner;
 
   // a list of coin.
-  public List<Coin> coin = new ArrayList<>();
+  public List<Coin> coins = new ArrayList<>();
 
   // ground.
   public Ground ground;
@@ -40,9 +40,9 @@ class RunningGameManager {
   /** update the coins and spikes. */
   public void update() {
     updateTimer();
-    for (int i = 0; i < coin.size(); i++) {
-      if (coin.get(i).getX() < -80) {
-        coin.remove(i);
+    for (int i = 0; i < coins.size(); i++) {
+      if (coins.get(i).getX() < -80) {
+        coins.remove(i);
         i--;
       }
     }
@@ -121,7 +121,7 @@ class RunningGameManager {
           // construct five consecutive coins in same height.
           int currentCoin = 1;
           while (currentCoin <= 5) {
-            coin.add(
+            coins.add(
                 new Coin(
                     RunningGameView,
                     RunningGameView.coinBmp,
@@ -133,13 +133,13 @@ class RunningGameManager {
 
         case 1:
           // construct three consecutive coins in different height.
-          coin.add(
+          coins.add(
               new Coin(
                   RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 32, 150));
-          coin.add(
+          coins.add(
               new Coin(
                   RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 96, 130));
-          coin.add(
+          coins.add(
               new Coin(
                   RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 160, 150));
           break;
