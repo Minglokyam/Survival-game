@@ -1,10 +1,10 @@
-package com.example.survivalgame;
+package com.example.survivalgame.runninggame;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-class Runner {
+public class Runner {
   // the first and second coordinate of the runner.
   private static int x;
   private static int y;
@@ -18,14 +18,17 @@ class Runner {
   private RunningGameView view;
 
   /** Build a runner. */
-  Runner(RunningGameView view, Bitmap bmp, int x, int y) {
+  public Runner(RunningGameView view, Bitmap bmp, int x, int y) {
     this.view = view;
     Runner.x = x;
     Runner.y = y;
     this.bmp = bmp;
   }
 
-  /** change the speed when hitting the ground and when jumping at highest point. */
+  /**
+   * change the speed when hitting the ground and when jumping at highest point. citation:
+   * https://www.youtube.com/watch?v=1WRNXLfT3F8
+   */
   private void update() {
     if (y < view.getHeight() - Ground.height - bmp.getHeight()) {
       // make the runner jump by adding vSpeed.
@@ -45,7 +48,7 @@ class Runner {
   }
 
   /** draw the runner. */
-  void draw(Canvas canvas) {
+  public void draw(Canvas canvas) {
     // first update the runner's position.
     update();
 
@@ -54,7 +57,7 @@ class Runner {
   }
 
   /** make the runner jump when touching the screen. */
-  void onTouch() {
+  public void onTouch() {
     if (y >= view.getHeight() - Ground.height - bmp.getHeight()) {
       // set the vertical speed the runner will jump.
       vSpeed = -20;
@@ -62,7 +65,7 @@ class Runner {
   }
 
   /** get the rectangle of the runner. */
-  Rect getRect() {
+  public Rect getRect() {
     return new Rect(x, y, x + bmp.getWidth(), y + bmp.getHeight());
   }
 }

@@ -1,8 +1,12 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import android.graphics.Canvas;
 
-public class PongGameManager {
+import com.example.survivalgame.User;
+
+class PongGameManager {
+  BallFactory ballFactory = new BallFactory();
+  RectPaddleFactory rectPaddleFactory = new RectPaddleFactory();
   /** The screen width */
   private int screenWidth;
 
@@ -17,10 +21,10 @@ public class PongGameManager {
     this.screenWidth = screenWidth;
     this.screenHeight = screenHeight;
     ball =
-        new Ball(
+        ballFactory.createBall(
             this, 10, screenWidth / 2, screenHeight / 2, screenWidth / 3, -screenHeight / 3, user);
     rectPaddle =
-        new RectPaddle(
+        rectPaddleFactory.createRectPaddle(
             this,
             screenWidth / 5,
             screenWidth / 4,

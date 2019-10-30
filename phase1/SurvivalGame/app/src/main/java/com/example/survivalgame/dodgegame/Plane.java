@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.dodgegame;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,21 +11,13 @@ public class Plane extends DodgeGameItem {
   private int xSpeed;
   private int ySpeed;
 
-  public Plane(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight, HP hp) {
+  Plane(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight, HP hp) {
     super(dodgeGameManager);
     getPaint().setColor(Color.BLACK);
     setXCoordinate(screenWidth / 2);
     setYCoordinate(screenHeight - 600);
     counter = 0;
     this.hp = hp;
-  }
-
-  public int getxSpeed() {
-    return xSpeed;
-  }
-
-  public int getySpeed() {
-    return ySpeed;
   }
 
   void setxSpeed(int xSpeed) {
@@ -36,7 +28,7 @@ public class Plane extends DodgeGameItem {
     this.ySpeed = ySpeed;
   }
 
-  public RectF getRectF() {
+  RectF getRectF() {
     return new RectF(
         getXCoordinate() - 60, getYCoordinate(), getXCoordinate() + 60, getYCoordinate() + 200);
   }

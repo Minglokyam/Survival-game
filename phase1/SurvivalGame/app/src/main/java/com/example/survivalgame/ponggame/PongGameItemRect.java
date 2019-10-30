@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import android.graphics.Canvas;
 
@@ -25,7 +25,7 @@ public abstract class PongGameItemRect extends PongGameItem {
   }
 
   /** A getter of height */
-  public float getHeight() {
+  private float getHeight() {
     return height;
   }
 

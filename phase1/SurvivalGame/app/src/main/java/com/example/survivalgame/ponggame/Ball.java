@@ -1,8 +1,10 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import android.graphics.Color;
 
-public class Ball extends PongGameItemCircle {
+import com.example.survivalgame.User;
+
+class Ball extends PongGameItemCircle {
   /** The horizontal velocity of this ball */
   private float xVelocity;
 
@@ -21,27 +23,7 @@ public class Ball extends PongGameItemCircle {
   /** The initial y-coordinate of this ball */
   private float initialYCoordinate;
 
-  User user;
-
-  /** A getter of xVelocity */
-  public float getXVelocity() {
-    return xVelocity;
-  }
-
-  /** A setter of xVelocity */
-  public void setXVelocity(float newXVelocity) {
-    this.xVelocity = newXVelocity;
-  }
-
-  /** A getter of yVelocity */
-  public float getYVelocity() {
-    return yVelocity;
-  }
-
-  /** A setter of yVelocity */
-  public void setYVelocity(float newYVelocity) {
-    this.yVelocity = newYVelocity;
-  }
+  private User user;
 
   /** build a ball. */
   Ball(
@@ -64,7 +46,7 @@ public class Ball extends PongGameItemCircle {
   }
 
   /** move the ball when it hit top, left, right, paddle or bottom. */
-  void move(long fps) {
+  public void move(long fps) {
     hitTop();
     hitLeft();
     hitRight();
@@ -74,13 +56,19 @@ public class Ball extends PongGameItemCircle {
     yMove(fps);
   }
 
-  /** move the ball in x direction. */
+  /**
+   * move the ball in x direction. citation:
+   * http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+   */
   private void xMove(long fps) {
     float newXCoordinate = getXCoordinate() + (xVelocity / fps);
     setXCoordinate(newXCoordinate);
   }
 
-  /** move the ball in y direction. */
+  /**
+   * move the ball in y direction. citation:
+   * http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+   */
   private void yMove(long fps) {
     float newYCoordinate = getYCoordinate() + (yVelocity / fps);
     setYCoordinate(newYCoordinate);

@@ -1,8 +1,10 @@
-package com.example.survivalgame;
+package com.example.survivalgame.dodgegame;
 
 import android.graphics.Canvas;
 
-public class DodgeGameThread extends Thread {
+import com.example.survivalgame.User;
+
+class DodgeGameThread extends Thread {
   private boolean running = false;
   private DodgeGameView dodgeGameView;
   private User user;
@@ -17,7 +19,6 @@ public class DodgeGameThread extends Thread {
   }
 
   public void run() {
-
     while (running) {
       long startTime = System.currentTimeMillis();
       Canvas canvas = null;

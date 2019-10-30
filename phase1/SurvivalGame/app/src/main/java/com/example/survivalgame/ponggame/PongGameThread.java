@@ -1,8 +1,10 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import android.graphics.Canvas;
 
-public class PongGameThread extends Thread {
+import com.example.survivalgame.User;
+
+class PongGameThread extends Thread {
   private boolean playing = true;
   private PongGameView pongGameView;
   private User user;
@@ -12,11 +14,12 @@ public class PongGameThread extends Thread {
     this.pongGameView = newPongGameView;
   }
 
+  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
   @Override
   public void run() {
     while (playing) {
       long startTime = System.currentTimeMillis();
-      if (!pongGameView.getStop()) {
+      if (pongGameView.notStop()) {
         pongGameView.update();
       }
 
@@ -37,7 +40,7 @@ public class PongGameThread extends Thread {
       }
 
       long timeInterval = System.currentTimeMillis() - startTime;
-      if (!pongGameView.getStop()) {
+      if (pongGameView.notStop()) {
         user.setTotalDuration(user.getTotalDuration().plusMillis(timeInterval));
         pongGameView.setPongDuration(pongGameView.getPongDuration().minusMillis(timeInterval));
       }
@@ -47,7 +50,8 @@ public class PongGameThread extends Thread {
     }
   }
 
-  void setPlaying(boolean newPlaying) {
+  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
+  public void setPlaying(boolean newPlaying) {
     playing = newPlaying;
   }
 }

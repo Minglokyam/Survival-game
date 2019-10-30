@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.dodgegame;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,6 +8,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.example.survivalgame.User;
+
 import java.time.Duration;
 
 public class DodgeGameView extends SurfaceView {
@@ -16,16 +18,17 @@ public class DodgeGameView extends SurfaceView {
   private Duration dodgeDuration;
   private DodgeGameThread dodgeGameThread;
   private SurfaceHolder holder;
-  public Paint paint;
+  private Paint paint;
   private User user;
   private Paint paintText;
 
+  // Dependency Injection
   public DodgeGameView(Context context, User user, int screenWidth, int screenHeight) {
     super(context);
     dodgeGameActivity = (DodgeGameActivity) context;
     dodgeGameManager = new DodgeGameManager(screenWidth, screenHeight);
     this.user = user;
-    dodgeDuration = Duration.ofSeconds(50);
+    dodgeDuration = Duration.ofSeconds(30);
     paintText = new Paint();
     paintText.setTextSize(40);
     dodgeGameThread = new DodgeGameThread(this, user);
@@ -71,11 +74,12 @@ public class DodgeGameView extends SurfaceView {
   // This method updates all objects in the ArrayList!
   public void update() {
     dodgeGameManager.update();
-    if(dodgeGameManager.getHP() <= 0){
+    if (dodgeGameManager.getHP() <= 0) {
       user.setLife(user.getLife() - 1);
       dodgeGameManager.setHP(100);
     }
-    if (dodgeDuration.getSeconds() <= 0 || user.getLife() <= 0) {
+    if (dodgeDuration.getSeconds() <= 0 || user.getLife() == 0) {
+      dodgeGameThread.setRunning(false);
       dodgeGameActivity.toMain();
     }
     user.setScore(user.getScore() + 1);
@@ -95,8 +99,10 @@ public class DodgeGameView extends SurfaceView {
   @Override
   public boolean onTouchEvent(MotionEvent event) {
     if (event.getAction() == MotionEvent.ACTION_MOVE) {
-      dodgeGameManager.plane.setxSpeed((int) ((event.getX() - dodgeGameManager.plane.getXCoordinate()) / 6));
-      int spdY = (int) ((event.getY() - dodgeGameManager.plane.getYCoordinate()) / 15);
+      dodgeGameManager
+          .getPlane()
+          .setxSpeed((int) ((event.getX() - dodgeGameManager.getPlane().getXCoordinate()) / 6));
+      int spdY = (int) ((event.getY() - dodgeGameManager.getPlane().getYCoordinate()) / 15);
       if (spdY > 20) {
         spdY = 20;
       } else if (spdY > 0 && spdY < 8) {
@@ -106,7 +112,7 @@ public class DodgeGameView extends SurfaceView {
       } else if (spdY < -20) {
         spdY = -20;
       }
-      dodgeGameManager.plane.setySpeed(spdY);
+      dodgeGameManager.getPlane().setySpeed(spdY);
     }
     return true;
   }

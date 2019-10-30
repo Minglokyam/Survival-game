@@ -1,31 +1,30 @@
-package com.example.survivalgame;
+package com.example.survivalgame.runninggame;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
 class Spike {
-
   private int x, y;
   private Bitmap bmp;
-  private RunningGameView view;
+  private RunningGameView runningGameView;
 
   /** build a spike. */
-  Spike(RunningGameView view, Bitmap bmp, int x) {
-    this.view = view;
+  public Spike(RunningGameView runningGameView, Bitmap bmp, int x, int y) {
+    this.runningGameView = runningGameView;
     this.bmp = bmp;
     this.x = x;
-    this.y = view.getHeight() - Ground.height - bmp.getHeight();
+    this.y = y;
   }
 
   /** update the spike and make the spike move. */
   private void update() {
     // move the spikes with movingSpeed.
-    x -= RunningGameView.movingSpeed;
+    x -= runningGameView.movingSpeed;
   }
 
   /** draw the spike. */
-  void draw(Canvas canvas) {
+  public void draw(Canvas canvas) {
     // first update the spike.
     update();
 
@@ -36,17 +35,17 @@ class Spike {
   }
 
   /** check whether the runner touched the spike. */
-  boolean checkCollision(Rect runner, Rect spikes) {
+  public boolean checkCollision(Rect runner, Rect spikes) {
     return Rect.intersects(runner, spikes);
   }
 
   /** get the rectangle of the spike. */
-  Rect getRect() {
+  public Rect getRect() {
     return new Rect(this.x, this.y, this.x + bmp.getWidth(), this.y + bmp.getHeight());
   }
 
   /** the getter of the first coordinate of the spike. */
-  int getX() {
+  public int getX() {
     return x;
   }
 }

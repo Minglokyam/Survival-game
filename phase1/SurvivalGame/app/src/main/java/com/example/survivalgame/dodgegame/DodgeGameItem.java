@@ -1,9 +1,9 @@
-package com.example.survivalgame;
+package com.example.survivalgame.dodgegame;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public abstract class DodgeGameItem {
+abstract class DodgeGameItem {
   /** The x-coordinate of this PongGameItem */
   private float xCoordinate;
   /** The y-coordinate of this PongGameItem */
@@ -19,26 +19,13 @@ public abstract class DodgeGameItem {
     this.dodgeGameManager = dodgeGameManager;
   }
 
-  /**
-   * Create a PongGameItem.
-   *
-   * @param xCoordinate the x-coordinate of this PongGameItem
-   * @param yCoordinate the y-coordinate of this PongGameItem
-   */
-  DodgeGameItem(DodgeGameManager dodgeGameManager, float xCoordinate, float yCoordinate) {
-    paint = new Paint();
-    this.dodgeGameManager = dodgeGameManager;
-    this.xCoordinate = xCoordinate;
-    this.yCoordinate = yCoordinate;
-  }
-
   /** A getter of dodgeGameManager */
   DodgeGameManager getDodgeGameManager() {
     return dodgeGameManager;
   }
 
   /** A getter of xCoordinate */
-  float getXCoordinate() {
+  public float getXCoordinate() {
     return xCoordinate;
   }
 

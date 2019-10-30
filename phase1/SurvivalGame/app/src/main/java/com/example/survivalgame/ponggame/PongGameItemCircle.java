@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import android.graphics.Canvas;
 

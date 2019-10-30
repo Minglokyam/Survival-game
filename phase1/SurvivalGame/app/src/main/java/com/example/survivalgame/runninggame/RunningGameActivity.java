@@ -1,14 +1,20 @@
-package com.example.survivalgame;
+package com.example.survivalgame.runninggame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-public class RunningGameActivity extends AppCompatActivity {
+import com.example.survivalgame.IOManager;
+import com.example.survivalgame.MainActivity;
+import com.example.survivalgame.R;
+import com.example.survivalgame.User;
+import com.example.survivalgame.UserUpdater;
+import com.example.survivalgame.ponggame.PongGameActivity;
 
-  RunningGameView runningGameView;
-  User user;
+public class RunningGameActivity extends AppCompatActivity {
+  private RunningGameView runningGameView;
+  private User user;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,7 @@ public class RunningGameActivity extends AppCompatActivity {
   protected void onPause() {
     super.onPause();
     runningGameView.thread.running = false;
+    toPong();
     finish();
   }
 
@@ -40,7 +47,9 @@ public class RunningGameActivity extends AppCompatActivity {
 
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    UserUpdater.resetUser(user);
+    IOManager.saveFile();
     startActivity(intent);
     finish();
   }

@@ -1,8 +1,12 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import android.graphics.Color;
 
-class RectPaddle extends PongGameItemRect {
+import com.example.survivalgame.ponggame.PongGameItemRect;
+import com.example.survivalgame.ponggame.PongGameManager;
+
+/** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
+public class RectPaddle extends PongGameItemRect {
   private final int STOP = 0;
   private final int LEFT = 1;
   private final int RIGHT = 2;
@@ -10,7 +14,7 @@ class RectPaddle extends PongGameItemRect {
   private float xSpeed;
 
   /** build the paddle. */
-  RectPaddle(
+  public RectPaddle(
       PongGameManager pongGameManager,
       float xSpeed,
       float width,
@@ -23,7 +27,7 @@ class RectPaddle extends PongGameItemRect {
   }
 
   /** move the paddle considering the current moving direction . */
-  void move(long fps) {
+  public void move(long fps) {
     if (!checkHitLeft() && movingStatus == LEFT) {
       xMoveLeft(fps);
     } else if (!checkHitRight() && movingStatus == RIGHT) {
@@ -54,17 +58,17 @@ class RectPaddle extends PongGameItemRect {
   }
 
   /** change the moving status to left. */
-  void moveLeft() {
+  public void moveLeft() {
     movingStatus = LEFT;
   }
 
   /** change the moving status to right. */
-  void moveRight() {
+  public void moveRight() {
     movingStatus = RIGHT;
   }
 
   /** change the moving status to stop. */
-  void stop() {
+  public void stop() {
     movingStatus = STOP;
   }
 }

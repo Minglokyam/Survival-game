@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.dodgegame;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class DodgeGameManager {
+class DodgeGameManager {
   private int screenWidth;
   private int screenHeight;
   private List<Shell> shells;
   private HP hp;
-  Plane plane;
+  private Plane plane;
   private EnemyGenerator enemyGenerator;
 
   DodgeGameManager(int screenWidth, int screenHeight) {
@@ -32,12 +32,16 @@ public class DodgeGameManager {
     return screenHeight;
   }
 
-  public int getHP() {
+  int getHP() {
     return hp.getHP();
   }
 
-  public void setHP(int newHP) {
+  void setHP(int newHP) {
     hp.setHP(newHP);
+  }
+
+  Plane getPlane() {
+    return plane;
   }
 
   public void update() {
@@ -64,8 +68,8 @@ public class DodgeGameManager {
   public void draw(Canvas canvas) {
     canvas.drawColor(Color.rgb(255, 255, 255));
     plane.draw(canvas);
-    for (int i = 0; i < shells.size(); i++) {
-      shells.get(i).draw(canvas);
+    for (Shell shell: shells) {
+      shell.draw(canvas);
     }
     hp.draw(canvas);
   }

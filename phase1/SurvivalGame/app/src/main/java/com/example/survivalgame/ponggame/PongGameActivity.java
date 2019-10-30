@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,9 +7,15 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.survivalgame.dodgegame.DodgeGameActivity;
+import com.example.survivalgame.IOManager;
+import com.example.survivalgame.MainActivity;
+import com.example.survivalgame.User;
+import com.example.survivalgame.UserUpdater;
+
 public class PongGameActivity extends AppCompatActivity {
-  PongGameView pongGameView;
-  User user;
+  private PongGameView pongGameView;
+  private User user;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +32,14 @@ public class PongGameActivity extends AppCompatActivity {
     setContentView(pongGameView);
   }
 
+  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
   @Override
   protected void onResume() {
     super.onResume();
     pongGameView.resume();
   }
 
+  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
   @Override
   protected void onPause() {
     super.onPause();
@@ -48,7 +56,9 @@ public class PongGameActivity extends AppCompatActivity {
 
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    UserUpdater.resetUser(user);
+    IOManager.saveFile();
     startActivity(intent);
     finish();
   }

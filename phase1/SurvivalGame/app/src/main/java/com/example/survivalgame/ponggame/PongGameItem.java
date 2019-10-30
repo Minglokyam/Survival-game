@@ -1,9 +1,9 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public abstract class PongGameItem {
+abstract class PongGameItem {
   /** The x-coordinate of this PongGameItem */
   private float xCoordinate;
   /** The y-coordinate of this PongGameItem */
@@ -32,7 +32,7 @@ public abstract class PongGameItem {
   }
 
   /** A getter of xCoordinate */
-  float getXCoordinate() {
+  public float getXCoordinate() {
     return xCoordinate;
   }
 

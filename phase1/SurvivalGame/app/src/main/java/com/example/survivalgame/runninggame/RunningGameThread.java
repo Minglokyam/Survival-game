@@ -1,12 +1,14 @@
-package com.example.survivalgame;
+package com.example.survivalgame.runninggame;
 
 import android.graphics.Canvas;
 
-class RunningGameThread extends Thread {
+import com.example.survivalgame.User;
+
+public class RunningGameThread extends Thread {
   private RunningGameView view;
 
   // check whether the runner is running
-  boolean running;
+  public boolean running;
 
   public RunningGameThread(RunningGameView view, User user) {
     this.view = view;

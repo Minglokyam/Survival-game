@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserManager implements Serializable {
-  List<User> userList;
+class UserManager implements Serializable {
+
+  private static List<User> userList;
 
   UserManager() {
     userList = new ArrayList<>();
@@ -22,12 +23,8 @@ public class UserManager implements Serializable {
   }
 
   public boolean userExists(String username) {
-    try {
-      for (User user : userList) {
-        if (user.getUsername().equals(username)) return true;
-      }
-    } catch (Exception e) {
-      return false;
+    for (User user : userList) {
+      if (user.getUsername().equals(username)) return true;
     }
     return false;
   }
@@ -39,13 +36,11 @@ public class UserManager implements Serializable {
     return null;
   }
 
-  public void update(UserManager newManager) {
-    this.userList = newManager.userList;
+  public List<User> getUserList() {
+    return userList;
   }
 
-  public void printList() {
-    for (User user : userList) {
-      System.out.println(user);
-    }
+  public static void setUserList(List<User> userList) {
+    UserManager.userList = userList;
   }
 }
