@@ -120,8 +120,8 @@ public class PongGameView extends SurfaceView {
     FPS = newFPS;
   }
 
-  public boolean getStop() {
-    return stop;
+  public boolean notStop() {
+    return !stop;
   }
 
   public Duration getPongDuration() {

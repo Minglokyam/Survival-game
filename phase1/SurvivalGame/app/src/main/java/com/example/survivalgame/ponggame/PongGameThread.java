@@ -3,7 +3,6 @@ package com.example.survivalgame.ponggame;
 import android.graphics.Canvas;
 
 import com.example.survivalgame.User;
-import com.example.survivalgame.ponggame.PongGameView;
 
 public class PongGameThread extends Thread {
   private boolean playing = true;
@@ -20,7 +19,7 @@ public class PongGameThread extends Thread {
   public void run() {
     while (playing) {
       long startTime = System.currentTimeMillis();
-      if (!pongGameView.getStop()) {
+      if (pongGameView.notStop()) {
         pongGameView.update();
       }
 
@@ -41,7 +40,7 @@ public class PongGameThread extends Thread {
       }
 
       long timeInterval = System.currentTimeMillis() - startTime;
-      if (!pongGameView.getStop()) {
+      if (pongGameView.notStop()) {
         user.setTotalDuration(user.getTotalDuration().plusMillis(timeInterval));
         pongGameView.setPongDuration(pongGameView.getPongDuration().minusMillis(timeInterval));
       }
