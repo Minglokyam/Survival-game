@@ -47,7 +47,9 @@ public class RunningGameActivity extends AppCompatActivity {
 
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    UserUpdater.resetUser(user);
+    IOManager.saveFile();
     startActivity(intent);
     finish();
   }
