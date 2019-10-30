@@ -78,7 +78,6 @@ public class PongGameView extends SurfaceView {
       canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
       canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
     }
-
     pongGameManager.draw(canvas);
   }
 
