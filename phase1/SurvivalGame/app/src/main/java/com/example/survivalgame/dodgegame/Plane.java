@@ -5,17 +5,13 @@ import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.RectF;
 
-import com.example.survivalgame.dodgegame.DodgeGameItem;
-import com.example.survivalgame.dodgegame.DodgeGameManager;
-import com.example.survivalgame.dodgegame.HP;
-
 public class Plane extends DodgeGameItem {
   private HP hp;
   private int counter;
   private int xSpeed;
   private int ySpeed;
 
-  public Plane(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight, HP hp) {
+  Plane(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight, HP hp) {
     super(dodgeGameManager);
     getPaint().setColor(Color.BLACK);
     setXCoordinate(screenWidth / 2);
@@ -24,15 +20,15 @@ public class Plane extends DodgeGameItem {
     this.hp = hp;
   }
 
-  public void setxSpeed(int xSpeed) {
+  void setxSpeed(int xSpeed) {
     this.xSpeed = xSpeed;
   }
 
-  public void setySpeed(int ySpeed) {
+  void setySpeed(int ySpeed) {
     this.ySpeed = ySpeed;
   }
 
-  public RectF getRectF() {
+  RectF getRectF() {
     return new RectF(
         getXCoordinate() - 60, getYCoordinate(), getXCoordinate() + 60, getYCoordinate() + 200);
   }

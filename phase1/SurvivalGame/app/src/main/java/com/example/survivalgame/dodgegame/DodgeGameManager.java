@@ -15,7 +15,7 @@ class DodgeGameManager {
   private Plane plane;
   private EnemyGenerator enemyGenerator;
 
-  public DodgeGameManager(int screenWidth, int screenHeight) {
+  DodgeGameManager(int screenWidth, int screenHeight) {
     hp = new HP(this, screenWidth, screenHeight);
     plane = new Plane(this, screenWidth, screenHeight, hp);
     shells = new ArrayList<>();
@@ -24,23 +24,23 @@ class DodgeGameManager {
     this.screenHeight = screenHeight;
   }
 
-  public int getScreenWidth() {
+  int getScreenWidth() {
     return screenWidth;
   }
 
-  public int getScreenHeight() {
+  int getScreenHeight() {
     return screenHeight;
   }
 
-  public int getHP() {
+  int getHP() {
     return hp.getHP();
   }
 
-  public void setHP(int newHP) {
+  void setHP(int newHP) {
     hp.setHP(newHP);
   }
 
-  public Plane getPlane() {
+  Plane getPlane() {
     return plane;
   }
 

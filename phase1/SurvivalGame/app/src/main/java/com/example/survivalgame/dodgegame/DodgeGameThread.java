@@ -9,12 +9,12 @@ class DodgeGameThread extends Thread {
   private DodgeGameView dodgeGameView;
   private User user;
 
-  public DodgeGameThread(DodgeGameView view, User user) {
+  DodgeGameThread(DodgeGameView view, User user) {
     this.dodgeGameView = view;
     this.user = user;
   }
 
-  public void setRunning(boolean running) {
+  void setRunning(boolean running) {
     this.running = running;
   }
 

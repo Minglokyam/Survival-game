@@ -22,7 +22,7 @@ public class DodgeGameView extends SurfaceView {
   private User user;
   private Paint paintText;
 
-  //Dependency Injection
+  // Dependency Injection
   public DodgeGameView(Context context, User user, int screenWidth, int screenHeight) {
     super(context);
     dodgeGameActivity = (DodgeGameActivity) context;

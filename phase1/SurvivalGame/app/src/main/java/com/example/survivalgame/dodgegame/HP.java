@@ -17,11 +17,11 @@ public class HP extends DodgeGameItem {
     this.screenHeight = screenHeight;
   }
 
-  public int getHP() {
+  int getHP() {
     return this.hp;
   }
 
-  public void setHP(int hp) {
+  void setHP(int hp) {
     this.hp = hp;
   }
 
