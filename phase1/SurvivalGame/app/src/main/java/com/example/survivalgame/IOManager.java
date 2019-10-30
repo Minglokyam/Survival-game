@@ -53,7 +53,7 @@ public class IOManager {
   public static void saveFile() {
     FileOutputStream fos = null;
     try {
-      fos = mainActivity.openFileOutput(USER_FILE, mainActivity.MODE_PRIVATE);
+      fos = mainActivity.openFileOutput(USER_FILE, Context.MODE_PRIVATE);
       ObjectOutputStream os = new ObjectOutputStream(fos);
       // userManager.printList();
       os.writeObject(userManager.getUserList());

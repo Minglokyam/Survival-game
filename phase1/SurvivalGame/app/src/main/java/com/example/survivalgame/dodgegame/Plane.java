@@ -20,11 +20,11 @@ public class Plane extends DodgeGameItem {
     this.hp = hp;
   }
 
-  void setxSpeed(int xSpeed) {
+  void setXSpeed(int xSpeed) {
     this.xSpeed = xSpeed;
   }
 
-  void setySpeed(int ySpeed) {
+  void setYSpeed(int ySpeed) {
     this.ySpeed = ySpeed;
   }
 

@@ -101,7 +101,7 @@ public class DodgeGameView extends SurfaceView {
     if (event.getAction() == MotionEvent.ACTION_MOVE) {
       dodgeGameManager
           .getPlane()
-          .setxSpeed((int) ((event.getX() - dodgeGameManager.getPlane().getXCoordinate()) / 6));
+          .setXSpeed((int) ((event.getX() - dodgeGameManager.getPlane().getXCoordinate()) / 6));
       int spdY = (int) ((event.getY() - dodgeGameManager.getPlane().getYCoordinate()) / 15);
       if (spdY > 20) {
         spdY = 20;
@@ -112,7 +112,7 @@ public class DodgeGameView extends SurfaceView {
       } else if (spdY < -20) {
         spdY = -20;
       }
-      dodgeGameManager.getPlane().setySpeed(spdY);
+      dodgeGameManager.getPlane().setYSpeed(spdY);
     }
     return true;
   }
