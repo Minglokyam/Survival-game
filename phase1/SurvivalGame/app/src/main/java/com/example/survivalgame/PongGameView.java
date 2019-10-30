@@ -54,7 +54,7 @@ public class PongGameView extends SurfaceView {
     paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
     // =======================================
-    pongDuration = Duration.ofSeconds(9);
+    pongDuration = Duration.ofSeconds(15);
   }
 
   public void update() {

@@ -19,19 +19,6 @@ public abstract class DodgeGameItem {
     this.dodgeGameManager = dodgeGameManager;
   }
 
-  /**
-   * Create a PongGameItem.
-   *
-   * @param xCoordinate the x-coordinate of this PongGameItem
-   * @param yCoordinate the y-coordinate of this PongGameItem
-   */
-  DodgeGameItem(DodgeGameManager dodgeGameManager, float xCoordinate, float yCoordinate) {
-    paint = new Paint();
-    this.dodgeGameManager = dodgeGameManager;
-    this.xCoordinate = xCoordinate;
-    this.yCoordinate = yCoordinate;
-  }
-
   /** A getter of dodgeGameManager */
   DodgeGameManager getDodgeGameManager() {
     return dodgeGameManager;

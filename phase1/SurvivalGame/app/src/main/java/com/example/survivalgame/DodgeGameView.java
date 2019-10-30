@@ -19,17 +19,13 @@ public class DodgeGameView extends SurfaceView {
   public Paint paint;
   private User user;
   private Paint paintText;
-  private int life;
-  private int score;
 
   public DodgeGameView(Context context, User user, int screenWidth, int screenHeight) {
     super(context);
     dodgeGameActivity = (DodgeGameActivity) context;
     dodgeGameManager = new DodgeGameManager(screenWidth, screenHeight);
     this.user = user;
-    life = user.getLife();
-    score = user.getScore();
-    dodgeDuration = Duration.ofSeconds(9);
+    dodgeDuration = Duration.ofSeconds(30);
     paintText = new Paint();
     paintText.setTextSize(40);
     dodgeGameThread = new DodgeGameThread(this, user);
@@ -75,11 +71,15 @@ public class DodgeGameView extends SurfaceView {
   // This method updates all objects in the ArrayList!
   public void update() {
     dodgeGameManager.update();
-    if (dodgeDuration.getSeconds() <= 0 || life == 0) {
+    if(dodgeGameManager.getHP() <= 0){
+      user.setLife(user.getLife() - 1);
+      dodgeGameManager.setHP(100);
+    }
+    if (dodgeDuration.getSeconds() <= 0 || user.getLife() == 0) {
       dodgeGameThread.setRunning(false);
       dodgeGameActivity.toMain();
     }
-    score++;
+    user.setScore(user.getScore() + 1);
   }
 
   @Override
@@ -87,10 +87,10 @@ public class DodgeGameView extends SurfaceView {
     super.draw(canvas);
     dodgeGameManager.draw(canvas);
     paintText.setColor(Color.BLACK);
-    canvas.drawText("Life: " + life, 0, 32, paintText);
-    canvas.drawText("Total time: " + this.user.getTotalDuration().getSeconds(), 0, 64, paintText);
+    canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
+    canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
     canvas.drawText("Game time: " + dodgeDuration.getSeconds(), 0, 96, paintText);
-    canvas.drawText("Score: " + score, 0, 128, paintText);
+    canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
   }
 
   @Override
