@@ -13,11 +13,15 @@ class DodgeGameManager {
   private List<Shell> shells;
   private HP hp;
   private Plane plane;
+  private HPFactory hpFactory;
+  private PlaneFactory planeFactory;
   private EnemyGenerator enemyGenerator;
 
   DodgeGameManager(int screenWidth, int screenHeight) {
-    hp = new HP(this, screenWidth, screenHeight);
-    plane = new Plane(this, screenWidth, screenHeight, hp);
+    hpFactory = new HPFactory();
+    planeFactory = new PlaneFactory();
+    hp = hpFactory.createHP(this, screenWidth, screenHeight);
+    plane = planeFactory.createPlane(this, screenWidth, screenHeight, hp);
     shells = new ArrayList<>();
     enemyGenerator = new EnemyGenerator(this);
     this.screenWidth = screenWidth;

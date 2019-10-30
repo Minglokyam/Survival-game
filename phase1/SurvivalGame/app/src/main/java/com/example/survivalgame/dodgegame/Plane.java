@@ -11,11 +11,11 @@ public class Plane extends DodgeGameItem {
   private int xSpeed;
   private int ySpeed;
 
-  Plane(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight, HP hp) {
+  Plane(DodgeGameManager dodgeGameManager, HP hp, float xCoordinate, float yCoordinate) {
     super(dodgeGameManager);
     getPaint().setColor(Color.BLACK);
-    setXCoordinate(screenWidth / 2);
-    setYCoordinate(screenHeight - 600);
+    setXCoordinate(xCoordinate);
+    setYCoordinate(yCoordinate);
     counter = 0;
     this.hp = hp;
   }
