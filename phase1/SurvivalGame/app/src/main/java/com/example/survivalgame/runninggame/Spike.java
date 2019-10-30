@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 class Spike {
-
   private int x, y;
   private Bitmap bmp;
   private RunningGameView view;

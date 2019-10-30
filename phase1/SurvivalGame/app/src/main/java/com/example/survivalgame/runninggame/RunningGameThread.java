@@ -3,7 +3,6 @@ package com.example.survivalgame.runninggame;
 import android.graphics.Canvas;
 
 import com.example.survivalgame.User;
-import com.example.survivalgame.runninggame.RunningGameView;
 
 public class RunningGameThread extends Thread {
   private RunningGameView view;
