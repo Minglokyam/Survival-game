@@ -53,7 +53,7 @@ public class Ball extends PongGameItemCircle {
     xMove(fps);
     yMove(fps);
   }
-  
+
   /**
    * move the ball in x direction.
    * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
