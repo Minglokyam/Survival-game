@@ -5,6 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 class Coin {
+    /**
+     * citation: https://www.youtube.com/watch?v=HzP9jJNmzSY
+     */
+
     // the first and second coordinate of the coin.
     private int x;
     private int y;

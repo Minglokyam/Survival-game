@@ -8,12 +8,12 @@ class RunningGameThread extends Thread {
   // check whether the runner is running
   boolean running;
 
-  public RunningGameThread(RunningGameView view, User user) {
+    RunningGameThread(RunningGameView view, User user) {
     this.view = view;
     this.user = user;
   }
 
-  public void setRunning() {
+    void setRunning() {
     this.running = true;
   }
 
