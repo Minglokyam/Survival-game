@@ -9,14 +9,12 @@ import android.view.SurfaceView;
 import android.graphics.Bitmap;
 import android.view.SurfaceHolder.Callback;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.Paint;
 
 import com.example.survivalgame.R;
 import com.example.survivalgame.User;
 
 import java.time.Duration;
-import java.util.Iterator;
 
 public class RunningGameView extends SurfaceView {
   public RunningGameThread thread;
@@ -107,50 +105,10 @@ public class RunningGameView extends SurfaceView {
   /** update the objects and current game status. */
   private void update() {
     user.setScore(user.getScore() + 1);
-    runningGameManager.update();
-    updateCoin();
-    updateSpike();
-
+    runningGameManager.update(runningGameActivity, user);
     // when the game time runs out, jump to next game.
     if (runningDuration.getSeconds() <= 0) {
       runningGameActivity.toPong();
-    }
-  }
-
-  /** update the coin when it moves out of the screen or the runner touches it. */
-  private void updateCoin() {
-    boolean collide = false;
-    Iterator<Coin> coinIterator = runningGameManager.coins.iterator();
-    while (coinIterator.hasNext() && !collide) {
-      Coin coin = coinIterator.next();
-      Rect runnerRect = runningGameManager.runner.getRect();
-      Rect coinRect = coin.getRect();
-      if (coin.checkCollision(runnerRect, coinRect)) {
-        // remove the coin once the runner touch this coin.
-        coinIterator.remove();
-        // add points to the score when the runner touches a coin.
-        user.setScore(user.getScore() + 100);
-        collide = true;
-      }
-    }
-  }
-
-  /** update the spike when it moves out of the screen or the runner touches it. */
-  private void updateSpike() {
-    boolean collide = false;
-    Iterator<Spike> spikeIterator = runningGameManager.spikes.iterator();
-    while (spikeIterator.hasNext() && !collide) {
-      Spike spike = spikeIterator.next();
-      Rect runnerRect = runningGameManager.runner.getRect();
-      Rect spikeRect = spike.getRect();
-      if (spike.checkCollision(runnerRect, spikeRect)) {
-        user.setLife(user.getLife() - 1);
-        spikeIterator.remove();
-      }
-      if (user.getLife() == 0) {
-        runningGameActivity.toMain();
-        collide = true;
-      }
     }
   }
 

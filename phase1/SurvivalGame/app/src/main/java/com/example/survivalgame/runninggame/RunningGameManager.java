@@ -1,6 +1,11 @@
 package com.example.survivalgame.runninggame;
 
+import android.graphics.Rect;
+
+import com.example.survivalgame.User;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -37,8 +42,45 @@ class RunningGameManager {
     ground = new Ground(RunningGameView, RunningGameView.groundBmp, 0, 0);
   }
 
+  /** update the coin when it moves out of the screen or the runner touches it. */
+  private void updateCoin(User user) {
+    boolean collide = false;
+    Iterator<Coin> coinIterator = coins.iterator();
+    while (coinIterator.hasNext() && !collide) {
+      Coin coin = coinIterator.next();
+      Rect runnerRect = runner.getRect();
+      Rect coinRect = coin.getRect();
+      if (coin.checkCollision(runnerRect, coinRect)) {
+        // remove the coin once the runner touch this coin.
+        coinIterator.remove();
+        // add points to the score when the runner touches a coin.
+        user.setScore(user.getScore() + 100);
+        collide = true;
+      }
+    }
+  }
+
+  /** update the spike when it moves out of the screen or the runner touches it. */
+  private void updateSpike(RunningGameActivity runningGameActivity, User user) {
+    boolean collide = false;
+    Iterator<Spike> spikeIterator = spikes.iterator();
+    while (spikeIterator.hasNext() && !collide) {
+      Spike spike = spikeIterator.next();
+      Rect runnerRect = runner.getRect();
+      Rect spikeRect = spike.getRect();
+      if (spike.checkCollision(runnerRect, spikeRect)) {
+        user.setLife(user.getLife() - 1);
+        spikeIterator.remove();
+      }
+      if (user.getLife() == 0) {
+        runningGameActivity.toMain();
+        collide = true;
+      }
+    }
+  }
+
   /** update the coins and spikes. */
-  public void update() {
+  public void update(RunningGameActivity runningGameActivity, User user) {
     updateTimer();
     for (int i = 0; i < coins.size(); i++) {
       if (coins.get(i).getX() < -80) {
@@ -52,6 +94,8 @@ class RunningGameManager {
         i--;
       }
     }
+    updateCoin(user);
+    updateSpike(runningGameActivity, user);
   }
 
   /** update the timers to randomly generate the coins and spikes. */
