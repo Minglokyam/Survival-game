@@ -24,10 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void register(View view) {
         IOManager.loadFile();
-        EditText usernameInput = findViewById(R.id.usernameInput);
-        EditText passwordInput = findViewById(R.id.passwordInput);
-        String username = usernameInput.getText().toString();
-        String password = passwordInput.getText().toString();
+        String username = getName();
+        String password = getPassword();
         if (!(username.trim().equals("") || password.trim().equals(""))) {
             if (!userManager.userExists(username)) {
                 User newUser = new User(username, password, userManager.numUsers());
@@ -49,10 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void logIn(View view) {
         IOManager.loadFile();
-        EditText usernameInput = findViewById(R.id.usernameInput);
-        EditText passwordInput = findViewById(R.id.passwordInput);
-        String username = usernameInput.getText().toString();
-        String password = passwordInput.getText().toString();
+        String username = getName();
+        String password = getPassword();
         if (!(username.trim().equals("") || password.trim().equals(""))) {
             System.out.println(userManager.userExists(username));
             if (userManager.userExists(username)) {
@@ -81,19 +77,29 @@ public class MainActivity extends AppCompatActivity {
         int gameStage = user.getGameStage();
         if (gameStage == User.RUNNING) {
             Intent toJumpGame = new Intent(this, RunningGameActivity.class);
-            toJumpGame.putExtra("user", user);
-            System.out.println("ready to launch");
-            startActivity(toJumpGame);
+            toGame(toJumpGame);
         } else if (gameStage == User.PONG) {
             Intent toPongGame = new Intent(this, PongGameActivity.class);
-            toPongGame.putExtra("user", user);
-            System.out.println("ready to launch");
-            startActivity(toPongGame);
+            toGame(toPongGame);
         } else if (gameStage == User.DODGE) {
             Intent toDodgeGame = new Intent(this, DodgeGameActivity.class);
-            toDodgeGame.putExtra("user", user);
-            System.out.println("ready to launch");
-            startActivity(toDodgeGame);
+            toGame(toDodgeGame);
         }
+    }
+
+    private void toGame(Intent intent){
+        intent.putExtra("user", user);
+        System.out.println("ready to launch");
+        startActivity(intent);
+    }
+
+    private String getName(){
+        EditText usernameInput = findViewById(R.id.usernameInput);
+        return usernameInput.getText().toString();
+    }
+
+    private String getPassword(){
+        EditText passwordInput = findViewById(R.id.passwordInput);
+        return passwordInput.getText().toString();
     }
 }

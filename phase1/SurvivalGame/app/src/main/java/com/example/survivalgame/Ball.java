@@ -23,26 +23,6 @@ public class Ball extends PongGameItemCircle {
 
   User user;
 
-  /** A getter of xVelocity */
-  public float getXVelocity() {
-    return xVelocity;
-  }
-
-  /** A setter of xVelocity */
-  public void setXVelocity(float newXVelocity) {
-    this.xVelocity = newXVelocity;
-  }
-
-  /** A getter of yVelocity */
-  public float getYVelocity() {
-    return yVelocity;
-  }
-
-  /** A setter of yVelocity */
-  public void setYVelocity(float newYVelocity) {
-    this.yVelocity = newYVelocity;
-  }
-
   /** build a ball. */
   Ball(
       PongGameManager pongGameManager,

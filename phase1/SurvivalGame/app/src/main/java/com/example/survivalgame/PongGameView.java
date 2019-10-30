@@ -32,17 +32,9 @@ public class PongGameView extends SurfaceView {
 
   private Duration pongDuration;
 
-  public Duration getPongDuration() {
-    return pongDuration;
-  }
-
   private PongGameActivity pongGameActivity;
 
   private User user;
-
-  public void setPongDuration(Duration newPongDuration) {
-    pongDuration = newPongDuration;
-  }
 
   public PongGameView(Context context, User user) {
     super(context);
@@ -71,6 +63,7 @@ public class PongGameView extends SurfaceView {
     }
   }
 
+  @Override
   public void draw(Canvas canvas) {
     super.draw(canvas);
     canvas.drawColor(Color.rgb(255, 255, 255));
@@ -123,5 +116,13 @@ public class PongGameView extends SurfaceView {
 
   public boolean getStop() {
     return stop;
+  }
+
+  public Duration getPongDuration() {
+    return pongDuration;
+  }
+
+  public void setPongDuration(Duration newPongDuration) {
+    pongDuration = newPongDuration;
   }
 }
