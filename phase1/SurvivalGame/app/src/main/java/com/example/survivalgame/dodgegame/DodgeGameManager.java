@@ -68,8 +68,8 @@ class DodgeGameManager {
   public void draw(Canvas canvas) {
     canvas.drawColor(Color.rgb(255, 255, 255));
     plane.draw(canvas);
-    for (int i = 0; i < shells.size(); i++) {
-      shells.get(i).draw(canvas);
+    for (Shell shell: shells) {
+      shell.draw(canvas);
     }
     hp.draw(canvas);
   }

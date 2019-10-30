@@ -29,7 +29,7 @@ class Coin {
 
   /** update the coin's speed, and make the coin move */
   private void update() {
-    x -= RunningGameView.movingSpeed;
+    x -= view.movingSpeed;
 
     // check the condition when the x coordinate is less than 0.
     if (x < 0) {

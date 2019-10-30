@@ -11,7 +11,9 @@ import java.util.Random;
 
 class RunningGameManager {
 
-  private com.example.survivalgame.runninggame.RunningGameView RunningGameView;
+  private RunningGameView runningGameView;
+
+  private SpikeFactory spikeFactory;
 
   // the runner.
   public Runner runner;
@@ -34,12 +36,12 @@ class RunningGameManager {
   // random timer of the spike.
   private int timerRandomSpikes = 0;
 
-  public RunningGameManager(RunningGameView view) {
-    RunningGameView = view;
-
+  public RunningGameManager(RunningGameView runningGameView) {
+    this.runningGameView = runningGameView;
+    spikeFactory = new SpikeFactory();
     // add runner and ground to the game.
-    runner = new Runner(RunningGameView, RunningGameView.runnerBmp, 50, 50);
-    ground = new Ground(RunningGameView, RunningGameView.groundBmp, 0, 0);
+    runner = new Runner(runningGameView, runningGameView.runnerBmp, 50, 50);
+    ground = new Ground(runningGameView, runningGameView.groundBmp, 0, 0);
   }
 
   /** update the coin when it moves out of the screen or the runner touches it. */
@@ -118,36 +120,30 @@ class RunningGameManager {
         // three different cases to generate spikes in different distances.
       case 0:
         if (timerSpike >= 100) {
-          spikes.add(
-              new Spike(
-                  RunningGameView, RunningGameView.spikesBmp, RunningGameView.getWidth() + 24));
-          Random randomSpikes = new Random();
-          timerRandomSpikes = randomSpikes.nextInt(3);
-          timerSpike = 0;
+          generateSpikes();
         }
         break;
 
       case 1:
         if (timerSpike >= 125) {
-          spikes.add(
-              new Spike(
-                  RunningGameView, RunningGameView.spikesBmp, RunningGameView.getWidth() + 24));
-          Random randomSpikes = new Random();
-          timerRandomSpikes = randomSpikes.nextInt(3);
-          timerSpike = 0;
+          generateSpikes();
         }
         break;
       case 2:
         if (timerSpike >= 150) {
-          spikes.add(
-              new Spike(
-                  RunningGameView, RunningGameView.spikesBmp, RunningGameView.getWidth() + 24));
-          Random randomSpikes = new Random();
-          timerRandomSpikes = randomSpikes.nextInt(3);
-          timerSpike = 0;
+          generateSpikes();
         }
         break;
     }
+  }
+
+  private void generateSpikes(){
+    Spike spike;
+    spike = spikeFactory.createSpike(runningGameView, runningGameView.spikesBmp, runningGameView.getWidth() + 24);
+    spikes.add(spike);
+    Random randomSpikes = new Random();
+    timerRandomSpikes = randomSpikes.nextInt(3);
+    timerSpike = 0;
   }
 
   /**
@@ -167,9 +163,9 @@ class RunningGameManager {
           while (currentCoin <= 5) {
             coins.add(
                 new Coin(
-                    RunningGameView,
-                    RunningGameView.coinBmp,
-                    RunningGameView.getWidth() + (64 * currentCoin),
+                    runningGameView,
+                    runningGameView.coinBmp,
+                    runningGameView.getWidth() + (64 * currentCoin),
                     130));
             currentCoin++;
           }
@@ -179,13 +175,13 @@ class RunningGameManager {
           // construct three consecutive coins in different height.
           coins.add(
               new Coin(
-                  RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 32, 150));
+                  runningGameView, runningGameView.coinBmp, runningGameView.getWidth() + 32, 150));
           coins.add(
               new Coin(
-                  RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 96, 130));
+                  runningGameView, runningGameView.coinBmp, runningGameView.getWidth() + 96, 130));
           coins.add(
               new Coin(
-                  RunningGameView, RunningGameView.coinBmp, RunningGameView.getWidth() + 160, 150));
+                  runningGameView, runningGameView.coinBmp, runningGameView.getWidth() + 160, 150));
           break;
       }
       // reset the timer.

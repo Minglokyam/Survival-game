@@ -7,20 +7,20 @@ import android.graphics.Rect;
 class Spike {
   private int x, y;
   private Bitmap bmp;
-  private RunningGameView view;
+  private RunningGameView runningGameView;
 
   /** build a spike. */
-  public Spike(RunningGameView view, Bitmap bmp, int x) {
-    this.view = view;
+  public Spike(RunningGameView runningGameView, Bitmap bmp, int x, int y) {
+    this.runningGameView = runningGameView;
     this.bmp = bmp;
     this.x = x;
-    this.y = view.getHeight() - Ground.height - bmp.getHeight();
+    this.y = y;
   }
 
   /** update the spike and make the spike move. */
   private void update() {
     // move the spikes with movingSpeed.
-    x -= RunningGameView.movingSpeed;
+    x -= runningGameView.movingSpeed;
   }
 
   /** draw the spike. */

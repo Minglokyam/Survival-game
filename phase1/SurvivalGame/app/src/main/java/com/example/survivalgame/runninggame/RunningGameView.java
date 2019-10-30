@@ -21,7 +21,7 @@ public class RunningGameView extends SurfaceView {
   private SurfaceHolder holder;
 
   // the moving speed of the objects in the game.
-  public static int movingSpeed = 10;
+  public int movingSpeed = 10;
 
   // the image holder of the runner.
   public Bitmap runnerBmp;
