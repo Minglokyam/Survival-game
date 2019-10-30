@@ -1,6 +1,9 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import android.graphics.Canvas;
+
+import com.example.survivalgame.User;
+import com.example.survivalgame.ponggame.PongGameView;
 
 public class PongGameThread extends Thread {
   private boolean playing = true;
@@ -53,7 +56,7 @@ public class PongGameThread extends Thread {
   /**
    * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
    */
-  void setPlaying(boolean newPlaying) {
+  public void setPlaying(boolean newPlaying) {
     playing = newPlaying;
   }
 }

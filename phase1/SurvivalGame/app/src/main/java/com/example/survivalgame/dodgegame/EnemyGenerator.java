@@ -1,17 +1,20 @@
-package com.example.survivalgame;
+package com.example.survivalgame.dodgegame;
+
+import com.example.survivalgame.dodgegame.DodgeGameManager;
+import com.example.survivalgame.dodgegame.Shell;
 
 import java.util.List;
 
-class EnemyGenerator {
+public class EnemyGenerator {
   private DodgeGameManager dodgeGameManager;
   private int counter;
 
-  EnemyGenerator(DodgeGameManager dodgeGameManager) {
+  public EnemyGenerator(DodgeGameManager dodgeGameManager) {
     this.dodgeGameManager = dodgeGameManager;
     counter = 1;
   }
 
-  void generateShells(List<Shell> shells) {
+  public void generateShells(List<Shell> shells) {
     if (counter % 40 == 0) {
       int num = (int) (Math.random() * 0.5) + 1; // enemy generated this round
       for (int i = 0; i < num; i++) {

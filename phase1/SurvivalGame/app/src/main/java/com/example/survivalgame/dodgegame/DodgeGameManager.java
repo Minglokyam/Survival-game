@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.dodgegame;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,10 +12,10 @@ public class DodgeGameManager {
   private int screenHeight;
   private List<Shell> shells;
   private HP hp;
-  Plane plane;
+  private Plane plane;
   private EnemyGenerator enemyGenerator;
 
-  DodgeGameManager(int screenWidth, int screenHeight) {
+  public DodgeGameManager(int screenWidth, int screenHeight) {
     hp = new HP(this, screenWidth, screenHeight);
     plane = new Plane(this, screenWidth, screenHeight, hp);
     shells = new ArrayList<>();
@@ -24,11 +24,11 @@ public class DodgeGameManager {
     this.screenHeight = screenHeight;
   }
 
-  int getScreenWidth() {
+  public int getScreenWidth() {
     return screenWidth;
   }
 
-  int getScreenHeight() {
+  public int getScreenHeight() {
     return screenHeight;
   }
 
@@ -39,6 +39,8 @@ public class DodgeGameManager {
   public void setHP(int newHP) {
     hp.setHP(newHP);
   }
+
+  public Plane getPlane(){ return plane; }
 
   public void update() {
     Shell shell;

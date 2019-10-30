@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.example.survivalgame.dodgegame.DodgeGameActivity;
+import com.example.survivalgame.IOManager;
+import com.example.survivalgame.MainActivity;
+import com.example.survivalgame.User;
+import com.example.survivalgame.UserUpdater;
 
 public class PongGameActivity extends AppCompatActivity {
   PongGameView pongGameView;

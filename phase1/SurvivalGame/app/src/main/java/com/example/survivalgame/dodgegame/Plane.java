@@ -1,9 +1,13 @@
-package com.example.survivalgame;
+package com.example.survivalgame.dodgegame;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.RectF;
+
+import com.example.survivalgame.dodgegame.DodgeGameItem;
+import com.example.survivalgame.dodgegame.DodgeGameManager;
+import com.example.survivalgame.dodgegame.HP;
 
 public class Plane extends DodgeGameItem {
   private HP hp;
@@ -28,11 +32,11 @@ public class Plane extends DodgeGameItem {
     return ySpeed;
   }
 
-  void setxSpeed(int xSpeed) {
+  public void setxSpeed(int xSpeed) {
     this.xSpeed = xSpeed;
   }
 
-  void setySpeed(int ySpeed) {
+  public void setySpeed(int ySpeed) {
     this.ySpeed = ySpeed;
   }
 

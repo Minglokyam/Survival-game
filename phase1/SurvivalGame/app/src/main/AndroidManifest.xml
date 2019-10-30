@@ -10,9 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ScoreBoardActivity"></activity>
-        <activity android:name=".DodgeGameActivity" />
-        <activity android:name=".RunningGameActivity" />
-        <activity android:name=".PongGameActivity" />
+        <activity android:name=".dodgegame.DodgeGameActivity" />
+        <activity android:name=".runninggame.RunningGameActivity" />
+        <activity android:name=".ponggame.PongGameActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

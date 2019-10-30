@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.dodgegame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
+
+import com.example.survivalgame.IOManager;
+import com.example.survivalgame.MainActivity;
+import com.example.survivalgame.User;
+import com.example.survivalgame.UserUpdater;
 
 public class DodgeGameActivity extends AppCompatActivity {
   private DodgeGameView dodgeGameView;
@@ -28,7 +33,7 @@ public class DodgeGameActivity extends AppCompatActivity {
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    UserUpdater.updateUser(user, User.RUNNING);
+    UserUpdater.resetUser(user);
     IOManager.saveFile();
     startActivity(intent);
     finish();

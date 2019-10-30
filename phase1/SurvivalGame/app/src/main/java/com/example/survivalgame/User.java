@@ -3,7 +3,7 @@ package com.example.survivalgame;
 import java.time.Duration;
 import java.io.*;
 
-class User implements Serializable {
+public class User implements Serializable {
     private String username;
     private String password;
 

@@ -1,6 +1,9 @@
-package com.example.survivalgame;
+package com.example.survivalgame.dodgegame;
 
 import android.graphics.*;
+
+import com.example.survivalgame.dodgegame.DodgeGameItem;
+import com.example.survivalgame.dodgegame.DodgeGameManager;
 
 public class HP extends DodgeGameItem {
   private int screenWidth;

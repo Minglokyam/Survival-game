@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.dodgegame;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -14,37 +14,37 @@ public abstract class DodgeGameItem {
   private Paint paint;
 
   /** Create a PongGameItem. */
-  DodgeGameItem(DodgeGameManager dodgeGameManager) {
+  public DodgeGameItem(DodgeGameManager dodgeGameManager) {
     paint = new Paint();
     this.dodgeGameManager = dodgeGameManager;
   }
 
   /** A getter of dodgeGameManager */
-  DodgeGameManager getDodgeGameManager() {
+  public DodgeGameManager getDodgeGameManager() {
     return dodgeGameManager;
   }
 
   /** A getter of xCoordinate */
-  float getXCoordinate() {
+  public float getXCoordinate() {
     return xCoordinate;
   }
 
   /** A setter of xCoordinate */
-  void setXCoordinate(float newXCoordinate) {
+  public void setXCoordinate(float newXCoordinate) {
     this.xCoordinate = newXCoordinate;
   }
 
   /** A getter of yCoordinate */
-  float getYCoordinate() {
+  public float getYCoordinate() {
     return yCoordinate;
   }
 
   /** A setter of yCoordinate */
-  void setYCoordinate(float newYCoordinate) {
+  public void setYCoordinate(float newYCoordinate) {
     this.yCoordinate = newYCoordinate;
   }
 
-  Paint getPaint() {
+  public Paint getPaint() {
     return paint;
   }
 

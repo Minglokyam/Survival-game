@@ -1,24 +1,30 @@
-package com.example.survivalgame;
+package com.example.survivalgame.runninggame;
+
+import com.example.survivalgame.runninggame.Coin;
+import com.example.survivalgame.runninggame.Ground;
+import com.example.survivalgame.runninggame.Runner;
+import com.example.survivalgame.runninggame.RunningGameView;
+import com.example.survivalgame.runninggame.Spike;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-class RunningGameManager {
+public class RunningGameManager {
 
-  private RunningGameView RunningGameView;
+  private com.example.survivalgame.runninggame.RunningGameView RunningGameView;
 
   // the runner.
-  Runner runner;
+  public Runner runner;
 
   // a list of coin.
-  List<Coin> coin = new ArrayList<>();
+  public List<Coin> coin = new ArrayList<>();
 
   // ground.
-  Ground ground;
+  public Ground ground;
 
   // a list of spikes.
-  List<Spike> spikes = new ArrayList<>();
+  public List<Spike> spikes = new ArrayList<>();
 
   // the timer of the coin.
   private int timerCoins = 0;
@@ -29,7 +35,7 @@ class RunningGameManager {
   // random timer of the spike.
   private int timerRandomSpikes = 0;
 
-  RunningGameManager(RunningGameView view) {
+  public RunningGameManager(RunningGameView view) {
     RunningGameView = view;
 
     // add runner and ground to the game.

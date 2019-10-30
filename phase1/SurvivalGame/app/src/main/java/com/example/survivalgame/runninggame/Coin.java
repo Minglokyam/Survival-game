@@ -1,10 +1,13 @@
-package com.example.survivalgame;
+package com.example.survivalgame.runninggame;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-class Coin {
+import com.example.survivalgame.runninggame.Ground;
+import com.example.survivalgame.runninggame.RunningGameView;
+
+public class Coin {
     /**
      * citation: https://www.youtube.com/watch?v=HzP9jJNmzSY
      */
@@ -22,7 +25,7 @@ class Coin {
     /**
      * Build a coin.
      */
-    Coin(RunningGameView view, Bitmap bmp, int x, int y) {
+    public Coin(RunningGameView view, Bitmap bmp, int x, int y) {
         this.x = x;
         this.y = view.getHeight() - y - Ground.height - bmp.getHeight();
 
@@ -52,7 +55,7 @@ class Coin {
     /**
      * draw the coin.
      */
-    void draw(Canvas canvas) {
+    public void draw(Canvas canvas) {
         // first update the coin's status.
         update();
 
@@ -64,21 +67,21 @@ class Coin {
     }
 
   /** check whether the runner touched the coin */
-  boolean checkCollision(Rect runner, Rect coin) {
+  public boolean checkCollision(Rect runner, Rect coin) {
         return Rect.intersects(runner, coin);
     }
 
     /**
      * get the rectangle of the coin.
      */
-    Rect getRect() {
+    public Rect getRect() {
         return new Rect(x, y, x + bmp.getWidth() / 4, y + bmp.getHeight());
     }
 
     /**
      * the getter of first coordinate of coin.
      */
-    int getX() {
+    public int getX() {
         return x;
     }
 }

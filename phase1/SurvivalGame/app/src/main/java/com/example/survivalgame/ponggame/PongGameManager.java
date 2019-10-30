@@ -1,6 +1,8 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import android.graphics.Canvas;
+
+import com.example.survivalgame.User;
 
 public class PongGameManager {
   /** The screen width */

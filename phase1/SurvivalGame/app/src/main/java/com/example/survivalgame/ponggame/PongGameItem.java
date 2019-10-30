@@ -1,7 +1,9 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
+import com.example.survivalgame.ponggame.PongGameManager;
 
 public abstract class PongGameItem {
   /** The x-coordinate of this PongGameItem */
@@ -19,7 +21,7 @@ public abstract class PongGameItem {
    * @param xCoordinate the x-coordinate of this PongGameItem
    * @param yCoordinate the y-coordinate of this PongGameItem
    */
-  PongGameItem(PongGameManager pongGameManager, float xCoordinate, float yCoordinate) {
+  public PongGameItem(PongGameManager pongGameManager, float xCoordinate, float yCoordinate) {
     paint = new Paint();
     this.pongGameManager = pongGameManager;
     this.xCoordinate = xCoordinate;
@@ -27,31 +29,31 @@ public abstract class PongGameItem {
   }
 
   /** A getter of pongGameManager */
-  PongGameManager getPongGameManager() {
+  public PongGameManager getPongGameManager() {
     return pongGameManager;
   }
 
   /** A getter of xCoordinate */
-  float getXCoordinate() {
+  public float getXCoordinate() {
     return xCoordinate;
   }
 
   /** A setter of xCoordinate */
-  void setXCoordinate(float newXCoordinate) {
+  public void setXCoordinate(float newXCoordinate) {
     this.xCoordinate = newXCoordinate;
   }
 
   /** A getter of yCoordinate */
-  float getYCoordinate() {
+  public float getYCoordinate() {
     return yCoordinate;
   }
 
   /** A setter of yCoordinate */
-  void setYCoordinate(float newYCoordinate) {
+  public void setYCoordinate(float newYCoordinate) {
     this.yCoordinate = newYCoordinate;
   }
 
-  Paint getPaint() {
+  public Paint getPaint() {
     return paint;
   }
 

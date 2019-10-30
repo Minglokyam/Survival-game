@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.ponggame;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -9,6 +9,8 @@ import android.graphics.Typeface;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
+
+import com.example.survivalgame.User;
 
 import java.time.Duration;
 

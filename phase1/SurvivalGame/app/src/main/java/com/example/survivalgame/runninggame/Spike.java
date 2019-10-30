@@ -1,17 +1,20 @@
-package com.example.survivalgame;
+package com.example.survivalgame.runninggame;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-class Spike {
+import com.example.survivalgame.runninggame.Ground;
+import com.example.survivalgame.runninggame.RunningGameView;
+
+public class Spike {
 
   private int x, y;
   private Bitmap bmp;
   private RunningGameView view;
 
   /** build a spike. */
-  Spike(RunningGameView view, Bitmap bmp, int x) {
+  public Spike(RunningGameView view, Bitmap bmp, int x) {
     this.view = view;
     this.bmp = bmp;
     this.x = x;
@@ -25,7 +28,7 @@ class Spike {
   }
 
   /** draw the spike. */
-  void draw(Canvas canvas) {
+  public void draw(Canvas canvas) {
     // first update the spike.
     update();
 
@@ -36,17 +39,17 @@ class Spike {
   }
 
   /** check whether the runner touched the spike. */
-  boolean checkCollision(Rect runner, Rect spikes) {
+  public boolean checkCollision(Rect runner, Rect spikes) {
     return Rect.intersects(runner, spikes);
   }
 
   /** get the rectangle of the spike. */
-  Rect getRect() {
+  public Rect getRect() {
     return new Rect(this.x, this.y, this.x + bmp.getWidth(), this.y + bmp.getHeight());
   }
 
   /** the getter of the first coordinate of the spike. */
-  int getX() {
+  public int getX() {
     return x;
   }
 }
