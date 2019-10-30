@@ -34,15 +34,8 @@ public class Plane extends DodgeGameItem {
   }
 
   public void draw(Canvas canvas) {
-
     if (hp.getHP() != 0) {
-      Path p = new Path();
-      p.moveTo(getXCoordinate(), getYCoordinate());
-      p.lineTo(getXCoordinate() - 40, getYCoordinate() + 100);
-      p.lineTo(getXCoordinate(), getYCoordinate() + 60);
-      p.lineTo(getXCoordinate() + 40, getYCoordinate() + 100);
-      p.lineTo(getXCoordinate(), getYCoordinate());
-      canvas.drawPath(p, getPaint());
+      drawPath(canvas);
       setXCoordinate(getXCoordinate() + xSpeed);
       setYCoordinate(getYCoordinate() + ySpeed);
 
@@ -54,13 +47,17 @@ public class Plane extends DodgeGameItem {
       System.out.println(counter);
       getPaint().setColor(Color.RED);
     }
-    Path p = new Path();
-    p.moveTo(getXCoordinate(), getYCoordinate());
-    p.lineTo(getXCoordinate() - 40, getYCoordinate() + 100);
-    p.lineTo(getXCoordinate(), getYCoordinate() + 60);
-    p.lineTo(getXCoordinate() + 40, getYCoordinate() + 100);
-    p.lineTo(getXCoordinate(), getYCoordinate());
-    canvas.drawPath(p, getPaint());
+    drawPath(canvas);
+  }
+
+  private void drawPath(Canvas canvas) {
+    Path path = new Path();
+    path.moveTo(getXCoordinate(), getYCoordinate());
+    path.lineTo(getXCoordinate() - 40, getYCoordinate() + 100);
+    path.lineTo(getXCoordinate(), getYCoordinate() + 60);
+    path.lineTo(getXCoordinate() + 40, getYCoordinate() + 100);
+    path.lineTo(getXCoordinate(), getYCoordinate());
+    canvas.drawPath(path, getPaint());
   }
 
   public void update() {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -31,6 +32,7 @@ public class DodgeGameView extends SurfaceView {
     dodgeDuration = Duration.ofSeconds(30);
     paintText = new Paint();
     paintText.setTextSize(40);
+    paintText.setTypeface(Typeface.DEFAULT_BOLD);
     dodgeGameThread = new DodgeGameThread(this, user);
     paint = new Paint();
     paint.setColor(Color.BLUE);
