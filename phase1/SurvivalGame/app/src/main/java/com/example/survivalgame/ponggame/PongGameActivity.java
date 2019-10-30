@@ -14,8 +14,8 @@ import com.example.survivalgame.User;
 import com.example.survivalgame.UserUpdater;
 
 public class PongGameActivity extends AppCompatActivity {
-  PongGameView pongGameView;
-  User user;
+  private PongGameView pongGameView;
+  private User user;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

@@ -1,16 +1,10 @@
 package com.example.survivalgame.runninggame;
 
-import com.example.survivalgame.runninggame.Coin;
-import com.example.survivalgame.runninggame.Ground;
-import com.example.survivalgame.runninggame.Runner;
-import com.example.survivalgame.runninggame.RunningGameView;
-import com.example.survivalgame.runninggame.Spike;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RunningGameManager {
+class RunningGameManager {
 
   private com.example.survivalgame.runninggame.RunningGameView RunningGameView;
 

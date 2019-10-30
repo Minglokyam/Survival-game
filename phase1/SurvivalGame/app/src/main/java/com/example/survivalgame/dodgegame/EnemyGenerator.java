@@ -2,7 +2,7 @@ package com.example.survivalgame.dodgegame;
 
 import java.util.List;
 
-public class EnemyGenerator {
+class EnemyGenerator {
   private DodgeGameManager dodgeGameManager;
   private int counter;
 

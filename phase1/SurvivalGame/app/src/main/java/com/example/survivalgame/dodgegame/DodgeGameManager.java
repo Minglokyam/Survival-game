@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class DodgeGameManager {
+class DodgeGameManager {
   private int screenWidth;
   private int screenHeight;
   private List<Shell> shells;

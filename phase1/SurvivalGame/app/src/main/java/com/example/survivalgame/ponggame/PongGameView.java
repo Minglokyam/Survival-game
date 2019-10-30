@@ -16,13 +16,13 @@ import java.time.Duration;
 
 public class PongGameView extends SurfaceView {
   /** The screen width */
-  int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+  private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
 
   /** The screen height */
-  int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+  private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
   /** A Pong Game Thread */
-  PongGameThread thread;
+  private PongGameThread thread;
 
   private boolean stop = true;
 

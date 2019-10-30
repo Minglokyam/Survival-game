@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 
 import com.example.survivalgame.User;
 
-public class PongGameManager {
+class PongGameManager {
   /** The screen width */
   private int screenWidth;
 

@@ -104,7 +104,7 @@ public class RunningGameView extends SurfaceView {
   }
 
   /** update the objects and current game status. */
-  public void update() {
+  private void update() {
     user.setScore(user.getScore() + 1);
     runningGameManager.update();
     updateCoin();
@@ -117,7 +117,7 @@ public class RunningGameView extends SurfaceView {
   }
 
   /** update the coin when it moves out of the screen or the runner touches it. */
-  public void updateCoin() {
+  private void updateCoin() {
     for (int i = 0; i < runningGameManager.coin.size(); i++) {
       Rect runner1 = runningGameManager.runner.getRect();
       Rect coin1 = runningGameManager.coin.get(i).getRect();
@@ -132,7 +132,7 @@ public class RunningGameView extends SurfaceView {
   }
 
   /** update the spike when it moves out of the screen or the runner touches it. */
-  public void updateSpike() {
+  private void updateSpike() {
     for (int i = 0; i < runningGameManager.spikes.size(); i++) {
       Rect runner1 = runningGameManager.runner.getRect();
       Rect spike1 = runningGameManager.spikes.get(i).getRect();
