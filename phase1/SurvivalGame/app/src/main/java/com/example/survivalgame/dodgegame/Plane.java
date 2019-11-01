@@ -46,6 +46,9 @@ public class Plane extends DodgeGameItem {
         getXCoordinate() - 60, getYCoordinate(), getXCoordinate() + 60, getYCoordinate() + 200);
   }
 
+  /**
+   * draw the plane on canvas.
+   */
   void draw(Canvas canvas) {
     if (hp.getHP() != 0) {
       drawPath(canvas);
@@ -63,6 +66,7 @@ public class Plane extends DodgeGameItem {
     canvas.drawPath(path, getPaint());
   }
 
+  /** update the postion of the plane. */
   void update() {
     if (inScreen()) {
       previousXCoordinate = getXCoordinate();
@@ -76,10 +80,11 @@ public class Plane extends DodgeGameItem {
     }
   }
 
+  /** check whether the plane is still in the screen. */
   private boolean inScreen() {
     return getXCoordinate() >= 0
-        && getXCoordinate() <= getDodgeGameManager().getScreenWidth()
-        && getYCoordinate() >= 0
-        && getYCoordinate() <= getDodgeGameManager().getScreenHeight();
+            && getXCoordinate() <= getDodgeGameManager().getScreenWidth()
+            && getYCoordinate() >= 0
+            && getYCoordinate() <= getDodgeGameManager().getScreenHeight();
   }
 }
