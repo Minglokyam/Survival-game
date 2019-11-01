@@ -174,55 +174,34 @@ class RunningGameManager {
     if (timerCoins >= 100) {
       // randomly generate int 0 and 1 to decide which case the coins are generated.
       int random = new Random().nextInt(2);
-      Coin coin;
-
       switch (random) {
         case 0:
           // construct five consecutive coins in same height.
-          int currentCoin = 1;
-          while (currentCoin <= 5) {
-            coin =
-                coinFactory.createCoin(
-                    runningGameView,
-                    runningGameView.getCoinBMP(),
-                    runningGameView.getWidth() + (currentCoin * 64),
-                    130,
-                    groundHeight);
-            coins.add(coin);
-            currentCoin++;
+          for (int i = 1; i < 6; i++) {
+            makeCoin(i * 64, 130);
           }
           break;
 
         case 1:
           // construct three consecutive coins in different height.
-          coin =
-              coinFactory.createCoin(
-                  runningGameView,
-                  runningGameView.getCoinBMP(),
-                  runningGameView.getWidth() + 32,
-                  150,
-                  groundHeight);
-          coins.add(coin);
-          coin =
-              coinFactory.createCoin(
-                  runningGameView,
-                  runningGameView.getCoinBMP(),
-                  runningGameView.getWidth() + 96,
-                  130,
-                  groundHeight);
-          coins.add(coin);
-          coin =
-              coinFactory.createCoin(
-                  runningGameView,
-                  runningGameView.getCoinBMP(),
-                  runningGameView.getWidth() + 160,
-                  150,
-                  groundHeight);
-          coins.add(coin);
+          makeCoin(32, 150);
+          makeCoin(96, 130);
+          makeCoin(160, 150);
           break;
       }
       // reset the timer.
       timerCoins = 0;
     }
+  }
+
+  private void makeCoin(int xCoordinate, int yCoordinate) {
+    Coin coin =
+        coinFactory.createCoin(
+            runningGameView,
+            runningGameView.getCoinBMP(),
+            runningGameView.getWidth() + xCoordinate,
+            yCoordinate,
+            groundHeight);
+    coins.add(coin);
   }
 }
