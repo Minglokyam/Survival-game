@@ -30,6 +30,9 @@ public class DodgeGameActivity extends AppCompatActivity {
     setContentView(dodgeGameView);
   }
 
+  /**
+   * after finishing the DodgeGame, move back to MainActivity
+   */
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

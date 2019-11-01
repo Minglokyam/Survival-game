@@ -5,8 +5,11 @@ import android.graphics.Color;
 import android.graphics.RectF;
 
 public class Shell extends DodgeGameItem {
+  //the speed of xCoordinate
   private float xSpeed;
+  //the speed of yCoordinate
   private float ySpeed;
+
 
   Shell(
       DodgeGameManager dodgeGameManager,
@@ -39,6 +42,11 @@ public class Shell extends DodgeGameItem {
     }
   }
 
+  /**
+   * @return a rectangle
+   * the position of rectangle is based on the position of the shell.
+   * the method would be called, when we check if the plane is hit by shells or not.
+   */
   RectF getRectF() {
     return new RectF(
         getXCoordinate(), getYCoordinate(), getXCoordinate() + 50, getYCoordinate() + 50);
