@@ -1,5 +1,5 @@
 package com.example.survivalgame.dodgegame;
-
+//The factory for HP class, used to produce an HP bar.
 class HPFactory {
   HP createHP(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight) {
     float xCoordinate = screenWidth - 110;

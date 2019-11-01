@@ -1,7 +1,7 @@
 package com.example.survivalgame.dodgegame;
 
 import java.util.List;
-
+//The class that generates "shell"s at some random rate. If we want to change the amount or the rate the "shell" appears, we can change it here without changing any other code.
 class EnemyGenerator {
   private ShellFactory shellFactory;
   private DodgeGameManager dodgeGameManager;
