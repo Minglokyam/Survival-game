@@ -13,25 +13,39 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class IOManager {
+
+  /* the main activity of the game */
   private static MainActivity mainActivity;
+
+  /* the user manager of the game */
   private static UserManager userManager;
+
+  /* the file that stores all user's data */
   private static final String USER_FILE = "user_file.ser";
 
+  /**
+   * set the main activity of the game
+   */
   public static void setMainActivity(Context context) {
     mainActivity = (MainActivity) context;
   }
 
+  /**
+   * set the userManager of the game
+   */
   public static void setUserManager() {
     userManager = mainActivity.userManager;
   }
 
+  /**
+   * read the user file and update the current userManager
+   */
   public static void loadFile() {
     FileInputStream fis = null;
     try {
       InputStream inputStream = mainActivity.openFileInput(USER_FILE);
       if (inputStream != null) {
         ObjectInputStream input = new ObjectInputStream(inputStream);
-        // userManager.userList = (ArrayList) input.readObject();
         userManager.setUserList((ArrayList) input.readObject());
         inputStream.close();
       }
@@ -50,12 +64,14 @@ public class IOManager {
     }
   }
 
+  /**
+   * replace the user file with a new file containing the latest user data
+   */
   public static void saveFile() {
     FileOutputStream fos = null;
     try {
       fos = mainActivity.openFileOutput(USER_FILE, Context.MODE_PRIVATE);
       ObjectOutputStream os = new ObjectOutputStream(fos);
-      // userManager.printList();
       os.writeObject(userManager.getUserList());
       os.close();
     } catch (IOException e) {
