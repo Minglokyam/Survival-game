@@ -22,7 +22,7 @@ class DodgeGameManager {
   DodgeGameManager() {
     hpFactory = new HPFactory();
     planeFactory = new PlaneFactory();
-    hp = hpFactory.createHP(this, screenWidth, screenHeight);
+    hp = hpFactory.createHP(this, screenWidth);
     plane = planeFactory.createPlane(this, screenWidth, screenHeight, hp);
     shells = new ArrayList<>();
     enemyGenerator = new EnemyGenerator(this);
