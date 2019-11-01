@@ -15,7 +15,7 @@ import com.example.survivalgame.runninggame.RunningGameActivity;
 public class MainActivity extends AppCompatActivity {
 
   /** UserManager of the game */
-  UserManager userManager;
+  private UserManager userManager;
 
   /** the user that's logged in */
   private User user;
@@ -131,5 +131,9 @@ public class MainActivity extends AppCompatActivity {
   private String getPassword() {
     EditText passwordInput = findViewById(R.id.passwordInput);
     return passwordInput.getText().toString();
+  }
+
+  public UserManager getUserManager(){
+    return userManager;
   }
 }

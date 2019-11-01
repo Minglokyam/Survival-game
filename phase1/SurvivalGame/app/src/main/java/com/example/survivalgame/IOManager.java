@@ -30,7 +30,7 @@ public class IOManager {
 
   /** set the userManager of the game */
   public static void setUserManager() {
-    userManager = mainActivity.userManager;
+    userManager = mainActivity.getUserManager();
   }
 
   /** read the user file and update the current userManager */

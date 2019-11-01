@@ -23,7 +23,7 @@ public class UserUpdater {
 
   /** update the user list */
   public static void setUserList() {
-    userList = mainActivity.userManager.getUserList();
+    userList = mainActivity.getUserManager().getUserList();
   }
 
   /**

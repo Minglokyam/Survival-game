@@ -1,7 +1,6 @@
 package com.example.survivalgame.ponggame;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,28 +14,32 @@ import com.example.survivalgame.User;
 import java.time.Duration;
 
 public class PongGameView extends SurfaceView {
-  /** A Pong Game Thread */
+  /** The Activity of this game */
+  private PongGameActivity pongGameActivity;
+  /** The Thread of this game */
   private PongGameThread thread;
-
-  private boolean stop = true;
-
-  private long FPS;
-
+  /** Pong Game Manager is responsible for storing the objects of this game and their motions. */
   private PongGameManager pongGameManager;
+  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
+  /** Ensure the game does not start at the beginning of this game */
+  private boolean stop = true;
+  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
+  /** The duration for one update */
+  private long FPS;
 
   private Paint paintText;
 
   private Duration pongDuration;
-
-  private PongGameActivity pongGameActivity;
 
   private User user;
 
   public PongGameView(Context context, User user) {
     super(context);
     pongGameActivity = (PongGameActivity) context;
-    this.user = user;
     pongGameManager = new PongGameManager(user);
+
+    this.user = user;
+
     setFocusable(true);
     paintText = new Paint();
     paintText.setTextSize(36);
