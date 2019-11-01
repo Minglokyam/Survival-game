@@ -5,8 +5,7 @@ import android.graphics.Canvas;
 import com.example.survivalgame.User;
 
 class PongGameThread extends Thread {
-  private boolean playing = true;
-  private boolean end = false;
+  private boolean running;
   private PongGameView pongGameView;
   private User user;
 
@@ -18,21 +17,15 @@ class PongGameThread extends Thread {
   /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
   @Override
   public void run() {
-    while (playing) {
+    while (running) {
       long startTime = System.currentTimeMillis();
-      if (pongGameView.notStop()) {
-        pongGameView.update();
-      }
-
-      if(end){
-        return;
-      }
 
       Canvas canvas = null;
       try {
         canvas = pongGameView.getHolder().lockCanvas();
         if (canvas != null) {
           synchronized (pongGameView.getHolder()) {
+            pongGameView.update();
             pongGameView.draw(canvas);
           }
         }
@@ -45,10 +38,9 @@ class PongGameThread extends Thread {
       }
 
       long timeInterval = System.currentTimeMillis() - startTime;
-      if (pongGameView.notStop()) {
-        user.setTotalDuration(user.getTotalDuration().plusMillis(timeInterval));
-        pongGameView.setPongDuration(pongGameView.getPongDuration().minusMillis(timeInterval));
-      }
+      user.setTotalDuration(user.getTotalDuration().plusMillis(timeInterval));
+      pongGameView.setPongDuration(pongGameView.getPongDuration().minusMillis(timeInterval));
+
       if (timeInterval > 1) {
         pongGameView.setFPS(1000 / timeInterval);
       }
@@ -56,11 +48,7 @@ class PongGameThread extends Thread {
   }
 
   /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  public void setPlaying(boolean newPlaying) {
-    playing = newPlaying;
-  }
-
-  void endGame(){
-    end = true;
+  public void setRunning(boolean newRunning) {
+    running = newRunning;
   }
 }

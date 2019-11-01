@@ -1,5 +1,6 @@
 package com.example.survivalgame.dodgegame;
 
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
@@ -7,9 +8,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/** DodgeGameManager is used to combine all the items we are going to use for the game. */
 class DodgeGameManager {
-  private int screenWidth;
-  private int screenHeight;
+  private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+  private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
   private List<Shell> shells;
   private HP hp;
   private Plane plane;
@@ -17,17 +19,16 @@ class DodgeGameManager {
   private PlaneFactory planeFactory;
   private EnemyGenerator enemyGenerator;
 
-  DodgeGameManager(int screenWidth, int screenHeight) {
+  DodgeGameManager() {
     hpFactory = new HPFactory();
     planeFactory = new PlaneFactory();
-    hp = hpFactory.createHP(this, screenWidth, screenHeight);
+    hp = hpFactory.createHP(this, screenWidth);
     plane = planeFactory.createPlane(this, screenWidth, screenHeight, hp);
     shells = new ArrayList<>();
     enemyGenerator = new EnemyGenerator(this);
-    this.screenWidth = screenWidth;
-    this.screenHeight = screenHeight;
   }
 
+  /** those methods are the getter and setter for attributes. */
   int getScreenWidth() {
     return screenWidth;
   }
@@ -67,8 +68,10 @@ class DodgeGameManager {
       }
     }
     hp.update();
+    plane.update();
   }
 
+  /** draw method would call other draws method from other classes */
   public void draw(Canvas canvas) {
     canvas.drawColor(Color.rgb(255, 255, 255));
     plane.draw(canvas);

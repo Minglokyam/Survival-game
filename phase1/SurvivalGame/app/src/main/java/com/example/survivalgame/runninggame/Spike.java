@@ -4,23 +4,18 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-class Spike {
-  private int x, y;
-  private Bitmap bmp;
-  private RunningGameView runningGameView;
+class Spike extends RunningGameItem {
+  private RectFactory rectFactory = new RectFactory();
 
   /** build a spike. */
-  public Spike(RunningGameView runningGameView, Bitmap bmp, int x, int y) {
-    this.runningGameView = runningGameView;
-    this.bmp = bmp;
-    this.x = x;
-    this.y = y;
+  Spike(RunningGameView runningGameView, Bitmap bmp, int xCoordinate, int yCoordinate) {
+    super(runningGameView, bmp, xCoordinate, yCoordinate);
   }
 
   /** update the spike and make the spike move. */
   private void update() {
     // move the spikes with movingSpeed.
-    x -= runningGameView.movingSpeed;
+    setXCoordinate(getXCoordinate() - getRunningGameView().getMovingSpeed());
   }
 
   /** draw the spike. */
@@ -29,23 +24,28 @@ class Spike {
     update();
 
     // then draw the coin by the rect.
-    Rect a = new Rect(0, 0, bmp.getWidth(), bmp.getHeight());
-    Rect b = new Rect(x, y, x + bmp.getWidth(), y + bmp.getHeight());
-    canvas.drawBitmap(bmp, a, b, null);
+    Rect a = rectFactory.createRect(0, 0, getBitmap().getWidth(), getBitmap().getHeight());
+
+    Rect b =
+        rectFactory.createRect(
+            getXCoordinate(),
+            getYCoordinate(),
+            getXCoordinate() + getBitmap().getWidth(),
+            getYCoordinate() + getBitmap().getHeight());
+    canvas.drawBitmap(getBitmap(), a, b, null);
   }
 
   /** check whether the runner touched the spike. */
-  public boolean checkCollision(Rect runner, Rect spikes) {
+  boolean checkCollision(Rect runner, Rect spikes) {
     return Rect.intersects(runner, spikes);
   }
 
   /** get the rectangle of the spike. */
-  public Rect getRect() {
-    return new Rect(this.x, this.y, this.x + bmp.getWidth(), this.y + bmp.getHeight());
-  }
-
-  /** the getter of the first coordinate of the spike. */
-  public int getX() {
-    return x;
+  Rect getRect() {
+    return rectFactory.createRect(
+        getXCoordinate(),
+        getYCoordinate(),
+        getXCoordinate() + getBitmap().getWidth(),
+        getYCoordinate() + getBitmap().getHeight());
   }
 }

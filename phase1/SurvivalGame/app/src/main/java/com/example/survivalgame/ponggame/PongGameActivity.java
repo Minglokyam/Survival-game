@@ -24,26 +24,8 @@ public class PongGameActivity extends AppCompatActivity {
     user = (User) intent.getSerializableExtra("user");
     UserUpdater.updateUser(user, User.PONG);
     IOManager.saveFile();
-    requestWindowFeature(Window.FEATURE_NO_TITLE);
-    getWindow()
-        .setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     pongGameView = new PongGameView(this, user);
     setContentView(pongGameView);
-  }
-
-  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  @Override
-  protected void onResume() {
-    super.onResume();
-    pongGameView.resume();
-  }
-
-  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  @Override
-  protected void onPause() {
-    super.onPause();
-    pongGameView.pause();
   }
 
   public void toDodge() {

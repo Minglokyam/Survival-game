@@ -1,6 +1,7 @@
 package com.example.survivalgame.ponggame;
 
 class RectPaddleFactory {
+  /** the factory used to create the rect of paddle. */
   RectPaddle createRectPaddle(
       PongGameManager pongGameManager,
       float xSpeed,
