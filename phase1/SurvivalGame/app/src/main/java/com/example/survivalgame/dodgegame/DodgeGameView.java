@@ -1,6 +1,7 @@
 package com.example.survivalgame.dodgegame;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,6 +15,8 @@ import com.example.survivalgame.User;
 import java.time.Duration;
 
 public class DodgeGameView extends SurfaceView {
+  private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+  private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
   private DodgeGameActivity dodgeGameActivity;
   private DodgeGameManager dodgeGameManager;
   private Duration dodgeDuration;
@@ -24,12 +27,11 @@ public class DodgeGameView extends SurfaceView {
   private Paint paintText;
 
   // Dependency Injection
-  public DodgeGameView(Context context, User user, int screenWidth, int screenHeight) {
+  public DodgeGameView(Context context, User user) {
     super(context);
     dodgeGameActivity = (DodgeGameActivity) context;
     dodgeGameManager = new DodgeGameManager(screenWidth, screenHeight);
     this.user = user;
-    dodgeDuration = Duration.ofSeconds(30);
     paintText = new Paint();
     paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
@@ -63,6 +65,8 @@ public class DodgeGameView extends SurfaceView {
             }
           }
         });
+    // =======================================
+    dodgeDuration = Duration.ofSeconds(30);
   }
 
   public Duration getDodgeDuration() {

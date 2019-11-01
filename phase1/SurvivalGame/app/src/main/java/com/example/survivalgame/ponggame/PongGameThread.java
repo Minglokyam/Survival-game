@@ -24,7 +24,7 @@ class PongGameThread extends Thread {
         pongGameView.update();
       }
 
-      if(end){
+      if (end) {
         return;
       }
 
@@ -60,7 +60,7 @@ class PongGameThread extends Thread {
     playing = newPlaying;
   }
 
-  void endGame(){
+  void endGame() {
     end = true;
   }
 }

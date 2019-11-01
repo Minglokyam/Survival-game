@@ -14,13 +14,11 @@ public class HP extends DodgeGameItem {
       int hpValue,
       int width,
       int length) {
-    super(dodgeGameManager);
+    super(dodgeGameManager, xCoordinate, yCoordinate);
     getPaint().setColor(Color.GREEN);
     this.width = width;
     this.length = length;
     this.hpValue = hpValue;
-    setXCoordinate(xCoordinate);
-    setYCoordinate(yCoordinate);
   }
 
   int getHP() {

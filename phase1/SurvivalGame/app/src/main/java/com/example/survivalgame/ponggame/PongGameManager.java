@@ -22,11 +22,16 @@ class PongGameManager {
     this.screenHeight = screenHeight;
     ball =
         ballFactory.createBall(
-            this, 10, screenWidth / 2, screenHeight / 2, screenWidth / 3, -screenHeight / 3, user);
+            this,
+                10,
+                screenWidth / 2,
+                screenHeight / 2,
+                screenWidth / 3,
+                -screenHeight / 3, user);
     rectPaddle =
         rectPaddleFactory.createRectPaddle(
             this,
-            screenWidth / 5,
+            screenWidth * 2 / 9,
             screenWidth / 4,
             screenHeight / 25,
             screenWidth / 6,

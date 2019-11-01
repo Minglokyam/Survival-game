@@ -23,10 +23,7 @@ public class DodgeGameActivity extends AppCompatActivity {
     user = (User) intent.getSerializableExtra("user");
     UserUpdater.updateUser(user, User.DODGE);
     IOManager.saveFile();
-    Display display = getWindowManager().getDefaultDisplay();
-    Point size = new Point();
-    display.getSize(size);
-    dodgeGameView = new DodgeGameView(this, user, size.x, size.y);
+    dodgeGameView = new DodgeGameView(this, user);
     setContentView(dodgeGameView);
   }
 

@@ -14,15 +14,13 @@ public class Shell extends DodgeGameItem {
       float yCoordinate,
       float xSpeed,
       float ySpeed) {
-    super(dodgeGameManager);
+    super(dodgeGameManager, xCoordinate, yCoordinate);
     getPaint().setColor(Color.BLUE);
     this.xSpeed = xSpeed;
     this.ySpeed = ySpeed;
-    setXCoordinate(xCoordinate);
-    setYCoordinate(yCoordinate);
   }
 
-  public void draw(Canvas c) {
+  void draw(Canvas c) {
     c.drawOval(
         getXCoordinate(),
         getYCoordinate(),
@@ -33,7 +31,7 @@ public class Shell extends DodgeGameItem {
     setYCoordinate(getYCoordinate() + ySpeed);
   }
 
-  public void update() {
+  void update() {
     if (getXCoordinate() < 0 || getXCoordinate() + 60 >= getDodgeGameManager().getScreenWidth()) {
       xSpeed *= -1;
     }

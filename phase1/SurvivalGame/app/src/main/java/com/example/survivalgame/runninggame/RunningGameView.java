@@ -18,11 +18,11 @@ import com.example.survivalgame.User;
 import java.time.Duration;
 
 public class RunningGameView extends SurfaceView {
-  public RunningGameThread thread;
+  private RunningGameThread runningGameThread;
   private SurfaceHolder holder;
 
   // the moving speed of the objects in the game.
-  public int movingSpeed = 10;
+  private int movingSpeed = 10;
 
   // the image holder of the runner.
   private Bitmap runnerBMP;
@@ -54,9 +54,8 @@ public class RunningGameView extends SurfaceView {
     paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
     this.user = user;
-    runningDuration = Duration.ofSeconds(30);
     runningGameActivity = (RunningGameActivity) context;
-    thread = new RunningGameThread(this, user);
+    runningGameThread = new RunningGameThread(this, user);
     holder = getHolder();
     holder.addCallback(
         new Callback() {
@@ -66,8 +65,8 @@ public class RunningGameView extends SurfaceView {
 
           @Override
           public void surfaceCreated(SurfaceHolder holder0) {
-            thread.setRunning();
-            thread.start();
+            runningGameThread.setRunning(true);
+            runningGameThread.start();
           }
 
           @Override
@@ -81,6 +80,16 @@ public class RunningGameView extends SurfaceView {
     spikeBMP = BitmapFactory.decodeResource(getResources(), R.drawable.spikes);
 
     runningGameManager = new RunningGameManager(this);
+    // =======================================
+    runningDuration = Duration.ofSeconds(30);
+  }
+
+  RunningGameThread getRunningGameThread() {
+    return runningGameThread;
+  }
+
+  int getMovingSpeed() {
+    return movingSpeed;
   }
 
   Bitmap getRunnerBMP() {

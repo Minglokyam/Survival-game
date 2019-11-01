@@ -7,16 +7,14 @@ import android.graphics.RectF;
 
 public class Plane extends DodgeGameItem {
   private HP hp;
-  private int counter;
   private int xSpeed;
   private int ySpeed;
+  private float previousXCoordinate;
+  private float previousYCoordinate;
 
   Plane(DodgeGameManager dodgeGameManager, HP hp, float xCoordinate, float yCoordinate) {
-    super(dodgeGameManager);
+    super(dodgeGameManager, xCoordinate, yCoordinate);
     getPaint().setColor(Color.BLACK);
-    setXCoordinate(xCoordinate);
-    setYCoordinate(yCoordinate);
-    counter = 0;
     this.hp = hp;
   }
 
@@ -33,21 +31,10 @@ public class Plane extends DodgeGameItem {
         getXCoordinate() - 60, getYCoordinate(), getXCoordinate() + 60, getYCoordinate() + 200);
   }
 
-  public void draw(Canvas canvas) {
+  void draw(Canvas canvas) {
     if (hp.getHP() != 0) {
       drawPath(canvas);
-      setXCoordinate(getXCoordinate() + xSpeed);
-      setYCoordinate(getYCoordinate() + ySpeed);
-
-    } else if (counter % 20 <= 10) {
-      counter++;
-      getPaint().setColor(Color.YELLOW);
-    } else if (counter % 20 > 10) {
-      counter++;
-      System.out.println(counter);
-      getPaint().setColor(Color.RED);
     }
-    drawPath(canvas);
   }
 
   private void drawPath(Canvas canvas) {
@@ -60,8 +47,23 @@ public class Plane extends DodgeGameItem {
     canvas.drawPath(path, getPaint());
   }
 
-  public void update() {
-    xSpeed *= 0.5;
-    ySpeed *= 0.5;
+  void update() {
+    if (inScreen()) {
+      previousXCoordinate = getXCoordinate();
+      previousYCoordinate = getYCoordinate();
+      setXCoordinate(getXCoordinate() + xSpeed);
+      setYCoordinate(getYCoordinate() + ySpeed);
+
+    } else {
+      setXCoordinate(previousXCoordinate);
+      setYCoordinate(previousYCoordinate);
+    }
+  }
+
+  private boolean inScreen() {
+    return getXCoordinate() >= 0
+        && getXCoordinate() <= getDodgeGameManager().getScreenWidth()
+        && getYCoordinate() >= 0
+        && getYCoordinate() <= getDodgeGameManager().getScreenHeight();
   }
 }

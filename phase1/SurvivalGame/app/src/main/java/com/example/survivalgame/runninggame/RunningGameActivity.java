@@ -20,7 +20,6 @@ public class RunningGameActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_running_game);
-
     Intent intent = getIntent();
     user = (User) intent.getSerializableExtra("user");
     UserUpdater.updateUser(user, User.RUNNING);
@@ -32,7 +31,7 @@ public class RunningGameActivity extends AppCompatActivity {
   @Override
   protected void onPause() {
     super.onPause();
-    runningGameView.thread.running = false;
+    runningGameView.getRunningGameThread().setRunning(false);
     toPong();
     finish();
   }

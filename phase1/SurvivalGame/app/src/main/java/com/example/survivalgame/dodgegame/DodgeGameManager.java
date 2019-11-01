@@ -67,6 +67,7 @@ class DodgeGameManager {
       }
     }
     hp.update();
+    plane.update();
   }
 
   public void draw(Canvas canvas) {

@@ -88,13 +88,13 @@ class RunningGameManager {
   public void update(RunningGameActivity runningGameActivity, User user) {
     updateTimer();
     for (int i = 0; i < coins.size(); i++) {
-      if (coins.get(i).getX() < -80) {
+      if (coins.get(i).getXCoordinate() < -80) {
         coins.remove(i);
         i--;
       }
     }
     for (int i = 0; i < spikes.size(); i++) {
-      if (spikes.get(i).getX() < -80) {
+      if (spikes.get(i).getXCoordinate() < -80) {
         spikes.remove(i);
         i--;
       }
