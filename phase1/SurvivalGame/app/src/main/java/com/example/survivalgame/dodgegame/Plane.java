@@ -11,20 +11,20 @@ public class Plane extends DodgeGameItem {
   private int xSpeed;
   private int ySpeed;
 
-  Plane(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight, HP hp) {
+  Plane(DodgeGameManager dodgeGameManager, HP hp, float xCoordinate, float yCoordinate) {
     super(dodgeGameManager);
     getPaint().setColor(Color.BLACK);
-    setXCoordinate(screenWidth / 2);
-    setYCoordinate(screenHeight - 600);
+    setXCoordinate(xCoordinate);
+    setYCoordinate(yCoordinate);
     counter = 0;
     this.hp = hp;
   }
 
-  void setxSpeed(int xSpeed) {
+  void setXSpeed(int xSpeed) {
     this.xSpeed = xSpeed;
   }
 
-  void setySpeed(int ySpeed) {
+  void setYSpeed(int ySpeed) {
     this.ySpeed = ySpeed;
   }
 
@@ -34,15 +34,8 @@ public class Plane extends DodgeGameItem {
   }
 
   public void draw(Canvas canvas) {
-
     if (hp.getHP() != 0) {
-      Path p = new Path();
-      p.moveTo(getXCoordinate(), getYCoordinate());
-      p.lineTo(getXCoordinate() - 40, getYCoordinate() + 100);
-      p.lineTo(getXCoordinate(), getYCoordinate() + 60);
-      p.lineTo(getXCoordinate() + 40, getYCoordinate() + 100);
-      p.lineTo(getXCoordinate(), getYCoordinate());
-      canvas.drawPath(p, getPaint());
+      drawPath(canvas);
       setXCoordinate(getXCoordinate() + xSpeed);
       setYCoordinate(getYCoordinate() + ySpeed);
 
@@ -54,13 +47,17 @@ public class Plane extends DodgeGameItem {
       System.out.println(counter);
       getPaint().setColor(Color.RED);
     }
-    Path p = new Path();
-    p.moveTo(getXCoordinate(), getYCoordinate());
-    p.lineTo(getXCoordinate() - 40, getYCoordinate() + 100);
-    p.lineTo(getXCoordinate(), getYCoordinate() + 60);
-    p.lineTo(getXCoordinate() + 40, getYCoordinate() + 100);
-    p.lineTo(getXCoordinate(), getYCoordinate());
-    canvas.drawPath(p, getPaint());
+    drawPath(canvas);
+  }
+
+  private void drawPath(Canvas canvas) {
+    Path path = new Path();
+    path.moveTo(getXCoordinate(), getYCoordinate());
+    path.lineTo(getXCoordinate() - 40, getYCoordinate() + 100);
+    path.lineTo(getXCoordinate(), getYCoordinate() + 60);
+    path.lineTo(getXCoordinate() + 40, getYCoordinate() + 100);
+    path.lineTo(getXCoordinate(), getYCoordinate());
+    canvas.drawPath(path, getPaint());
   }
 
   public void update() {

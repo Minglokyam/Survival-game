@@ -48,7 +48,7 @@ public class PongGameView extends SurfaceView {
     paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
     // =======================================
-    pongDuration = Duration.ofSeconds(15);
+    pongDuration = Duration.ofSeconds(30);
   }
 
   /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
@@ -58,10 +58,12 @@ public class PongGameView extends SurfaceView {
     if (user.getLife() == 0) {
       stop = true;
       thread.setPlaying(false);
+      thread.endGame();
       pongGameActivity.toMain();
     } else if (pongDuration.getSeconds() <= 0) {
       stop = true;
       thread.setPlaying(false);
+      thread.endGame();
       pongGameActivity.toDodge();
     }
   }
@@ -76,7 +78,6 @@ public class PongGameView extends SurfaceView {
       canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
       canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
     }
-
     pongGameManager.draw(canvas);
   }
 

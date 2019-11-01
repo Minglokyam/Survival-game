@@ -3,37 +3,48 @@ package com.example.survivalgame.dodgegame;
 import android.graphics.*;
 
 public class HP extends DodgeGameItem {
-  private int screenWidth;
-  private int screenHeight;
+  private int width;
   private int length;
-  private int hp;
+  private int hpValue;
 
-  HP(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight) {
+  HP(
+      DodgeGameManager dodgeGameManager,
+      float xCoordinate,
+      float yCoordinate,
+      int hpValue,
+      int width,
+      int length) {
     super(dodgeGameManager);
     getPaint().setColor(Color.GREEN);
-    length = 600;
-    hp = 100;
-    this.screenWidth = screenWidth;
-    this.screenHeight = screenHeight;
+    this.width = width;
+    this.length = length;
+    this.hpValue = hpValue;
+    setXCoordinate(xCoordinate);
+    setYCoordinate(yCoordinate);
   }
 
   int getHP() {
-    return this.hp;
+    return this.hpValue;
   }
 
   void setHP(int hp) {
-    this.hp = hp;
+    this.hpValue = hp;
   }
 
   public void draw(Canvas canvas) {
-    RectF hpBar = new RectF(screenWidth - 10, 10, screenWidth - 110, 10 + length);
+    RectF hpBar =
+        new RectF(
+            getXCoordinate(),
+            getYCoordinate(),
+            getXCoordinate() + width,
+            getYCoordinate() + length);
     // RectF hpBar = new RectF(10, 10, 110, 10 + this.length);
     canvas.drawRect(hpBar, getPaint());
   }
 
   public void update() {
-    if (hp >= 0) {
-      length = 6 * hp + 5;
+    if (hpValue >= 0) {
+      length = 6 * hpValue + 5;
     } else {
       length = 0;
     }

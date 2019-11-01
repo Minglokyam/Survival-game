@@ -71,6 +71,7 @@ public class User implements Serializable {
     totalDuration = newTotalDuration;
   }
 
+  @Override
   public String toString() {
     return username + gameStage;
   }

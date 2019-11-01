@@ -2,6 +2,7 @@ package com.example.survivalgame.runninggame;
 
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.content.Context;
@@ -24,13 +25,13 @@ public class RunningGameView extends SurfaceView {
   public int movingSpeed = 10;
 
   // the image holder of the runner.
-  public Bitmap runnerBmp;
+  private Bitmap runnerBMP;
   // the image holder of the coin.
-  public Bitmap coinBmp;
+  private Bitmap coinBMP;
   // the image holder of the ground.
-  public Bitmap groundBmp;
+  private Bitmap groundBMP;
   // the image holder of the spike.
-  public Bitmap spikesBmp;
+  private Bitmap spikeBMP;
 
   // the duration time of the running game.
   private Duration runningDuration;
@@ -44,36 +45,58 @@ public class RunningGameView extends SurfaceView {
 
   private RunningGameManager runningGameManager;
 
-  private Paint paintText = new Paint();
+  private Paint paintText;
 
   /** set up the GameView. */
   public RunningGameView(Context context, User user) {
     super(context);
+    paintText = new Paint();
+    paintText.setTextSize(36);
+    paintText.setTypeface(Typeface.DEFAULT_BOLD);
     this.user = user;
-    runningDuration = Duration.ofSeconds(50);
+    runningDuration = Duration.ofSeconds(30);
     runningGameActivity = (RunningGameActivity) context;
     thread = new RunningGameThread(this, user);
     holder = getHolder();
     holder.addCallback(
         new Callback() {
 
+          @Override
           public void surfaceDestroyed(SurfaceHolder holder0) {}
 
+          @Override
           public void surfaceCreated(SurfaceHolder holder0) {
             thread.setRunning();
             thread.start();
           }
 
+          @Override
           public void surfaceChanged(SurfaceHolder holder0, int a, int b, int c) {}
         });
 
     // get the image of the objects.
-    runnerBmp = BitmapFactory.decodeResource(getResources(), R.drawable.runner);
-    coinBmp = BitmapFactory.decodeResource(getResources(), R.drawable.coin);
-    groundBmp = BitmapFactory.decodeResource(getResources(), R.drawable.ground);
-    spikesBmp = BitmapFactory.decodeResource(getResources(), R.drawable.spikes);
+    runnerBMP = BitmapFactory.decodeResource(getResources(), R.drawable.runner);
+    coinBMP = BitmapFactory.decodeResource(getResources(), R.drawable.coin);
+    groundBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ground);
+    spikeBMP = BitmapFactory.decodeResource(getResources(), R.drawable.spikes);
 
     runningGameManager = new RunningGameManager(this);
+  }
+
+  Bitmap getRunnerBMP() {
+    return runnerBMP;
+  }
+
+  Bitmap getCoinBMP() {
+    return coinBMP;
+  }
+
+  Bitmap getGroundBMP() {
+    return groundBMP;
+  }
+
+  Bitmap getSpikeBMP() {
+    return spikeBMP;
   }
 
   /** getter of the runningDuration */
@@ -120,7 +143,6 @@ public class RunningGameView extends SurfaceView {
 
     // draw the life, total time, game time and score.
     canvas.drawColor(Color.WHITE);
-    paintText.setTextSize(40);
     canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
     canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
     canvas.drawText("Game time: " + runningDuration.getSeconds(), 0, 96, paintText);

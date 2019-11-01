@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -30,7 +31,8 @@ public class DodgeGameView extends SurfaceView {
     this.user = user;
     dodgeDuration = Duration.ofSeconds(30);
     paintText = new Paint();
-    paintText.setTextSize(40);
+    paintText.setTextSize(36);
+    paintText.setTypeface(Typeface.DEFAULT_BOLD);
     dodgeGameThread = new DodgeGameThread(this, user);
     paint = new Paint();
     paint.setColor(Color.BLUE);
@@ -101,7 +103,7 @@ public class DodgeGameView extends SurfaceView {
     if (event.getAction() == MotionEvent.ACTION_MOVE) {
       dodgeGameManager
           .getPlane()
-          .setxSpeed((int) ((event.getX() - dodgeGameManager.getPlane().getXCoordinate()) / 6));
+          .setXSpeed((int) ((event.getX() - dodgeGameManager.getPlane().getXCoordinate()) / 6));
       int spdY = (int) ((event.getY() - dodgeGameManager.getPlane().getYCoordinate()) / 15);
       if (spdY > 20) {
         spdY = 20;
@@ -112,7 +114,7 @@ public class DodgeGameView extends SurfaceView {
       } else if (spdY < -20) {
         spdY = -20;
       }
-      dodgeGameManager.getPlane().setySpeed(spdY);
+      dodgeGameManager.getPlane().setYSpeed(spdY);
     }
     return true;
   }

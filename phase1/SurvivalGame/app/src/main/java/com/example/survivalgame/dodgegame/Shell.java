@@ -8,7 +8,12 @@ public class Shell extends DodgeGameItem {
   private float xSpeed;
   private float ySpeed;
 
-  Shell(DodgeGameManager dodgeGameManager, float xCoordinate, float yCoordinate, float xSpeed, float ySpeed) {
+  Shell(
+      DodgeGameManager dodgeGameManager,
+      float xCoordinate,
+      float yCoordinate,
+      float xSpeed,
+      float ySpeed) {
     super(dodgeGameManager);
     getPaint().setColor(Color.BLUE);
     this.xSpeed = xSpeed;

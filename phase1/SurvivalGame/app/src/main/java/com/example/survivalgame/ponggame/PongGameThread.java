@@ -6,6 +6,7 @@ import com.example.survivalgame.User;
 
 class PongGameThread extends Thread {
   private boolean playing = true;
+  private boolean end = false;
   private PongGameView pongGameView;
   private User user;
 
@@ -21,6 +22,10 @@ class PongGameThread extends Thread {
       long startTime = System.currentTimeMillis();
       if (pongGameView.notStop()) {
         pongGameView.update();
+      }
+
+      if(end){
+        return;
       }
 
       Canvas canvas = null;
@@ -53,5 +58,9 @@ class PongGameThread extends Thread {
   /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
   public void setPlaying(boolean newPlaying) {
     playing = newPlaying;
+  }
+
+  void endGame(){
+    end = true;
   }
 }

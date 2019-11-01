@@ -43,14 +43,16 @@ public class RunningGameActivity extends AppCompatActivity {
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
+    return;
   }
 
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     UserUpdater.resetUser(user);
     IOManager.saveFile();
     startActivity(intent);
     finish();
+    return;
   }
 }
