@@ -15,14 +15,10 @@ import com.example.survivalgame.User;
 import java.time.Duration;
 // This is the class which is responsible for rendering the game objects.
 public class DodgeGameView extends SurfaceView {
-  private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-  private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
   private DodgeGameActivity dodgeGameActivity;
   private DodgeGameManager dodgeGameManager;
   private Duration dodgeDuration;
   private DodgeGameThread dodgeGameThread;
-  private SurfaceHolder holder;
-  private Paint paint;
   private User user;
   private Paint paintText;
 
@@ -30,16 +26,21 @@ public class DodgeGameView extends SurfaceView {
   public DodgeGameView(Context context, User user) {
     super(context);
     dodgeGameActivity = (DodgeGameActivity) context;
-    dodgeGameManager = new DodgeGameManager(screenWidth, screenHeight);
+    dodgeGameThread = new DodgeGameThread(this, user);
+
+    dodgeGameManager = new DodgeGameManager();
+
     this.user = user;
+
     paintText = new Paint();
     paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
-    dodgeGameThread = new DodgeGameThread(this, user);
-    paint = new Paint();
+
+    Paint paint = new Paint();
     paint.setColor(Color.BLUE);
-    holder = getHolder();
-    holder.addCallback(
+
+    SurfaceHolder surfaceHolder = getHolder();
+    surfaceHolder.addCallback(
         new SurfaceHolder.Callback() {
 
           @Override

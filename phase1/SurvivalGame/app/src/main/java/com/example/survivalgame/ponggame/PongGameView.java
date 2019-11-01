@@ -15,12 +15,6 @@ import com.example.survivalgame.User;
 import java.time.Duration;
 
 public class PongGameView extends SurfaceView {
-  /** The screen width */
-  private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-
-  /** The screen height */
-  private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
-
   /** A Pong Game Thread */
   private PongGameThread thread;
 
@@ -42,7 +36,7 @@ public class PongGameView extends SurfaceView {
     super(context);
     pongGameActivity = (PongGameActivity) context;
     this.user = user;
-    pongGameManager = new PongGameManager(screenWidth, screenHeight, user);
+    pongGameManager = new PongGameManager(user);
     setFocusable(true);
     paintText = new Paint();
     paintText.setTextSize(36);

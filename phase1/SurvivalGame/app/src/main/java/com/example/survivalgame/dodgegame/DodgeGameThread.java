@@ -18,6 +18,7 @@ class DodgeGameThread extends Thread {
     this.running = running;
   }
 
+  @Override
   public void run() {
     while (running) {
       long startTime = System.currentTimeMillis();
