@@ -13,9 +13,13 @@ class RunningGameManager {
 
   private RunningGameView runningGameView;
 
+  private RunnerFactory runnerFactory;
+
   private SpikeFactory spikeFactory;
 
   private CoinFactory coinFactory;
+
+  private GroundFactory groundFactory;
 
   // the runner.
   public Runner runner;
@@ -38,13 +42,21 @@ class RunningGameManager {
   // random timer of the spike.
   private int timerRandomSpikes = 0;
 
+  // The height of ground
+  private int groundHeight;
+
   public RunningGameManager(RunningGameView runningGameView) {
     this.runningGameView = runningGameView;
     spikeFactory = new SpikeFactory();
     coinFactory = new CoinFactory();
+    runnerFactory = new RunnerFactory();
+    groundFactory = new GroundFactory();
     // add runner and ground to the game.
-    runner = new Runner(runningGameView, runningGameView.getRunnerBMP(), 50, 50);
-    ground = new Ground(runningGameView, runningGameView.getGroundBMP(), 0, 0);
+    ground = groundFactory.createGround(runningGameView, runningGameView.getGroundBMP(), 0, 0);
+    groundHeight = ground.getHeight();
+    runner =
+        runnerFactory.createRunner(
+            runningGameView, runningGameView.getRunnerBMP(), 50, 50, groundHeight);
   }
 
   /** update the coin when it moves out of the screen or the runner touches it. */
@@ -144,7 +156,10 @@ class RunningGameManager {
     Spike spike;
     spike =
         spikeFactory.createSpike(
-            runningGameView, runningGameView.getSpikeBMP(), runningGameView.getWidth() + 24);
+            runningGameView,
+            runningGameView.getSpikeBMP(),
+            runningGameView.getWidth() + 24,
+            groundHeight);
     spikes.add(spike);
     Random randomSpikes = new Random();
     timerRandomSpikes = randomSpikes.nextInt(3);
@@ -171,7 +186,8 @@ class RunningGameManager {
                     runningGameView,
                     runningGameView.getCoinBMP(),
                     runningGameView.getWidth() + (currentCoin * 64),
-                    130);
+                    130,
+                    groundHeight);
             coins.add(coin);
             currentCoin++;
           }
@@ -184,21 +200,24 @@ class RunningGameManager {
                   runningGameView,
                   runningGameView.getCoinBMP(),
                   runningGameView.getWidth() + 32,
-                  150);
+                  150,
+                  groundHeight);
           coins.add(coin);
           coin =
               coinFactory.createCoin(
                   runningGameView,
                   runningGameView.getCoinBMP(),
                   runningGameView.getWidth() + 96,
-                  130);
+                  130,
+                  groundHeight);
           coins.add(coin);
           coin =
               coinFactory.createCoin(
                   runningGameView,
                   runningGameView.getCoinBMP(),
                   runningGameView.getWidth() + 160,
-                  150);
+                  150,
+                  groundHeight);
           coins.add(coin);
           break;
       }

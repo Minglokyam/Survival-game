@@ -2,7 +2,6 @@ package com.example.survivalgame.runninggame;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 
 abstract class RunningGameItem {
   /** The x-coordinate of this RunningGameItem */

@@ -8,9 +8,17 @@ public class Runner extends RunningGameItem {
   // the running speed.
   private static int vSpeed = 1;
 
+  private int groundHeight;
+
   /** Build a runner. */
-  public Runner(RunningGameView runningGameView, Bitmap bmp, int xCoordinate, int yCoordinate) {
+  public Runner(
+      RunningGameView runningGameView,
+      Bitmap bmp,
+      int xCoordinate,
+      int yCoordinate,
+      int groundHeight) {
     super(runningGameView, bmp, xCoordinate, yCoordinate);
+    this.groundHeight = groundHeight;
   }
 
   /**
@@ -19,19 +27,19 @@ public class Runner extends RunningGameItem {
    */
   private void update() {
     if (getYCoordinate()
-        < getRunningGameView().getHeight() - Ground.height - getBitmap().getHeight()) {
+        < getRunningGameView().getHeight() - groundHeight - getBitmap().getHeight()) {
       // make the runner jump by adding vSpeed.
       vSpeed += 1;
 
       if (getYCoordinate()
-          > getRunningGameView().getHeight() - Ground.height - getBitmap().getHeight() - vSpeed) {
-        vSpeed = getRunningGameView().getHeight() - Ground.height - getBitmap().getHeight();
+          > getRunningGameView().getHeight() - groundHeight - getBitmap().getHeight() - vSpeed) {
+        vSpeed = getRunningGameView().getHeight() - groundHeight - getBitmap().getHeight();
       }
 
     } else if (vSpeed > 0) {
       // set the vSpeed to 0 if it exceeds 0.
       vSpeed = 0;
-      setYCoordinate(getRunningGameView().getHeight() - Ground.height - getBitmap().getHeight());
+      setYCoordinate(getRunningGameView().getHeight() - groundHeight - getBitmap().getHeight());
     }
     setYCoordinate(getYCoordinate() + vSpeed);
   }
@@ -48,7 +56,7 @@ public class Runner extends RunningGameItem {
   /** make the runner jump when touching the screen. */
   public void onTouch() {
     if (getYCoordinate()
-        >= getRunningGameView().getHeight() - Ground.height - getBitmap().getHeight()) {
+        >= getRunningGameView().getHeight() - groundHeight - getBitmap().getHeight()) {
       // set the vertical speed the runner will jump.
       vSpeed = -20;
     }

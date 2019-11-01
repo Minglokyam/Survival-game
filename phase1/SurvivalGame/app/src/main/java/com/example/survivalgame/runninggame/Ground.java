@@ -5,12 +5,17 @@ import android.graphics.Canvas;
 
 public class Ground extends RunningGameItem {
   // the height of the ground.
-  public static int height;
+  private int height;
 
   /** build a ground. */
-  public Ground(RunningGameView runningGameView, Bitmap bmp, int xCoordinate, int yCoordinate) {
+  Ground(
+      RunningGameView runningGameView, Bitmap bmp, int xCoordinate, int yCoordinate, int height) {
     super(runningGameView, bmp, xCoordinate, yCoordinate);
-    height = bmp.getHeight();
+    this.height = height;
+  }
+
+  int getHeight() {
+    return height;
   }
 
   /** draw the ground. */
