@@ -18,7 +18,16 @@ Running game:
 tap the screen to make the runner jump; 
 you should jump over the spikes and hit the spike will cost one life;
 you can also jump to collect the coins, and collect one coin will add 100 points to the score.
+you have to survive (aka life is above 0) before the game time becomes 0.
 
 Pong game:
+tap the screen to make the paddle move.
+the paddle will move to left if you tap the left side of the paddle.
+the paddle will move to the right if you tap the right side of the paddle.
+you have to prevent the ball from touching the bottom.
+you have to survive (aka life is above 0) before the game time becomes 0.
 
 Dodge game:
+
+################# Known bug ###################
+When the player starts the second round, if he or she leave the running game, the app will go to the pong game. We are going to fix the bug.
