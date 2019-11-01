@@ -10,6 +10,8 @@ public class Runner extends RunningGameItem {
 
   private int groundHeight;
 
+  private RectFactory rectFactory = new RectFactory();
+
   /** Build a runner. */
   public Runner(
       RunningGameView runningGameView,
@@ -54,7 +56,7 @@ public class Runner extends RunningGameItem {
   }
 
   /** make the runner jump when touching the screen. */
-  public void onTouch() {
+  void onTouch() {
     if (getYCoordinate()
         >= getRunningGameView().getHeight() - groundHeight - getBitmap().getHeight()) {
       // set the vertical speed the runner will jump.
@@ -63,8 +65,8 @@ public class Runner extends RunningGameItem {
   }
 
   /** get the rectangle of the runner. */
-  public Rect getRect() {
-    return new Rect(
+  Rect getRect() {
+    return rectFactory.createRect(
         getXCoordinate(),
         getYCoordinate(),
         getXCoordinate() + getBitmap().getWidth(),

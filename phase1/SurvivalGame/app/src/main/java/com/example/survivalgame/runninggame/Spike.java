@@ -5,8 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 class Spike extends RunningGameItem {
+  private RectFactory rectFactory = new RectFactory();
+
   /** build a spike. */
-  public Spike(RunningGameView runningGameView, Bitmap bmp, int xCoordinate, int yCoordinate) {
+  Spike(RunningGameView runningGameView, Bitmap bmp, int xCoordinate, int yCoordinate) {
     super(runningGameView, bmp, xCoordinate, yCoordinate);
   }
 
@@ -22,9 +24,10 @@ class Spike extends RunningGameItem {
     update();
 
     // then draw the coin by the rect.
-    Rect a = new Rect(0, 0, getBitmap().getWidth(), getBitmap().getHeight());
+    Rect a = rectFactory.createRect(0, 0, getBitmap().getWidth(), getBitmap().getHeight());
+
     Rect b =
-        new Rect(
+        rectFactory.createRect(
             getXCoordinate(),
             getYCoordinate(),
             getXCoordinate() + getBitmap().getWidth(),
@@ -33,13 +36,13 @@ class Spike extends RunningGameItem {
   }
 
   /** check whether the runner touched the spike. */
-  public boolean checkCollision(Rect runner, Rect spikes) {
+  boolean checkCollision(Rect runner, Rect spikes) {
     return Rect.intersects(runner, spikes);
   }
 
   /** get the rectangle of the spike. */
-  public Rect getRect() {
-    return new Rect(
+  Rect getRect() {
+    return rectFactory.createRect(
         getXCoordinate(),
         getYCoordinate(),
         getXCoordinate() + getBitmap().getWidth(),

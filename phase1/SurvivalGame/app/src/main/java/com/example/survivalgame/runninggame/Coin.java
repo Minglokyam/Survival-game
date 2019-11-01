@@ -8,8 +8,10 @@ class Coin extends RunningGameItem {
   /** citation: https://www.youtube.com/watch?v=HzP9jJNmzSY */
   private int currentPosition = 0;
 
+  private RectFactory rectFactory = new RectFactory();
+
   /** Build a coin. */
-  public Coin(RunningGameView runningGameView, Bitmap bmp, int xCoordinate, int yCoordinate) {
+  Coin(RunningGameView runningGameView, Bitmap bmp, int xCoordinate, int yCoordinate) {
     super(runningGameView, bmp, xCoordinate, yCoordinate);
   }
 
@@ -37,28 +39,29 @@ class Coin extends RunningGameItem {
 
     // then draw the coin by the rect.
     Rect a =
-        new Rect(
+        rectFactory.createRect(
             currentPosition * getBitmap().getWidth() / 4,
             0,
             currentPosition * getBitmap().getWidth() / 4 + getBitmap().getWidth() / 4,
             42);
     Rect b =
-        new Rect(
+        rectFactory.createRect(
             getXCoordinate(),
             getYCoordinate(),
             getXCoordinate() + getBitmap().getWidth() / 4,
             getYCoordinate() + 42);
+
     canvas.drawBitmap(getBitmap(), a, b, null);
   }
 
   /** check whether the runner touched the coin */
-  public boolean checkCollision(Rect runner, Rect coin) {
+  boolean checkCollision(Rect runner, Rect coin) {
     return Rect.intersects(runner, coin);
   }
 
   /** get the rectangle of the coin. */
-  public Rect getRect() {
-    return new Rect(
+  Rect getRect() {
+    return rectFactory.createRect(
         getXCoordinate(),
         getYCoordinate(),
         getXCoordinate() + getBitmap().getWidth() / 4,
