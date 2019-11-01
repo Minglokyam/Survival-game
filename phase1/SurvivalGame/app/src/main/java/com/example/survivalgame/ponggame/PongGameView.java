@@ -27,6 +27,7 @@ public class PongGameView extends SurfaceView {
 
   private Paint paintText;
 
+  /** the countdown of this game */
   private Duration pongDuration;
 
   private User user;
@@ -67,10 +68,10 @@ public class PongGameView extends SurfaceView {
   public void update() {
     pongGameManager.update(FPS);
     user.setScore(user.getScore() + 1);
-    if (user.getLife() == 0) {
+    if (user.getLife() == 0) { // If no life left, return to main screen.
       pongGameThread.setRunning(false);
       pongGameActivity.toMain();
-    } else if (pongDuration.getSeconds() <= 0) {
+    } else if (pongDuration.getSeconds() <= 0) { // If countdown reach 0, go to next game.
       pongGameThread.setRunning(false);
       pongGameActivity.toDodge();
     }
@@ -79,11 +80,13 @@ public class PongGameView extends SurfaceView {
   @Override
   public void draw(Canvas canvas) {
     super.draw(canvas);
+    // draw the text on the top left corner
     canvas.drawColor(Color.rgb(255, 255, 255));
     canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
     canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
     canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
     canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
+    // draw game items
     pongGameManager.draw(canvas);
   }
 
@@ -93,9 +96,10 @@ public class PongGameView extends SurfaceView {
     RectPaddle rectPaddle = pongGameManager.getRectPaddle();
     switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
       case MotionEvent.ACTION_DOWN:
+        // point on the right of the peddle
         if (motionEvent.getX() > rectPaddle.getXCoordinate() + rectPaddle.getWidth() / 2) {
           pongGameManager.paddleMoveRight();
-        } else {
+        } else { //point on the left of the peddle
           pongGameManager.paddleMoveLeft();
         }
         break;

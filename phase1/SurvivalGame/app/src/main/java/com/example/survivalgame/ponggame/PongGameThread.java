@@ -23,12 +23,10 @@ class PongGameThread extends Thread {
       Canvas canvas = null;
       try {
         canvas = pongGameView.getHolder().lockCanvas();
-        if (canvas != null) {
           synchronized (pongGameView.getHolder()) {
             pongGameView.update();
             pongGameView.draw(canvas);
           }
-        }
       } catch (Exception e) {
         e.printStackTrace();
       } finally {
@@ -38,7 +36,9 @@ class PongGameThread extends Thread {
       }
 
       long timeInterval = System.currentTimeMillis() - startTime;
+      // update the total time
       user.setTotalDuration(user.getTotalDuration().plusMillis(timeInterval));
+      // update the countdown
       pongGameView.setPongDuration(pongGameView.getPongDuration().minusMillis(timeInterval));
 
       if (timeInterval > 1) {

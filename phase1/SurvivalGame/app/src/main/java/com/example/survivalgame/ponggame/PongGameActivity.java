@@ -28,6 +28,7 @@ public class PongGameActivity extends AppCompatActivity {
     setContentView(pongGameView);
   }
 
+  /** sent user statistic to DodgeGame, start DodgeGame, end PongGame*/
   public void toDodge() {
     Intent intent = new Intent(this, DodgeGameActivity.class);
     intent.putExtra("user", user);
@@ -37,6 +38,7 @@ public class PongGameActivity extends AppCompatActivity {
     return;
   }
 
+  /** reset user statistic, start MainActivity, end PongGame*/
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
