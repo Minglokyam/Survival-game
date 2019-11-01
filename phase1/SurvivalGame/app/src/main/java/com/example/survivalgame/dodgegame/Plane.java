@@ -6,11 +6,23 @@ import android.graphics.Path;
 import android.graphics.RectF;
 
 public class Plane extends DodgeGameItem {
+  //hp represent life
   private HP hp;
+
   private int counter;
+
+  //the speed of xCoordinate
   private int xSpeed;
+  //the speed of yCoordinate
   private int ySpeed;
 
+  /**
+   * constructor
+   * @param dodgeGameManager
+   * @param hp represent life
+   * @param xCoordinate of the plane
+   * @param yCoordinate of the plane
+   */
   Plane(DodgeGameManager dodgeGameManager, HP hp, float xCoordinate, float yCoordinate) {
     super(dodgeGameManager);
     getPaint().setColor(Color.BLACK);
@@ -28,6 +40,11 @@ public class Plane extends DodgeGameItem {
     this.ySpeed = ySpeed;
   }
 
+  /**
+   * @return a rectangle
+   * the position of rectangle is based on the position of the plane.
+   * the method would be called, when we check if the plane is hit by shells or not.
+   */
   RectF getRectF() {
     return new RectF(
         getXCoordinate() - 60, getYCoordinate(), getXCoordinate() + 60, getYCoordinate() + 200);
@@ -50,6 +67,10 @@ public class Plane extends DodgeGameItem {
     drawPath(canvas);
   }
 
+  /**
+   * the drawPath method is to draw a simple shape of plane
+   *
+   */
   private void drawPath(Canvas canvas) {
     Path path = new Path();
     path.moveTo(getXCoordinate(), getYCoordinate());
@@ -59,6 +80,7 @@ public class Plane extends DodgeGameItem {
     path.lineTo(getXCoordinate(), getYCoordinate());
     canvas.drawPath(path, getPaint());
   }
+
 
   public void update() {
     xSpeed *= 0.5;
