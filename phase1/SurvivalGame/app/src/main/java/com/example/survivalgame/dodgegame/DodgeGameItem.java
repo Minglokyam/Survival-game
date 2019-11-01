@@ -2,7 +2,7 @@ package com.example.survivalgame.dodgegame;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-
+//The super class for all game objects in Dodge Game
 abstract class DodgeGameItem {
   /** The x-coordinate of this DodgeGameItem */
   private float xCoordinate;

@@ -1,7 +1,7 @@
 package com.example.survivalgame.dodgegame;
 
 import android.graphics.*;
-
+// This Class is used to draw a life bar on the screen, when the hp comes to zero, the life counter will minus 1.
 public class HP extends DodgeGameItem {
   private int width;
   private int length;

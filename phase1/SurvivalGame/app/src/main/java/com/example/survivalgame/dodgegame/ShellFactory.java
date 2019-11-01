@@ -1,7 +1,7 @@
 package com.example.survivalgame.dodgegame;
 
 import java.util.Random;
-
+//The factory for shell class, which produces shells that players are going to dodge.
 class ShellFactory {
   Shell createShell(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight) {
     return new Shell(
