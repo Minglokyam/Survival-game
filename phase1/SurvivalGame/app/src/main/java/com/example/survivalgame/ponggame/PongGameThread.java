@@ -23,10 +23,10 @@ class PongGameThread extends Thread {
       Canvas canvas = null;
       try {
         canvas = pongGameView.getHolder().lockCanvas();
-          synchronized (pongGameView.getHolder()) {
-            pongGameView.update();
-            pongGameView.draw(canvas);
-          }
+        synchronized (pongGameView.getHolder()) {
+          pongGameView.update();
+          pongGameView.draw(canvas);
+        }
       } catch (Exception e) {
         e.printStackTrace();
       } finally {

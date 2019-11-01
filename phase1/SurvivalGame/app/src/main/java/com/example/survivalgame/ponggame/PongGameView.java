@@ -99,7 +99,7 @@ public class PongGameView extends SurfaceView {
         // point on the right of the peddle
         if (motionEvent.getX() > rectPaddle.getXCoordinate() + rectPaddle.getWidth() / 2) {
           pongGameManager.paddleMoveRight();
-        } else { //point on the left of the peddle
+        } else { // point on the left of the peddle
           pongGameManager.paddleMoveLeft();
         }
         break;
