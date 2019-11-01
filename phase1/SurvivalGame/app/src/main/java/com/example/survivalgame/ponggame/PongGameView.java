@@ -5,8 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.survivalgame.User;
@@ -17,15 +17,12 @@ public class PongGameView extends SurfaceView {
   /** The Activity of this game */
   private PongGameActivity pongGameActivity;
   /** The Thread of this game */
-  private PongGameThread thread;
+  private PongGameThread pongGameThread;
   /** Pong Game Manager is responsible for storing the objects of this game and their motions. */
   private PongGameManager pongGameManager;
   /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  /** Ensure the game does not start at the beginning of this game */
-  private boolean stop = true;
-  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
   /** The duration for one update */
-  private long FPS;
+  private long FPS = 30;
 
   private Paint paintText;
 
@@ -44,6 +41,23 @@ public class PongGameView extends SurfaceView {
     paintText = new Paint();
     paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
+
+    pongGameThread = new PongGameThread(this, user);
+    SurfaceHolder surfaceHolder = getHolder();
+    surfaceHolder.addCallback(
+        new SurfaceHolder.Callback() {
+          @Override
+          public void surfaceCreated(SurfaceHolder holder) {
+            pongGameThread.setRunning(true);
+            pongGameThread.start();
+          }
+
+          @Override
+          public void surfaceChanged(SurfaceHolder holder, int a, int b, int c) {}
+
+          @Override
+          public void surfaceDestroyed(SurfaceHolder holder) {}
+        });
     // =======================================
     pongDuration = Duration.ofSeconds(30);
   }
@@ -53,14 +67,10 @@ public class PongGameView extends SurfaceView {
     pongGameManager.update(FPS);
     user.setScore(user.getScore() + 1);
     if (user.getLife() == 0) {
-      stop = true;
-      thread.setPlaying(false);
-      thread.endGame();
+      pongGameThread.setRunning(false);
       pongGameActivity.toMain();
     } else if (pongDuration.getSeconds() <= 0) {
-      stop = true;
-      thread.setPlaying(false);
-      thread.endGame();
+      pongGameThread.setRunning(false);
       pongGameActivity.toDodge();
     }
   }
@@ -69,12 +79,10 @@ public class PongGameView extends SurfaceView {
   public void draw(Canvas canvas) {
     super.draw(canvas);
     canvas.drawColor(Color.rgb(255, 255, 255));
-    if (!stop) {
-      canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
-      canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
-      canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
-      canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
-    }
+    canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
+    canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
+    canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
+    canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
     pongGameManager.draw(canvas);
   }
 
@@ -84,7 +92,6 @@ public class PongGameView extends SurfaceView {
     RectPaddle rectPaddle = pongGameManager.getRectPaddle();
     switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
       case MotionEvent.ACTION_DOWN:
-        stop = false;
         if (motionEvent.getX() > rectPaddle.getXCoordinate() + rectPaddle.getWidth() / 2) {
           pongGameManager.paddleMoveRight();
         } else {
@@ -98,28 +105,8 @@ public class PongGameView extends SurfaceView {
     return true;
   }
 
-  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  public void pause() {
-    try {
-      thread.setPlaying(false);
-      thread.join();
-    } catch (InterruptedException e) {
-      Log.e("Error:", "joining thread");
-    }
-  }
-
-  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  public void resume() {
-    thread = new PongGameThread(this, user);
-    thread.start();
-  }
-
   public void setFPS(long newFPS) {
     FPS = newFPS;
-  }
-
-  public boolean notStop() {
-    return !stop;
   }
 
   public Duration getPongDuration() {

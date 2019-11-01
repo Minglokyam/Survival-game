@@ -50,8 +50,8 @@ class PongGameManager {
   }
 
   public void draw(Canvas canvas) {
-    ball.draw(canvas);
     rectPaddle.draw(canvas);
+    ball.draw(canvas);
   }
 
   public void paddleMoveLeft() {

@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     return passwordInput.getText().toString();
   }
 
-  public UserManager getUserManager(){
+  public UserManager getUserManager() {
     return userManager;
   }
 }

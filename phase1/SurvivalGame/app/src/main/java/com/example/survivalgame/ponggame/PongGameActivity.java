@@ -28,20 +28,6 @@ public class PongGameActivity extends AppCompatActivity {
     setContentView(pongGameView);
   }
 
-  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  @Override
-  protected void onResume() {
-    super.onResume();
-    pongGameView.resume();
-  }
-
-  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  @Override
-  protected void onPause() {
-    super.onPause();
-    pongGameView.pause();
-  }
-
   public void toDodge() {
     Intent intent = new Intent(this, DodgeGameActivity.class);
     intent.putExtra("user", user);
