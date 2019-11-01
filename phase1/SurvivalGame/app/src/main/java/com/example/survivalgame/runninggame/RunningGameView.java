@@ -135,7 +135,7 @@ public class RunningGameView extends SurfaceView {
   }
 
   /** update the objects and current game status. */
-  private void update() {
+  void update() {
     user.setScore(user.getScore() + 1);
     runningGameManager.update(runningGameActivity, user);
     // when the game time runs out, jump to next game.
@@ -147,30 +147,12 @@ public class RunningGameView extends SurfaceView {
   /** Draw all the objects on the screen. */
   public void draw(Canvas canvas) {
     super.draw(canvas);
-
-    update();
-
     // draw the life, total time, game time and score.
     canvas.drawColor(Color.WHITE);
     canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
     canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
     canvas.drawText("Game time: " + runningDuration.getSeconds(), 0, 96, paintText);
     canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
-
-    // draw the runner.
-    runningGameManager.runner.draw(canvas);
-
-    // draw the coin
-    for (int i = 0; i < runningGameManager.coins.size(); i++) {
-      runningGameManager.coins.get(i).draw(canvas);
-    }
-
-    // draw the spikes
-    for (int i = 0; i < runningGameManager.spikes.size(); i++) {
-      runningGameManager.spikes.get(i).draw(canvas);
-    }
-
-    // draw the ground.
-    runningGameManager.ground.draw(canvas);
+    runningGameManager.draw(canvas);
   }
 }

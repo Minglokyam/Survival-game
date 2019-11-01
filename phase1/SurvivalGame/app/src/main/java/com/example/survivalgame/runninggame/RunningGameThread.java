@@ -29,6 +29,7 @@ public class RunningGameThread extends Thread {
       try {
         canvas = view.getHolder().lockCanvas();
         synchronized (view.getHolder()) {
+          view.update();
           view.draw(canvas);
         }
       } finally {

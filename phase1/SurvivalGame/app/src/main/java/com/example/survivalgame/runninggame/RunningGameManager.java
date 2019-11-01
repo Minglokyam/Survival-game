@@ -1,5 +1,6 @@
 package com.example.survivalgame.runninggame;
 
+import android.graphics.Canvas;
 import android.graphics.Rect;
 
 import com.example.survivalgame.User;
@@ -97,7 +98,7 @@ class RunningGameManager {
   }
 
   /** update the coins and spikes. */
-  public void update(RunningGameActivity runningGameActivity, User user) {
+  void update(RunningGameActivity runningGameActivity, User user) {
     updateTimer();
     for (int i = 0; i < coins.size(); i++) {
       if (coins.get(i).getXCoordinate() < -80) {
@@ -203,5 +204,16 @@ class RunningGameManager {
             yCoordinate,
             groundHeight);
     coins.add(coin);
+  }
+
+  void draw(Canvas canvas) {
+    runner.draw(canvas);
+    for (Coin coin : coins) {
+      coin.draw(canvas);
+    }
+    for (Spike spike : spikes) {
+      spike.draw(canvas);
+    }
+    ground.draw(canvas);
   }
 }
