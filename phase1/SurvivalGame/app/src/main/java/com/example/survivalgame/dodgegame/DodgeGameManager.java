@@ -6,11 +6,14 @@ import android.graphics.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-//Item Manager for Dodge Game. All game objects are put in the ArrayList "shells".
+
+/**
+ * DodgeGameManager is used to combine all the items we are going to use for the game.
+ */
 class DodgeGameManager {
   private int screenWidth;
   private int screenHeight;
-  private List<Shell> shells; // The arraylist that saves all game objects.
+  private List<Shell> shells;
   private HP hp;
   private Plane plane;
   private HPFactory hpFactory;
@@ -28,6 +31,9 @@ class DodgeGameManager {
     this.screenHeight = screenHeight;
   }
 
+  /**
+   * those methods are the getter and setter for attributes.
+   */
   int getScreenWidth() {
     return screenWidth;
   }
@@ -47,7 +53,8 @@ class DodgeGameManager {
   Plane getPlane() {
     return plane;
   }
-  // Used to update the game.
+
+
   public void update() {
     Shell shell;
     enemyGenerator.generateShells(shells);
@@ -68,9 +75,13 @@ class DodgeGameManager {
     }
     hp.update();
   }
-  //Used to draw stuff on canvas.
+
+  /**
+   * draw method would call other draws method from other classes
+   *
+   */
   public void draw(Canvas canvas) {
-    canvas.drawColor(Color.rgb(255, 255, 255)); //Refreshes the canvas
+    canvas.drawColor(Color.rgb(255, 255, 255));
     plane.draw(canvas);
     for (Shell shell : shells) {
       shell.draw(canvas);
