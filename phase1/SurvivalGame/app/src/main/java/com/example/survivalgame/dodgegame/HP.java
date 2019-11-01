@@ -9,16 +9,14 @@ public class HP extends DodgeGameItem {
   private int length;
   private int hpValue;
 
-  /**
-   * build the hp presentation of the plane.
-   */
+  /** build the hp presentation of the plane. */
   HP(
-          DodgeGameManager dodgeGameManager,
-          float xCoordinate,
-          float yCoordinate,
-          int hpValue,
-          int width,
-          int length) {
+      DodgeGameManager dodgeGameManager,
+      float xCoordinate,
+      float yCoordinate,
+      int hpValue,
+      int width,
+      int length) {
     super(dodgeGameManager, xCoordinate, yCoordinate);
     getPaint().setColor(Color.GREEN);
     this.width = width;
@@ -39,11 +37,11 @@ public class HP extends DodgeGameItem {
   /** draw the hp column on canvas. */
   public void draw(Canvas canvas) {
     RectF hpBar =
-            new RectF(
-                    getXCoordinate(),
-                    getYCoordinate(),
-                    getXCoordinate() + width,
-                    getYCoordinate() + length);
+        new RectF(
+            getXCoordinate(),
+            getYCoordinate(),
+            getXCoordinate() + width,
+            getYCoordinate() + length);
     // RectF hpBar = new RectF(10, 10, 110, 10 + this.length);
     canvas.drawRect(hpBar, getPaint());
   }

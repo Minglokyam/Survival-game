@@ -59,15 +59,14 @@ public class RunningGameView extends SurfaceView {
     holder = getHolder();
     holder.addCallback(
         new Callback() {
-
-          @Override
-          public void surfaceDestroyed(SurfaceHolder holder0) {}
-
           @Override
           public void surfaceCreated(SurfaceHolder holder0) {
             runningGameThread.setRunning(true);
             runningGameThread.start();
           }
+
+          @Override
+          public void surfaceDestroyed(SurfaceHolder holder0) {}
 
           @Override
           public void surfaceChanged(SurfaceHolder holder0, int a, int b, int c) {}
@@ -109,26 +108,27 @@ public class RunningGameView extends SurfaceView {
   }
 
   /** getter of the runningDuration */
-  public Duration getRunningDuration() {
+  Duration getRunningDuration() {
     return runningDuration;
   }
 
   /** setter of the runningDuration. */
-  public void setRunningDuration(Duration newRunningDuration) {
+  void setRunningDuration(Duration newRunningDuration) {
     runningDuration = newRunningDuration;
   }
 
-  /** setter of the fps in the running game. */
-  public void setFps(long n) {
-    fps = n;
-  }
-
   /** getter of the fps in the running game. */
-  public long getFps() {
+  long getFps() {
     return fps;
   }
 
+  /** setter of the fps in the running game. */
+  void setFps(long n) {
+    fps = n;
+  }
+
   /** make the runner jump and restart the game once touching on the screen. */
+  @Override
   public boolean onTouchEvent(MotionEvent event) {
     runningGameManager.runner.onTouch();
     return false;

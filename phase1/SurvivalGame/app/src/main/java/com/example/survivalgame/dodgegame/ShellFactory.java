@@ -13,9 +13,7 @@ class ShellFactory {
         assignYSpeed());
   }
 
-  /**
-   * randomly assign the x coordinate.
-   */
+  /** randomly assign the x coordinate. */
   private float assignXCoordinate(int screenWidth) {
     Random random = new Random();
     return random.nextFloat() * screenWidth;
