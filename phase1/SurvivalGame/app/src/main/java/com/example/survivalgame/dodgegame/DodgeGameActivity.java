@@ -11,7 +11,7 @@ import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserUpdater;
-
+//MainActivity class for the dodge game
 public class DodgeGameActivity extends AppCompatActivity {
   private DodgeGameView dodgeGameView;
   private User user;

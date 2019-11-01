@@ -1,26 +1,20 @@
 package com.example.survivalgame.dodgegame;
 
 import android.graphics.*;
-
+// This Class is used to draw a life bar on the screen, when the hp comes to zero, the life counter will minus 1.
 public class HP extends DodgeGameItem {
   private int width;
   private int length;
   private int hpValue;
 
-  HP(
-      DodgeGameManager dodgeGameManager,
-      float xCoordinate,
-      float yCoordinate,
-      int hpValue,
-      int width,
-      int length) {
-    super(dodgeGameManager);
-    getPaint().setColor(Color.GREEN);
-    this.width = width;
-    this.length = length;
-    this.hpValue = hpValue;
-    setXCoordinate(xCoordinate);
-    setYCoordinate(yCoordinate);
+  HP(DodgeGameManager dodgeGameManager, float xCoordinate, float yCoordinate, int hpValue, int width, int length) {
+      super(dodgeGameManager);
+      getPaint().setColor(Color.GREEN);
+      this.width = width;
+      this.length = length;
+      this.hpValue = hpValue;
+      setXCoordinate(xCoordinate);
+      setYCoordinate(yCoordinate);
   }
 
   int getHP() {

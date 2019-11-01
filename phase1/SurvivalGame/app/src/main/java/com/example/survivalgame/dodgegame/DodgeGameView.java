@@ -12,7 +12,7 @@ import android.view.SurfaceView;
 import com.example.survivalgame.User;
 
 import java.time.Duration;
-
+//This is the class which is responsible for rendering the game objects.
 public class DodgeGameView extends SurfaceView {
   private DodgeGameActivity dodgeGameActivity;
   private DodgeGameManager dodgeGameManager;
@@ -77,10 +77,10 @@ public class DodgeGameView extends SurfaceView {
   public void update() {
     dodgeGameManager.update();
     if (dodgeGameManager.getHP() <= 0) {
-      user.setLife(user.getLife() - 1);
+      user.setLife(user.getLife() - 1); // When hp( aka the life bar) goes to, or below, 0, life counter will minus 1.
       dodgeGameManager.setHP(100);
     }
-    if (dodgeDuration.getSeconds() <= 0 || user.getLife() == 0) {
+    if (dodgeDuration.getSeconds() <= 0 || user.getLife() == 0) { // After a success or a defeat, the player will go back to the main menu.
       dodgeGameThread.setRunning(false);
       dodgeGameActivity.toMain();
     }
@@ -92,12 +92,13 @@ public class DodgeGameView extends SurfaceView {
     super.draw(canvas);
     dodgeGameManager.draw(canvas);
     paintText.setColor(Color.BLACK);
+    //These are "life", "total time", "game time" and "score" which are drawn on top left of the screen.
     canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
     canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
     canvas.drawText("Game time: " + dodgeDuration.getSeconds(), 0, 96, paintText);
     canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
   }
-
+  //This is the event listener, which enables the player to control the plane.
   @Override
   public boolean onTouchEvent(MotionEvent event) {
     if (event.getAction() == MotionEvent.ACTION_MOVE) {
