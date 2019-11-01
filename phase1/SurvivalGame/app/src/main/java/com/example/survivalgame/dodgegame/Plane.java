@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.RectF;
-
+// The class for the plane that controls by the player.
 public class Plane extends DodgeGameItem {
   //hp represent life
   private HP hp;
