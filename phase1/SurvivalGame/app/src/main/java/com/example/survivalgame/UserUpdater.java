@@ -16,16 +16,12 @@ public class UserUpdater {
   /* the user that's playing*/
   private static User user;
 
-  /**
-   *  set the main activity
-   **/
+  /** set the main activity */
   public static void setMainActivity(Context context) {
     mainActivity = (MainActivity) context;
   }
 
-  /**
-   * update the user list
-   */
+  /** update the user list */
   public static void setUserList() {
     userList = mainActivity.userManager.getUserList();
   }
@@ -59,6 +55,7 @@ public class UserUpdater {
 
   /**
    * set the user that's playing the game
+   *
    * @param newUser
    */
   private static void setUser(User newUser) {

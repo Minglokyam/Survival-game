@@ -34,8 +34,7 @@ public class User implements Serializable {
   public static final int DODGE = 2;
 
   /**
-   * instantiate the user.
-   * Set initial score to 0 and life count to 3
+   * instantiate the user. Set initial score to 0 and life count to 3
    *
    * @param username user's username
    * @param password user's password
@@ -51,30 +50,22 @@ public class User implements Serializable {
     this.id = id;
   }
 
-  /**
-   * get the user's username
-   */
+  /** get the user's username */
   String getUsername() {
     return username;
   }
 
-  /**
-   * get the user's password
-   */
+  /** get the user's password */
   String getPassword() {
     return password;
   }
 
-  /**
-   * get the user's id
-   */
+  /** get the user's id */
   public int getID() {
     return id;
   }
 
-  /**
-   * get the user's current score
-   */
+  /** get the user's current score */
   public int getScore() {
     return score;
   }
@@ -88,9 +79,7 @@ public class User implements Serializable {
     score = newScore;
   }
 
-  /**
-   * get the user's current life count
-   */
+  /** get the user's current life count */
   public int getLife() {
     return life;
   }
@@ -104,9 +93,7 @@ public class User implements Serializable {
     life = newLife;
   }
 
-  /**
-   * get the game the user's currently playing
-   */
+  /** get the game the user's currently playing */
   public int getGameStage() {
     return gameStage;
   }
@@ -120,9 +107,7 @@ public class User implements Serializable {
     gameStage = newGameStage;
   }
 
-  /**
-   * get the duration of user's playing time
-   */
+  /** get the duration of user's playing time */
   public Duration getTotalDuration() {
     return totalDuration;
   }
@@ -136,9 +121,7 @@ public class User implements Serializable {
     totalDuration = newTotalDuration;
   }
 
-  /**
-   * prints the username and the game the user's playing
-   */
+  /** prints the username and the game the user's playing */
   @Override
   public String toString() {
     return username + gameStage;

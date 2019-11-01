@@ -14,19 +14,13 @@ import com.example.survivalgame.runninggame.RunningGameActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-  /**
-   *  UserManager of the game
-   */
+  /** UserManager of the game */
   UserManager userManager;
 
-  /**
-   * the user that's logged in
-   */
+  /** the user that's logged in */
   private User user;
 
-  /**
-   * Create new UserManager when this activity is created
-   */
+  /** Create new UserManager when this activity is created */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -37,12 +31,11 @@ public class MainActivity extends AppCompatActivity {
   }
 
   /**
-   * If the username to be registered does not exist, add this new user
-   * to userManager and update the user file
+   * If the username to be registered does not exist, add this new user to userManager and update
+   * the user file
    *
    * @param view the current view display
    */
-
   public void register(View view) {
     IOManager.loadFile();
     String username = getName();
@@ -65,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
   }
 
   /**
-   * If username and password match, the user is logged in and will be
-   * directed to the game he left off.
+   * If username and password match, the user is logged in and will be directed to the game he left
+   * off.
    *
    * @param view the current view display
    */
@@ -98,9 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  /**
-   * direct the user to the game he left off
-   */
+  /** direct the user to the game he left off */
   private void launchGame() {
     int gameStage = user.getGameStage();
     if (gameStage == User.RUNNING) {
@@ -115,9 +106,7 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  /**
-   * send the logged in user to another game and start that game's activity
-   */
+  /** send the logged in user to another game and start that game's activity */
   private void toGame(Intent intent) {
     intent.putExtra("user", user);
     System.out.println("ready to launch");

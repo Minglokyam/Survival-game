@@ -3,7 +3,7 @@ package com.example.survivalgame.dodgegame;
 import android.graphics.Canvas;
 
 import com.example.survivalgame.User;
-//This is the class which the game loop belongs to.
+// This is the class which the game loop belongs to.
 class DodgeGameThread extends Thread {
   private boolean running = false;
   private DodgeGameView dodgeGameView;

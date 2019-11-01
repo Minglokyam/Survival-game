@@ -23,23 +23,17 @@ public class IOManager {
   /* the file that stores all user's data */
   private static final String USER_FILE = "user_file.ser";
 
-  /**
-   * set the main activity of the game
-   */
+  /** set the main activity of the game */
   public static void setMainActivity(Context context) {
     mainActivity = (MainActivity) context;
   }
 
-  /**
-   * set the userManager of the game
-   */
+  /** set the userManager of the game */
   public static void setUserManager() {
     userManager = mainActivity.userManager;
   }
 
-  /**
-   * read the user file and update the current userManager
-   */
+  /** read the user file and update the current userManager */
   public static void loadFile() {
     FileInputStream fis = null;
     try {
@@ -64,9 +58,7 @@ public class IOManager {
     }
   }
 
-  /**
-   * replace the user file with a new file containing the latest user data
-   */
+  /** replace the user file with a new file containing the latest user data */
   public static void saveFile() {
     FileOutputStream fos = null;
     try {

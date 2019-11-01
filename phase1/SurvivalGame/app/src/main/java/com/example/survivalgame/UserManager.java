@@ -46,7 +46,7 @@ class UserManager implements Serializable {
   }
 
   /**
-   *  return the user object by username
+   * return the user object by username
    *
    * @param username the user's username
    * @return the user object

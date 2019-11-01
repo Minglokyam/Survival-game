@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * DodgeGameManager is used to combine all the items we are going to use for the game.
- */
+/** DodgeGameManager is used to combine all the items we are going to use for the game. */
 class DodgeGameManager {
   private int screenWidth;
   private int screenHeight;
@@ -31,9 +29,7 @@ class DodgeGameManager {
     this.screenHeight = screenHeight;
   }
 
-  /**
-   * those methods are the getter and setter for attributes.
-   */
+  /** those methods are the getter and setter for attributes. */
   int getScreenWidth() {
     return screenWidth;
   }
@@ -53,7 +49,6 @@ class DodgeGameManager {
   Plane getPlane() {
     return plane;
   }
-
 
   public void update() {
     Shell shell;
@@ -77,10 +72,7 @@ class DodgeGameManager {
     plane.update();
   }
 
-  /**
-   * draw method would call other draws method from other classes
-   *
-   */
+  /** draw method would call other draws method from other classes */
   public void draw(Canvas canvas) {
     canvas.drawColor(Color.rgb(255, 255, 255));
     plane.draw(canvas);
