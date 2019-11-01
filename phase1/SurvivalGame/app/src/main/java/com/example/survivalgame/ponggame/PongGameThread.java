@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import com.example.survivalgame.User;
 
 class PongGameThread extends Thread {
-  private boolean running = true;
+  private boolean running;
   private PongGameView pongGameView;
   private User user;
 
