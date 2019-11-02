@@ -2,7 +2,7 @@ package com.example.survivalgame.dodgegame;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-//The super class for all game objects in Dodge Game
+// The super class for all game objects in Dodge Game
 abstract class DodgeGameItem {
   /** The x-coordinate of this DodgeGameItem */
   private float xCoordinate;
@@ -14,9 +14,11 @@ abstract class DodgeGameItem {
   private Paint paint;
 
   /** Create a DodgeGameItem. */
-  DodgeGameItem(DodgeGameManager dodgeGameManager) {
+  DodgeGameItem(DodgeGameManager dodgeGameManager, float xCoordinate, float yCoordinate) {
+    this.xCoordinate = xCoordinate;
     paint = new Paint();
     this.dodgeGameManager = dodgeGameManager;
+    this.yCoordinate = yCoordinate;
   }
 
   /** A getter of dodgeGameManager */
@@ -48,5 +50,5 @@ abstract class DodgeGameItem {
     return paint;
   }
 
-  public abstract void draw(Canvas canvas);
+  abstract void draw(Canvas canvas);
 }

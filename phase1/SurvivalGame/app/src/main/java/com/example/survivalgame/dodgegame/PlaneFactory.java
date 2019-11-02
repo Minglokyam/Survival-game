@@ -1,5 +1,5 @@
 package com.example.survivalgame.dodgegame;
-//The class which produces the plane
+// The class which produces the plane
 class PlaneFactory {
   Plane createPlane(DodgeGameManager dodgeGameManager, int screenWidth, int screenHeight, HP hp) {
     float xCoordinate = screenWidth / 2;

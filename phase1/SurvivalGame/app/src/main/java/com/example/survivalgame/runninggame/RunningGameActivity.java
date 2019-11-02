@@ -19,8 +19,7 @@ public class RunningGameActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_running_game);
-
+    setContentView(R.layout.activity_runninggame);
     Intent intent = getIntent();
     user = (User) intent.getSerializableExtra("user");
     UserUpdater.updateUser(user, User.RUNNING);
@@ -32,7 +31,7 @@ public class RunningGameActivity extends AppCompatActivity {
   @Override
   protected void onPause() {
     super.onPause();
-    runningGameView.thread.running = false;
+    runningGameView.getRunningGameThread().setRunning(false);
     toPong();
     finish();
   }
@@ -43,7 +42,6 @@ public class RunningGameActivity extends AppCompatActivity {
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
-    return;
   }
 
   public void toMain() {
@@ -53,6 +51,5 @@ public class RunningGameActivity extends AppCompatActivity {
     IOManager.saveFile();
     startActivity(intent);
     finish();
-    return;
   }
 }

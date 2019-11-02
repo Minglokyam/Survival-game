@@ -3,30 +3,24 @@ package com.example.survivalgame.runninggame;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-public class Ground {
-
-  // the first and second coordinate of the ground.
-  private int x;
-  private int y;
-
+class Ground extends RunningGameItem {
   // the height of the ground.
-  public static int height;
-
-  private Bitmap groundBmp;
-
-  private RunningGameView view;
+  private int height;
 
   /** build a ground. */
-  public Ground(RunningGameView view, Bitmap bmp, int x, int y) {
-    this.x = x;
-    this.y = y;
-    this.groundBmp = bmp;
-    height = bmp.getHeight();
-    this.view = view;
+  Ground(
+      RunningGameView runningGameView, Bitmap bmp, int xCoordinate, int yCoordinate, int height) {
+    super(runningGameView, bmp, xCoordinate, yCoordinate);
+    this.height = height;
+  }
+
+  int getHeight() {
+    return height;
   }
 
   /** draw the ground. */
   public void draw(Canvas canvas) {
-    canvas.drawBitmap(groundBmp, x, view.getHeight() - height, null);
+    canvas.drawBitmap(
+        getBitmap(), getXCoordinate(), getRunningGameView().getHeight() - height, null);
   }
 }

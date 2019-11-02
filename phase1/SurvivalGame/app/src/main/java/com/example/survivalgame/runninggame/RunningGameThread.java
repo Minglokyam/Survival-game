@@ -4,22 +4,21 @@ import android.graphics.Canvas;
 
 import com.example.survivalgame.User;
 
-public class RunningGameThread extends Thread {
+class RunningGameThread extends Thread {
   private RunningGameView view;
+  private User user;
 
   // check whether the runner is running
-  public boolean running;
+  private boolean running;
 
-  public RunningGameThread(RunningGameView view, User user) {
+  RunningGameThread(RunningGameView view, User user) {
     this.view = view;
     this.user = user;
   }
 
-  public void setRunning() {
-    this.running = true;
+  void setRunning(boolean newRunning) {
+    running = newRunning;
   }
-
-  private User user;
 
   @Override
   public void run() {
@@ -30,6 +29,7 @@ public class RunningGameThread extends Thread {
       try {
         canvas = view.getHolder().lockCanvas();
         synchronized (view.getHolder()) {
+          view.update();
           view.draw(canvas);
         }
       } finally {

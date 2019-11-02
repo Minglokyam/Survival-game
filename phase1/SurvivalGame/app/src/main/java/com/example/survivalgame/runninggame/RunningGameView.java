@@ -18,11 +18,11 @@ import com.example.survivalgame.User;
 import java.time.Duration;
 
 public class RunningGameView extends SurfaceView {
-  public RunningGameThread thread;
+  private RunningGameThread runningGameThread;
   private SurfaceHolder holder;
 
   // the moving speed of the objects in the game.
-  public int movingSpeed = 10;
+  private int movingSpeed = 10;
 
   // the image holder of the runner.
   private Bitmap runnerBMP;
@@ -54,21 +54,19 @@ public class RunningGameView extends SurfaceView {
     paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
     this.user = user;
-    runningDuration = Duration.ofSeconds(30);
     runningGameActivity = (RunningGameActivity) context;
-    thread = new RunningGameThread(this, user);
+    runningGameThread = new RunningGameThread(this, user);
     holder = getHolder();
     holder.addCallback(
         new Callback() {
+          @Override
+          public void surfaceCreated(SurfaceHolder holder0) {
+            runningGameThread.setRunning(true);
+            runningGameThread.start();
+          }
 
           @Override
           public void surfaceDestroyed(SurfaceHolder holder0) {}
-
-          @Override
-          public void surfaceCreated(SurfaceHolder holder0) {
-            thread.setRunning();
-            thread.start();
-          }
 
           @Override
           public void surfaceChanged(SurfaceHolder holder0, int a, int b, int c) {}
@@ -81,6 +79,16 @@ public class RunningGameView extends SurfaceView {
     spikeBMP = BitmapFactory.decodeResource(getResources(), R.drawable.spikes);
 
     runningGameManager = new RunningGameManager(this);
+    // =======================================
+    runningDuration = Duration.ofSeconds(30);
+  }
+
+  RunningGameThread getRunningGameThread() {
+    return runningGameThread;
+  }
+
+  int getMovingSpeed() {
+    return movingSpeed;
   }
 
   Bitmap getRunnerBMP() {
@@ -100,33 +108,34 @@ public class RunningGameView extends SurfaceView {
   }
 
   /** getter of the runningDuration */
-  public Duration getRunningDuration() {
+  Duration getRunningDuration() {
     return runningDuration;
   }
 
   /** setter of the runningDuration. */
-  public void setRunningDuration(Duration newRunningDuration) {
+  void setRunningDuration(Duration newRunningDuration) {
     runningDuration = newRunningDuration;
   }
 
-  /** setter of the fps in the running game. */
-  public void setFps(long n) {
-    fps = n;
-  }
-
   /** getter of the fps in the running game. */
-  public long getFps() {
+  long getFps() {
     return fps;
   }
 
+  /** setter of the fps in the running game. */
+  void setFps(long n) {
+    fps = n;
+  }
+
   /** make the runner jump and restart the game once touching on the screen. */
+  @Override
   public boolean onTouchEvent(MotionEvent event) {
     runningGameManager.runner.onTouch();
     return false;
   }
 
   /** update the objects and current game status. */
-  private void update() {
+  void update() {
     user.setScore(user.getScore() + 1);
     runningGameManager.update(runningGameActivity, user);
     // when the game time runs out, jump to next game.
@@ -138,30 +147,12 @@ public class RunningGameView extends SurfaceView {
   /** Draw all the objects on the screen. */
   public void draw(Canvas canvas) {
     super.draw(canvas);
-
-    update();
-
     // draw the life, total time, game time and score.
     canvas.drawColor(Color.WHITE);
     canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
     canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
     canvas.drawText("Game time: " + runningDuration.getSeconds(), 0, 96, paintText);
     canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
-
-    // draw the runner.
-    runningGameManager.runner.draw(canvas);
-
-    // draw the coin
-    for (int i = 0; i < runningGameManager.coins.size(); i++) {
-      runningGameManager.coins.get(i).draw(canvas);
-    }
-
-    // draw the spikes
-    for (int i = 0; i < runningGameManager.spikes.size(); i++) {
-      runningGameManager.spikes.get(i).draw(canvas);
-    }
-
-    // draw the ground.
-    runningGameManager.ground.draw(canvas);
+    runningGameManager.draw(canvas);
   }
 }

@@ -5,30 +5,27 @@ import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.RectF;
 // The class for the plane that controls by the player.
-public class Plane extends DodgeGameItem {
-  //hp represent life
+class Plane extends DodgeGameItem {
+  // hp represent life
   private HP hp;
-
-  private int counter;
-
-  //the speed of xCoordinate
+  // the speed of xCoordinate
   private int xSpeed;
-  //the speed of yCoordinate
+  // the speed of yCoordinate
   private int ySpeed;
+  private float previousXCoordinate;
+  private float previousYCoordinate;
 
   /**
    * constructor
-   * @param dodgeGameManager
+   *
+   * @param dodgeGameManager This is a dodge game manager
    * @param hp represent life
    * @param xCoordinate of the plane
    * @param yCoordinate of the plane
    */
   Plane(DodgeGameManager dodgeGameManager, HP hp, float xCoordinate, float yCoordinate) {
-    super(dodgeGameManager);
+    super(dodgeGameManager, xCoordinate, yCoordinate);
     getPaint().setColor(Color.BLACK);
-    setXCoordinate(xCoordinate);
-    setYCoordinate(yCoordinate);
-    counter = 0;
     this.hp = hp;
   }
 
@@ -41,36 +38,22 @@ public class Plane extends DodgeGameItem {
   }
 
   /**
-   * @return a rectangle
-   * the position of rectangle is based on the position of the plane.
-   * the method would be called, when we check if the plane is hit by shells or not.
+   * @return a rectangle the position of rectangle is based on the position of the plane. the method
+   *     would be called, when we check if the plane is hit by shells or not.
    */
   RectF getRectF() {
     return new RectF(
         getXCoordinate() - 60, getYCoordinate(), getXCoordinate() + 60, getYCoordinate() + 200);
   }
 
-  public void draw(Canvas canvas) {
+  /** draw the plane on canvas. */
+  void draw(Canvas canvas) {
     if (hp.getHP() != 0) {
       drawPath(canvas);
-      setXCoordinate(getXCoordinate() + xSpeed);
-      setYCoordinate(getYCoordinate() + ySpeed);
-
-    } else if (counter % 20 <= 10) {
-      counter++;
-      getPaint().setColor(Color.YELLOW);
-    } else if (counter % 20 > 10) {
-      counter++;
-      System.out.println(counter);
-      getPaint().setColor(Color.RED);
     }
-    drawPath(canvas);
   }
 
-  /**
-   * the drawPath method is to draw a simple shape of plane
-   *
-   */
+  /** the drawPath method is to draw a simple shape of plane */
   private void drawPath(Canvas canvas) {
     Path path = new Path();
     path.moveTo(getXCoordinate(), getYCoordinate());
@@ -81,9 +64,25 @@ public class Plane extends DodgeGameItem {
     canvas.drawPath(path, getPaint());
   }
 
+  /** update the position of the plane. */
+  void update() {
+    if (inScreen()) {
+      previousXCoordinate = getXCoordinate();
+      previousYCoordinate = getYCoordinate();
+      setXCoordinate(getXCoordinate() + xSpeed);
+      setYCoordinate(getYCoordinate() + ySpeed);
 
-  public void update() {
-    xSpeed *= 0.5;
-    ySpeed *= 0.5;
+    } else {
+      setXCoordinate(previousXCoordinate);
+      setYCoordinate(previousYCoordinate);
+    }
+  }
+
+  /** check whether the plane is still in the screen. */
+  private boolean inScreen() {
+    return getXCoordinate() >= 0
+        && getXCoordinate() <= getDodgeGameManager().getScreenWidth()
+        && getYCoordinate() >= 0
+        && getYCoordinate() <= getDodgeGameManager().getScreenHeight();
   }
 }

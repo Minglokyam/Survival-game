@@ -3,15 +3,14 @@ package com.example.survivalgame.dodgegame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Point;
+import com.example.survivalgame.R;
 import android.os.Bundle;
-import android.view.Display;
 
 import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserUpdater;
-//MainActivity class for the dodge game
+// MainActivity class for the dodge game
 public class DodgeGameActivity extends AppCompatActivity {
   private DodgeGameView dodgeGameView;
   private User user;
@@ -19,14 +18,12 @@ public class DodgeGameActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_dodgegame);
     Intent intent = getIntent();
     user = (User) intent.getSerializableExtra("user");
     UserUpdater.updateUser(user, User.DODGE);
     IOManager.saveFile();
-    Display display = getWindowManager().getDefaultDisplay();
-    Point size = new Point();
-    display.getSize(size);
-    dodgeGameView = new DodgeGameView(this, user, size.x, size.y);
+    dodgeGameView = new DodgeGameView(this, user);
     setContentView(dodgeGameView);
   }
 
@@ -40,6 +37,5 @@ public class DodgeGameActivity extends AppCompatActivity {
     IOManager.saveFile();
     startActivity(intent);
     finish();
-    return;
   }
 }
