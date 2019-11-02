@@ -100,31 +100,50 @@ class RunningGameManager {
   /** update the coins and spikes. */
   void update(RunningGameActivity runningGameActivity, User user) {
     updateTimer();
+    randomGenerateItems();
+    removeItems();
+    updateCoin(user);
+    updateSpike(runningGameActivity, user);
+  }
+
+  /** update the timers. */
+  private void updateTimer() {
+    timerCoins++;
+    timerSpike++;
+  }
+
+  /** randomly generate the coins and spikes. */
+  private void randomGenerateItems() {
+    // randomly generate spikes.
+    randomGenerateSpikes();
+    // randomly generate coins.
+    randomGenerateCoins();
+  }
+
+  /** remove coins and spikes. */
+  private void removeItems() {
+    removeCoins();
+    removeSpikes();
+  }
+
+  /** remove coins that are not inside the screen */
+  private void removeCoins() {
     for (int i = 0; i < coins.size(); i++) {
       if (coins.get(i).getXCoordinate() < -80) {
         coins.remove(i);
         i--;
       }
     }
+  }
+
+  /** remove spikes that are not inside the screen */
+  private void removeSpikes() {
     for (int i = 0; i < spikes.size(); i++) {
       if (spikes.get(i).getXCoordinate() < -80) {
         spikes.remove(i);
         i--;
       }
     }
-    updateCoin(user);
-    updateSpike(runningGameActivity, user);
-  }
-
-  /** update the timers to randomly generate the coins and spikes. */
-  private void updateTimer() {
-    timerCoins++;
-    timerSpike++;
-
-    // randomly generate spikes.
-    randomGenerateSpikes();
-    // randomly generate coins.
-    randomGenerateCoins();
   }
 
   /**
@@ -139,7 +158,6 @@ class RunningGameManager {
           generateSpikes();
         }
         break;
-
       case 1:
         if (timerSpike >= 125) {
           generateSpikes();
