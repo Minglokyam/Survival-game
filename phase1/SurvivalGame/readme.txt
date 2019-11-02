@@ -4,7 +4,6 @@ http://gamecodeschool.com/android/programming-a-pong-game-for-android/
 
 However, the code is changed substantially to improve software architecture.
 
-
 The Running Game takes the following website videos as a reference.
 https://www.youtube.com/watch?v=gx7bxb2TTUg&list=PL5xhT8WWHZ9gTAiJgJrHEjOQefcdJi5az&index=1
 
@@ -28,11 +27,11 @@ you have to prevent the ball from touching the bottom.
 you have to survive (aka life is above 0) before the game time becomes 0.
 
 Dodge game:
-
-################# Known bug ###################
-When the player starts the second round, if he or she leave the running game, the app will go to the pong game. We are going to fix the bug.
 you should control the plane to dodge shells around you.
 the plane would follow where your fingers or mouse is.
 you have to survive (aka life is above 0) before the game time becomes 0.
-If you run the game on your computer,then use the mouse to control the plane..
-If you run the game on your phone,then use fingers to control the plane.
+If you run the game on your computer, then use the mouse to control the plane.
+If you run the game on your phone, then use fingers to control the plane.
+
+################# Known bug ###################
+When the player starts the second round, if he or she leave the running game, the app will go to the pong game. We are going to fix the bug.
