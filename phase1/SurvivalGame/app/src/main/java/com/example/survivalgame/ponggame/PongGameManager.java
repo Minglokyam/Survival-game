@@ -18,7 +18,7 @@ class PongGameManager {
 
   private RectPaddle rectPaddle;
 
-  public PongGameManager(User user) {
+  PongGameManager(User user) {
     ball =
         ballFactory.createBall(
             this, 10, screenWidth / 2, screenHeight / 2, screenWidth / 3, -screenHeight / 3, user);

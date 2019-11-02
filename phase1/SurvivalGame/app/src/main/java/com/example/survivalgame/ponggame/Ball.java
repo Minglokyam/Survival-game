@@ -126,8 +126,8 @@ class Ball extends PongGameItemCircle {
   private void hitBottom() {
     if (this.getYCoordinate() + getRadius() >= getPongGameManager().getScreenHeight()) {
       user.setLife(user.getLife() - 1);
-      resetSpeed();
       resetCoordinate();
+      resetSpeed();
     }
   }
 

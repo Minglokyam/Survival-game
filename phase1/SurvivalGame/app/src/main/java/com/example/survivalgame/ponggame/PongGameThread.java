@@ -14,7 +14,10 @@ class PongGameThread extends Thread {
     this.pongGameView = newPongGameView;
   }
 
-  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
+  /**
+   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ and assignment
+   * 1 fishtank
+   */
   @Override
   public void run() {
     while (running) {
