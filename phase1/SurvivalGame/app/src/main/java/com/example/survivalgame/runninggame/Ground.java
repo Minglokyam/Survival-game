@@ -19,7 +19,8 @@ class Ground extends RunningGameItem {
   }
 
   /** draw the ground. */
-  public void draw(Canvas canvas) {
+  @Override
+  void draw(Canvas canvas) {
     canvas.drawBitmap(
         getBitmap(), getXCoordinate(), getRunningGameView().getHeight() - height, null);
   }

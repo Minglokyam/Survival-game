@@ -50,5 +50,5 @@ abstract class RunningGameItem {
     return bmp;
   }
 
-  public abstract void draw(Canvas canvas);
+  abstract void draw(Canvas canvas);
 }

@@ -13,7 +13,7 @@ public class Runner extends RunningGameItem {
   private RectFactory rectFactory = new RectFactory();
 
   /** Build a runner. */
-  public Runner(
+  Runner(
       RunningGameView runningGameView,
       Bitmap bmp,
       int xCoordinate,
@@ -47,7 +47,8 @@ public class Runner extends RunningGameItem {
   }
 
   /** draw the runner. */
-  public void draw(Canvas canvas) {
+  @Override
+  void draw(Canvas canvas) {
     // first update the runner's position.
     update();
 

@@ -33,7 +33,8 @@ class Coin extends RunningGameItem {
   }
 
   /** draw the coin. */
-  public void draw(Canvas canvas) {
+  @Override
+  void draw(Canvas canvas) {
     // first update the coin's status.
     update();
 

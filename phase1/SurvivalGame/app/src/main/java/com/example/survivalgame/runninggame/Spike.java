@@ -19,7 +19,8 @@ class Spike extends RunningGameItem {
   }
 
   /** draw the spike. */
-  public void draw(Canvas canvas) {
+  @Override
+  void draw(Canvas canvas) {
     // first update the spike.
     update();
 

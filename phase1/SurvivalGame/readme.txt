@@ -41,4 +41,4 @@ reference.
 
 When the player starts the second round, if he or she leaves the running game, the app
 will proceed to the pong game. This bug does not affect the functioning of
-the game. We are going to fix the bug.
+the game. We are going to fix this bug.
