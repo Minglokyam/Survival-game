@@ -34,7 +34,8 @@ Noted that the code has changed completely. We made game manager,  thread and vi
 improve the software design architecture. The reference just provides inspiration for how the
 objects in the game are constructed.
 
-The codes of the game manager, game thread and game view take assignment 1 fish tank as a reference.
+The codes of the game manager, game thread and game view take assignment 1 fish tank as a
+reference.
 
 ####################### Known bug #######################
 
