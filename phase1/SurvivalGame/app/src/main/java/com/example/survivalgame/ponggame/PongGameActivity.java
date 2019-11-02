@@ -35,7 +35,6 @@ public class PongGameActivity extends AppCompatActivity {
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
-    return;
   }
 
   /** reset user statistic, start MainActivity, end PongGame */
@@ -46,6 +45,5 @@ public class PongGameActivity extends AppCompatActivity {
     IOManager.saveFile();
     startActivity(intent);
     finish();
-    return;
   }
 }

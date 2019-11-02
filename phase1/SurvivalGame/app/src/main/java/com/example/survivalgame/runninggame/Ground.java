@@ -3,7 +3,7 @@ package com.example.survivalgame.runninggame;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-public class Ground extends RunningGameItem {
+class Ground extends RunningGameItem {
   // the height of the ground.
   private int height;
 

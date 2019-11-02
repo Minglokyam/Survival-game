@@ -42,7 +42,6 @@ public class RunningGameActivity extends AppCompatActivity {
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
-    return;
   }
 
   public void toMain() {
@@ -52,6 +51,5 @@ public class RunningGameActivity extends AppCompatActivity {
     IOManager.saveFile();
     startActivity(intent);
     finish();
-    return;
   }
 }

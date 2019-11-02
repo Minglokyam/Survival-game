@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.RectF;
 
-public class Shell extends DodgeGameItem {
+class Shell extends DodgeGameItem {
   // the speed of the shell in x and y direction.
   private float xSpeed;
   private float ySpeed;

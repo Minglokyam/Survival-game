@@ -6,8 +6,8 @@ import android.graphics.Canvas;
 import com.example.survivalgame.User;
 
 class PongGameManager {
-  BallFactory ballFactory = new BallFactory();
-  RectPaddleFactory rectPaddleFactory = new RectPaddleFactory();
+  private BallFactory ballFactory = new BallFactory();
+  private RectPaddleFactory rectPaddleFactory = new RectPaddleFactory();
   /** The screen width */
   private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
 

@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.RectF;
 // The class for the plane that controls by the player.
-public class Plane extends DodgeGameItem {
+class Plane extends DodgeGameItem {
   // hp represent life
   private HP hp;
   // the speed of xCoordinate
@@ -18,7 +18,7 @@ public class Plane extends DodgeGameItem {
   /**
    * constructor
    *
-   * @param dodgeGameManager
+   * @param dodgeGameManager This is a dodge game manager
    * @param hp represent life
    * @param xCoordinate of the plane
    * @param yCoordinate of the plane
@@ -64,7 +64,7 @@ public class Plane extends DodgeGameItem {
     canvas.drawPath(path, getPaint());
   }
 
-  /** update the postion of the plane. */
+  /** update the position of the plane. */
   void update() {
     if (inScreen()) {
       previousXCoordinate = getXCoordinate();

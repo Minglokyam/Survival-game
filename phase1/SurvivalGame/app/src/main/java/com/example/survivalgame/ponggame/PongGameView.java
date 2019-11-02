@@ -21,8 +21,10 @@ public class PongGameView extends SurfaceView {
   /** Pong Game Manager is responsible for storing the objects of this game and their motions. */
   private PongGameManager pongGameManager;
 
-  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  /** The number of frames per second */
+  /**
+   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ The number of
+   * frames per second
+   */
   private long FPS = 30;
 
   private Paint paintText;

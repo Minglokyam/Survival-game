@@ -120,10 +120,4 @@ public class User implements Serializable {
   public void setTotalDuration(Duration newTotalDuration) {
     totalDuration = newTotalDuration;
   }
-
-  /** prints the username and the game the user's playing */
-  @Override
-  public String toString() {
-    return username + gameStage;
-  }
 }

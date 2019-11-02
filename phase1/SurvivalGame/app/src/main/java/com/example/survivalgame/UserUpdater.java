@@ -56,7 +56,7 @@ public class UserUpdater {
   /**
    * set the user that's playing the game
    *
-   * @param newUser
+   * @param newUser The user that we are going to set.
    */
   private static void setUser(User newUser) {
     user = userList.get(newUser.getID());

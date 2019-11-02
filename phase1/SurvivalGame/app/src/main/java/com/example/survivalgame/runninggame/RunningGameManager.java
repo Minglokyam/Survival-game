@@ -23,16 +23,16 @@ class RunningGameManager {
   private GroundFactory groundFactory;
 
   // the runner.
-  public Runner runner;
+  Runner runner;
 
   // a list of coin.
-  public List<Coin> coins = new ArrayList<>();
+  private List<Coin> coins = new ArrayList<>();
 
   // ground.
-  public Ground ground;
+  private Ground ground;
 
   // a list of spikes.
-  public List<Spike> spikes = new ArrayList<>();
+  private List<Spike> spikes = new ArrayList<>();
 
   // the timer of the coin.
   private int timerCoins = 0;
@@ -46,7 +46,7 @@ class RunningGameManager {
   // The height of ground
   private int groundHeight;
 
-  public RunningGameManager(RunningGameView runningGameView) {
+  RunningGameManager(RunningGameView runningGameView) {
     this.runningGameView = runningGameView;
     spikeFactory = new SpikeFactory();
     coinFactory = new CoinFactory();

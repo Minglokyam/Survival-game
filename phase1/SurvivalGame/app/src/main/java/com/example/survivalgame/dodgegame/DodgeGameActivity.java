@@ -34,6 +34,5 @@ public class DodgeGameActivity extends AppCompatActivity {
     IOManager.saveFile();
     startActivity(intent);
     finish();
-    return;
   }
 }

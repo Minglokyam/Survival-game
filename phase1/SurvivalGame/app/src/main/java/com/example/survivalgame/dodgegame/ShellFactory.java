@@ -26,7 +26,7 @@ class ShellFactory {
 
   /** randomly assign the moving speed in x direction. */
   private float assignXSpeed() {
-    float xSpeed = 0;
+    float xSpeed;
     if (Math.random() < 0.5) {
       xSpeed = 8;
     } else {

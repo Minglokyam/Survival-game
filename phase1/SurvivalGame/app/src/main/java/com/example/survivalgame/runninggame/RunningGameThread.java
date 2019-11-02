@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 
 import com.example.survivalgame.User;
 
-public class RunningGameThread extends Thread {
+class RunningGameThread extends Thread {
   private RunningGameView view;
   private User user;
 
