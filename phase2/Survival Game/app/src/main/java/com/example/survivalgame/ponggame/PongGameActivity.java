@@ -3,7 +3,6 @@ package com.example.survivalgame.ponggame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import com.example.survivalgame.R;
 import android.os.Bundle;
 
 import com.example.survivalgame.dodgegame.DodgeGameActivity;

@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
-import com.example.survivalgame.R;
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserUpdater;
 import com.example.survivalgame.ponggame.PongGameActivity;
