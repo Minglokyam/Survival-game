@@ -18,7 +18,6 @@ public class DodgeGameActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_dodgegame);
     Intent intent = getIntent();
     user = (User) intent.getSerializableExtra("user");
     UserUpdater.updateUser(user, User.DODGE);

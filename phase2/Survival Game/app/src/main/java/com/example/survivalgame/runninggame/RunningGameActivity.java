@@ -19,7 +19,6 @@ public class RunningGameActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_runninggame);
     Intent intent = getIntent();
     user = (User) intent.getSerializableExtra("user");
     UserUpdater.updateUser(user, User.RUNNING);
