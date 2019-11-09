@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-class Coin extends RunningGameItem {
+class Coin extends RunningGameItem implements RandomItem {
   /** citation: https://www.youtube.com/watch?v=HzP9jJNmzSY */
   private int currentPosition = 0;
 
@@ -34,7 +34,7 @@ class Coin extends RunningGameItem {
 
   /** draw the coin. */
   @Override
-  void draw(Canvas canvas) {
+  public void draw(Canvas canvas) {
     // first update the coin's status.
     update();
 
@@ -56,16 +56,23 @@ class Coin extends RunningGameItem {
   }
 
   /** check whether the runner touched the coin */
-  boolean checkCollision(Rect runner, Rect coin) {
+  @Override
+  public boolean checkCollision(Rect runner, Rect coin) {
     return Rect.intersects(runner, coin);
   }
 
   /** get the rectangle of the coin. */
-  Rect getRect() {
+  @Override
+  public Rect getRect() {
     return rectFactory.createRect(
         getXCoordinate(),
         getYCoordinate(),
         getXCoordinate() + getBitmap().getWidth() / 4,
         getYCoordinate() + getBitmap().getHeight());
+  }
+
+  @Override
+  public boolean outOfScreen() {
+    return getXCoordinate() < -80;
   }
 }

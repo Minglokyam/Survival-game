@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-class Spike extends RunningGameItem {
+class Spike extends RunningGameItem implements RandomItem {
   private RectFactory rectFactory = new RectFactory();
 
   /** build a spike. */
@@ -20,7 +20,7 @@ class Spike extends RunningGameItem {
 
   /** draw the spike. */
   @Override
-  void draw(Canvas canvas) {
+  public void draw(Canvas canvas) {
     // first update the spike.
     update();
 
@@ -37,16 +37,23 @@ class Spike extends RunningGameItem {
   }
 
   /** check whether the runner touched the spike. */
-  boolean checkCollision(Rect runner, Rect spikes) {
+  @Override
+  public boolean checkCollision(Rect runner, Rect spikes) {
     return Rect.intersects(runner, spikes);
   }
 
   /** get the rectangle of the spike. */
-  Rect getRect() {
+  @Override
+  public Rect getRect() {
     return rectFactory.createRect(
         getXCoordinate(),
         getYCoordinate(),
         getXCoordinate() + getBitmap().getWidth(),
         getYCoordinate() + getBitmap().getHeight());
+  }
+
+  @Override
+  public boolean outOfScreen() {
+    return getXCoordinate() < -80;
   }
 }

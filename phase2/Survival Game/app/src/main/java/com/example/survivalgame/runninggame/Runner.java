@@ -47,7 +47,6 @@ public class Runner extends RunningGameItem {
   }
 
   /** draw the runner. */
-  @Override
   void draw(Canvas canvas) {
     // first update the runner's position.
     update();

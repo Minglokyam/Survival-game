@@ -16,23 +16,15 @@ class RunningGameManager {
 
   private RunnerFactory runnerFactory;
 
-  private SpikeFactory spikeFactory;
-
-  private CoinFactory coinFactory;
+  private RandomItemFactory randomItemFactory;
 
   private GroundFactory groundFactory;
 
   // the runner.
   Runner runner;
 
-  // a list of coin.
-  private List<Coin> coins = new ArrayList<>();
-
   // ground.
   private Ground ground;
-
-  // a list of spikes.
-  private List<Spike> spikes = new ArrayList<>();
 
   // the timer of the coin.
   private int timerCoins = 0;
@@ -46,10 +38,11 @@ class RunningGameManager {
   // The height of ground
   private int groundHeight;
 
+  private List<RandomItem> randomItems = new ArrayList<>();
+
   RunningGameManager(RunningGameView runningGameView) {
     this.runningGameView = runningGameView;
-    spikeFactory = new SpikeFactory();
-    coinFactory = new CoinFactory();
+    randomItemFactory = new RandomItemFactory();
     runnerFactory = new RunnerFactory();
     groundFactory = new GroundFactory();
     // add runner and ground to the game.
@@ -61,38 +54,34 @@ class RunningGameManager {
   }
 
   /** update the coin when it moves out of the screen or the runner touches it. */
-  private void updateCoin(User user) {
-    boolean collide = false;
-    Iterator<Coin> coinIterator = coins.iterator();
-    while (coinIterator.hasNext() && !collide) {
-      Coin coin = coinIterator.next();
+  private void updateItems(RunningGameActivity runningGameActivity, User user) {
+
+    Iterator<RandomItem> randomItemIterator = randomItems.iterator();
+
+    while (randomItemIterator.hasNext()) {
+
+      RandomItem randomItem = randomItemIterator.next();
       Rect runnerRect = runner.getRect();
-      Rect coinRect = coin.getRect();
-      if (coin.checkCollision(runnerRect, coinRect)) {
-        // remove the coin once the runner touch this coin.
-        coinIterator.remove();
-        // add points to the score when the runner touches a coin.
-        user.setScore(user.getScore() + 100);
-        collide = true;
+      Rect rect = randomItem.getRect();
+
+      if (randomItem.checkCollision(runnerRect, rect)) {
+        collideAction(runningGameActivity, user, randomItem);
+        // remove the random item after touching.
+        randomItemIterator.remove();
+        break;
       }
     }
   }
 
-  /** update the spike when it moves out of the screen or the runner touches it. */
-  private void updateSpike(RunningGameActivity runningGameActivity, User user) {
-    boolean collide = false;
-    Iterator<Spike> spikeIterator = spikes.iterator();
-    while (spikeIterator.hasNext() && !collide) {
-      Spike spike = spikeIterator.next();
-      Rect runnerRect = runner.getRect();
-      Rect spikeRect = spike.getRect();
-      if (spike.checkCollision(runnerRect, spikeRect)) {
-        user.setLife(user.getLife() - 1);
-        spikeIterator.remove();
-      }
+  private void collideAction(
+      RunningGameActivity runningGameActivity, User user, RandomItem randomItem) {
+    if (randomItem instanceof Coin) {
+      // add points to the score when the runner touches a coin.
+      user.setScore(user.getScore() + 100);
+    } else {
+      user.setLife(user.getLife() - 1);
       if (user.getLife() == 0) {
         runningGameActivity.toMain();
-        collide = true;
       }
     }
   }
@@ -101,9 +90,8 @@ class RunningGameManager {
   void update(RunningGameActivity runningGameActivity, User user) {
     updateTimer();
     randomGenerateItems();
-    removeItems();
-    updateCoin(user);
-    updateSpike(runningGameActivity, user);
+    removeRandomItems();
+    updateItems(runningGameActivity, user);
   }
 
   /** update the timers. */
@@ -120,28 +108,13 @@ class RunningGameManager {
     randomGenerateCoins();
   }
 
-  /** remove coins and spikes. */
-  private void removeItems() {
-    removeCoins();
-    removeSpikes();
-  }
-
-  /** remove coins that are not inside the screen */
-  private void removeCoins() {
-    for (int i = 0; i < coins.size(); i++) {
-      if (coins.get(i).getXCoordinate() < -80) {
-        coins.remove(i);
-        i--;
-      }
-    }
-  }
-
-  /** remove spikes that are not inside the screen */
-  private void removeSpikes() {
-    for (int i = 0; i < spikes.size(); i++) {
-      if (spikes.get(i).getXCoordinate() < -80) {
-        spikes.remove(i);
-        i--;
+  /** remove random items that are not inside the screen */
+  private void removeRandomItems() {
+    Iterator<RandomItem> randomItemIterator = randomItems.iterator();
+    while (randomItemIterator.hasNext()) {
+      RandomItem randomItem = randomItemIterator.next();
+      if (randomItem.outOfScreen()) {
+        randomItemIterator.remove();
       }
     }
   }
@@ -155,33 +128,34 @@ class RunningGameManager {
         // three different cases to generate spikes in different distances.
       case 0:
         if (timerSpike >= 100) {
-          generateSpikes();
+          makeSpikes();
         }
         break;
       case 1:
         if (timerSpike >= 125) {
-          generateSpikes();
+          makeSpikes();
         }
         break;
       case 2:
         if (timerSpike >= 150) {
-          generateSpikes();
+          makeSpikes();
         }
         break;
     }
   }
 
-  private void generateSpikes() {
-    Spike spike;
-    spike =
-        spikeFactory.createSpike(
+  private void makeSpikes() {
+    RandomItem spike =
+        randomItemFactory.createRandomItem(
             runningGameView,
             runningGameView.getSpikeBMP(),
             runningGameView.getWidth() + 24,
-            groundHeight);
-    spikes.add(spike);
-    Random randomSpikes = new Random();
-    timerRandomSpikes = randomSpikes.nextInt(3);
+            24,
+            groundHeight,
+            randomItemFactory.SPIKE);
+    randomItems.add(spike);
+    Random spikesRandom = new Random();
+    timerRandomSpikes = spikesRandom.nextInt(3);
     timerSpike = 0;
   }
 
@@ -197,15 +171,15 @@ class RunningGameManager {
         case 0:
           // construct five consecutive coins in same height.
           for (int i = 1; i < 6; i++) {
-            makeCoin(i * 64, 130);
+            makeCoins(i * 64, 130);
           }
           break;
 
         case 1:
           // construct three consecutive coins in different height.
-          makeCoin(32, 150);
-          makeCoin(96, 130);
-          makeCoin(160, 150);
+          makeCoins(32, 150);
+          makeCoins(96, 130);
+          makeCoins(160, 150);
           break;
       }
       // reset the timer.
@@ -213,24 +187,22 @@ class RunningGameManager {
     }
   }
 
-  private void makeCoin(int xCoordinate, int yCoordinate) {
-    Coin coin =
-        coinFactory.createCoin(
+  private void makeCoins(int xCoordinate, int yCoordinate) {
+    RandomItem coin =
+        randomItemFactory.createRandomItem(
             runningGameView,
             runningGameView.getCoinBMP(),
             runningGameView.getWidth() + xCoordinate,
             yCoordinate,
-            groundHeight);
-    coins.add(coin);
+            groundHeight,
+            randomItemFactory.COIN);
+    randomItems.add(coin);
   }
 
   void draw(Canvas canvas) {
     runner.draw(canvas);
-    for (Coin coin : coins) {
-      coin.draw(canvas);
-    }
-    for (Spike spike : spikes) {
-      spike.draw(canvas);
+    for (RandomItem randomItem : randomItems) {
+      randomItem.draw(canvas);
     }
     ground.draw(canvas);
   }

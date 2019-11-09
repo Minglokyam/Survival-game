@@ -49,6 +49,4 @@ abstract class RunningGameItem {
   Bitmap getBitmap() {
     return bmp;
   }
-
-  abstract void draw(Canvas canvas);
 }
