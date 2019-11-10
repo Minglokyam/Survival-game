@@ -1,6 +1,6 @@
 package com.example.survivalgame;
 
-public interface LoginPresenterInterface {
+public interface LoginListener {
     void onRegisterSuccess();
 
     void onUserNotExists();

@@ -1,7 +1,6 @@
 package com.example.survivalgame;
 
-public class LoginPresenter implements LoginPresenterInterface {
-
+public class LoginPresenter implements LoginListener {
     private LoginView loginView;
     private LoginInteractor loginInteractor;
 
@@ -10,12 +9,14 @@ public class LoginPresenter implements LoginPresenterInterface {
         this.loginInteractor = loginInteractor;
     }
 
+    @Override
     public void onRegisterSuccess() {
         if (loginView != null) {
             loginView.setRegisterSuccess();
         }
     }
 
+    @Override
     public void onUserNotExists() {
         if (loginView != null) {
             loginView.setUserNotExistError();
@@ -29,36 +30,40 @@ public class LoginPresenter implements LoginPresenterInterface {
         }
     }
 
+    @Override
     public void onCredentialEmpty() {
         if (loginView != null) {
             loginView.setEmptyInputError();
         }
     }
 
+    @Override
     public void onWrongCredential() {
         if (loginView != null) {
             loginView.setCredentialsError();
         }
     }
 
+    @Override
     public void launchRunningGame(String name, User user) {
         loginView.launchRunningGame(name, user);
     }
 
+    @Override
     public void launchPongGame(String name, User user) {
         loginView.launchPongGame(name, user);
     }
 
+    @Override
     public void launchDodgeGame(String name, User user) {
         loginView.launchDodgeGame(name, user);
     }
 
-
-    public void validateRegisterCredentials(String username, String password) {
+    void validateRegisterCredentials(String username, String password) {
         loginInteractor.register(username, password, this);
     }
 
-    public void validateLoginCredentials(String username, String password) {
+    void validateLoginCredentials(String username, String password) {
         loginInteractor.login(username, password, this);
     }
 }

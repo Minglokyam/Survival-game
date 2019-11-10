@@ -14,7 +14,6 @@ import com.example.survivalgame.runninggame.RunningGameActivity;
 
 public class MainActivity extends AppCompatActivity implements LoginView {
     private LoginPresenter presenter;
-
     /**
      * Create new UserManager when this activity is created
      */
@@ -59,16 +58,19 @@ public class MainActivity extends AppCompatActivity implements LoginView {
         Toast.makeText(MainActivity.this, "Register success", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
     public void launchRunningGame(String name, User user) {
         Intent toJumpGame = new Intent(this, RunningGameActivity.class);
         toGame(name, toJumpGame);
     }
 
+    @Override
     public void launchPongGame(String name, User user) {
         Intent toPongGame = new Intent(this, PongGameActivity.class);
         toGame(name, toPongGame);
     }
 
+    @Override
     public void launchDodgeGame(String name, User user) {
         Intent toDodgeGame = new Intent(this, DodgeGameActivity.class);
         toGame(name, toDodgeGame);
@@ -102,6 +104,4 @@ public class MainActivity extends AppCompatActivity implements LoginView {
         EditText passwordInput = findViewById(R.id.passwordInput);
         return passwordInput.getText().toString();
     }
-
-
 }

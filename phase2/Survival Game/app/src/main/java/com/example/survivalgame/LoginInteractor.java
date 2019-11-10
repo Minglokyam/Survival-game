@@ -1,55 +1,51 @@
 package com.example.survivalgame;
 
-public class LoginInteractor {
+class LoginInteractor {
 
-    public void register(
-
-            String username, String password, LoginPresenterInterface loginPresenterInterface) {
+    void register(String username, String password, LoginListener loginListener) {
         IOManager.loadFile();
         if (!(username.trim().equals("") || password.trim().equals(""))) {
             if (!UserManager.userExists(username)) {
                 User newUser = new User(username, password);
                 UserManager.addUser(username, newUser);
                 IOManager.saveFile();
-                loginPresenterInterface.onRegisterSuccess();
+                loginListener.onRegisterSuccess();
             } else {
-                loginPresenterInterface.onUserAlreadyExists();
+                loginListener.onUserAlreadyExists();
             }
         } else {
-            loginPresenterInterface.onCredentialEmpty();
+            loginListener.onCredentialEmpty();
         }
     }
 
-    public void login(
-
-            String username, String password, LoginPresenterInterface loginPresenterInterface) {
+    void login(String username, String password, LoginListener loginListener) {
         IOManager.loadFile();
         if (!(username.trim().equals("") || password.trim().equals(""))) {
             System.out.println(UserManager.userExists(username));
             if (UserManager.userExists(username)) {
                 User temp = UserManager.getUser(username);
                 if (temp.getUsername().equals(username) && temp.getPassword().equals(password)) {
-                    onLoginSuccess(username, temp, loginPresenterInterface);
+                    onLoginSuccess(username, temp, loginListener);
                 } else {
-                    loginPresenterInterface.onWrongCredential();
+                    loginListener.onWrongCredential();
                 }
             } else {
-                loginPresenterInterface.onUserNotExists();
+                loginListener.onUserNotExists();
             }
         } else {
-            loginPresenterInterface.onCredentialEmpty();
+            loginListener.onCredentialEmpty();
         }
     }
 
-    private void onLoginSuccess(String name, User user, LoginPresenterInterface loginPresenterInterface) {
+    private void onLoginSuccess(String name, User user, LoginListener loginListener) {
         int gameStage = user.getGameStage();
         if (gameStage == User.RUNNING) {
-            loginPresenterInterface.launchRunningGame(name, user);
+            loginListener.launchRunningGame(name, user);
         } else if (gameStage == User.PONG) {
-            loginPresenterInterface.launchPongGame(name, user);
+            loginListener.launchPongGame(name, user);
 
         } else if (gameStage == User.DODGE) {
-            loginPresenterInterface.launchDodgeGame(name, user);
+            loginListener.launchDodgeGame(name, user);
         }
     }
 }

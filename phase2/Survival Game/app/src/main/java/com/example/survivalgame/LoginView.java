@@ -1,7 +1,6 @@
 package com.example.survivalgame;
 
 public interface LoginView {
-
     void launchRunningGame(String name, User user);
 
     void launchPongGame(String name, User user);
