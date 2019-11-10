@@ -24,11 +24,11 @@ public class MainActivity extends AppCompatActivity implements LoginView {
     presenter = new LoginPresenter(this, new LoginInteractor());
   }
 
-  public void validateLoginCredentials() {
+  public void validateLoginCredentials(View view) {
       presenter.validateLoginCredentials(getName(), getPassword());
   }
 
-    public void validateRegisterCredentials() {
+    public void validateRegisterCredentials(View view) {
       presenter.validateRegisterCredentials(getName(), getPassword());
   }
 
