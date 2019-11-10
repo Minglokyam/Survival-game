@@ -5,7 +5,9 @@ public class LoginPresenter implements LoginPresenterInterface {
     public void onRegisterSuccess(){}
     public void onUserNotExists(){}
     public void onCredentialEmpty(){}
-    public void onLoginSuccess(){}
+    public void launchRunningGame(String name, User user){};
+    public void launchPongGame(String name, User user){};
+    public void launchDodgeGame(String name, User user){};
     public void onWrongCredential(){}
 
     public LoginPresenter(LoginView loginView, LoginInteractor loginInteractor) {

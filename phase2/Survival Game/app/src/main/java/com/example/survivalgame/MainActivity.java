@@ -21,23 +21,15 @@ public class MainActivity extends AppCompatActivity implements LoginView {
     super.onCreate(savedInstanceState);
     IOManager.setMainActivity(this);
     setContentView(R.layout.activity_main);
-    findViewById(R.id.loginButton).setOnClickListener(v -> validateLoginCredentials());
-    findViewById(R.id.loginButton).setOnClickListener(v -> validateRegisterCredentials());
-
     presenter = new LoginPresenter(this, new LoginInteractor());
   }
 
-  private void validateLoginCredentials() {
+  public void validateLoginCredentials() {
       presenter.validateLoginCredentials(getName(), getPassword());
   }
 
-  private void validateRegisterCredentials() {
+    public void validateRegisterCredentials() {
       presenter.validateRegisterCredentials(getName(), getPassword());
-  }
-
-  @Override
-  public void toGame() {
-
   }
 
   @Override
@@ -55,24 +47,24 @@ public class MainActivity extends AppCompatActivity implements LoginView {
 
   }
 
-  /** direct the user to the game he left off */
-  public void launchGame(String name, User user) {
-    int gameStage = user.getGameStage();
-    if (gameStage == User.RUNNING) {
+  public void launchRunningGame(String name, User user){
       Intent toJumpGame = new Intent(this, RunningGameActivity.class);
-      toGame(toJumpGame);
-    } else if (gameStage == User.PONG) {
-      Intent toPongGame = new Intent(this, PongGameActivity.class);
-      toGame(toPongGame);
-    } else if (gameStage == User.DODGE) {
-      Intent toDodgeGame = new Intent(this, DodgeGameActivity.class);
-      toGame(toDodgeGame);
-    }
+      toGame(name, toJumpGame);
   }
 
+    public void launchPongGame(String name, User user){
+        Intent toPongGame = new Intent(this, PongGameActivity.class);
+        toGame(name, toPongGame);
+    }
+
+    public void launchDodgeGame(String name, User user){
+        Intent toDodgeGame = new Intent(this, DodgeGameActivity.class);
+        toGame(name, toDodgeGame);
+    }
+
   /** send the logged in user to another game and start that game's activity */
-  private void toGame(Intent intent) {
-    intent.putExtra("user", name);
+  private void toGame(String username, Intent intent) {
+    intent.putExtra("user", username);
     System.out.println("ready to launch");
     startActivity(intent);
   }

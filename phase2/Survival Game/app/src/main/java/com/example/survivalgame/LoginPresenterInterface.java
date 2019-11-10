@@ -4,6 +4,8 @@ public interface LoginPresenterInterface {
     void onRegisterSuccess();
     void onUserNotExists();
     void onCredentialEmpty();
-    void onLoginSuccess();
+    void launchRunningGame(String name, User user);
+    void launchPongGame(String name, User user);
+    void launchDodgeGame(String name, User user);
     void onWrongCredential();
 }
