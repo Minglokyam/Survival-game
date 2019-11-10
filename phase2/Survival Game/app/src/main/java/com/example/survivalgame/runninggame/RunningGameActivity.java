@@ -12,44 +12,36 @@ import com.example.survivalgame.UserManager;
 import com.example.survivalgame.ponggame.PongGameActivity;
 
 public class RunningGameActivity extends AppCompatActivity {
-  private RunningGameView runningGameView;
-  private String name;
-  private User user;
+    private RunningGameView runningGameView;
+    private String name;
+    private User user;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    Intent intent = getIntent();
-    name = intent.getStringExtra("user");
-    user = UserManager.getUser(name);
-    user.setGameStage(User.RUNNING);
-    IOManager.saveFile();
-    runningGameView = new RunningGameView(this, user);
-    setContentView(runningGameView);
-  }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        name = intent.getStringExtra("user");
+        user = UserManager.getUser(name);
+        user.setGameStage(User.RUNNING);
+        IOManager.saveFile();
+        runningGameView = new RunningGameView(this, user);
+        setContentView(runningGameView);
+    }
 
-  @Override
-  protected void onPause() {
-    super.onPause();
-    runningGameView.getRunningGameThread().setRunning(false);
-    toPong();
-    finish();
-  }
+    public void toPong() {
+        Intent intent = new Intent(this, PongGameActivity.class);
+        intent.putExtra("user", name);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
 
-  public void toPong() {
-    Intent intent = new Intent(this, PongGameActivity.class);
-    intent.putExtra("user", name);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(intent);
-    finish();
-  }
-
-  public void toMain() {
-    Intent intent = new Intent(this, MainActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    user.reset();
-    IOManager.saveFile();
-    startActivity(intent);
-    finish();
-  }
+    public void toMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        user.reset();
+        IOManager.saveFile();
+        startActivity(intent);
+        finish();
+    }
 }
