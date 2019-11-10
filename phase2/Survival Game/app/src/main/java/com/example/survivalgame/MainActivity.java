@@ -38,7 +38,12 @@ public class MainActivity extends AppCompatActivity implements LoginView {
   }
 
   @Override
-  public void setUserExistError() {
+  public void setUserNotExistError() {
+    Toast.makeText(MainActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
+  }
+
+  @Override
+  public void setUserAlreadyExistError() {
     Toast.makeText(MainActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
   }
 

@@ -18,7 +18,14 @@ public class LoginPresenter implements LoginPresenterInterface {
 
     public void onUserNotExists(){
         if(loginView != null){
-            loginView.setUserExistError();
+            loginView.setUserNotExistError();
+        }
+    }
+
+    @Override
+    public void onUserAlreadyExists() {
+        if(loginView != null){
+            loginView.setUserAlreadyExistError();
         }
     }
 

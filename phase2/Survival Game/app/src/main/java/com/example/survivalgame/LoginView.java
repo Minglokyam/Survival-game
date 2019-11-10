@@ -6,7 +6,8 @@ public interface LoginView {
     void launchPongGame(String name, User user);
     void launchDodgeGame(String name, User user);
     void setEmptyInputError();
-    void setUserExistError();
+    void setUserNotExistError();
+    void setUserAlreadyExistError();
     void setCredentialsError();
     void setRegisterSuccess();
 }

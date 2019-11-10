@@ -13,7 +13,7 @@ public class LoginInteractor {
         IOManager.saveFile();
         loginPresenterInterface.onRegisterSuccess();
       } else {
-        loginPresenterInterface.onUserNotExists();
+        loginPresenterInterface.onUserAlreadyExists();
       }
     } else {
       loginPresenterInterface.onCredentialEmpty();
