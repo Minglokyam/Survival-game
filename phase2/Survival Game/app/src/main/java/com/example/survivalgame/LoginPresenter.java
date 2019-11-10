@@ -8,7 +8,7 @@ public class LoginPresenter implements LoginPresenterInterface {
     public void onLoginSuccess(){}
     public void onWrongCredential(){}
 
-    public LoginPresenter(LoginView loginview, LoginInteractor loginInteractor) {
+    public LoginPresenter(LoginView loginView, LoginInteractor loginInteractor) {
     }
 
     public void validateRegisterCredentials(String toString, String toString1) {
