@@ -14,6 +14,7 @@ import com.example.survivalgame.runninggame.RunningGameActivity;
 
 public class MainActivity extends AppCompatActivity implements LoginView {
     private LoginPresenter presenter;
+
     /**
      * Create new UserManager when this activity is created
      */

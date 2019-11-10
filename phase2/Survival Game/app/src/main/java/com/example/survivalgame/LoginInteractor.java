@@ -1,7 +1,6 @@
 package com.example.survivalgame;
 
 class LoginInteractor {
-
     void register(String username, String password, LoginListener loginListener) {
         IOManager.loadFile();
         if (!(username.trim().equals("") || password.trim().equals(""))) {
