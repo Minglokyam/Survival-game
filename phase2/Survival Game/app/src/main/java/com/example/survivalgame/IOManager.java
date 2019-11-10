@@ -10,27 +10,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 
 public class IOManager {
 
   /* the main activity of the game */
-  private static MainActivity mainActivity;
+  private static Context context;
 
   /* the file that stores all user's data */
   private static final String USER_FILE = "user_file.ser";
 
   /** set the main activity of the game */
-  public static void setMainActivity(Context context) {
-    mainActivity = (MainActivity) context;
+  public static void setMainActivity(Context newContext) {
+    context = newContext;
   }
 
   /** read the user file and update the current userManager */
   public static void loadFile() {
     FileInputStream fis = null;
     try {
-      InputStream inputStream = mainActivity.openFileInput(USER_FILE);
+      InputStream inputStream = context.openFileInput(USER_FILE);
       if (inputStream != null) {
         ObjectInputStream input = new ObjectInputStream(inputStream);
         UserManager.setUserMap((HashMap) input.readObject());
@@ -55,7 +55,7 @@ public class IOManager {
   public static void saveFile() {
     FileOutputStream fos = null;
     try {
-      fos = mainActivity.openFileOutput(USER_FILE, Context.MODE_PRIVATE);
+      fos = context.openFileOutput(USER_FILE, Context.MODE_PRIVATE);
       ObjectOutputStream os = new ObjectOutputStream(fos);
       os.writeObject(UserManager.getUserMap());
       os.close();
