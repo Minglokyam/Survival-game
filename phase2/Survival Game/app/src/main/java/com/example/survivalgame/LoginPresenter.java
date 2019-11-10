@@ -3,8 +3,10 @@ package com.example.survivalgame;
 public class LoginPresenter implements LoginPresenterInterface {
 
     public void onRegisterSuccess(){}
-    public void onUserExists(){}
+    public void onUserNotExists(){}
     public void onCredentialEmpty(){}
+    public void onLoginSuccess(){}
+    public void onWrongCredential(){}
 
     public LoginPresenter(LoginView loginview, LoginInteractor loginInteractor) {
     }
