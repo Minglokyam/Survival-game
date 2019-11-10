@@ -13,20 +13,14 @@ import com.example.survivalgame.ponggame.PongGameActivity;
 import com.example.survivalgame.runninggame.RunningGameActivity;
 
 public class MainActivity extends AppCompatActivity {
-
-  /** UserManager of the game */
-  private UserManager userManager;
-
-  /** the user that's logged in */
+  private String name;
   private User user;
 
   /** Create new UserManager when this activity is created */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    userManager = new UserManager();
     IOManager.setMainActivity(this);
-    IOManager.setUserManager();
     setContentView(R.layout.activity_main);
   }
 
@@ -41,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
     String username = getName();
     String password = getPassword();
     if (!(username.trim().equals("") || password.trim().equals(""))) {
-      if (!userManager.userExists(username)) {
-        User newUser = new User(username, password, userManager.numUsers());
-        userManager.addUser(newUser);
+      if (!UserManager.userExists(username)) {
+        User newUser = new User(username, password);
+        UserManager.addUser(username, newUser);
         IOManager.saveFile();
         String msg = "User creation successful";
         Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
@@ -68,14 +62,13 @@ public class MainActivity extends AppCompatActivity {
     String username = getName();
     String password = getPassword();
     if (!(username.trim().equals("") || password.trim().equals(""))) {
-      System.out.println(userManager.userExists(username));
-      if (userManager.userExists(username)) {
-        User temp = userManager.getUser(username);
+      System.out.println(UserManager.userExists(username));
+      if (UserManager.userExists(username)) {
+        User temp = UserManager.getUser(username);
         if (temp.getUsername().equals(username) && temp.getPassword().equals(password)) {
           System.out.println("login success");
+          name = username;
           user = temp;
-          UserUpdater.setMainActivity(this);
-          UserUpdater.setUserList();
           launchGame();
         } else {
           String msg = "Username/password does not match";
@@ -108,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
   /** send the logged in user to another game and start that game's activity */
   private void toGame(Intent intent) {
-    intent.putExtra("user", user);
+    intent.putExtra("user", name);
     System.out.println("ready to launch");
     startActivity(intent);
   }
@@ -131,9 +124,5 @@ public class MainActivity extends AppCompatActivity {
   private String getPassword() {
     EditText passwordInput = findViewById(R.id.passwordInput);
     return passwordInput.getText().toString();
-  }
-
-  public UserManager getUserManager() {
-    return userManager;
   }
 }

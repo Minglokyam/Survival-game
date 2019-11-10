@@ -4,22 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import com.example.survivalgame.UserManager;
 
 import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
-import com.example.survivalgame.UserUpdater;
+
 // MainActivity class for the dodge game
 public class DodgeGameActivity extends AppCompatActivity {
   private DodgeGameView dodgeGameView;
+  private String name;
   private User user;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Intent intent = getIntent();
-    user = (User) intent.getSerializableExtra("user");
-    UserUpdater.updateUser(user, User.DODGE);
+    name = intent.getStringExtra("user");
+    user = UserManager.getUser(name);
+    user.setGameStage(User.DODGE);
     IOManager.saveFile();
     dodgeGameView = new DodgeGameView(this, user);
     setContentView(dodgeGameView);
@@ -29,7 +32,7 @@ public class DodgeGameActivity extends AppCompatActivity {
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    UserUpdater.resetUser(user);
+    user.reset();
     IOManager.saveFile();
     startActivity(intent);
     finish();

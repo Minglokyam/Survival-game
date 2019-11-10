@@ -11,9 +11,6 @@ public class User implements Serializable {
   /* user's password */
   private String password;
 
-  /* user's id */
-  private int id;
-
   /* user's current score */
   private int score;
 
@@ -38,16 +35,14 @@ public class User implements Serializable {
    *
    * @param username user's username
    * @param password user's password
-   * @param id user's id
    */
-  User(String username, String password, int id) {
+  User(String username, String password) {
     this.username = username;
     this.password = password;
     score = 0;
     life = 3;
     gameStage = RUNNING;
     totalDuration = Duration.ofSeconds(0);
-    this.id = id;
   }
 
   /** get the user's username */
@@ -58,11 +53,6 @@ public class User implements Serializable {
   /** get the user's password */
   String getPassword() {
     return password;
-  }
-
-  /** get the user's id */
-  public int getID() {
-    return id;
   }
 
   /** get the user's current score */
@@ -119,5 +109,12 @@ public class User implements Serializable {
    */
   public void setTotalDuration(Duration newTotalDuration) {
     totalDuration = newTotalDuration;
+  }
+
+  public void reset() {
+    life = 3;
+    gameStage = User.RUNNING;
+    score = 0;
+    totalDuration = Duration.ofSeconds(0);
   }
 }

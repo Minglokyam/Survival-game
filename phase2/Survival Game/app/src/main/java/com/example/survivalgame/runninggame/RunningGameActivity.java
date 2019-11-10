@@ -8,19 +8,21 @@ import android.os.Bundle;
 import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
-import com.example.survivalgame.UserUpdater;
+import com.example.survivalgame.UserManager;
 import com.example.survivalgame.ponggame.PongGameActivity;
 
 public class RunningGameActivity extends AppCompatActivity {
   private RunningGameView runningGameView;
+  private String name;
   private User user;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Intent intent = getIntent();
-    user = (User) intent.getSerializableExtra("user");
-    UserUpdater.updateUser(user, User.RUNNING);
+    name = intent.getStringExtra("user");
+    user = UserManager.getUser(name);
+    user.setGameStage(User.RUNNING);
     IOManager.saveFile();
     runningGameView = new RunningGameView(this, user);
     setContentView(runningGameView);
@@ -36,7 +38,7 @@ public class RunningGameActivity extends AppCompatActivity {
 
   public void toPong() {
     Intent intent = new Intent(this, PongGameActivity.class);
-    intent.putExtra("user", user);
+    intent.putExtra("user", name);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
@@ -45,7 +47,7 @@ public class RunningGameActivity extends AppCompatActivity {
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    UserUpdater.resetUser(user);
+    user.reset();
     IOManager.saveFile();
     startActivity(intent);
     finish();
