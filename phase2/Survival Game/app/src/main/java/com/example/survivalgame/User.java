@@ -3,7 +3,7 @@ package com.example.survivalgame;
 import java.time.Duration;
 import java.io.*;
 
-public class User implements Serializable {
+public class User implements Serializable, Comparable<User> {
 
   /* user's username */
   private String username;
@@ -116,5 +116,15 @@ public class User implements Serializable {
     gameStage = User.RUNNING;
     score = 0;
     totalDuration = Duration.ofSeconds(0);
+  }
+
+  public int compareTo(User user) {
+    if(this.score > user.score){
+      return -1;
+    }else if(this.score < user.score){
+      return 1;
+    }else{
+      return 0;
+    }
   }
 }
