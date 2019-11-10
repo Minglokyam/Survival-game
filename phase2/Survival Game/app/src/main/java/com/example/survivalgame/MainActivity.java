@@ -12,9 +12,12 @@ import com.example.survivalgame.dodgegame.DodgeGameActivity;
 import com.example.survivalgame.ponggame.PongGameActivity;
 import com.example.survivalgame.runninggame.RunningGameActivity;
 
-public class MainActivity extends AppCompatActivity {
-  private String name;
-  private User user;
+public class MainActivity extends AppCompatActivity implements LoginView {
+
+  private EditText username;
+  private EditText password;
+
+  private LoginPresenter presenter;
 
   /** Create new UserManager when this activity is created */
   @Override
@@ -22,9 +25,44 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     IOManager.setMainActivity(this);
     setContentView(R.layout.activity_main);
+
+    username = findViewById(R.id.usernameInput);
+    password = findViewById(R.id.passwordInput);
+    findViewById(R.id.loginButton).setOnClickListener(v -> validateLoginCredentials());
+    findViewById(R.id.loginButton).setOnClickListener(v -> validateRegisterCredentials());
+
+    presenter = new LoginPresenter(this, new LoginInteractor());
   }
 
-  /**
+  private void validateLoginCredentials() {
+      presenter.validateLoginCredentials(username.getText().toString(), password.getText().toString());
+  }
+
+  private void validateRegisterCredentials() {
+      presenter.validateRegisterCredentials(username.getText().toString(), password.getText().toString());
+  }
+
+  @Override
+  public void toGame() {
+
+  }
+
+  @Override
+  public void setEmptyInputError() {
+
+  }
+
+  @Override
+  public void setUserExistError() {
+
+  }
+
+  @Override
+  public void setCredentialsError() {
+
+  }
+
+    /**
    * If the username to be registered does not exist, add this new user to userManager and update
    * the user file
    *
@@ -125,4 +163,6 @@ public class MainActivity extends AppCompatActivity {
     EditText passwordInput = findViewById(R.id.passwordInput);
     return passwordInput.getText().toString();
   }
+
+
 }
