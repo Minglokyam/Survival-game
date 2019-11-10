@@ -34,17 +34,22 @@ public class MainActivity extends AppCompatActivity implements LoginView {
 
   @Override
   public void setEmptyInputError() {
-
+    Toast.makeText(MainActivity.this, "Input cannot be empty", Toast.LENGTH_SHORT).show();
   }
 
   @Override
   public void setUserExistError() {
-
+    Toast.makeText(MainActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
   }
 
   @Override
   public void setCredentialsError() {
+    Toast.makeText(MainActivity.this, "Username and password do not match", Toast.LENGTH_SHORT).show();
+  }
 
+  @Override
+  public void setRegisterSuccess() {
+    Toast.makeText(MainActivity.this, "Register success", Toast.LENGTH_SHORT).show();
   }
 
   public void launchRunningGame(String name, User user){

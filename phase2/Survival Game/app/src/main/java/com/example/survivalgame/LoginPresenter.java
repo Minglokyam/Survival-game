@@ -1,15 +1,39 @@
 package com.example.survivalgame;
 
 public class LoginPresenter implements LoginPresenterInterface {
-    private LoginView loginView;
 
-    LoginPresenter(LoginView loginView){
+    private LoginView loginView;
+    private LoginInteractor loginInteractor;
+
+    LoginPresenter(LoginView loginView, LoginInteractor loginInteractor){
         this.loginView = loginView;
+        this.loginInteractor = loginInteractor;
     }
 
-    public void onRegisterSuccess(){}
-    public void onUserNotExists(){}
-    public void onCredentialEmpty(){}
+    public void onRegisterSuccess(){
+        if(loginView != null){
+            loginView.setRegisterSuccess();
+        }
+    }
+
+    public void onUserNotExists(){
+        if(loginView != null){
+            loginView.setUserExistError();
+        }
+    }
+
+    public void onCredentialEmpty(){
+        if(loginView != null){
+            loginView.setEmptyInputError();
+        }
+    }
+
+    public void onWrongCredential(){
+        if(loginView != null){
+            loginView.setCredentialsError();
+        }
+    }
+
     public void launchRunningGame(String name, User user){
         loginView.launchRunningGame(name, user);
     }
@@ -19,14 +43,13 @@ public class LoginPresenter implements LoginPresenterInterface {
     public void launchDodgeGame(String name, User user){
         loginView.launchDodgeGame(name, user);
     }
-    public void onWrongCredential(){}
 
-    public LoginPresenter(LoginView loginView, LoginInteractor loginInteractor) {
+
+    public void validateRegisterCredentials(String username, String password) {
+        loginInteractor.register(username, password, this);
     }
 
-    public void validateRegisterCredentials(String toString, String toString1) {
-    }
-
-    public void validateLoginCredentials(String toString, String toString1) {
+    public void validateLoginCredentials(String username, String password) {
+        loginInteractor.login(username, password, this);
     }
 }

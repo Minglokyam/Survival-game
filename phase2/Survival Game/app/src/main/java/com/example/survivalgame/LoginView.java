@@ -8,4 +8,5 @@ public interface LoginView {
     void setEmptyInputError();
     void setUserExistError();
     void setCredentialsError();
+    void setRegisterSuccess();
 }
