@@ -11,14 +11,12 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class IOManager {
 
   /* the main activity of the game */
   private static MainActivity mainActivity;
-
-  /* the user manager of the game */
-  private static UserManager userManager;
 
   /* the file that stores all user's data */
   private static final String USER_FILE = "user_file.ser";
@@ -28,11 +26,6 @@ public class IOManager {
     mainActivity = (MainActivity) context;
   }
 
-  /** set the userManager of the game */
-  public static void setUserManager() {
-    userManager = mainActivity.getUserManager();
-  }
-
   /** read the user file and update the current userManager */
   public static void loadFile() {
     FileInputStream fis = null;
@@ -40,7 +33,7 @@ public class IOManager {
       InputStream inputStream = mainActivity.openFileInput(USER_FILE);
       if (inputStream != null) {
         ObjectInputStream input = new ObjectInputStream(inputStream);
-        userManager.setUserList((ArrayList) input.readObject());
+        UserManager.setUserMap((HashMap) input.readObject());
         inputStream.close();
       }
     } catch (FileNotFoundException e) {
@@ -64,7 +57,7 @@ public class IOManager {
     try {
       fos = mainActivity.openFileOutput(USER_FILE, Context.MODE_PRIVATE);
       ObjectOutputStream os = new ObjectOutputStream(fos);
-      os.writeObject(userManager.getUserList());
+      os.writeObject(UserManager.getUserMap());
       os.close();
     } catch (IOException e) {
       Log.e("Exception", "File write failed: " + e.toString());
