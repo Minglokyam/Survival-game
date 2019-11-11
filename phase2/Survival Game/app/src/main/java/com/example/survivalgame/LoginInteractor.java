@@ -1,11 +1,14 @@
 package com.example.survivalgame;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 class LoginInteractor {
     void register(String username, String password, LoginListener loginListener) {
         IOManager.loadFile();
-        if (!(username.trim().equals("") || password.trim().equals(""))) {
+        if (checkNotEmptyCredential(username, password)) {
             if (!UserManager.userExists(username)) {
-                User newUser = new User(username, password);
+                String hashed = BCrypt.hashpw(password, BCrypt.gensalt(10));
+                User newUser = new User(username, hashed);
                 UserManager.addUser(username, newUser);
                 IOManager.saveFile();
                 loginListener.onRegisterSuccess();
@@ -19,11 +22,11 @@ class LoginInteractor {
 
     void login(String username, String password, LoginListener loginListener) {
         IOManager.loadFile();
-        if (!(username.trim().equals("") || password.trim().equals(""))) {
+        if (checkNotEmptyCredential(username, password)) {
             System.out.println(UserManager.userExists(username));
             if (UserManager.userExists(username)) {
                 User temp = UserManager.getUser(username);
-                if (temp.getUsername().equals(username) && temp.getPassword().equals(password)) {
+                if (checkPassword(password, temp.getPassword())) {
                     onLoginSuccess(username, temp, loginListener);
                 } else {
                     loginListener.onWrongCredential();
@@ -46,5 +49,13 @@ class LoginInteractor {
         } else if (gameStage == User.DODGE) {
             loginListener.launchDodgeGame(name, user);
         }
+    }
+
+    private boolean checkPassword(String password, String hashed) {
+        return BCrypt.checkpw(password, hashed);
+    }
+
+    private boolean checkNotEmptyCredential(String username, String password) {
+        return !username.trim().equals("") || password.trim().equals("");
     }
 }
