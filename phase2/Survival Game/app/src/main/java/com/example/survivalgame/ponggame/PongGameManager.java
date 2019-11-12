@@ -44,15 +44,15 @@ class PongGameManager {
     movableList.add(ball);
   }
 
-  public int getScreenWidth() {
+  int getScreenWidth() {
     return this.screenWidth;
   }
 
-  public int getScreenHeight() {
+  int getScreenHeight() {
     return this.screenHeight;
   }
 
-  public RectPaddle getRectPaddle() {
+  RectPaddle getRectPaddle() {
     return this.rectPaddle;
   }
 
@@ -68,15 +68,15 @@ class PongGameManager {
     }
   }
 
-  public void paddleMoveLeft() {
+  void paddleMoveLeft() {
     rectPaddle.moveLeft();
   }
 
-  public void paddleMoveRight() {
+  void paddleMoveRight() {
     rectPaddle.moveRight();
   }
 
-  public void paddleStop() {
+  void paddleStop() {
     rectPaddle.stop();
   }
 }
