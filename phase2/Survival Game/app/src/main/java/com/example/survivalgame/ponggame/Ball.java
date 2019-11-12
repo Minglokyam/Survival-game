@@ -4,7 +4,7 @@ import android.graphics.Color;
 
 import com.example.survivalgame.User;
 
-class Ball extends PongGameItemCircle {
+class Ball extends PongGameItemCircle implements Movable {
   /** The horizontal velocity of this ball */
   private float xVelocity;
 
@@ -46,6 +46,7 @@ class Ball extends PongGameItemCircle {
   }
 
   /** move the ball when it hit top, left, right, paddle or bottom. */
+  @Override
   public void move(long fps) {
     hitTop();
     hitLeft();

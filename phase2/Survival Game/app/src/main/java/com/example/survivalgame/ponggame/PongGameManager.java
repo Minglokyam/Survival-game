@@ -5,6 +5,9 @@ import android.graphics.Canvas;
 
 import com.example.survivalgame.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class PongGameManager {
   private BallFactory ballFactory = new BallFactory();
   private RectPaddleFactory rectPaddleFactory = new RectPaddleFactory();
@@ -14,14 +17,21 @@ class PongGameManager {
   /** The screen height */
   private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-  private Ball ball;
-
   private RectPaddle rectPaddle;
 
+  private List<Movable> movableList = new ArrayList<>();
+
   PongGameManager(User user) {
-    ball =
+    Ball ball =
         ballFactory.createBall(
-            this, 10, screenWidth / 2, screenHeight / 2, screenWidth / 3, -screenHeight / 3, user);
+                this,
+                10,
+                screenWidth / 2,
+                screenHeight / 2,
+                screenWidth / 3,
+                -screenHeight / 3, user
+        );
+    movableList.add(ball);
     rectPaddle =
         rectPaddleFactory.createRectPaddle(
             this,
@@ -29,7 +39,9 @@ class PongGameManager {
             screenWidth / 4,
             screenHeight / 25,
             screenWidth / 6,
-            screenHeight * 7 / 8);
+            screenHeight * 7 / 8
+        );
+    movableList.add(ball);
   }
 
   public int getScreenWidth() {
@@ -45,13 +57,15 @@ class PongGameManager {
   }
 
   public void update(long fps) {
-    ball.move(fps);
-    rectPaddle.move(fps);
+    for(Movable movable: movableList){
+      movable.move(fps);
+    }
   }
 
   public void draw(Canvas canvas) {
-    rectPaddle.draw(canvas);
-    ball.draw(canvas);
+    for(Movable movable: movableList){
+      movable.draw(canvas);
+    }
   }
 
   public void paddleMoveLeft() {

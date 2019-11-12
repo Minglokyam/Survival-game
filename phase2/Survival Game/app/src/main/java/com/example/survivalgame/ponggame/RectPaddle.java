@@ -3,7 +3,7 @@ package com.example.survivalgame.ponggame;
 import android.graphics.Color;
 
 /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-class RectPaddle extends PongGameItemRect {
+class RectPaddle extends PongGameItemRect implements Movable {
   private final int STOP = 0;
   private final int LEFT = 1;
   private final int RIGHT = 2;
@@ -24,7 +24,8 @@ class RectPaddle extends PongGameItemRect {
   }
 
   /** move the paddle considering the current moving direction . */
-  void move(long fps) {
+  @Override
+  public void move(long fps) {
     if (!checkHitLeft() && movingStatus == LEFT) {
       xMoveLeft(fps);
     } else if (!checkHitRight() && movingStatus == RIGHT) {
