@@ -17,7 +17,6 @@ public abstract class PongGameItemCircle extends PongGameItem {
     return radius;
   }
 
-  @Override
   public void draw(Canvas canvas) {
     canvas.drawCircle(getXCoordinate(), getYCoordinate(), getRadius(), getPaint());
   }

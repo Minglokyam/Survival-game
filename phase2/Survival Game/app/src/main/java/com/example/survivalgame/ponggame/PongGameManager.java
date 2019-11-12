@@ -41,7 +41,7 @@ class PongGameManager {
             screenWidth / 6,
             screenHeight * 7 / 8
         );
-    movableList.add(ball);
+    movableList.add(rectPaddle);
   }
 
   int getScreenWidth() {

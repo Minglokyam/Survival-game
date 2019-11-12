@@ -1,5 +1,6 @@
 package com.example.survivalgame.ponggame;
 
+import android.graphics.Canvas;
 import android.graphics.Color;
 
 /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */

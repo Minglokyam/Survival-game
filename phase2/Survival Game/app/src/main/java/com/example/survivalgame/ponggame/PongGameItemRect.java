@@ -20,22 +20,21 @@ public abstract class PongGameItemRect extends PongGameItem {
   }
 
   /** A getter of width */
-  public float getWidth() {
+  float getWidth() {
     return width;
   }
 
   /** A getter of height */
-  private float getHeight() {
+  float getHeight() {
     return height;
   }
 
-  @Override
   public void draw(Canvas canvas) {
     canvas.drawRect(
-        getXCoordinate(),
-        getYCoordinate(),
-        getXCoordinate() + getWidth(),
-        getYCoordinate() + getHeight(),
-        getPaint());
+            getXCoordinate(),
+            getYCoordinate(),
+            getXCoordinate() + getWidth(),
+            getYCoordinate() + getHeight(),
+            getPaint());
   }
 }
