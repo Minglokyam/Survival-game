@@ -1,126 +1,115 @@
 package com.example.survivalgame.ponggame;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.survivalgame.User;
 
-import java.time.Duration;
+public class PongGameView extends SurfaceView implements View {
+    private ActivityInterface activityInterface;
 
-public class PongGameView extends SurfaceView {
-  /** The Activity of this game */
-  private PongGameActivity pongGameActivity;
-  /** The Thread of this game */
-  private PongGameThread pongGameThread;
-  /** Pong Game Manager is responsible for storing the objects of this game and their motions. */
-  private PongGameManager pongGameManager;
+    private Canvas canvas;
+    /**
+     * The Thread of this game
+     */
+    private PongGameThreadPresenter pongGameThreadPresenter;
 
-  /**
-   * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ The number of
-   * frames per second
-   */
-  private long FPS = 30;
+    /**
+     * The screen width
+     */
+    private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
 
-  private Paint paintText;
+    /**
+     * The screen height
+     */
+    private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-  /** the countdown of this game */
-  private Duration pongDuration;
+    private float touchReference;
 
-  private User user;
+    public PongGameView(Context context, ActivityInterface activityInterface, User user) {
+        super(context);
+        this.activityInterface = activityInterface;
+        pongGameThreadPresenter = new PongGameThreadPresenter(this, user, screenWidth, screenHeight);
+        SurfaceHolder surfaceHolder = getHolder();
+        surfaceHolder.addCallback(
+                new SurfaceHolder.Callback() {
+                    @Override
+                    public void surfaceCreated(SurfaceHolder holder) {
+                        pongGameThreadPresenter.setRunning(true);
+                        pongGameThreadPresenter.start();
+                    }
 
-  public PongGameView(Context context, User user) {
-    super(context);
-    pongGameActivity = (PongGameActivity) context;
-    pongGameManager = new PongGameManager(user);
+                    @Override
+                    public void surfaceChanged(SurfaceHolder holder, int a, int b, int c) {
+                    }
 
-    this.user = user;
-
-    setFocusable(true);
-    paintText = new Paint();
-    paintText.setTextSize(36);
-    paintText.setTypeface(Typeface.DEFAULT_BOLD);
-
-    pongGameThread = new PongGameThread(this, user);
-    SurfaceHolder surfaceHolder = getHolder();
-    surfaceHolder.addCallback(
-        new SurfaceHolder.Callback() {
-          @Override
-          public void surfaceCreated(SurfaceHolder holder) {
-            pongGameThread.setRunning(true);
-            pongGameThread.start();
-          }
-
-          @Override
-          public void surfaceChanged(SurfaceHolder holder, int a, int b, int c) {}
-
-          @Override
-          public void surfaceDestroyed(SurfaceHolder holder) {}
-        });
-    // =======================================
-    pongDuration = Duration.ofSeconds(30);
-  }
-
-  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  public void update() {
-    pongGameManager.update(FPS);
-    user.setScore(user.getScore() + 1);
-    if (user.getLife() == 0) { // If no life left, return to main screen.
-      pongGameThread.setRunning(false);
-      pongGameActivity.toMain();
-    } else if (pongDuration.getSeconds() <= 0) { // If countdown reach 0, go to next game.
-      pongGameThread.setRunning(false);
-      pongGameActivity.toDodge();
+                    @Override
+                    public void surfaceDestroyed(SurfaceHolder holder) {
+                    }
+                });
     }
-  }
 
-  @Override
-  public void draw(Canvas canvas) {
-    super.draw(canvas);
-    // draw the text on the top left corner
-    canvas.drawColor(Color.rgb(255, 255, 255));
-    canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
-    canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
-    canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
-    canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
-    // draw game items
-    pongGameManager.draw(canvas);
-  }
-
-  /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  @Override
-  public boolean onTouchEvent(MotionEvent motionEvent) {
-    RectPaddle rectPaddle = pongGameManager.getRectPaddle();
-    switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
-      case MotionEvent.ACTION_DOWN:
-        // point on the right of the peddle
-        if (motionEvent.getX() > rectPaddle.getXCoordinate() + rectPaddle.getWidth() / 2) {
-          pongGameManager.paddleMoveRight();
-        } else { // point on the left of the peddle
-          pongGameManager.paddleMoveLeft();
+    /**
+     * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
+            case MotionEvent.ACTION_DOWN:
+                // point on the right of the peddle
+                if (motionEvent.getX() > touchReference) {
+                    pongGameThreadPresenter.paddleMoveRight();
+                } else { // point on the left of the peddle
+                    pongGameThreadPresenter.paddleMoveLeft();
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                pongGameThreadPresenter.paddleStop();
+                break;
         }
-        break;
-      case MotionEvent.ACTION_UP:
-        pongGameManager.paddleStop();
-        break;
+        return true;
     }
-    return true;
-  }
 
-  public void setFPS(long newFPS) {
-    FPS = newFPS;
-  }
+    @Override
+    public Canvas lockCanvas() {
+        return getHolder().lockCanvas();
+    }
 
-  public Duration getPongDuration() {
-    return pongDuration;
-  }
+    @Override
+    public void unlockCanvasAndPost(Canvas canvas) {
+        getHolder().unlockCanvasAndPost(canvas);
+    }
 
-  public void setPongDuration(Duration newPongDuration) {
-    pongDuration = newPongDuration;
-  }
+    @Override
+    public void toMain() {
+        activityInterface.toMain();
+    }
+
+    @Override
+    public void toDodge() {
+        activityInterface.toDodge();
+    }
+
+    @Override
+    public void setTouchReference(float newTouchReference) {
+        touchReference = newTouchReference;
+    }
+
+//    @Override
+//    public SurfaceHolder obtainHolder() {
+//        return getHolder();
+//    }
+
+    @Override
+    public void drawCircle() {
+    }
+
+    @Override
+    public void drawRect() {
+
+    }
 }
