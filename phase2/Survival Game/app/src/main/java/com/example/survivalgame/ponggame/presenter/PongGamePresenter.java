@@ -6,7 +6,6 @@ import com.example.survivalgame.ponggame.model.PongGameItem;
 import com.example.survivalgame.ponggame.model.PongGameManager;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PongGamePresenter extends Thread {
@@ -16,7 +15,6 @@ public class PongGamePresenter extends Thread {
     private PongGameManager pongGameManager;
     private long fps = 30;
     List<List<Float>> itemList;
-    private ArrayList<float[]> replay;
     /**
      * the countdown of this game
      */
@@ -50,13 +48,19 @@ public class PongGamePresenter extends Thread {
                     view.drawText("Score: " + user.getScore(), 0, 128);
                     checkQuit();
                     itemList = pongGameManager.getItemList();
+                    float[] tempReplay = new float[4];
                     for (List<Float> floatList : itemList) {
                         if (floatList.get(0) == PongGameItem.CIRCLE) {
                             view.drawCircle(floatList.get(1), floatList.get(2), floatList.get(3));
+                            tempReplay[0] = floatList.get(1);
+                            tempReplay[1] = floatList.get(2);
                         } else {
                             view.drawRect(floatList.get(1), floatList.get(2), floatList.get(3), floatList.get(4));
+                            tempReplay[2] = floatList.get(1);
+                            tempReplay[3] = floatList.get(2);
                         }
                     }
+                    this.user.addReplay(tempReplay);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -110,4 +114,7 @@ public class PongGamePresenter extends Thread {
     public void paddleStop() {
         pongGameManager.paddleStop();
     }
+
+
+
 }

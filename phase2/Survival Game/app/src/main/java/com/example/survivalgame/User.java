@@ -46,6 +46,7 @@ public class User implements Serializable, Comparable<User> {
         life = 3;
         gameStage = RUNNING;
         totalDuration = Duration.ofSeconds(0);
+        replay = new ArrayList<float[]>();
     }
 
     /**
@@ -143,8 +144,8 @@ public class User implements Serializable, Comparable<User> {
         }
     }
 
-    public void setReplay(ArrayList<float[]> replay) {
-        this.replay = replay;
+    public void addReplay(float[] tempReplay) {
+        this.replay.add(tempReplay);
     }
 
     public ArrayList<float[]> getReplay() {
