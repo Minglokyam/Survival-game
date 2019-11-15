@@ -6,6 +6,7 @@ import com.example.survivalgame.ponggame.model.PongGameItem;
 import com.example.survivalgame.ponggame.model.PongGameManager;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PongGamePresenter extends Thread {
@@ -15,6 +16,7 @@ public class PongGamePresenter extends Thread {
     private PongGameManager pongGameManager;
     private long fps = 30;
     List<List<Float>> itemList;
+    private ArrayList<float[]> replay;
     /**
      * the countdown of this game
      */

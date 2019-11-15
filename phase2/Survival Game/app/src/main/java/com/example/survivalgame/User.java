@@ -2,6 +2,7 @@ package com.example.survivalgame;
 
 import java.time.Duration;
 import java.io.*;
+import java.util.ArrayList;
 
 public class User implements Serializable, Comparable<User> {
 
@@ -22,6 +23,8 @@ public class User implements Serializable, Comparable<User> {
 
     /* the game the user is playing */
     private int gameStage;
+
+    private ArrayList<float[]> replay;
 
     /* First game: Running game */
     public static final int RUNNING = 0;
@@ -138,5 +141,13 @@ public class User implements Serializable, Comparable<User> {
         } else {
             return 0;
         }
+    }
+
+    public void setReplay(ArrayList<float[]> replay) {
+        this.replay = replay;
+    }
+
+    public ArrayList<float[]> getReplay() {
+        return replay;
     }
 }

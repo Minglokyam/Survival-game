@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
 import com.example.survivalgame.User;
 import com.example.survivalgame.ponggame.presenter.PongGamePresenter;
 
@@ -20,8 +22,9 @@ public class PongGameView extends SurfaceView implements View {
 
     private Paint paintShape;
 
-
     private Paint paintText;
+
+    private ArrayList<float[]> replay;
 
     /**
      * The Thread of this game
