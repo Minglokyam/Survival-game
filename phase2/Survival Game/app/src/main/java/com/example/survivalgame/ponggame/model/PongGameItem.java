@@ -1,11 +1,8 @@
-package com.example.survivalgame.ponggame;
-
-import android.graphics.Canvas;
-import android.graphics.Paint;
+package com.example.survivalgame.ponggame.model;
 
 import java.util.List;
 
-abstract class PongGameItem {
+public abstract class PongGameItem {
     private float shape;
 
     public static final float CIRCLE = 0f;

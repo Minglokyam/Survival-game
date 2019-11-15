@@ -1,11 +1,11 @@
-package com.example.survivalgame.ponggame;
+package com.example.survivalgame.ponggame.model;
 
 import com.example.survivalgame.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class PongGameManager {
+public class PongGameManager {
     private int screenWidth;
     private int screenHeight;
     private BallFactory ballFactory = new BallFactory();
@@ -16,7 +16,7 @@ class PongGameManager {
     private List<Movable> movableList = new ArrayList<>();
     private List<PongGameItem> gameItemList = new ArrayList<>();
 
-    PongGameManager(User user, int screenWidth, int screenHeight) {
+    public PongGameManager(User user, int screenWidth, int screenHeight) {
         Ball ball =
                 ballFactory.createBall(
                         this,
@@ -53,19 +53,19 @@ class PongGameManager {
         }
     }
 
-    void paddleMoveLeft() {
+    public void paddleMoveLeft() {
         rectPaddle.moveLeft();
     }
 
-    void paddleMoveRight() {
+    public void paddleMoveRight() {
         rectPaddle.moveRight();
     }
 
-    void paddleStop() {
+    public void paddleStop() {
         rectPaddle.stop();
     }
 
-    float getTouchReference() {
+    public float getTouchReference() {
         float newTouchReference = rectPaddle.getXCoordinate() + rectPaddle.getWidth() / 2;
         return newTouchReference;
     }
@@ -78,7 +78,7 @@ class PongGameManager {
         return screenHeight;
     }
 
-    List<List<Float>> getItemList() {
+    public List<List<Float>> getItemList() {
         List<List<Float>> itemList = new ArrayList<>();
         for (PongGameItem pongGameItem : gameItemList) {
             itemList.add(pongGameItem.getFloatList());

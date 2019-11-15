@@ -12,7 +12,7 @@
         <activity android:name=".ScoreBoarding.ScoreBoard"></activity>
         <activity android:name=".dodgegame.DodgeGameActivity" />
         <activity android:name=".runninggame.RunningGameActivity" />
-        <activity android:name=".ponggame.PongGameActivity" />
+        <activity android:name=".ponggame.view.PongGameActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

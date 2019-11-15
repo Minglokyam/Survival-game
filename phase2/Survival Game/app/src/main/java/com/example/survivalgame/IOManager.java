@@ -14,7 +14,6 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 public class IOManager {
-
     /* the main activity of the game */
     private static Context context;
 

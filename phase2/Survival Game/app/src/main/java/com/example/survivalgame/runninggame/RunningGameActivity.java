@@ -9,7 +9,7 @@ import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserManager;
-import com.example.survivalgame.ponggame.PongGameActivity;
+import com.example.survivalgame.ponggame.view.PongGameActivity;
 
 public class RunningGameActivity extends AppCompatActivity {
     private RunningGameView runningGameView;

@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.survivalgame.dodgegame.DodgeGameActivity;
-import com.example.survivalgame.ponggame.PongGameActivity;
+import com.example.survivalgame.ponggame.view.PongGameActivity;
 import com.example.survivalgame.runninggame.RunningGameActivity;
 
 public class MainActivity extends AppCompatActivity implements LoginView {

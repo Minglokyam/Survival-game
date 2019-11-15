@@ -1,4 +1,4 @@
-package com.example.survivalgame.ponggame;
+package com.example.survivalgame.ponggame.model;
 
 /**
  * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/

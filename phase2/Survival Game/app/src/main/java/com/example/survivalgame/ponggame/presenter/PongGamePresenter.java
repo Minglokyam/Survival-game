@@ -1,23 +1,26 @@
-package com.example.survivalgame.ponggame;
+package com.example.survivalgame.ponggame.presenter;
 
 import com.example.survivalgame.User;
+import com.example.survivalgame.ponggame.view.View;
+import com.example.survivalgame.ponggame.model.PongGameItem;
+import com.example.survivalgame.ponggame.model.PongGameManager;
 
 import java.time.Duration;
 import java.util.List;
 
-class PongGameThreadPresenter extends Thread {
+public class PongGamePresenter extends Thread {
     private boolean running;
     private View view;
     private User user;
     private PongGameManager pongGameManager;
-    private long FPS = 30;
+    private long fps = 30;
     List<List<Float>> itemList;
     /**
      * the countdown of this game
      */
     private Duration pongDuration;
 
-    public PongGameThreadPresenter(View view, User user, int screenWidth, int screenHeight) {
+    public PongGamePresenter(View view, User user, int screenWidth, int screenHeight) {
         this.user = user;
         this.view = view;
         pongGameManager = new PongGameManager(user, screenWidth, screenHeight);
@@ -36,7 +39,7 @@ class PongGameThreadPresenter extends Thread {
             try {
                 view.lockCanvas();
                 synchronized (this) {
-                    pongGameManager.update(FPS);
+                    pongGameManager.update(fps);
                     setTouchReference();
                     view.drawColor(255, 255, 255);
                     view.drawText("Life: " + user.getLife(), 0, 32);
@@ -66,7 +69,7 @@ class PongGameThreadPresenter extends Thread {
             pongDuration = (pongDuration.minusMillis(timeInterval));
 
             if (timeInterval > 1) {
-                FPS = 1000 / timeInterval;
+                fps = 1000 / timeInterval;
             }
         }
     }
@@ -85,7 +88,7 @@ class PongGameThreadPresenter extends Thread {
         }
     }
 
-    void setRunning(boolean newRunning) {
+    public void setRunning(boolean newRunning) {
         running = newRunning;
     }
 
@@ -94,15 +97,15 @@ class PongGameThreadPresenter extends Thread {
         view.setTouchReference(newTouchReference);
     }
 
-    void paddleMoveLeft() {
+    public void paddleMoveLeft() {
         pongGameManager.paddleMoveLeft();
     }
 
-    void paddleMoveRight() {
+    public void paddleMoveRight() {
         pongGameManager.paddleMoveRight();
     }
 
-    void paddleStop() {
+    public void paddleStop() {
         pongGameManager.paddleStop();
     }
 }

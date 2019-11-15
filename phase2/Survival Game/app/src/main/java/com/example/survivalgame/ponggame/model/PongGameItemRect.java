@@ -1,4 +1,4 @@
-package com.example.survivalgame.ponggame;
+package com.example.survivalgame.ponggame.model;
 
 import java.util.ArrayList;
 import java.util.List;

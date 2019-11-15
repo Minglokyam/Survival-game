@@ -1,4 +1,4 @@
-package com.example.survivalgame.ponggame;
+package com.example.survivalgame.ponggame.view;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.survivalgame.User;
+import com.example.survivalgame.ponggame.presenter.PongGamePresenter;
 
 public class PongGameView extends SurfaceView implements View {
     private ActivityInterface activityInterface;
@@ -25,7 +26,7 @@ public class PongGameView extends SurfaceView implements View {
     /**
      * The Thread of this game
      */
-    private PongGameThreadPresenter pongGameThreadPresenter;
+    private PongGamePresenter pongGamePresenter;
 
     /**
      * The screen width
@@ -48,14 +49,14 @@ public class PongGameView extends SurfaceView implements View {
         paintText.setTextSize(36);
         paintText.setTypeface(Typeface.DEFAULT_BOLD);
 
-        pongGameThreadPresenter = new PongGameThreadPresenter(this, user, screenWidth, screenHeight);
+        pongGamePresenter = new PongGamePresenter(this, user, screenWidth, screenHeight);
 
         getHolder().addCallback(
                 new SurfaceHolder.Callback() {
                     @Override
                     public void surfaceCreated(SurfaceHolder holder) {
-                        pongGameThreadPresenter.setRunning(true);
-                        pongGameThreadPresenter.start();
+                        pongGamePresenter.setRunning(true);
+                        pongGamePresenter.start();
                     }
 
                     @Override
@@ -77,13 +78,13 @@ public class PongGameView extends SurfaceView implements View {
             case MotionEvent.ACTION_DOWN:
                 // point on the right of the peddle
                 if (motionEvent.getX() > touchReference) {
-                    pongGameThreadPresenter.paddleMoveRight();
+                    pongGamePresenter.paddleMoveRight();
                 } else { // point on the left of the peddle
-                    pongGameThreadPresenter.paddleMoveLeft();
+                    pongGamePresenter.paddleMoveLeft();
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                pongGameThreadPresenter.paddleStop();
+                pongGamePresenter.paddleStop();
                 break;
         }
         return true;
