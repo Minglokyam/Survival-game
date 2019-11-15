@@ -151,4 +151,12 @@ public class User implements Serializable, Comparable<User> {
     public ArrayList<float[]> getReplay() {
         return replay;
     }
+
+    public void deleteReplay(){
+        replay.remove(0);
+    }
+
+    public boolean isEmptyReplay() {
+        return replay.isEmpty();
+    }
 }

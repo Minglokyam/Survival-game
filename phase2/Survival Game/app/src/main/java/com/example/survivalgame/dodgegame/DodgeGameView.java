@@ -66,7 +66,7 @@ public class DodgeGameView extends SurfaceView {
           }
         });
     // =======================================
-    dodgeDuration = Duration.ofSeconds(30);
+    dodgeDuration = Duration.ofSeconds(5);
   }
 
   public Duration getDodgeDuration() {
@@ -90,7 +90,7 @@ public class DodgeGameView extends SurfaceView {
         || user.getLife()
             == 0) { // After a success or a defeat, the player will go back to the main menu.
       dodgeGameThread.setRunning(false);
-      dodgeGameActivity.toMain();
+      dodgeGameActivity.toReplay();
     }
     user.setScore(user.getScore() + 1);
   }

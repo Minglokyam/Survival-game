@@ -9,6 +9,7 @@ import com.example.survivalgame.UserManager;
 import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
+import com.example.survivalgame.ponggame.view.PongGameReplayActivity;
 
 // MainActivity class for the dodge game
 public class DodgeGameActivity extends AppCompatActivity {
@@ -34,6 +35,14 @@ public class DodgeGameActivity extends AppCompatActivity {
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     user.reset();
     IOManager.saveFile();
+    startActivity(intent);
+    finish();
+  }
+
+  public void toReplay() {
+    Intent intent = new Intent(this, PongGameReplayActivity.class);
+    intent.putExtra("user", name);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
   }
