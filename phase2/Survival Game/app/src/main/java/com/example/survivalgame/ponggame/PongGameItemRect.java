@@ -1,6 +1,7 @@
 package com.example.survivalgame.ponggame;
 
-import android.graphics.Canvas;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class PongGameItemRect extends PongGameItem {
     /**
@@ -21,6 +22,7 @@ public abstract class PongGameItemRect extends PongGameItem {
         super(pongGameManager, xCoordinate, yCoordinate);
         this.width = width;
         this.height = height;
+        this.setShape(PongGameItem.RECTANGLE);
     }
 
     /**
@@ -37,12 +39,13 @@ public abstract class PongGameItemRect extends PongGameItem {
         return height;
     }
 
-    public void draw(Canvas canvas) {
-        canvas.drawRect(
-                getXCoordinate(),
-                getYCoordinate(),
-                getXCoordinate() + getWidth(),
-                getYCoordinate() + getHeight(),
-                getPaint());
+    public List<Float> getFloatList() {
+        List<Float> floatList = new ArrayList<>();
+        floatList.add(getShape());
+        floatList.add(getXCoordinate());
+        floatList.add(getYCoordinate());
+        floatList.add(width);
+        floatList.add(height);
+        return floatList;
     }
 }

@@ -1,8 +1,5 @@
 package com.example.survivalgame.ponggame;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-
 import com.example.survivalgame.User;
 
 class Ball extends PongGameItemCircle implements Movable {
@@ -57,7 +54,6 @@ class Ball extends PongGameItemCircle implements Movable {
         initialYCoordinate = yCoordinate;
         this.xVelocity = xVelocity;
         this.yVelocity = yVelocity;
-        getPaint().setColor(Color.MAGENTA);
     }
 
     /**

@@ -1,13 +1,11 @@
 package com.example.survivalgame.ponggame;
 
-import android.graphics.Canvas;
-
 public interface View {
-    Canvas lockCanvas();
+    void clearCanvas();
 
-//    SurfaceHolder obtainHolder();
+    void lockCanvas();
 
-    void unlockCanvasAndPost(Canvas canvas);
+    void unlockCanvasAndPost();
 
     void toMain();
 
@@ -15,7 +13,11 @@ public interface View {
 
     void setTouchReference(float newTouchReference);
 
-    void drawCircle();
+    void drawCircle(float xCoordinate, float yCoordinate, float radius);
 
-    void drawRect();
+    void drawRect(float xCoordinate, float yCoordinate, float width, float height);
+
+    void drawText(String string, float xCoordinate, float yCoordinate);
+
+    void drawColor(int red, int green, int blue);
 }

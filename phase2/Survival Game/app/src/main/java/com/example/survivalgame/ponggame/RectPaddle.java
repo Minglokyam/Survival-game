@@ -1,8 +1,5 @@
 package com.example.survivalgame.ponggame;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-
 /**
  * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
  */
@@ -24,7 +21,6 @@ class RectPaddle extends PongGameItemRect implements Movable {
             float xCoordinate,
             float yCoordinate) {
         super(pongGameManager, width, height, xCoordinate, yCoordinate);
-        getPaint().setColor(Color.MAGENTA);
         this.xSpeed = xSpeed;
     }
 

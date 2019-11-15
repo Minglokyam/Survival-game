@@ -1,7 +1,5 @@
 package com.example.survivalgame.ponggame;
 
-import android.graphics.Canvas;
-
 import com.example.survivalgame.User;
 
 import java.util.ArrayList;
@@ -16,6 +14,7 @@ class PongGameManager {
     private RectPaddle rectPaddle;
 
     private List<Movable> movableList = new ArrayList<>();
+    private List<PongGameItem> gameItemList = new ArrayList<>();
 
     PongGameManager(User user, int screenWidth, int screenHeight) {
         Ball ball =
@@ -28,6 +27,7 @@ class PongGameManager {
                         -screenHeight / 3, user
                 );
         movableList.add(ball);
+        gameItemList.add(ball);
         rectPaddle =
                 rectPaddleFactory.createRectPaddle(
                         this,
@@ -38,6 +38,7 @@ class PongGameManager {
                         screenHeight * 7 / 8
                 );
         movableList.add(rectPaddle);
+        gameItemList.add(rectPaddle);
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
     }
@@ -49,12 +50,6 @@ class PongGameManager {
     public void update(long fps) {
         for (Movable movable : movableList) {
             movable.move(fps);
-        }
-    }
-
-    public void draw(Canvas canvas) {
-        for (Movable movable : movableList) {
-            movable.draw(canvas);
         }
     }
 
@@ -81,5 +76,13 @@ class PongGameManager {
 
     int getScreenHeight() {
         return screenHeight;
+    }
+
+    List<List<Float>> getItemList() {
+        List<List<Float>> itemList = new ArrayList<>();
+        for (PongGameItem pongGameItem : gameItemList) {
+            itemList.add(pongGameItem.getFloatList());
+        }
+        return itemList;
     }
 }

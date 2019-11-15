@@ -3,6 +3,9 @@ package com.example.survivalgame.ponggame;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -13,6 +16,12 @@ public class PongGameView extends SurfaceView implements View {
     private ActivityInterface activityInterface;
 
     private Canvas canvas;
+
+    private Paint paintShape;
+
+
+    private Paint paintText;
+
     /**
      * The Thread of this game
      */
@@ -33,9 +42,15 @@ public class PongGameView extends SurfaceView implements View {
     public PongGameView(Context context, ActivityInterface activityInterface, User user) {
         super(context);
         this.activityInterface = activityInterface;
+        paintShape = new Paint();
+        paintShape.setColor(Color.MAGENTA);
+        paintText = new Paint();
+        paintText.setTextSize(36);
+        paintText.setTypeface(Typeface.DEFAULT_BOLD);
+
         pongGameThreadPresenter = new PongGameThreadPresenter(this, user, screenWidth, screenHeight);
-        SurfaceHolder surfaceHolder = getHolder();
-        surfaceHolder.addCallback(
+
+        getHolder().addCallback(
                 new SurfaceHolder.Callback() {
                     @Override
                     public void surfaceCreated(SurfaceHolder holder) {
@@ -75,12 +90,12 @@ public class PongGameView extends SurfaceView implements View {
     }
 
     @Override
-    public Canvas lockCanvas() {
-        return getHolder().lockCanvas();
+    public void lockCanvas() {
+        canvas = getHolder().lockCanvas();
     }
 
     @Override
-    public void unlockCanvasAndPost(Canvas canvas) {
+    public void unlockCanvasAndPost() {
         getHolder().unlockCanvasAndPost(canvas);
     }
 
@@ -99,17 +114,33 @@ public class PongGameView extends SurfaceView implements View {
         touchReference = newTouchReference;
     }
 
-//    @Override
-//    public SurfaceHolder obtainHolder() {
-//        return getHolder();
-//    }
-
     @Override
-    public void drawCircle() {
+    public void drawCircle(float xCoordinate, float yCoordinate, float radius) {
+        canvas.drawCircle(xCoordinate, yCoordinate, radius, paintShape);
     }
 
     @Override
-    public void drawRect() {
+    public void drawRect(float xCoordinate, float yCoordinate, float width, float height) {
+        canvas.drawRect(
+                xCoordinate,
+                yCoordinate,
+                xCoordinate + width,
+                yCoordinate + height,
+                paintShape);
+    }
 
+    @Override
+    public void drawText(String string, float xCoordinate, float yCoordinate) {
+        canvas.drawText(string, xCoordinate, yCoordinate, paintText);
+    }
+
+    @Override
+    public void drawColor(int red, int green, int blue) {
+        canvas.drawColor(Color.rgb(red, green, blue));
+    }
+
+    @Override
+    public void clearCanvas() {
+        canvas = null;
     }
 }

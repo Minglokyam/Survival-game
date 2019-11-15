@@ -1,13 +1,9 @@
 package com.example.survivalgame.ponggame;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-
 import com.example.survivalgame.User;
 
 import java.time.Duration;
+import java.util.List;
 
 class PongGameThreadPresenter extends Thread {
     private boolean running;
@@ -15,19 +11,16 @@ class PongGameThreadPresenter extends Thread {
     private User user;
     private PongGameManager pongGameManager;
     private long FPS = 30;
+    List<List<Float>> itemList;
     /**
      * the countdown of this game
      */
     private Duration pongDuration;
-    private Paint paintText;
 
     public PongGameThreadPresenter(View view, User user, int screenWidth, int screenHeight) {
         this.user = user;
         this.view = view;
         pongGameManager = new PongGameManager(user, screenWidth, screenHeight);
-        paintText = new Paint();
-        paintText.setTextSize(36);
-        paintText.setTypeface(Typeface.DEFAULT_BOLD);
         pongDuration = Duration.ofSeconds(30);
     }
 
@@ -39,27 +32,31 @@ class PongGameThreadPresenter extends Thread {
     public void run() {
         while (running) {
             long startTime = System.currentTimeMillis();
-
-            Canvas canvas = null;
+            view.clearCanvas();
             try {
-                canvas = view.lockCanvas();
+                view.lockCanvas();
                 synchronized (this) {
                     pongGameManager.update(FPS);
                     setTouchReference();
-                    canvas.drawColor(Color.rgb(255, 255, 255));
-                    canvas.drawText("Life: " + user.getLife(), 0, 32, paintText);
-                    canvas.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64, paintText);
-                    canvas.drawText("Game time: " + pongDuration.getSeconds(), 0, 96, paintText);
-                    canvas.drawText("Score: " + user.getScore(), 0, 128, paintText);
+                    view.drawColor(255, 255, 255);
+                    view.drawText("Life: " + user.getLife(), 0, 32);
+                    view.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64);
+                    view.drawText("Game time: " + pongDuration.getSeconds(), 0, 96);
+                    view.drawText("Score: " + user.getScore(), 0, 128);
                     checkQuit();
-                    pongGameManager.draw(canvas);
+                    itemList = pongGameManager.getItemList();
+                    for (List<Float> floatList : itemList) {
+                        if (floatList.get(0) == PongGameItem.CIRCLE) {
+                            view.drawCircle(floatList.get(1), floatList.get(2), floatList.get(3));
+                        } else {
+                            view.drawRect(floatList.get(1), floatList.get(2), floatList.get(3), floatList.get(4));
+                        }
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                if (canvas != null) {
-                    view.unlockCanvasAndPost(canvas);
-                }
+                view.unlockCanvasAndPost();
             }
 
             long timeInterval = System.currentTimeMillis() - startTime;

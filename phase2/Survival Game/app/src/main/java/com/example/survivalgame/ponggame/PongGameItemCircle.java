@@ -1,6 +1,7 @@
 package com.example.survivalgame.ponggame;
 
-import android.graphics.Canvas;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class PongGameItemCircle extends PongGameItem {
     /**
@@ -12,6 +13,7 @@ public abstract class PongGameItemCircle extends PongGameItem {
             PongGameManager pongGameManager, float radius, float xCoordinate, float yCoordinate) {
         super(pongGameManager, xCoordinate, yCoordinate);
         this.radius = radius;
+        this.setShape(PongGameItem.CIRCLE);
     }
 
     /**
@@ -21,7 +23,12 @@ public abstract class PongGameItemCircle extends PongGameItem {
         return radius;
     }
 
-    public void draw(Canvas canvas) {
-        canvas.drawCircle(getXCoordinate(), getYCoordinate(), getRadius(), getPaint());
+    public List<Float> getFloatList() {
+        List<Float> floatList = new ArrayList<>();
+        floatList.add(getShape());
+        floatList.add(getXCoordinate());
+        floatList.add(getYCoordinate());
+        floatList.add(radius);
+        return floatList;
     }
 }

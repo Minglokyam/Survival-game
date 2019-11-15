@@ -3,7 +3,14 @@ package com.example.survivalgame.ponggame;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import java.util.List;
+
 abstract class PongGameItem {
+    private float shape;
+
+    public static final float CIRCLE = 0f;
+    public static final float RECTANGLE = 1f;
+
     /**
      * The x-coordinate of this PongGameItem
      */
@@ -17,8 +24,6 @@ abstract class PongGameItem {
      */
     private PongGameManager pongGameManager;
 
-    private Paint paint;
-
     /**
      * Create a PongGameItem.
      *
@@ -26,11 +31,12 @@ abstract class PongGameItem {
      * @param yCoordinate the y-coordinate of this PongGameItem
      */
     PongGameItem(PongGameManager pongGameManager, float xCoordinate, float yCoordinate) {
-        paint = new Paint();
         this.pongGameManager = pongGameManager;
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
     }
+
+    public abstract List<Float> getFloatList();
 
     /**
      * A getter of pongGameManager
@@ -67,9 +73,11 @@ abstract class PongGameItem {
         this.yCoordinate = newYCoordinate;
     }
 
-    Paint getPaint() {
-        return paint;
+    public float getShape() {
+        return shape;
     }
 
-    public abstract void draw(Canvas canvas);
+    public void setShape(float newShape) {
+        shape = newShape;
+    }
 }
