@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity implements LoginView {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    IOManager.setMainActivity(this);
     setContentView(R.layout.activity_main);
     presenter = new LoginPresenter(this, new LoginInteractor());
   }
@@ -101,5 +100,10 @@ public class MainActivity extends AppCompatActivity implements LoginView {
   private String getPassword() {
     EditText passwordInput = findViewById(R.id.passwordInput);
     return passwordInput.getText().toString();
+  }
+
+  @Override
+  public void loadFile(){
+    IOManager.loadFile(this);
   }
 }
