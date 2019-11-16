@@ -1,18 +1,18 @@
-package com.example.survivalgame.runninggame;
+package com.example.survivalgame.ponggame.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.survivalgame.UserManager;
+import com.example.survivalgame.dodgegame.DodgeGameActivity;
 import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
-import com.example.survivalgame.UserManager;
-import com.example.survivalgame.ponggame.view.PongGameActivity;
 
-public class RunningGameActivity extends AppCompatActivity {
-    private RunningGameView runningGameView;
+public class PongGameActivity extends AppCompatActivity implements ActivityInterface {
+    private PongGameView pongGameView;
     private String name;
     private User user;
 
@@ -22,20 +22,28 @@ public class RunningGameActivity extends AppCompatActivity {
         Intent intent = getIntent();
         name = intent.getStringExtra("user");
         user = UserManager.getUser(name);
-        user.setGameStage(User.RUNNING);
+        user.setGameStage(User.PONG);
         IOManager.saveFile();
-        runningGameView = new RunningGameView(this, user);
-        setContentView(runningGameView);
+        pongGameView = new PongGameView(this, this, user);
+        setContentView(pongGameView);
     }
 
-    public void toPong() {
-        Intent intent = new Intent(this, PongGameActivity.class);
+    /**
+     * sent user statistic to DodgeGame, start DodgeGame, end PongGame
+     */
+    @Override
+    public void toDodge() {
+        Intent intent = new Intent(this, DodgeGameActivity.class);
         intent.putExtra("user", name);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
 
+    /**
+     * reset user statistic, start MainActivity, end PongGame
+     */
+    @Override
     public void toMain() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -9,120 +9,100 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.survivalgame.dodgegame.DodgeGameActivity;
-import com.example.survivalgame.ponggame.PongGameActivity;
+import com.example.survivalgame.ponggame.view.PongGameActivity;
 import com.example.survivalgame.runninggame.RunningGameActivity;
 
-public class MainActivity extends AppCompatActivity {
-  private String name;
-  private User user;
+public class MainActivity extends AppCompatActivity implements LoginView {
+    private LoginPresenter presenter;
 
-  /** Create new UserManager when this activity is created */
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    IOManager.setMainActivity(this);
-    setContentView(R.layout.activity_main);
-  }
-
-  /**
-   * If the username to be registered does not exist, add this new user to userManager and update
-   * the user file
-   *
-   * @param view the current view display
-   */
-  public void register(View view) {
-    IOManager.loadFile();
-    String username = getName();
-    String password = getPassword();
-    if (!(username.trim().equals("") || password.trim().equals(""))) {
-      if (!UserManager.userExists(username)) {
-        User newUser = new User(username, password);
-        UserManager.addUser(username, newUser);
-        IOManager.saveFile();
-        String msg = "User creation successful";
-        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-      } else {
-        String msg = "User already exists";
-        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-      }
-    } else {
-      String msg = "Username/password cannot be empty";
-      Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+    /**
+     * Create new UserManager when this activity is created
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        IOManager.setMainActivity(this);
+        setContentView(R.layout.activity_main);
+        presenter = new LoginPresenter(this, new LoginInteractor());
     }
-  }
 
-  /**
-   * If username and password match, the user is logged in and will be directed to the game he left
-   * off.
-   *
-   * @param view the current view display
-   */
-  public void logIn(View view) {
-    IOManager.loadFile();
-    String username = getName();
-    String password = getPassword();
-    if (!(username.trim().equals("") || password.trim().equals(""))) {
-      System.out.println(UserManager.userExists(username));
-      if (UserManager.userExists(username)) {
-        User temp = UserManager.getUser(username);
-        if (temp.getUsername().equals(username) && temp.getPassword().equals(password)) {
-          System.out.println("login success");
-          name = username;
-          user = temp;
-          launchGame();
-        } else {
-          String msg = "Username/password does not match";
-          Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-        }
-      } else {
-        String msg = "User does not exist";
-        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-      }
-    } else {
-      String msg = "Username/password cannot be empty";
-      Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+    public void validateLoginCredentials(View view) {
+        presenter.validateLoginCredentials(getName(), getPassword());
     }
-  }
 
-  /** direct the user to the game he left off */
-  private void launchGame() {
-    int gameStage = user.getGameStage();
-    if (gameStage == User.RUNNING) {
-      Intent toJumpGame = new Intent(this, RunningGameActivity.class);
-      toGame(toJumpGame);
-    } else if (gameStage == User.PONG) {
-      Intent toPongGame = new Intent(this, PongGameActivity.class);
-      toGame(toPongGame);
-    } else if (gameStage == User.DODGE) {
-      Intent toDodgeGame = new Intent(this, DodgeGameActivity.class);
-      toGame(toDodgeGame);
+    public void validateRegisterCredentials(View view) {
+        presenter.validateRegisterCredentials(getName(), getPassword());
     }
-  }
 
-  /** send the logged in user to another game and start that game's activity */
-  private void toGame(Intent intent) {
-    intent.putExtra("user", name);
-    System.out.println("ready to launch");
-    startActivity(intent);
-  }
+    @Override
+    public void setEmptyInputError() {
+        Toast.makeText(MainActivity.this, "Input cannot be empty", Toast.LENGTH_SHORT).show();
+    }
 
-  /**
-   * get the username input
-   *
-   * @return the username
-   */
-  private String getName() {
-    EditText usernameInput = findViewById(R.id.usernameInput);
-    return usernameInput.getText().toString();
-  }
+    @Override
+    public void setUserNotExistError() {
+        Toast.makeText(MainActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
+    }
 
-  /**
-   * get the password input
-   *
-   * @return user's password
-   */
-  private String getPassword() {
-    EditText passwordInput = findViewById(R.id.passwordInput);
-    return passwordInput.getText().toString();
-  }
+    @Override
+    public void setUserAlreadyExistError() {
+        Toast.makeText(MainActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setCredentialsError() {
+        Toast.makeText(MainActivity.this, "Username and password do not match", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setRegisterSuccess() {
+        Toast.makeText(MainActivity.this, "Register success", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void launchRunningGame(String name, User user) {
+        Intent toJumpGame = new Intent(this, RunningGameActivity.class);
+        toGame(name, toJumpGame);
+    }
+
+    @Override
+    public void launchPongGame(String name, User user) {
+        Intent toPongGame = new Intent(this, PongGameActivity.class);
+        toGame(name, toPongGame);
+    }
+
+    @Override
+    public void launchDodgeGame(String name, User user) {
+        Intent toDodgeGame = new Intent(this, DodgeGameActivity.class);
+        toGame(name, toDodgeGame);
+    }
+
+    /**
+     * send the logged in user to another game and start that game's activity
+     */
+    private void toGame(String username, Intent intent) {
+        intent.putExtra("user", username);
+        System.out.println("ready to launch");
+        startActivity(intent);
+    }
+
+    /**
+     * get the username input
+     *
+     * @return the username
+     */
+    private String getName() {
+        EditText usernameInput = findViewById(R.id.usernameInput);
+        return usernameInput.getText().toString();
+    }
+
+    /**
+     * get the password input
+     *
+     * @return user's password
+     */
+    private String getPassword() {
+        EditText passwordInput = findViewById(R.id.passwordInput);
+        return passwordInput.getText().toString();
+    }
 }
