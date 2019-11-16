@@ -31,10 +31,12 @@ public class RankingActivity extends AppCompatActivity {
     TextView num1 = (TextView) findViewById(R.id.num1);
     TextView num2 = (TextView) findViewById(R.id.num2);
     TextView num3 = (TextView) findViewById(R.id.num3);
+    TextView yourScore = (TextView) findViewById(R.id.yourScore);
 
+    TextView[] textViews ={num1,num2,num3};
     User[] users = rankingPresenter.toUserArray();
-    num1.setText(users[0].toString());
-    num2.setText(users[1].toString());
-    num2.setText(users[2].toString());
+    rankingPresenter.setOneText(yourScore,user);
+    rankingPresenter.setTexts(textViews,users);
+
   }
 }

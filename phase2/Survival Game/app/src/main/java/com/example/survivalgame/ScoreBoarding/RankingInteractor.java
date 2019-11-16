@@ -1,5 +1,7 @@
 package com.example.survivalgame.ScoreBoarding;
 
+import android.widget.TextView;
+
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserManager;
 
@@ -22,4 +24,16 @@ public class RankingInteractor {
     // Arrays.sort(UserArray);
     return UserArray;
   }
+
+  public void setOneText(TextView t,User user){
+      t.setText("You received " + user.getScore()+" scores");
+  }
+  public void setTexts(TextView[] textviews,User[] users){
+      for(int i =0;i<textviews.length;i++){
+          if(i<users.length){
+              textviews[i].setText(users[i].toString());
+          }
+      }
+  }
+
 }

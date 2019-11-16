@@ -32,10 +32,13 @@
         android:text="Third"
         android:textSize="20sp" />
 
-
-
-
-
+    <TextView
+        android:id="@+id/yourScore"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="YourOwnScore"
+        android:textSize="20sp" />
 
 
 </LinearLayout>
