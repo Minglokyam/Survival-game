@@ -35,7 +35,7 @@ public class RunningGamePresenter extends Thread implements RunningPresenter {
     runningGameManager = new RunningGameManager(this, screenWidth, screenHeight, bmpSizeMap);
     this.runningView = runningView;
     this.user = user;
-    runningDuration = Duration.ofSeconds(3);
+    runningDuration = Duration.ofSeconds(30);
   }
 
   public void setRunning(boolean newRunning) {
