@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.survivalgame.ScoreBoarding.RankingActivity;
+import com.example.survivalgame.ScoreBoarding.ScoreBoard;
 import com.example.survivalgame.UserManager;
 
 import com.example.survivalgame.IOManager;
@@ -47,4 +50,14 @@ public class DodgeGameActivity extends AppCompatActivity implements DodgeActivit
     startActivity(intent);
     finish();
   }
+
+  public void toScoreBoard() {
+    Intent intent = new Intent(this, RankingActivity.class);
+    intent.putExtra("user", name);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(intent);
+    finish();
+  }
+
+
 }

@@ -2,6 +2,7 @@ package com.example.survivalgame.ScoreBoarding;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -14,10 +15,16 @@ import java.util.*;
 
 public class RankingActivity extends AppCompatActivity {
   RankingPresenter rankingPresenter;
+  private User user;
+  private String name;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Intent intent = getIntent();
+    name = intent.getStringExtra("user");
+    user = UserManager.getUser(name);
+
     setContentView(R.layout.activity_ranking);
     rankingPresenter = new RankingPresenter(new RankingInteractor());
 
