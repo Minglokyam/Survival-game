@@ -1,17 +1,13 @@
-package com.example.survivalgame.dodgegame;
-
-import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.Color;
+package com.example.survivalgame.dodgegame.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 /** DodgeGameManager is used to combine all the items we are going to use for the game. */
-class DodgeGameManager {
-  private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-  private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+public class DodgeGameManager {
+  private int screenWidth;
+  private int screenHeight;
   private List<Shell> shells;
   private HP hp;
   private Plane plane;
@@ -19,9 +15,11 @@ class DodgeGameManager {
   private PlaneFactory planeFactory;
   private EnemyGenerator enemyGenerator;
 
-  DodgeGameManager() {
+  public DodgeGameManager(int screenWidth, int screenHeight) {
     hpFactory = new HPFactory();
     planeFactory = new PlaneFactory();
+    this.screenWidth = screenWidth;
+    this.screenHeight = screenHeight;
     hp = hpFactory.createHP(this, screenWidth);
     plane = planeFactory.createPlane(this, screenWidth, screenHeight, hp);
     shells = new ArrayList<>();
@@ -37,15 +35,7 @@ class DodgeGameManager {
     return screenHeight;
   }
 
-  int getHP() {
-    return hp.getHP();
-  }
-
-  void setHP(int newHP) {
-    hp.setHP(newHP);
-  }
-
-  Plane getPlane() {
+  public Plane getPlane() {
     return plane;
   }
 
@@ -59,8 +49,8 @@ class DodgeGameManager {
           > (screenHeight + 100)) { // This statement removes the object outside the screen.
         shellsIterator.remove();
       } else if (shell.getRectF().intersect(plane.getRectF())) {
-        if (hp.getHP() > 0) {
-          hp.setHP(hp.getHP() - 20);
+        if (hp.getHPValue() > 0) {
+          hp.setHPValue(hp.getHPValue() - 20);
           shellsIterator.remove();
         }
       } else {
@@ -71,13 +61,11 @@ class DodgeGameManager {
     plane.update();
   }
 
-  /** draw method would call other draws method from other classes */
-  public void draw(Canvas canvas) {
-    canvas.drawColor(Color.rgb(255, 255, 255));
-    plane.draw(canvas);
-    for (Shell shell : shells) {
-      shell.draw(canvas);
-    }
-    hp.draw(canvas);
+  public List<Shell> getShells() {
+    return shells;
+  }
+
+  public HP getHP() {
+    return hp;
   }
 }

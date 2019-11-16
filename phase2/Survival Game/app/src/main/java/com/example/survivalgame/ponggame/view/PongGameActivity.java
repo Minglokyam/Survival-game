@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.survivalgame.UserManager;
-import com.example.survivalgame.dodgegame.DodgeGameActivity;
+import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;

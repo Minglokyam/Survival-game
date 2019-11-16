@@ -1,4 +1,4 @@
-package com.example.survivalgame.dodgegame;
+package com.example.survivalgame.dodgegame.model;
 
 import java.util.List;
 // The class that generates "shell"s at some random rate. If we want to change the amount or the

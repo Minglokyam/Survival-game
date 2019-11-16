@@ -1,7 +1,5 @@
-package com.example.survivalgame.dodgegame;
+package com.example.survivalgame.dodgegame.model;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
 // The super class for all game objects in Dodge Game
 abstract class DodgeGameItem {
   /** The x-coordinate of this DodgeGameItem */
@@ -11,12 +9,9 @@ abstract class DodgeGameItem {
   /** An instance of DodgeGameManager */
   private DodgeGameManager dodgeGameManager;
 
-  private Paint paint;
-
   /** Create a DodgeGameItem. */
   DodgeGameItem(DodgeGameManager dodgeGameManager, float xCoordinate, float yCoordinate) {
     this.xCoordinate = xCoordinate;
-    paint = new Paint();
     this.dodgeGameManager = dodgeGameManager;
     this.yCoordinate = yCoordinate;
   }
@@ -32,23 +27,17 @@ abstract class DodgeGameItem {
   }
 
   /** A setter of xCoordinate */
-  void setXCoordinate(float newXCoordinate) {
+  public void setXCoordinate(float newXCoordinate) {
     this.xCoordinate = newXCoordinate;
   }
 
   /** A getter of yCoordinate */
-  float getYCoordinate() {
+  public float getYCoordinate() {
     return yCoordinate;
   }
 
   /** A setter of yCoordinate */
-  void setYCoordinate(float newYCoordinate) {
+  public void setYCoordinate(float newYCoordinate) {
     this.yCoordinate = newYCoordinate;
   }
-
-  Paint getPaint() {
-    return paint;
-  }
-
-  abstract void draw(Canvas canvas);
 }

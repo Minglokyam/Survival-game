@@ -1,12 +1,11 @@
-package com.example.survivalgame.dodgegame;
+package com.example.survivalgame.dodgegame.model;
 
-import android.graphics.*;
 // This Class is used to draw a life bar on the screen, when the hp comes to zero, the life counter
 // will minus 1.
-class HP extends DodgeGameItem {
+public class HP extends DodgeGameItem {
   // the width, length and value of hp.
-  private int width;
-  private int length;
+  private float width;
+  private float length;
   private int hpValue;
 
   /** build the hp presentation of the plane. */
@@ -18,32 +17,27 @@ class HP extends DodgeGameItem {
       int width,
       int length) {
     super(dodgeGameManager, xCoordinate, yCoordinate);
-    getPaint().setColor(Color.GREEN);
     this.width = width;
     this.length = length;
     this.hpValue = hpValue;
   }
 
   /** the getter of hpValue. */
-  int getHP() {
+  public int getHPValue() {
     return this.hpValue;
   }
 
   /** the setter of hpValue. */
-  void setHP(int hp) {
-    this.hpValue = hp;
+  public void setHPValue(int newHPValue) {
+    this.hpValue = newHPValue;
   }
 
-  /** draw the hp column on canvas. */
-  public void draw(Canvas canvas) {
-    RectF hpBar =
-        new RectF(
-            getXCoordinate(),
-            getYCoordinate(),
-            getXCoordinate() + width,
-            getYCoordinate() + length);
-    // RectF hpBar = new RectF(10, 10, 110, 10 + this.length);
-    canvas.drawRect(hpBar, getPaint());
+  public float getWidth() {
+    return width;
+  }
+
+  public float getLength() {
+    return length;
   }
 
   /** update the hp value once the plane is hit by enemy. */

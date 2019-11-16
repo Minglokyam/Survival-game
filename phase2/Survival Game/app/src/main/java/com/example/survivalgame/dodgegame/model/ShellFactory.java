@@ -1,4 +1,4 @@
-package com.example.survivalgame.dodgegame;
+package com.example.survivalgame.dodgegame.model;
 
 import java.util.Random;
 

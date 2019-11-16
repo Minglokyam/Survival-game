@@ -1,17 +1,16 @@
-package com.example.survivalgame.dodgegame;
+package com.example.survivalgame.dodgegame.model;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Path;
 import android.graphics.RectF;
+
 // The class for the plane that controls by the player.
-class Plane extends DodgeGameItem {
-  // hp represent life
-  private HP hp;
+public class Plane extends DodgeGameItem {
+  public static int STOP = 0;
+  public static int MOVE = 1;
+  private int movingStatus;
   // the speed of xCoordinate
-  private int xSpeed;
+  private float xSpeed;
   // the speed of yCoordinate
-  private int ySpeed;
+  private float ySpeed;
   private float previousXCoordinate;
   private float previousYCoordinate;
 
@@ -25,15 +24,16 @@ class Plane extends DodgeGameItem {
    */
   Plane(DodgeGameManager dodgeGameManager, HP hp, float xCoordinate, float yCoordinate) {
     super(dodgeGameManager, xCoordinate, yCoordinate);
-    getPaint().setColor(Color.BLACK);
-    this.hp = hp;
+    movingStatus = STOP;
+    previousXCoordinate = getXCoordinate();
+    previousYCoordinate = getYCoordinate();
   }
 
-  void setXSpeed(int xSpeed) {
+  public void setXSpeed(float xSpeed) {
     this.xSpeed = xSpeed;
   }
 
-  void setYSpeed(int ySpeed) {
+  public void setYSpeed(float ySpeed) {
     this.ySpeed = ySpeed;
   }
 
@@ -43,30 +43,12 @@ class Plane extends DodgeGameItem {
    */
   RectF getRectF() {
     return new RectF(
-        getXCoordinate() - 60, getYCoordinate(), getXCoordinate() + 60, getYCoordinate() + 200);
-  }
-
-  /** draw the plane on canvas. */
-  void draw(Canvas canvas) {
-    if (hp.getHP() != 0) {
-      drawPath(canvas);
-    }
-  }
-
-  /** the drawPath method is to draw a simple shape of plane */
-  private void drawPath(Canvas canvas) {
-    Path path = new Path();
-    path.moveTo(getXCoordinate(), getYCoordinate());
-    path.lineTo(getXCoordinate() - 40, getYCoordinate() + 100);
-    path.lineTo(getXCoordinate(), getYCoordinate() + 60);
-    path.lineTo(getXCoordinate() + 40, getYCoordinate() + 100);
-    path.lineTo(getXCoordinate(), getYCoordinate());
-    canvas.drawPath(path, getPaint());
+        getXCoordinate() - 60, getYCoordinate(), getXCoordinate() + 60, getYCoordinate() + 100);
   }
 
   /** update the position of the plane. */
   void update() {
-    if (inScreen()) {
+    if (inScreen() && movingStatus == MOVE) {
       previousXCoordinate = getXCoordinate();
       previousYCoordinate = getYCoordinate();
       setXCoordinate(getXCoordinate() + xSpeed);
@@ -84,5 +66,15 @@ class Plane extends DodgeGameItem {
         && getXCoordinate() <= getDodgeGameManager().getScreenWidth()
         && getYCoordinate() >= 0
         && getYCoordinate() <= getDodgeGameManager().getScreenHeight();
+  }
+
+  public void move() {
+    movingStatus = MOVE;
+  }
+
+  public void stop() {
+    xSpeed = 0;
+    ySpeed = 0;
+    movingStatus = STOP;
   }
 }
