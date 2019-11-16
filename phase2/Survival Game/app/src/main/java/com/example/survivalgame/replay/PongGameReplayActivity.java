@@ -1,4 +1,4 @@
-package com.example.survivalgame.ponggame.view;
+package com.example.survivalgame.replay;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserManager;
 import com.example.survivalgame.dodgegame.DodgeGameActivity;
+import com.example.survivalgame.ponggame.view.ActivityInterface;
+import com.example.survivalgame.replay.PongGameReplayView;
 
 public class PongGameReplayActivity extends AppCompatActivity implements ActivityInterface {
     private PongGameReplayView replayView;

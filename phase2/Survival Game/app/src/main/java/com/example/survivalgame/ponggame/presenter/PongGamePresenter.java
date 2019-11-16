@@ -14,7 +14,6 @@ public class PongGamePresenter extends Thread {
     private User user;
     private PongGameManager pongGameManager;
     private long fps = 30;
-    List<List<Float>> itemList;
     /**
      * the countdown of this game
      */
@@ -24,7 +23,7 @@ public class PongGamePresenter extends Thread {
         this.user = user;
         this.view = view;
         pongGameManager = new PongGameManager(user, screenWidth, screenHeight);
-        pongDuration = Duration.ofSeconds(30);
+        pongDuration = Duration.ofSeconds(10);
     }
 
     /**
@@ -47,20 +46,17 @@ public class PongGamePresenter extends Thread {
                     view.drawText("Game time: " + pongDuration.getSeconds(), 0, 96);
                     view.drawText("Score: " + user.getScore(), 0, 128);
                     checkQuit();
-                    itemList = pongGameManager.getItemList();
-                    float[] tempReplay = new float[4];
+                    List<List<Float>> itemList = pongGameManager.getItemList();
                     for (List<Float> floatList : itemList) {
                         if (floatList.get(0) == PongGameItem.CIRCLE) {
                             view.drawCircle(floatList.get(1), floatList.get(2), floatList.get(3));
-                            tempReplay[0] = floatList.get(1);
-                            tempReplay[1] = floatList.get(2);
                         } else {
                             view.drawRect(floatList.get(1), floatList.get(2), floatList.get(3), floatList.get(4));
-                            tempReplay[2] = floatList.get(1);
-                            tempReplay[3] = floatList.get(2);
                         }
                     }
-                    this.user.addReplay(tempReplay);
+
+                    // save replay
+                    user.addReplay(itemList);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -114,7 +110,6 @@ public class PongGamePresenter extends Thread {
     public void paddleStop() {
         pongGameManager.paddleStop();
     }
-
 
 
 }
