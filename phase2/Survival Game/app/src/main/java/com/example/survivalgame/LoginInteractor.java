@@ -2,6 +2,8 @@ package com.example.survivalgame;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+
+
 class LoginInteractor {
   void register(String username, String password, LoginListener loginListener) {
     IOManager.loadFile();
