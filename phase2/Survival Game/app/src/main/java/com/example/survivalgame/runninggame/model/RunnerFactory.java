@@ -1,7 +1,5 @@
 package com.example.survivalgame.runninggame.model;
 
-import com.example.survivalgame.runninggame.model.Runner;
-
 import java.util.List;
 
 class RunnerFactory {

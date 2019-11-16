@@ -1,9 +1,5 @@
 package com.example.survivalgame.runninggame.model;
 
-import com.example.survivalgame.runninggame.model.Coin;
-import com.example.survivalgame.runninggame.model.RandomItem;
-import com.example.survivalgame.runninggame.model.Spike;
-
 import java.util.List;
 
 class RandomItemFactory {

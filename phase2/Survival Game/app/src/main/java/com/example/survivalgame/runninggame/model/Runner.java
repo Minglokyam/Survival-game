@@ -2,9 +2,6 @@ package com.example.survivalgame.runninggame.model;
 
 import android.graphics.Rect;
 
-import com.example.survivalgame.runninggame.model.RectFactory;
-import com.example.survivalgame.runninggame.model.RunningGameItem;
-
 import java.util.List;
 
 public class Runner extends RunningGameItem {

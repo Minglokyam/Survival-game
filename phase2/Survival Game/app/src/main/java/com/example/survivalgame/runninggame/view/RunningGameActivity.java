@@ -10,8 +10,6 @@ import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserManager;
 import com.example.survivalgame.ponggame.view.PongGameActivity;
-import com.example.survivalgame.runninggame.view.RunningActivityInterface;
-import com.example.survivalgame.runninggame.view.RunningGameView;
 
 public class RunningGameActivity extends AppCompatActivity implements RunningActivityInterface {
   private RunningGameView runningGameView;
