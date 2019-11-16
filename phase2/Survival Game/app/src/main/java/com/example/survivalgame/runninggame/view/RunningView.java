@@ -2,7 +2,7 @@ package com.example.survivalgame.runninggame.view;
 
 import android.graphics.Rect;
 
-public interface View {
+public interface RunningView {
   void lockCanvas();
 
   void unlockCanvasAndPost();

@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RunningGameView extends SurfaceView implements View {
+public class RunningGameView extends SurfaceView implements RunningView {
   private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
   private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 

@@ -1,6 +1,6 @@
 package com.example.survivalgame.ponggame.view;
 
-public interface View {
+public interface PongView {
   void clearCanvas();
 
   void lockCanvas();

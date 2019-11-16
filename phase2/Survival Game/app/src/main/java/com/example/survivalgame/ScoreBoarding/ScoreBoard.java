@@ -8,13 +8,9 @@ import com.example.survivalgame.R;
 
 public class ScoreBoard extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_score_board);
-
-
-
-
-    }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_score_board);
+  }
 }

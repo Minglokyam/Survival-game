@@ -1,5 +1,5 @@
 package com.example.survivalgame.dodgegame.view;
 
-public interface ActivityInterface {
+public interface DodgeActivityInterface {
   void toMain();
 }

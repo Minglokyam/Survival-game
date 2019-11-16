@@ -5,7 +5,7 @@ import com.example.survivalgame.dodgegame.model.DodgeGameManager;
 import com.example.survivalgame.dodgegame.model.Plane;
 import com.example.survivalgame.dodgegame.model.HP;
 import com.example.survivalgame.dodgegame.model.Shell;
-import com.example.survivalgame.dodgegame.view.View;
+import com.example.survivalgame.dodgegame.view.DodgeView;
 
 import java.time.Duration;
 
@@ -14,18 +14,18 @@ public class DodgeGamePresenter extends Thread {
   private DodgeGameManager dodgeGameManager;
   private Duration dodgeDuration;
   private boolean running = false;
-  private View view;
+  private DodgeView dodgeView;
   private User user;
   private float xTouchReference;
   private float yTouchReference;
   private Plane plane;
   private HP hp;
 
-  public DodgeGamePresenter(View view, User user, int screenWidth, int screenHeight) {
+  public DodgeGamePresenter(DodgeView dodgeView, User user, int screenWidth, int screenHeight) {
     dodgeGameManager = new DodgeGameManager(screenWidth, screenHeight);
     plane = dodgeGameManager.getPlane();
     hp = dodgeGameManager.getHP();
-    this.view = view;
+    this.dodgeView = dodgeView;
     this.user = user;
     dodgeDuration = Duration.ofSeconds(30);
   }
@@ -38,29 +38,30 @@ public class DodgeGamePresenter extends Thread {
   public void run() {
     while (running) {
       long startTime = System.currentTimeMillis();
-      view.clearCanvas();
+      dodgeView.clearCanvas();
       try {
         synchronized (this) {
-          view.lockCanvas();
+          dodgeView.lockCanvas();
           dodgeGameManager.update();
           setPlane();
           checkHP();
           checkEndGame();
           user.setScore(user.getScore() + 1);
 
-          view.drawColor(255, 255, 255);
-          view.drawPath(plane.getXCoordinate(), plane.getYCoordinate());
+          dodgeView.drawColor(255, 255, 255);
+          dodgeView.drawPath(plane.getXCoordinate(), plane.getYCoordinate());
           for (Shell shell : dodgeGameManager.getShells()) {
-            view.drawOval(shell.getXCoordinate(), shell.getYCoordinate());
+            dodgeView.drawOval(shell.getXCoordinate(), shell.getYCoordinate());
           }
-          view.drawRectF(hp.getXCoordinate(), hp.getYCoordinate(), hp.getWidth(), hp.getLength());
+          dodgeView.drawRectF(
+              hp.getXCoordinate(), hp.getYCoordinate(), hp.getWidth(), hp.getLength());
 
-          view.drawText("Life: " + user.getLife(), 0, 32);
-          view.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64);
-          view.drawText("Game time: " + dodgeDuration.getSeconds(), 0, 96);
-          view.drawText("Score: " + user.getScore(), 0, 128);
+          dodgeView.drawText("Life: " + user.getLife(), 0, 32);
+          dodgeView.drawText("Total time: " + user.getTotalDuration().getSeconds(), 0, 64);
+          dodgeView.drawText("Game time: " + dodgeDuration.getSeconds(), 0, 96);
+          dodgeView.drawText("Score: " + user.getScore(), 0, 128);
 
-          view.unlockCanvasAndPost();
+          dodgeView.unlockCanvasAndPost();
         }
       } finally {
         long timeInterval = System.currentTimeMillis() - startTime;
@@ -85,7 +86,7 @@ public class DodgeGamePresenter extends Thread {
     if (dodgeDuration.getSeconds() <= 0 || user.getLife() == 0) {
       // After a success or a defeat, the player will go back to the main menu.
       running = false;
-      view.toMain();
+      dodgeView.toMain();
     }
   }
 

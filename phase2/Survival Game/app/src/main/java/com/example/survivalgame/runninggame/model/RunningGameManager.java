@@ -2,7 +2,7 @@ package com.example.survivalgame.runninggame.model;
 
 import android.graphics.Rect;
 
-import com.example.survivalgame.runninggame.presenter.Presenter;
+import com.example.survivalgame.runninggame.presenter.RunningPresenter;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,16 +44,16 @@ public class RunningGameManager {
   // The height of ground
   private int groundHeight;
 
-  private Presenter presenter;
+  private RunningPresenter runningPresenter;
 
   private List<RandomItem> randomItems = new ArrayList<>();
 
   public RunningGameManager(
-      Presenter presenter,
+      RunningPresenter runningPresenter,
       int screenWidth,
       int screenHeight,
       Map<String, List<Integer>> bmpSizeMap) {
-    this.presenter = presenter;
+    this.runningPresenter = runningPresenter;
     this.screenWidth = screenWidth;
     this.screenHeight = screenHeight;
     this.bmpSizeMap = bmpSizeMap;
@@ -104,9 +104,9 @@ public class RunningGameManager {
   private void collideAction(RandomItem randomItem) {
     if (randomItem instanceof Coin) {
       // add points to the score when the runner touches a coin.
-      presenter.addScore();
+      runningPresenter.addScore();
     } else {
-      presenter.reduceLife();
+      runningPresenter.reduceLife();
     }
   }
 

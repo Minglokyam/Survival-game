@@ -1,6 +1,6 @@
 package com.example.survivalgame.dodgegame.view;
 
-public interface View {
+public interface DodgeView {
   void lockCanvas();
 
   void unlockCanvasAndPost();

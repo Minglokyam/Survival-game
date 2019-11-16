@@ -10,18 +10,16 @@ import java.util.List;
 
 public class RankingInteractor {
 
-
-    public User[] toUserArray(){
-        List listUser =new ArrayList<>();
-        Iterator it = UserManager.getUserMap().keySet().iterator();
-        while(it.hasNext()){
-            String key = it.next().toString();
-            listUser.add(UserManager.getUserMap().get(key));
-        }
-        Collections.sort(listUser);
-        User[] UserArray = (User[])listUser.toArray(new User[listUser.size()]);
-        // Arrays.sort(UserArray);
-        return UserArray;
-
+  public User[] toUserArray() {
+    List listUser = new ArrayList<>();
+    Iterator it = UserManager.getUserMap().keySet().iterator();
+    while (it.hasNext()) {
+      String key = it.next().toString();
+      listUser.add(UserManager.getUserMap().get(key));
     }
+    Collections.sort(listUser);
+    User[] UserArray = (User[]) listUser.toArray(new User[listUser.size()]);
+    // Arrays.sort(UserArray);
+    return UserArray;
+  }
 }

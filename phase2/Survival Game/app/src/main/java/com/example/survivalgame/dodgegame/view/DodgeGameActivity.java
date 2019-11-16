@@ -12,7 +12,7 @@ import com.example.survivalgame.User;
 import com.example.survivalgame.replay.PongGameReplayActivity;
 
 // MainActivity class for the dodge game
-public class DodgeGameActivity extends AppCompatActivity implements ActivityInterface {
+public class DodgeGameActivity extends AppCompatActivity implements DodgeActivityInterface {
   private DodgeGameView dodgeGameView;
   private String name;
   private User user;

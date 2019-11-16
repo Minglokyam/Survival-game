@@ -16,18 +16,18 @@ import com.example.survivalgame.User;
 import com.example.survivalgame.dodgegame.presenter.DodgeGamePresenter;
 
 // This is the class which is responsible for rendering the game objects.
-public class DodgeGameView extends SurfaceView implements View {
+public class DodgeGameView extends SurfaceView implements DodgeView {
   private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
   private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
-  private ActivityInterface activityInterface;
+  private DodgeActivityInterface dodgeActivityInterface;
   private DodgeGamePresenter dodgeGamePresenter;
   private Paint paintText;
   private Canvas canvas;
 
   // Dependency Injection
-  public DodgeGameView(Context context, ActivityInterface activityInterface, User user) {
+  public DodgeGameView(Context context, DodgeActivityInterface dodgeActivityInterface, User user) {
     super(context);
-    this.activityInterface = activityInterface;
+    this.dodgeActivityInterface = dodgeActivityInterface;
     dodgeGamePresenter = new DodgeGamePresenter(this, user, screenWidth, screenHeight);
 
     paintText = new Paint();
@@ -79,7 +79,7 @@ public class DodgeGameView extends SurfaceView implements View {
 
   @Override
   public void toMain() {
-    activityInterface.toMain();
+    dodgeActivityInterface.toMain();
   }
 
   @Override

@@ -10,116 +10,102 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.survivalgame.User;
-import com.example.survivalgame.ponggame.view.ActivityInterface;
-import com.example.survivalgame.ponggame.view.View;
-import com.example.survivalgame.replay.PongGameReplayPresenter;
+import com.example.survivalgame.ponggame.view.PongActivityInterface;
+import com.example.survivalgame.ponggame.view.PongView;
 
-public class PongGameReplayView extends SurfaceView implements View {
-    private ActivityInterface activityInterface;
+public class PongGameReplayView extends SurfaceView implements PongView {
+  private PongActivityInterface pongActivityInterface;
 
-    private Canvas canvas;
+  private Canvas canvas;
 
-    private Paint paintShape;
+  private Paint paintShape;
 
-    private Paint paintText;
+  private Paint paintText;
 
+  /** The Thread of this game */
+  private PongGameReplayPresenter replayPresenter;
 
-    /**
-     * The Thread of this game
-     */
-    private PongGameReplayPresenter replayPresenter;
+  /** The screen width */
+  private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
 
-    /**
-     * The screen width
-     */
-    private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+  /** The screen height */
+  private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    /**
-     * The screen height
-     */
-    private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+  public PongGameReplayView(
+      Context context, PongActivityInterface pongActivityInterface, User user) {
+    super(context);
+    this.pongActivityInterface = pongActivityInterface;
+    paintShape = new Paint();
+    paintShape.setColor(Color.MAGENTA);
+    paintText = new Paint();
+    paintText.setTextSize(36);
+    paintText.setTypeface(Typeface.DEFAULT_BOLD);
 
+    replayPresenter = new PongGameReplayPresenter(this, user, screenWidth, screenHeight);
 
-    public PongGameReplayView(Context context, ActivityInterface activityInterface, User user) {
-        super(context);
-        this.activityInterface = activityInterface;
-        paintShape = new Paint();
-        paintShape.setColor(Color.MAGENTA);
-        paintText = new Paint();
-        paintText.setTextSize(36);
-        paintText.setTypeface(Typeface.DEFAULT_BOLD);
+    getHolder()
+        .addCallback(
+            new SurfaceHolder.Callback() {
+              @Override
+              public void surfaceCreated(SurfaceHolder holder) {
+                replayPresenter.setRunning(true);
+                replayPresenter.start();
+              }
 
-        replayPresenter = new PongGameReplayPresenter(this, user, screenWidth, screenHeight);
+              @Override
+              public void surfaceChanged(SurfaceHolder holder, int a, int b, int c) {}
 
-        getHolder().addCallback(
-                new SurfaceHolder.Callback() {
-                    @Override
-                    public void surfaceCreated(SurfaceHolder holder) {
-                        replayPresenter.setRunning(true);
-                        replayPresenter.start();
-                    }
+              @Override
+              public void surfaceDestroyed(SurfaceHolder holder) {}
+            });
+  }
 
-                    @Override
-                    public void surfaceChanged(SurfaceHolder holder, int a, int b, int c) {
-                    }
+  @Override
+  public void lockCanvas() {
+    canvas = getHolder().lockCanvas();
+  }
 
-                    @Override
-                    public void surfaceDestroyed(SurfaceHolder holder) {
-                    }
-                });
-    }
+  @Override
+  public void unlockCanvasAndPost() {
+    getHolder().unlockCanvasAndPost(canvas);
+  }
 
+  @Override
+  public void toMain() {
+    pongActivityInterface.toMain();
+  }
 
-    @Override
-    public void lockCanvas() {
-        canvas = getHolder().lockCanvas();
-    }
+  @Override
+  public void toDodge() {
+    pongActivityInterface.toDodge();
+  }
 
-    @Override
-    public void unlockCanvasAndPost() {
-        getHolder().unlockCanvasAndPost(canvas);
-    }
+  @Override
+  public void setTouchReference(float newTouchReference) {}
 
-    @Override
-    public void toMain() {
-        activityInterface.toMain();
-    }
+  @Override
+  public void drawCircle(float xCoordinate, float yCoordinate, float radius) {
+    canvas.drawCircle(xCoordinate, yCoordinate, radius, paintShape);
+  }
 
-    @Override
-    public void toDodge() {
-        activityInterface.toDodge();
-    }
+  @Override
+  public void drawRect(float xCoordinate, float yCoordinate, float width, float height) {
+    canvas.drawRect(
+        xCoordinate, yCoordinate, xCoordinate + width, yCoordinate + height, paintShape);
+  }
 
-    @Override
-    public void setTouchReference(float newTouchReference) {}
+  @Override
+  public void drawText(String string, float xCoordinate, float yCoordinate) {
+    canvas.drawText(string, xCoordinate, yCoordinate, paintText);
+  }
 
-    @Override
-    public void drawCircle(float xCoordinate, float yCoordinate, float radius) {
-        canvas.drawCircle(xCoordinate, yCoordinate, radius, paintShape);
-    }
+  @Override
+  public void drawColor(int red, int green, int blue) {
+    canvas.drawColor(Color.rgb(red, green, blue));
+  }
 
-    @Override
-    public void drawRect(float xCoordinate, float yCoordinate, float width, float height) {
-        canvas.drawRect(
-                xCoordinate,
-                yCoordinate,
-                xCoordinate + width,
-                yCoordinate + height,
-                paintShape);
-    }
-
-    @Override
-    public void drawText(String string, float xCoordinate, float yCoordinate) {
-        canvas.drawText(string, xCoordinate, yCoordinate, paintText);
-    }
-
-    @Override
-    public void drawColor(int red, int green, int blue) {
-        canvas.drawColor(Color.rgb(red, green, blue));
-    }
-
-    @Override
-    public void clearCanvas() {
-        canvas = null;
-    }
+  @Override
+  public void clearCanvas() {
+    canvas = null;
+  }
 }
