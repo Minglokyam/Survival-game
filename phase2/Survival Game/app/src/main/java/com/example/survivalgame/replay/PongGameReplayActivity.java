@@ -9,7 +9,7 @@ import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserManager;
-import com.example.survivalgame.dodgegame.DodgeGameActivity;
+import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 import com.example.survivalgame.ponggame.view.ActivityInterface;
 import com.example.survivalgame.replay.PongGameReplayView;
 
