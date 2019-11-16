@@ -17,13 +17,14 @@ public class IOManager {
   /* the main activity of the game */
   private static Context context;
 
-  /* the file that stores all user's data */
-  private static final String USER_FILE = "user_file.ser";
 
   /** set the main activity of the game */
   public static void setMainActivity(Context newContext) {
     context = newContext;
   }
+
+  /* the file that stores all user's data */
+  private static final String USER_FILE = "user_file.ser";
 
   /** read the user file and update the current userManager */
   public static void loadFile() {

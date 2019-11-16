@@ -12,7 +12,7 @@ class LoginInteractor {
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt(10));
         User newUser = new User(username, hashed);
         UserManager.addUser(username, newUser);
-        IOManager.saveFile();
+          IOManager.saveFile();
         loginListener.onRegisterSuccess();
       } else {
         loginListener.onUserAlreadyExists();
@@ -23,7 +23,7 @@ class LoginInteractor {
   }
 
   void login(String username, String password, LoginListener loginListener) {
-    IOManager.loadFile();
+      IOManager.loadFile();
     if (checkNotEmptyCredential(username, password)) {
       System.out.println(UserManager.userExists(username));
       if (UserManager.userExists(username)) {
