@@ -159,4 +159,8 @@ public class User implements Serializable, Comparable<User> {
     public boolean isEmptyReplay() {
         return replay.isEmpty();
     }
+
+    public void setReplay(List<List<List<Float>>> newReplay) {
+        this.replay = newReplay;
+    }
 }

@@ -32,13 +32,7 @@ public class PongGameReplayActivity extends AppCompatActivity implements Activit
      * sent user statistic to DodgeGame, start DodgeGame, end PongGame
      */
     @Override
-    public void toDodge() {
-        Intent intent = new Intent(this, DodgeGameActivity.class);
-        intent.putExtra("user", name);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
+    public void toDodge() {}
 
     /**
      * reset user statistic, start MainActivity, end PongGame

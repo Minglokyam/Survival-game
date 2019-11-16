@@ -23,7 +23,7 @@ public class PongGamePresenter extends Thread {
         this.user = user;
         this.view = view;
         pongGameManager = new PongGameManager(user, screenWidth, screenHeight);
-        pongDuration = Duration.ofSeconds(10);
+        pongDuration = Duration.ofSeconds(20);
     }
 
     /**

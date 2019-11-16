@@ -24,7 +24,6 @@ public class PongGameView extends SurfaceView implements View {
 
     private Paint paintText;
 
-    private ArrayList<float[]> replay;
 
     /**
      * The Thread of this game
