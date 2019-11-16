@@ -11,6 +11,9 @@ import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PongGameActivity extends AppCompatActivity implements ActivityInterface {
     private PongGameView pongGameView;
     private String name;
@@ -23,6 +26,7 @@ public class PongGameActivity extends AppCompatActivity implements ActivityInter
         name = intent.getStringExtra("user");
         user = UserManager.getUser(name);
         user.setGameStage(User.PONG);
+        user.setReplay(new ArrayList<List<List<Float>>>()); // empty the replay
         IOManager.saveFile();
         pongGameView = new PongGameView(this, this, user);
         setContentView(pongGameView);
