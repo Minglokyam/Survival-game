@@ -6,7 +6,7 @@ import com.example.survivalgame.ScoreBoarding.RankingActivity;
 import com.example.survivalgame.User;
 
 public class RankingPresenter {
-  private RankingActivity rankView;
+  //private RankingActivity rankView;
   private RankingInteractor ri;
 
   public RankingPresenter(RankingInteractor ri) {

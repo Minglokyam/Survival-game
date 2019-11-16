@@ -17,7 +17,7 @@ public class RankingActivity extends AppCompatActivity {
   RankingPresenter rankingPresenter;
   private User user;
   private String name;
-
+  int i;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

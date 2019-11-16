@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class RankingInteractor {
-
+   int i =0;
   public User[] toUserArray() {
     List listUser = new ArrayList<>();
     Iterator it = UserManager.getUserMap().keySet().iterator();
