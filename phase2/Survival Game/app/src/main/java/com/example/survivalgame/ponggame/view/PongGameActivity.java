@@ -27,7 +27,7 @@ public class PongGameActivity extends AppCompatActivity implements PongActivityI
     user = UserManager.getUser(name);
     user.setGameStage(User.PONG);
     user.setReplay(new ArrayList<List<List<Float>>>()); // empty the replay
-    IOManager.saveFile(this);
+    IOManager.saveFile();
     pongGameView = new PongGameView(this, this, user);
     setContentView(pongGameView);
   }
@@ -48,7 +48,7 @@ public class PongGameActivity extends AppCompatActivity implements PongActivityI
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     user.reset();
-    IOManager.saveFile(this);
+    IOManager.saveFile();
     startActivity(intent);
     finish();
   }

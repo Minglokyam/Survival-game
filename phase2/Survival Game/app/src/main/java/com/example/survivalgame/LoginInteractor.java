@@ -4,13 +4,13 @@ import org.mindrot.jbcrypt.BCrypt;
 
 class LoginInteractor {
   void register(String username, String password, LoginListener loginListener) {
-    loginListener.loadFile();
+    IOManager.loadFile();
     if (checkNotEmptyCredential(username, password)) {
       if (!UserManager.userExists(username)) {
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt(10));
         User newUser = new User(username, hashed);
         UserManager.addUser(username, newUser);
-        loginListener.loadFile();
+          IOManager.saveFile();
         loginListener.onRegisterSuccess();
       } else {
         loginListener.onUserAlreadyExists();
@@ -21,7 +21,7 @@ class LoginInteractor {
   }
 
   void login(String username, String password, LoginListener loginListener) {
-    loginListener.loadFile();
+      IOManager.loadFile();
     if (checkNotEmptyCredential(username, password)) {
       System.out.println(UserManager.userExists(username));
       if (UserManager.userExists(username)) {

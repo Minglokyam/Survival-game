@@ -16,6 +16,4 @@ public interface LoginListener {
   void launchDodgeGame(String name, User user);
 
   void onWrongCredential();
-
-  void loadFile();
 }

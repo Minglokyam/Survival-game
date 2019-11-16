@@ -24,7 +24,7 @@ public class DodgeGameActivity extends AppCompatActivity implements DodgeActivit
     name = intent.getStringExtra("user");
     user = UserManager.getUser(name);
     user.setGameStage(User.DODGE);
-    IOManager.saveFile(this);
+    IOManager.saveFile();
     dodgeGameView = new DodgeGameView(this, this, user);
     setContentView(dodgeGameView);
   }
@@ -35,7 +35,7 @@ public class DodgeGameActivity extends AppCompatActivity implements DodgeActivit
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     user.reset();
-    IOManager.saveFile(this);
+    IOManager.saveFile();
     startActivity(intent);
     finish();
   }

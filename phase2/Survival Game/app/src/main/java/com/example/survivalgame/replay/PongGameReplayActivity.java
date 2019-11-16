@@ -36,7 +36,7 @@ public class PongGameReplayActivity extends AppCompatActivity implements PongAct
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     user.reset();
-    IOManager.saveFile(this);
+    IOManager.saveFile();
     startActivity(intent);
     finish();
   }

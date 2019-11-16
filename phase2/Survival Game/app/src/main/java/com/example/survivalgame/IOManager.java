@@ -14,11 +14,20 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 public class IOManager {
+  /* the main activity of the game */
+  private static Context context;
+
+
+  /** set the main activity of the game */
+  public static void setMainActivity(Context newContext) {
+    context = newContext;
+  }
+
   /* the file that stores all user's data */
   private static final String USER_FILE = "user_file.ser";
 
   /** read the user file and update the current userManager */
-  public static void loadFile(Context context) {
+  public static void loadFile() {
     FileInputStream fis = null;
     try {
       InputStream inputStream = context.openFileInput(USER_FILE);
@@ -43,7 +52,7 @@ public class IOManager {
   }
 
   /** replace the user file with a new file containing the latest user data */
-  public static void saveFile(Context context) {
+  public static void saveFile() {
     FileOutputStream fos = null;
     try {
       fos = context.openFileOutput(USER_FILE, Context.MODE_PRIVATE);

@@ -23,7 +23,7 @@ public class RunningGameActivity extends AppCompatActivity implements RunningAct
     name = intent.getStringExtra("user");
     user = UserManager.getUser(name);
     user.setGameStage(User.RUNNING);
-    IOManager.saveFile(this);
+    IOManager.saveFile();
     runningGameView = new RunningGameView(this, this, user);
     setContentView(runningGameView);
   }
@@ -33,7 +33,7 @@ public class RunningGameActivity extends AppCompatActivity implements RunningAct
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     user.reset();
-    IOManager.saveFile(this);
+    IOManager.saveFile();
     startActivity(intent);
     finish();
   }

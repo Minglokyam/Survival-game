@@ -66,9 +66,4 @@ public class LoginPresenter implements LoginListener {
   void validateLoginCredentials(String username, String password) {
     loginInteractor.login(username, password, this);
   }
-
-  @Override
-  public void loadFile(){
-    loginView.loadFile();
-  }
 }
