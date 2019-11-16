@@ -1,7 +1,6 @@
 package com.example.survivalgame.replay;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -22,14 +21,10 @@ public class PongGameReplayView extends SurfaceView implements PongView {
 
   private Paint paintText;
 
-  /** The Thread of this game */
+  /**
+   * The replay presenter of this game
+   */
   private PongGameReplayPresenter replayPresenter;
-
-  /** The screen width */
-  private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-
-  /** The screen height */
-  private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
   public PongGameReplayView(
       Context context, PongActivityInterface pongActivityInterface, User user) {
@@ -41,7 +36,7 @@ public class PongGameReplayView extends SurfaceView implements PongView {
     paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
 
-    replayPresenter = new PongGameReplayPresenter(this, user, screenWidth, screenHeight);
+    replayPresenter = new PongGameReplayPresenter(this, user);
 
     getHolder()
         .addCallback(

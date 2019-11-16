@@ -4,17 +4,14 @@ import com.example.survivalgame.User;
 import com.example.survivalgame.ponggame.model.PongGameItem;
 import com.example.survivalgame.ponggame.view.PongView;
 
-import java.time.Duration;
 import java.util.List;
 
 public class PongGameReplayPresenter extends Thread {
   private boolean running;
   private PongView pongView;
   private User user;
-  /** the countdown of this game */
-  private Duration pongDuration;
 
-  public PongGameReplayPresenter(PongView pongView, User user, int screenWidth, int screenHeight) {
+  public PongGameReplayPresenter(PongView pongView, User user) {
     this.user = user;
     this.pongView = pongView;
   }
@@ -26,7 +23,6 @@ public class PongGameReplayPresenter extends Thread {
   @Override
   public void run() {
     while (running) {
-      long startTime = System.currentTimeMillis();
       pongView.clearCanvas();
       try {
         pongView.lockCanvas();
