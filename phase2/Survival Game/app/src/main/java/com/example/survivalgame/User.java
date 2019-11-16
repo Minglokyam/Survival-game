@@ -3,6 +3,7 @@ package com.example.survivalgame;
 import java.time.Duration;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable, Comparable<User> {
 
@@ -24,7 +25,7 @@ public class User implements Serializable, Comparable<User> {
     /* the game the user is playing */
     private int gameStage;
 
-    private ArrayList<float[]> replay;
+    private List<List<List<Float>>> replay = new ArrayList<>();
 
     /* First game: Running game */
     public static final int RUNNING = 0;
@@ -143,11 +144,23 @@ public class User implements Serializable, Comparable<User> {
         }
     }
 
-    public void setReplay(ArrayList<float[]> replay) {
-        this.replay = replay;
+    public void addReplay(List<List<Float>> tempReplay) {
+        this.replay.add(tempReplay);
     }
 
-    public ArrayList<float[]> getReplay() {
+    public List<List<List<Float>>> getReplay() {
         return replay;
+    }
+
+    public List<List<Float>> deleteReplay(){
+        return replay.remove(0);
+    }
+
+    public boolean isEmptyReplay() {
+        return replay.isEmpty();
+    }
+
+    public void setReplay(List<List<List<Float>>> newReplay) {
+        this.replay = newReplay;
     }
 }

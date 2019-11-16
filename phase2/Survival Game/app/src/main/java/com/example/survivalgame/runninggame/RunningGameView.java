@@ -84,7 +84,7 @@ public class RunningGameView extends SurfaceView {
 
         runningGameManager = new RunningGameManager(this);
         // =======================================
-        runningDuration = Duration.ofSeconds(30);
+        runningDuration = Duration.ofSeconds(3);
     }
 
     RunningGameThread getRunningGameThread() {

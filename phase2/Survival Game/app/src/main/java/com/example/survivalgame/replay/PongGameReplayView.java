@@ -1,4 +1,4 @@
-package com.example.survivalgame.ponggame.view;
+package com.example.survivalgame.replay;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,16 +6,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.util.ArrayList;
-
 import com.example.survivalgame.User;
-import com.example.survivalgame.ponggame.presenter.PongGamePresenter;
+import com.example.survivalgame.ponggame.view.ActivityInterface;
+import com.example.survivalgame.ponggame.view.View;
+import com.example.survivalgame.replay.PongGameReplayPresenter;
 
-public class PongGameView extends SurfaceView implements View {
+public class PongGameReplayView extends SurfaceView implements View {
     private ActivityInterface activityInterface;
 
     private Canvas canvas;
@@ -28,7 +27,7 @@ public class PongGameView extends SurfaceView implements View {
     /**
      * The Thread of this game
      */
-    private PongGamePresenter pongGamePresenter;
+    private PongGameReplayPresenter replayPresenter;
 
     /**
      * The screen width
@@ -40,9 +39,8 @@ public class PongGameView extends SurfaceView implements View {
      */
     private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    private float touchReference;
 
-    public PongGameView(Context context, ActivityInterface activityInterface, User user) {
+    public PongGameReplayView(Context context, ActivityInterface activityInterface, User user) {
         super(context);
         this.activityInterface = activityInterface;
         paintShape = new Paint();
@@ -51,14 +49,14 @@ public class PongGameView extends SurfaceView implements View {
         paintText.setTextSize(36);
         paintText.setTypeface(Typeface.DEFAULT_BOLD);
 
-        pongGamePresenter = new PongGamePresenter(this, user, screenWidth, screenHeight);
+        replayPresenter = new PongGameReplayPresenter(this, user, screenWidth, screenHeight);
 
         getHolder().addCallback(
                 new SurfaceHolder.Callback() {
                     @Override
                     public void surfaceCreated(SurfaceHolder holder) {
-                        pongGamePresenter.setRunning(true);
-                        pongGamePresenter.start();
+                        replayPresenter.setRunning(true);
+                        replayPresenter.start();
                     }
 
                     @Override
@@ -71,26 +69,6 @@ public class PongGameView extends SurfaceView implements View {
                 });
     }
 
-    /**
-     * citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/
-     */
-    @Override
-    public boolean onTouchEvent(MotionEvent motionEvent) {
-        switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
-            case MotionEvent.ACTION_DOWN:
-                // point on the right of the peddle
-                if (motionEvent.getX() > touchReference) {
-                    pongGamePresenter.paddleMoveRight();
-                } else { // point on the left of the peddle
-                    pongGamePresenter.paddleMoveLeft();
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                pongGamePresenter.paddleStop();
-                break;
-        }
-        return true;
-    }
 
     @Override
     public void lockCanvas() {
@@ -113,9 +91,7 @@ public class PongGameView extends SurfaceView implements View {
     }
 
     @Override
-    public void setTouchReference(float newTouchReference) {
-        touchReference = newTouchReference;
-    }
+    public void setTouchReference(float newTouchReference) {}
 
     @Override
     public void drawCircle(float xCoordinate, float yCoordinate, float radius) {
