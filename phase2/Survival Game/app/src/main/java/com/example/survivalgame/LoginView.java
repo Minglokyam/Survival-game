@@ -16,4 +16,8 @@ public interface LoginView {
   void setCredentialsError();
 
   void setRegisterSuccess();
+
+  void saveFile();
+
+  void loadFile();
 }

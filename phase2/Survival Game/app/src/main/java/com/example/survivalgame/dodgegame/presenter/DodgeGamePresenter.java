@@ -27,7 +27,7 @@ public class DodgeGamePresenter extends Thread {
     hp = dodgeGameManager.getHP();
     this.dodgeView = dodgeView;
     this.user = user;
-    dodgeDuration = Duration.ofSeconds(3);
+    dodgeDuration = Duration.ofSeconds(30);
   }
 
   public void setRunning(boolean running) {
