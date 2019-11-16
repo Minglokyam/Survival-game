@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".dodgegame.view.DodgeGameActivity" />
-        <activity android:name=".runninggame.RunningGameActivity" />
+        <activity android:name=".runninggame.view.RunningGameActivity" />
         <activity android:name=".ponggame.view.PongGameActivity" />
         <activity android:name=".replay.PongGameReplayActivity" />
         <activity android:name=".MainActivity">

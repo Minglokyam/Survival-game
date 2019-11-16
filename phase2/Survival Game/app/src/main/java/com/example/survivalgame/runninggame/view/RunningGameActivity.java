@@ -1,4 +1,4 @@
-package com.example.survivalgame.runninggame;
+package com.example.survivalgame.runninggame.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +10,10 @@ import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserManager;
 import com.example.survivalgame.ponggame.view.PongGameActivity;
+import com.example.survivalgame.runninggame.view.RunningActivityInterface;
+import com.example.survivalgame.runninggame.view.RunningGameView;
 
-public class RunningGameActivity extends AppCompatActivity {
+public class RunningGameActivity extends AppCompatActivity implements RunningActivityInterface {
   private RunningGameView runningGameView;
   private String name;
   private User user;
@@ -24,23 +26,25 @@ public class RunningGameActivity extends AppCompatActivity {
     user = UserManager.getUser(name);
     user.setGameStage(User.RUNNING);
     IOManager.saveFile();
-    runningGameView = new RunningGameView(this, user);
+    runningGameView = new RunningGameView(this, this, user);
     setContentView(runningGameView);
   }
 
-  public void toPong() {
-    Intent intent = new Intent(this, PongGameActivity.class);
-    intent.putExtra("user", name);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(intent);
-    finish();
-  }
-
+  @Override
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     user.reset();
     IOManager.saveFile();
+    startActivity(intent);
+    finish();
+  }
+
+  @Override
+  public void toPong() {
+    Intent intent = new Intent(this, PongGameActivity.class);
+    intent.putExtra("user", name);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
   }

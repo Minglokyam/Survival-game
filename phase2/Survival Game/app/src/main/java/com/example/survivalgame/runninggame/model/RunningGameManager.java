@@ -1,18 +1,24 @@
-package com.example.survivalgame.runninggame;
+package com.example.survivalgame.runninggame.model;
 
-import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import com.example.survivalgame.User;
+import com.example.survivalgame.runninggame.presenter.Presenter;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
-class RunningGameManager {
+public class RunningGameManager {
+  private int screenWidth;
 
-  private RunningGameView runningGameView;
+  private int screenHeight;
+
+  private Map<String, List<Integer>> bmpSizeMap;
+
+  // the moving speed of the objects in the game.
+  private int movingSpeed = 10;
 
   private RunnerFactory runnerFactory;
 
@@ -21,7 +27,7 @@ class RunningGameManager {
   private GroundFactory groundFactory;
 
   // the runner.
-  Runner runner;
+  private Runner runner;
 
   // ground.
   private Ground ground;
@@ -38,23 +44,45 @@ class RunningGameManager {
   // The height of ground
   private int groundHeight;
 
+  private Presenter presenter;
+
   private List<RandomItem> randomItems = new ArrayList<>();
 
-  RunningGameManager(RunningGameView runningGameView) {
-    this.runningGameView = runningGameView;
+  public RunningGameManager(
+      Presenter presenter,
+      int screenWidth,
+      int screenHeight,
+      Map<String, List<Integer>> bmpSizeMap) {
+    this.presenter = presenter;
+    this.screenWidth = screenWidth;
+    this.screenHeight = screenHeight;
+    this.bmpSizeMap = bmpSizeMap;
+
     randomItemFactory = new RandomItemFactory();
     runnerFactory = new RunnerFactory();
     groundFactory = new GroundFactory();
     // add runner and ground to the game.
-    ground = groundFactory.createGround(runningGameView, runningGameView.getGroundBMP(), 0, 0);
-    groundHeight = ground.getHeight();
+    ground = groundFactory.createGround(0, 0, movingSpeed, bmpSizeMap.get("ground"), screenHeight);
+    groundHeight = bmpSizeMap.get("ground").get(1) + 200;
     runner =
         runnerFactory.createRunner(
-            runningGameView, runningGameView.getRunnerBMP(), 50, 50, groundHeight);
+            50, 50, movingSpeed, bmpSizeMap.get("runner"), groundHeight, screenHeight);
+  }
+
+  public Runner getRunner() {
+    return runner;
+  }
+
+  public Ground getGround() {
+    return ground;
+  }
+
+  public List<RandomItem> getRandomItems() {
+    return randomItems;
   }
 
   /** update the coin when it moves out of the screen or the runner touches it. */
-  private void updateItems(RunningGameActivity runningGameActivity, User user) {
+  private void updateItems() {
 
     Iterator<RandomItem> randomItemIterator = randomItems.iterator();
 
@@ -65,7 +93,7 @@ class RunningGameManager {
       Rect rect = randomItem.getRect();
 
       if (randomItem.checkCollision(runnerRect, rect)) {
-        collideAction(runningGameActivity, user, randomItem);
+        collideAction(randomItem);
         // remove the random item after touching.
         randomItemIterator.remove();
         break;
@@ -73,22 +101,25 @@ class RunningGameManager {
     }
   }
 
-  private void collideAction(
-      RunningGameActivity runningGameActivity, User user, RandomItem randomItem) {
+  private void collideAction(RandomItem randomItem) {
     if (randomItem instanceof Coin) {
       // add points to the score when the runner touches a coin.
-      user.setScore(user.getScore() + 100);
+      presenter.addScore();
     } else {
-      user.setLife(user.getLife() - 1);
+      presenter.reduceLife();
     }
   }
 
   /** update the coins and spikes. */
-  void update(RunningGameActivity runningGameActivity, User user) {
+  public void update() {
+    for (RandomItem randomItem : randomItems) {
+      randomItem.update();
+    }
+    runner.update();
     updateTimer();
     randomGenerateItems();
     removeRandomItems();
-    updateItems(runningGameActivity, user);
+    updateItems();
   }
 
   /** update the timers. */
@@ -144,12 +175,15 @@ class RunningGameManager {
   private void makeSpikes() {
     RandomItem spike =
         randomItemFactory.createRandomItem(
-            runningGameView,
-            runningGameView.getSpikeBMP(),
-            runningGameView.getWidth() + 24,
+            screenWidth + 24,
             24,
+            movingSpeed,
+            bmpSizeMap.get("spike"),
             groundHeight,
+            screenWidth,
+            screenHeight,
             randomItemFactory.SPIKE);
+
     randomItems.add(spike);
     Random spikesRandom = new Random();
     timerRandomSpikes = spikesRandom.nextInt(3);
@@ -187,20 +221,18 @@ class RunningGameManager {
   private void makeCoins(int xCoordinate, int yCoordinate) {
     RandomItem coin =
         randomItemFactory.createRandomItem(
-            runningGameView,
-            runningGameView.getCoinBMP(),
-            runningGameView.getWidth() + xCoordinate,
+            screenWidth + xCoordinate,
             yCoordinate,
+            movingSpeed,
+            bmpSizeMap.get("coin"),
             groundHeight,
+            screenWidth,
+            screenHeight,
             randomItemFactory.COIN);
     randomItems.add(coin);
   }
 
-  void draw(Canvas canvas) {
-    runner.draw(canvas);
-    for (RandomItem randomItem : randomItems) {
-      randomItem.draw(canvas);
-    }
-    ground.draw(canvas);
+  public void onTouch() {
+    runner.onTouch();
   }
 }

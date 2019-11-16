@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 import com.example.survivalgame.ponggame.view.PongGameActivity;
-import com.example.survivalgame.runninggame.RunningGameActivity;
+import com.example.survivalgame.runninggame.view.RunningGameActivity;
 
 public class MainActivity extends AppCompatActivity implements LoginView {
   private LoginPresenter presenter;
