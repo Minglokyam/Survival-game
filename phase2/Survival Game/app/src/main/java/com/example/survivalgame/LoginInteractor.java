@@ -2,18 +2,25 @@ package com.example.survivalgame;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class LoginInteractor {
+  private static final String REGEX = "^(?=.*[A-Z])[\\w@$!%*?&]{6,}$";
+
   void register(String username, String password, LoginListener loginListener) {
     loginListener.loadFile();
     if (checkNotEmptyCredential(username, password)) {
       if (!UserManager.userExists(username)) {
-        String hashed = BCrypt.hashpw(password, BCrypt.gensalt(10));
-        User newUser = new User(username, hashed);
-        UserManager.addUser(username, newUser);
-        loginListener.saveFile();
-        loginListener.onRegisterSuccess();
+        if (pwRequirement(password)) {
+          String hashed = BCrypt.hashpw(password, BCrypt.gensalt(10));
+          User newUser = new User(username, hashed);
+          UserManager.addUser(username, newUser);
+          loginListener.saveFile();
+          loginListener.onRegisterSuccess();
+        } else {
+          loginListener.onPWNotValid();
+        }
       } else {
         loginListener.onUserAlreadyExists();
       }
@@ -58,5 +65,11 @@ class LoginInteractor {
 
   private boolean checkNotEmptyCredential(String username, String password) {
     return !username.trim().equals("") || password.trim().equals("");
+  }
+
+  private boolean pwRequirement(String password) {
+    Pattern pattern = Pattern.compile(REGEX);
+    Matcher matcher = pattern.matcher(password);
+    return matcher.matches();
   }
 }

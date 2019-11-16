@@ -17,6 +17,8 @@ public interface LoginView {
 
   void setRegisterSuccess();
 
+  void onPWNotValid();
+
   void saveFile();
 
   void loadFile();

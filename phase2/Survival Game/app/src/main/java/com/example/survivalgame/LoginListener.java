@@ -17,6 +17,8 @@ public interface LoginListener {
 
   void onWrongCredential();
 
+  void onPWNotValid();
+
   void saveFile();
 
   void loadFile();

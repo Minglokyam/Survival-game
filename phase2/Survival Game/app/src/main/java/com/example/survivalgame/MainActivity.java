@@ -111,4 +111,13 @@ public class MainActivity extends AppCompatActivity implements LoginView {
   public void loadFile() {
     IOManager.loadFile(this);
   }
+
+  @Override
+  public void onPWNotValid() {
+    Toast.makeText(
+            MainActivity.this,
+            "The password must have at least six characters and at least one uppercase letter",
+            Toast.LENGTH_SHORT)
+        .show();
+  }
 }

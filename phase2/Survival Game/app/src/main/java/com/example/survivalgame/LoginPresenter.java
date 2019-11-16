@@ -76,4 +76,9 @@ public class LoginPresenter implements LoginListener {
   public void loadFile() {
     loginView.loadFile();
   }
+
+  @Override
+  public void onPWNotValid() {
+    loginView.onPWNotValid();
+  }
 }
