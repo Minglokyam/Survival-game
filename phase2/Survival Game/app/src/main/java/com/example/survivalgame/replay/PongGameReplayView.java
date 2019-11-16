@@ -1,4 +1,4 @@
-package com.example.survivalgame.ponggame.view;
+package com.example.survivalgame.replay;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,15 +6,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.survivalgame.User;
-import com.example.survivalgame.ponggame.presenter.PongGamePresenter;
-import com.example.survivalgame.ponggame.presenter.PongGameReplayPresenter;
-
-import java.util.ArrayList;
+import com.example.survivalgame.ponggame.view.ActivityInterface;
+import com.example.survivalgame.ponggame.view.View;
+import com.example.survivalgame.replay.PongGameReplayPresenter;
 
 public class PongGameReplayView extends SurfaceView implements View {
     private ActivityInterface activityInterface;
@@ -25,7 +23,6 @@ public class PongGameReplayView extends SurfaceView implements View {
 
     private Paint paintText;
 
-    private ArrayList<float[]> replay;
 
     /**
      * The Thread of this game
@@ -42,7 +39,6 @@ public class PongGameReplayView extends SurfaceView implements View {
      */
     private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    private float touchReference;
 
     public PongGameReplayView(Context context, ActivityInterface activityInterface, User user) {
         super(context);
@@ -95,9 +91,7 @@ public class PongGameReplayView extends SurfaceView implements View {
     }
 
     @Override
-    public void setTouchReference(float newTouchReference) {
-        touchReference = newTouchReference;
-    }
+    public void setTouchReference(float newTouchReference) {}
 
     @Override
     public void drawCircle(float xCoordinate, float yCoordinate, float radius) {

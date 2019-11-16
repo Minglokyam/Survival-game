@@ -9,7 +9,7 @@ import com.example.survivalgame.UserManager;
 import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
-import com.example.survivalgame.ponggame.view.PongGameReplayActivity;
+import com.example.survivalgame.replay.PongGameReplayActivity;
 
 // MainActivity class for the dodge game
 public class DodgeGameActivity extends AppCompatActivity {

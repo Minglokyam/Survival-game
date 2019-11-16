@@ -12,7 +12,7 @@
         <activity android:name=".dodgegame.DodgeGameActivity" />
         <activity android:name=".runninggame.RunningGameActivity" />
         <activity android:name=".ponggame.view.PongGameActivity" />
-        <activity android:name=".ponggame.view.PongGameReplayActivity" />
+        <activity android:name=".replay.PongGameReplayActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
