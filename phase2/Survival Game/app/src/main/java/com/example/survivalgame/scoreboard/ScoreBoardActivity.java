@@ -1,4 +1,4 @@
-package com.example.survivalgame.ScoreBoarding;
+package com.example.survivalgame.scoreboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.survivalgame.R;
 
-public class ScoreBoard extends AppCompatActivity {
+public class ScoreBoardActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

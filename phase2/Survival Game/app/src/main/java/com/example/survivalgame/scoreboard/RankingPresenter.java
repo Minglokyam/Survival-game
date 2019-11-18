@@ -1,8 +1,7 @@
-package com.example.survivalgame.ScoreBoarding;
+package com.example.survivalgame.scoreboard;
 
 import android.widget.TextView;
 
-import com.example.survivalgame.ScoreBoarding.RankingActivity;
 import com.example.survivalgame.User;
 
 public class RankingPresenter {

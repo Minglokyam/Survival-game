@@ -1,4 +1,4 @@
-package com.example.survivalgame.ScoreBoarding;
+package com.example.survivalgame.scoreboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +10,6 @@ import com.example.survivalgame.R;
 
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserManager;
-
-import java.util.*;
 
 public class RankingActivity extends AppCompatActivity {
   RankingPresenter rankingPresenter;

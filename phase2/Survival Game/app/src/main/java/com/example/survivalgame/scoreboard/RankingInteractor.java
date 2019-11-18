@@ -1,4 +1,4 @@
-package com.example.survivalgame.ScoreBoarding;
+package com.example.survivalgame.scoreboard;
 
 import android.widget.TextView;
 

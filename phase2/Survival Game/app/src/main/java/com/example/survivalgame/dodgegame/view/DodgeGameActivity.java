@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.survivalgame.ScoreBoarding.RankingActivity;
-import com.example.survivalgame.ScoreBoarding.ScoreBoard;
+import com.example.survivalgame.scoreboard.RankingActivity;
 import com.example.survivalgame.UserManager;
 
 import com.example.survivalgame.IOManager;
