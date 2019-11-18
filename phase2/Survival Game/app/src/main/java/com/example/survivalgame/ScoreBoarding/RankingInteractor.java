@@ -24,15 +24,15 @@ public class RankingInteractor {
     return UserArray;
   }
 
-  public void setOneText(TextView t,User user){
-      t.setText("You received " + user.getScore()+" scores");
-  }
-  public void setTexts(TextView[] textviews,User[] users){
-      for(int i =0;i<textviews.length;i++){
-          if(i<users.length){
-              textviews[i].setText(users[i].toString());
-          }
-      }
+  public void setOneText(TextView t, User user) {
+    t.setText("You received " + user.getScore() + " scores");
   }
 
+  public void setTexts(TextView[] textviews, User[] users) {
+    for (int i = 0; i < textviews.length; i++) {
+      if (i < users.length) {
+        textviews[i].setText(users[i].toString());
+      }
+    }
+  }
 }

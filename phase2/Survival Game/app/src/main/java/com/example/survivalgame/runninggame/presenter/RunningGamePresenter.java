@@ -1,5 +1,8 @@
 package com.example.survivalgame.runninggame.presenter;
 
+// We understand that importing Rect in presenter will violate MVP rule. The presenter should not
+// have any android class. We can solve it by creating our own Rect class. But this will be
+// redundant and unnecessarily increase the number of classes.
 import android.graphics.Rect;
 
 import com.example.survivalgame.User;

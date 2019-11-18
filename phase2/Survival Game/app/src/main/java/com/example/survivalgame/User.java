@@ -152,8 +152,7 @@ public class User implements Serializable, Comparable<User> {
     this.replay = newReplay;
   }
 
-  public String toString(){
-      return "Player "+this.username +" receives " + this.getScore()+" scores";
+  public String toString() {
+    return "Player " + this.username + " receives " + this.getScore() + " scores";
   }
-
 }

@@ -17,6 +17,7 @@ public class RankingActivity extends AppCompatActivity {
   RankingPresenter rankingPresenter;
   private User user;
   private String name;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -32,10 +33,9 @@ public class RankingActivity extends AppCompatActivity {
     TextView num3 = (TextView) findViewById(R.id.num3);
     TextView yourScore = (TextView) findViewById(R.id.yourScore);
 
-    TextView[] textViews ={num1,num2,num3};
+    TextView[] textViews = {num1, num2, num3};
     User[] users = rankingPresenter.toUserArray();
-    rankingPresenter.setOneText(yourScore,user);
-    rankingPresenter.setTexts(textViews,users);
-
+    rankingPresenter.setOneText(yourScore, user);
+    rankingPresenter.setTexts(textViews, users);
   }
 }

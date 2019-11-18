@@ -1,5 +1,8 @@
 package com.example.survivalgame.dodgegame.model;
 
+// We understand that importing RectF in model will violate MVP rule. The model should not have
+// android class. We can solve it by creating our own RectF class. But this will be redundant and
+// unnecessarily increase the number of classes.
 import android.graphics.RectF;
 
 // The class for the plane that controls by the player.

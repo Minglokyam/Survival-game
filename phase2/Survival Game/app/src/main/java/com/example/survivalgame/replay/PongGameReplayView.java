@@ -21,9 +21,7 @@ public class PongGameReplayView extends SurfaceView implements PongView {
 
   private Paint paintText;
 
-  /**
-   * The replay presenter of this game
-   */
+  /** The replay presenter of this game */
   private PongGameReplayPresenter replayPresenter;
 
   public PongGameReplayView(

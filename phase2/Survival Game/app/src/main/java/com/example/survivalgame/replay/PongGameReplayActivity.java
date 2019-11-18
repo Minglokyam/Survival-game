@@ -29,9 +29,7 @@ public class PongGameReplayActivity extends AppCompatActivity implements PongAct
   @Override
   public void toDodge() {}
 
-  /**
-   * reset user statistic, start MainActivity, end PongGameReplay
-   */
+  /** reset user statistic, start MainActivity, end PongGameReplay */
   @Override
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
