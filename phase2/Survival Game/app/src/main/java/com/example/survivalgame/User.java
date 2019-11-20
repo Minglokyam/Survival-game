@@ -135,6 +135,7 @@ public class User implements Serializable, Comparable<User> {
     gameStage = User.RUNNING;
     score = 0;
     totalDuration = Duration.ofSeconds(0);
+    replay.clear();
   }
 
   @Override
