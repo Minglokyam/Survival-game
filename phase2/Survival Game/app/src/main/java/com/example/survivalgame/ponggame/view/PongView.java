@@ -9,7 +9,7 @@ public interface PongView {
 
   void toScoreBoard();
 
-  void toDodge();
+  void toBeforeReplay();
 
   void setTouchReference(float newTouchReference);
 

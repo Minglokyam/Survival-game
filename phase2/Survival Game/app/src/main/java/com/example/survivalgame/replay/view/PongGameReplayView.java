@@ -63,8 +63,8 @@ public class PongGameReplayView extends SurfaceView implements ReplayView {
   }
 
   @Override
-  public void toScoreBoard() {
-    replayActivityInterface.toScoreBoard();
+  public void toDodge() {
+    replayActivityInterface.toDodge();
   }
 
   @Override

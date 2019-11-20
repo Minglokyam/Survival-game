@@ -130,12 +130,15 @@ public class User implements Serializable, Comparable<User> {
     totalDuration = newTotalDuration;
   }
 
+  public void clearReplay() {
+    replay.clear();
+  }
+
   public void reset() {
     life = 3;
     gameStage = User.RUNNING;
     score = 0;
     totalDuration = Duration.ofSeconds(0);
-    replay.clear();
   }
 
   @Override

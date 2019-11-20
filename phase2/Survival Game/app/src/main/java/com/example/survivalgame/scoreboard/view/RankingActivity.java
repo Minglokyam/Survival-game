@@ -41,15 +41,7 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
     setTextViews();
     yourScore = findViewById(R.id.yourScore);
 
-    Button replayButton = findViewById(R.id.replay);
     Button toMainButton = findViewById(R.id.toMain);
-    replayButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            toReplay();
-          }
-        });
     toMainButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
@@ -59,14 +51,6 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
         });
 
     rankingPresenter = new RankingPresenter(this, user, new RankingInteractor());
-  }
-
-  public void toReplay() {
-    Intent intent = new Intent(this, PongGameReplayActivity.class);
-    intent.putExtra("user", name);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(intent);
-    finish();
   }
 
   public void toMain() {

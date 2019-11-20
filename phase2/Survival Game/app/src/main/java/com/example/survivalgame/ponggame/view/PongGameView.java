@@ -43,7 +43,8 @@ public class PongGameView extends SurfaceView implements PongView {
     paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
 
-    pongGamePresenter = new PongGamePresenter(this, new PongGameManager(user, screenWidth, screenHeight), user);
+    pongGamePresenter =
+        new PongGamePresenter(this, new PongGameManager(user, screenWidth, screenHeight), user);
 
     getHolder()
         .addCallback(
@@ -97,8 +98,8 @@ public class PongGameView extends SurfaceView implements PongView {
   }
 
   @Override
-  public void toDodge() {
-    pongActivityInterface.toDodge();
+  public void toBeforeReplay() {
+    pongActivityInterface.toBeforeReplay();
   }
 
   @Override

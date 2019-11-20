@@ -70,11 +70,10 @@ public class RunningGameView extends SurfaceView implements RunningView {
     this.runningActivityInterface = runningActivityInterface;
     runningGamePresenter =
         new RunningGamePresenter(
-                this,
-                new RunningGameManager(screenWidth, screenHeight, bmpSizeMap),
-                new RectFactory(),
-                user
-        );
+            this,
+            new RunningGameManager(screenWidth, screenHeight, bmpSizeMap),
+            new RectFactory(),
+            user);
     getHolder()
         .addCallback(
             new Callback() {

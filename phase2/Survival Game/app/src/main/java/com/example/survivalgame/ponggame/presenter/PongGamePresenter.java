@@ -17,7 +17,7 @@ public class PongGamePresenter extends Thread {
   /** the countdown of this game */
   private Duration pongDuration;
 
-  //Use dependency injection for pong game manager
+  // Use dependency injection for pong game manager
   public PongGamePresenter(PongView pongView, PongGameManager pongGameManager, User user) {
     this.pongGameManager = pongGameManager;
     this.user = user;
@@ -84,7 +84,7 @@ public class PongGamePresenter extends Thread {
       pongView.toScoreBoard();
     } else if (pongDuration.getSeconds() <= 0) { // If countdown reach 0, go to next game.
       running = false;
-      pongView.toDodge();
+      pongView.toBeforeReplay();
     }
   }
 

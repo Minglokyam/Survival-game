@@ -52,9 +52,7 @@ public class RunningGameManager {
   private List<RandomItem> randomItems = new ArrayList<>();
 
   public RunningGameManager(
-      int screenWidth,
-      int screenHeight,
-      Map<String, List<Integer>> bmpSizeMap) {
+      int screenWidth, int screenHeight, Map<String, List<Integer>> bmpSizeMap) {
     this.screenWidth = screenWidth;
     this.screenHeight = screenHeight;
     this.bmpSizeMap = bmpSizeMap;
@@ -70,7 +68,7 @@ public class RunningGameManager {
             50, 50, movingSpeed, bmpSizeMap.get("runner"), groundHeight, screenHeight);
   }
 
-  public void setRunningPresenter(RunningPresenter runningPresenter){
+  public void setRunningPresenter(RunningPresenter runningPresenter) {
     this.runningPresenter = runningPresenter;
   }
 

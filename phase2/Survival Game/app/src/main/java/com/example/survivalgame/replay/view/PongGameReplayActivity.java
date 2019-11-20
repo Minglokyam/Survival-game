@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserManager;
+import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 import com.example.survivalgame.scoreboard.view.RankingActivity;
 
 public class PongGameReplayActivity extends AppCompatActivity implements ReplayActivityInterface {
@@ -26,8 +27,8 @@ public class PongGameReplayActivity extends AppCompatActivity implements ReplayA
 
   /** reset user statistic, start MainActivity, end PongGameReplay */
   @Override
-  public void toScoreBoard() {
-    Intent intent = new Intent(this, RankingActivity.class);
+  public void toDodge() {
+    Intent intent = new Intent(this, DodgeGameActivity.class);
     intent.putExtra("user", name);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);

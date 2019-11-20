@@ -9,6 +9,7 @@ import com.example.survivalgame.UserManager;
 import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
+import com.example.survivalgame.beforereplay.BeforeReplayActivity;
 import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 import com.example.survivalgame.scoreboard.view.RankingActivity;
 
@@ -35,8 +36,8 @@ public class PongGameActivity extends AppCompatActivity implements PongActivityI
 
   /** sent user statistic to DodgeGame, start DodgeGame, end PongGame */
   @Override
-  public void toDodge() {
-    Intent intent = new Intent(this, DodgeGameActivity.class);
+  public void toBeforeReplay() {
+    Intent intent = new Intent(this, BeforeReplayActivity.class);
     intent.putExtra("user", name);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);

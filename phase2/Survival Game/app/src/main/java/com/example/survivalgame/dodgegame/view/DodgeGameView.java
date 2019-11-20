@@ -29,7 +29,8 @@ public class DodgeGameView extends SurfaceView implements DodgeView {
   public DodgeGameView(Context context, DodgeActivityInterface dodgeActivityInterface, User user) {
     super(context);
     this.dodgeActivityInterface = dodgeActivityInterface;
-    dodgeGamePresenter = new DodgeGamePresenter(this, new DodgeGameManager(screenWidth, screenHeight), user);
+    dodgeGamePresenter =
+        new DodgeGamePresenter(this, new DodgeGameManager(screenWidth, screenHeight), user);
 
     paintText = new Paint();
     paintText.setColor(Color.BLACK);

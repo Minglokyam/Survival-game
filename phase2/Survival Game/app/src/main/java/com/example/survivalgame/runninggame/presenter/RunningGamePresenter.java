@@ -28,7 +28,7 @@ public class RunningGamePresenter extends Thread implements RunningPresenter {
   // check whether the runner is running
   private boolean running;
 
-  //We use dependency inversion principle to inject rect factory and running game manager
+  // We use dependency inversion principle to inject rect factory and running game manager
   public RunningGamePresenter(
       RunningView runningView,
       RunningGameManager runningGameManager,
