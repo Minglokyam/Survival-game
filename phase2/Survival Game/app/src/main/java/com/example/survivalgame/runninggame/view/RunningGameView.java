@@ -115,8 +115,8 @@ public class RunningGameView extends SurfaceView implements RunningView {
   }
 
   @Override
-  public void toMain() {
-    runningActivityInterface.toMain();
+  public void toScoreBoard() {
+    runningActivityInterface.toScoreBoard();
   }
 
   @Override

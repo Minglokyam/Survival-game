@@ -38,14 +38,4 @@ public class DodgeGameActivity extends AppCompatActivity implements DodgeActivit
     startActivity(intent);
     finish();
   }
-
-  @Override
-  public void toMain() {
-    Intent intent = new Intent(this, MainActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    user.reset();
-    IOManager.saveFile(this);
-    startActivity(intent);
-    finish();
-  }
 }

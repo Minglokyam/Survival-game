@@ -83,11 +83,6 @@ public class DodgeGameView extends SurfaceView implements DodgeView {
   }
 
   @Override
-  public void toMain() {
-    dodgeActivityInterface.toMain();
-  }
-
-  @Override
   public void clearCanvas() {
     canvas = null;
   }

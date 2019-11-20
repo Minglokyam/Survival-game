@@ -80,7 +80,7 @@ public class PongGamePresenter extends Thread {
     user.setScore(user.getScore() + 1);
     if (user.getLife() == 0) { // If no life left, return to main screen.
       running = false;
-      pongView.toMain();
+      pongView.toScoreBoard();
     } else if (pongDuration.getSeconds() <= 0) { // If countdown reach 0, go to next game.
       running = false;
       pongView.toDodge();

@@ -7,8 +7,6 @@ public interface DodgeView {
 
   void toScoreBoard();
 
-  void toMain();
-
   void clearCanvas();
 
   void drawText(String string, float xCoordinate, float yCoordinate);

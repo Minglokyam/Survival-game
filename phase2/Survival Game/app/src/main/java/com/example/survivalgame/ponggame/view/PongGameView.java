@@ -91,8 +91,8 @@ public class PongGameView extends SurfaceView implements PongView {
   }
 
   @Override
-  public void toMain() {
-    pongActivityInterface.toMain();
+  public void toScoreBoard() {
+    pongActivityInterface.toScoreBoard();
   }
 
   @Override

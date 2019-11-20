@@ -10,6 +10,7 @@ import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserManager;
 import com.example.survivalgame.ponggame.view.PongGameActivity;
+import com.example.survivalgame.scoreboard.view.RankingActivity;
 
 public class RunningGameActivity extends AppCompatActivity implements RunningActivityInterface {
   private RunningGameView runningGameView;
@@ -29,18 +30,17 @@ public class RunningGameActivity extends AppCompatActivity implements RunningAct
   }
 
   @Override
-  public void toMain() {
-    Intent intent = new Intent(this, MainActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    user.reset();
-    IOManager.saveFile(this);
+  public void toPong() {
+    Intent intent = new Intent(this, PongGameActivity.class);
+    intent.putExtra("user", name);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
   }
 
   @Override
-  public void toPong() {
-    Intent intent = new Intent(this, PongGameActivity.class);
+  public void toScoreBoard() {
+    Intent intent = new Intent(this, RankingActivity.class);
     intent.putExtra("user", name);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);

@@ -7,7 +7,7 @@ public interface PongView {
 
   void unlockCanvasAndPost();
 
-  void toMain();
+  void toScoreBoard();
 
   void toDodge();
 

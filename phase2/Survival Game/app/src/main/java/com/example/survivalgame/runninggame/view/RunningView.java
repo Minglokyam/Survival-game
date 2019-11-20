@@ -13,7 +13,7 @@ public interface RunningView {
 
   void drawColor(int red, int green, int blue);
 
-  void toMain();
+  void toScoreBoard();
 
   void toPong();
 

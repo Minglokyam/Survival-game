@@ -10,6 +10,7 @@ import com.example.survivalgame.IOManager;
 import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
 import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
+import com.example.survivalgame.scoreboard.view.RankingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +43,11 @@ public class PongGameActivity extends AppCompatActivity implements PongActivityI
     finish();
   }
 
-  /** reset user statistic, start MainActivity, end PongGame */
   @Override
-  public void toMain() {
-    Intent intent = new Intent(this, MainActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    user.reset();
-    IOManager.saveFile(this);
+  public void toScoreBoard() {
+    Intent intent = new Intent(this, RankingActivity.class);
+    intent.putExtra("user", name);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
   }
