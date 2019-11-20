@@ -2,21 +2,31 @@ package com.example.survivalgame.scoreboard.presenter;
 
 import com.example.survivalgame.User;
 import com.example.survivalgame.scoreboard.model.RankingInteractor;
+import com.example.survivalgame.scoreboard.view.RankingView;
 
-public class RankingPresenter {
-  // private RankingActivity rankView;
-  private RankingInteractor rankingInteractor;
+import java.util.ArrayList;
+import java.util.List;
 
-  public RankingPresenter(User user, RankingInteractor rankingInteractor) {
-    this.rankingInteractor = rankingInteractor;
+public class RankingPresenter implements RankingPresenterInterface {
+  private RankingView rankingView;
+
+  public RankingPresenter(RankingView rankingView, User user, RankingInteractor rankingInteractor) {
+    this.rankingView = rankingView;
     updateUserScore(user);
-  }
-
-  public User[] toUserArray() {
-    return rankingInteractor.toUserArray();
+    rankingInteractor.generateRanking(this);
+    rankingView.setUserText(user.getScore());
   }
 
   private void updateUserScore(User user) {
     user.updateHighestScore(user.getScore());
+  }
+
+  @Override
+  public void printRankingText(List<User> userList) {
+    List<String> userStatementList = new ArrayList<>();
+    for (int i = 0; i < 3; i++) {
+      userStatementList.add(userList.get(i).toString());
+    }
+    rankingView.printRankingText(userStatementList);
   }
 }

@@ -38,7 +38,7 @@ public class UserManager implements Serializable {
     return userMap.get(username);
   }
 
-  public static Map getUserMap() {
+  public static Map<String, User> getUserMap() {
     return userMap;
   }
 

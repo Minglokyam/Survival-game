@@ -18,10 +18,15 @@ import com.example.survivalgame.replay.view.PongGameReplayActivity;
 import com.example.survivalgame.scoreboard.model.RankingInteractor;
 import com.example.survivalgame.scoreboard.presenter.RankingPresenter;
 
-public class RankingActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class RankingActivity extends AppCompatActivity implements RankingView {
   RankingPresenter rankingPresenter;
   private User user;
   private String name;
+  private List<TextView> textViews;
+  private TextView yourScore;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +36,10 @@ public class RankingActivity extends AppCompatActivity {
     user = UserManager.getUser(name);
 
     setContentView(R.layout.activity_ranking);
-    rankingPresenter = new RankingPresenter(user, new RankingInteractor());
 
-    TextView num1 = findViewById(R.id.num1);
-    TextView num2 = findViewById(R.id.num2);
-    TextView num3 = findViewById(R.id.num3);
-    TextView yourScore = findViewById(R.id.yourScore);
+    textViews = new ArrayList<>();
+    setTextViews();
+    yourScore = findViewById(R.id.yourScore);
 
     Button replayButton = findViewById(R.id.replay);
     Button toMainButton = findViewById(R.id.toMain);
@@ -55,10 +58,7 @@ public class RankingActivity extends AppCompatActivity {
           }
         });
 
-    TextView[] textViews = {num1, num2, num3};
-    User[] users = rankingPresenter.toUserArray();
-    setOneText(yourScore, user);
-    setTexts(textViews, users);
+    rankingPresenter = new RankingPresenter(this, user, new RankingInteractor());
   }
 
   public void toReplay() {
@@ -78,15 +78,28 @@ public class RankingActivity extends AppCompatActivity {
     finish();
   }
 
-  public void setTexts(TextView[] textViews, User[] users) {
-    for (int i = 0; i < textViews.length; i++) {
-      if (i < users.length) {
-        textViews[i].setText(users[i].toString());
-      }
+  private void setTextViews() {
+    TextView num1 = findViewById(R.id.num1);
+    textViews.add(num1);
+    TextView num2 = findViewById(R.id.num2);
+    textViews.add(num2);
+    TextView num3 = findViewById(R.id.num3);
+    textViews.add(num3);
+  }
+
+  @Override
+  public void printRankingText(List<String> userStatementList) {
+    String userStatement;
+    TextView textView;
+    for (int i = 0; i < userStatementList.size(); i++) {
+      userStatement = userStatementList.get(i);
+      textView = textViews.get(i);
+      textView.setText(userStatement);
     }
   }
 
-  public void setOneText(TextView textView, User user) {
-    textView.setText("You received " + user.getScore() + " scores");
+  @Override
+  public void setUserText(int userText) {
+    yourScore.setText("You received " + userText + " scores");
   }
 }
