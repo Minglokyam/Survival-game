@@ -1,17 +1,15 @@
-package com.example.survivalgame.replay;
+package com.example.survivalgame.replay.view;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.survivalgame.IOManager;
-import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
 import com.example.survivalgame.UserManager;
-import com.example.survivalgame.ponggame.view.PongActivityInterface;
+import com.example.survivalgame.scoreboard.view.RankingActivity;
 
-public class PongGameReplayActivity extends AppCompatActivity implements PongActivityInterface {
+public class PongGameReplayActivity extends AppCompatActivity implements ReplayActivityInterface {
   private PongGameReplayView replayView;
   private String name;
   private User user;
@@ -26,16 +24,12 @@ public class PongGameReplayActivity extends AppCompatActivity implements PongAct
     setContentView(replayView);
   }
 
-  @Override
-  public void toDodge() {}
-
   /** reset user statistic, start MainActivity, end PongGameReplay */
   @Override
-  public void toMain() {
-    Intent intent = new Intent(this, MainActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    user.reset();
-    IOManager.saveFile(this);
+  public void toScoreBoard() {
+    Intent intent = new Intent(this, RankingActivity.class);
+    intent.putExtra("user", name);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
   }

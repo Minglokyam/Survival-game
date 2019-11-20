@@ -16,6 +16,9 @@ public class User implements Serializable, Comparable<User> {
   /* user's current score */
   private int score;
 
+  /* user's highest score */
+  private int highestScore;
+
   /* user's current life count */
   private int life;
 
@@ -62,6 +65,18 @@ public class User implements Serializable, Comparable<User> {
   /** get the user's current score */
   public int getScore() {
     return score;
+  }
+
+  /** get the user's highest score */
+  public int getHighestScore() {
+    return highestScore;
+  }
+
+  /** set the user's highest score */
+  public void updateHighestScore(int currentScore) {
+    if (currentScore > highestScore) {
+      highestScore = currentScore;
+    }
   }
 
   /**
@@ -122,10 +137,11 @@ public class User implements Serializable, Comparable<User> {
     totalDuration = Duration.ofSeconds(0);
   }
 
+  @Override
   public int compareTo(User user) {
-    if (this.score > user.score) {
+    if (this.highestScore > user.highestScore) {
       return -1;
-    } else if (this.score < user.score) {
+    } else if (this.highestScore < user.highestScore) {
       return 1;
     } else {
       return 0;
@@ -152,7 +168,8 @@ public class User implements Serializable, Comparable<User> {
     this.replay = newReplay;
   }
 
+  @Override
   public String toString() {
-    return "Player " + this.username + " receives " + this.getScore() + " scores";
+    return "Player " + this.username + " receives " + highestScore + " scores";
   }
 }

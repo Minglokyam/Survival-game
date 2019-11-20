@@ -5,9 +5,9 @@ public interface DodgeView {
 
   void unlockCanvasAndPost();
 
-  void toMain();
-
   void toScoreBoard();
+
+  void toMain();
 
   void clearCanvas();
 

@@ -1,19 +1,19 @@
-package com.example.survivalgame.replay;
+package com.example.survivalgame.replay.presenter;
 
 import com.example.survivalgame.User;
-import com.example.survivalgame.ponggame.model.PongGameItem;
-import com.example.survivalgame.ponggame.view.PongView;
+import com.example.survivalgame.replay.view.ReplayView;
+import com.example.survivalgame.replay.model.PongGameItem;
 
 import java.util.List;
 
 public class PongGameReplayPresenter extends Thread {
   private boolean running;
-  private PongView pongView;
+  private ReplayView replayView;
   private User user;
 
-  public PongGameReplayPresenter(PongView pongView, User user) {
+  public PongGameReplayPresenter(ReplayView replayView, User user) {
     this.user = user;
-    this.pongView = pongView;
+    this.replayView = replayView;
   }
 
   /**
@@ -23,20 +23,20 @@ public class PongGameReplayPresenter extends Thread {
   @Override
   public void run() {
     while (running) {
-      pongView.clearCanvas();
+      replayView.clearCanvas();
       try {
-        pongView.lockCanvas();
+        replayView.lockCanvas();
         synchronized (this) {
-          pongView.drawColor(255, 255, 255);
+          replayView.drawColor(255, 255, 255);
           checkQuit();
           List<List<List<Float>>> replayList = user.getReplay();
           List<List<Float>> itemList = replayList.get(0);
           user.deleteReplay();
           for (List<Float> floatList : itemList) {
             if (floatList.get(0) == PongGameItem.CIRCLE) {
-              pongView.drawCircle(floatList.get(1), floatList.get(2), floatList.get(3));
+              replayView.drawCircle(floatList.get(1), floatList.get(2), floatList.get(3));
             } else {
-              pongView.drawRect(
+              replayView.drawRect(
                   floatList.get(1), floatList.get(2), floatList.get(3), floatList.get(4));
             }
           }
@@ -44,7 +44,7 @@ public class PongGameReplayPresenter extends Thread {
       } catch (Exception e) {
         e.printStackTrace();
       } finally {
-        pongView.unlockCanvasAndPost();
+        replayView.unlockCanvasAndPost();
       }
     }
   }
@@ -53,7 +53,7 @@ public class PongGameReplayPresenter extends Thread {
   public void checkQuit() {
     if (user.isEmptyReplay()) { // If replay ends, return to main screen.
       running = false;
-      pongView.toMain();
+      replayView.toScoreBoard();
     }
   }
 

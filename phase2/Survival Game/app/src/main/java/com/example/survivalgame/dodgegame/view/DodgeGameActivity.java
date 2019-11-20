@@ -5,13 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.survivalgame.scoreboard.RankingActivity;
+import com.example.survivalgame.MainActivity;
+import com.example.survivalgame.scoreboard.view.RankingActivity;
 import com.example.survivalgame.UserManager;
 
 import com.example.survivalgame.IOManager;
-import com.example.survivalgame.MainActivity;
 import com.example.survivalgame.User;
-import com.example.survivalgame.replay.PongGameReplayActivity;
 
 // MainActivity class for the dodge game
 public class DodgeGameActivity extends AppCompatActivity implements DodgeActivityInterface {
@@ -31,29 +30,21 @@ public class DodgeGameActivity extends AppCompatActivity implements DodgeActivit
     setContentView(dodgeGameView);
   }
 
-  /** after finishing the DodgeGame, move back to MainActivity */
+  @Override
+  public void toScoreBoard() {
+    Intent intent = new Intent(this, RankingActivity.class);
+    intent.putExtra("user", name);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(intent);
+    finish();
+  }
+
   @Override
   public void toMain() {
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     user.reset();
     IOManager.saveFile(this);
-    startActivity(intent);
-    finish();
-  }
-
-  public void toReplay() {
-    Intent intent = new Intent(this, PongGameReplayActivity.class);
-    intent.putExtra("user", name);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(intent);
-    finish();
-  }
-
-  public void toScoreBoard() {
-    Intent intent = new Intent(this, RankingActivity.class);
-    intent.putExtra("user", name);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
   }

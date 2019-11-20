@@ -1,4 +1,4 @@
-package com.example.survivalgame.replay;
+package com.example.survivalgame.replay.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,11 +9,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.survivalgame.User;
-import com.example.survivalgame.ponggame.view.PongActivityInterface;
-import com.example.survivalgame.ponggame.view.PongView;
+import com.example.survivalgame.replay.presenter.PongGameReplayPresenter;
 
-public class PongGameReplayView extends SurfaceView implements PongView {
-  private PongActivityInterface pongActivityInterface;
+public class PongGameReplayView extends SurfaceView implements ReplayView {
+  private ReplayActivityInterface replayActivityInterface;
 
   private Canvas canvas;
 
@@ -25,9 +24,9 @@ public class PongGameReplayView extends SurfaceView implements PongView {
   private PongGameReplayPresenter replayPresenter;
 
   public PongGameReplayView(
-      Context context, PongActivityInterface pongActivityInterface, User user) {
+      Context context, ReplayActivityInterface replayActivityInterface, User user) {
     super(context);
-    this.pongActivityInterface = pongActivityInterface;
+    this.replayActivityInterface = replayActivityInterface;
     paintShape = new Paint();
     paintShape.setColor(Color.MAGENTA);
     paintText = new Paint();
@@ -64,17 +63,9 @@ public class PongGameReplayView extends SurfaceView implements PongView {
   }
 
   @Override
-  public void toMain() {
-    pongActivityInterface.toMain();
+  public void toScoreBoard() {
+    replayActivityInterface.toScoreBoard();
   }
-
-  @Override
-  public void toDodge() {
-    pongActivityInterface.toDodge();
-  }
-
-  @Override
-  public void setTouchReference(float newTouchReference) {}
 
   @Override
   public void drawCircle(float xCoordinate, float yCoordinate, float radius) {

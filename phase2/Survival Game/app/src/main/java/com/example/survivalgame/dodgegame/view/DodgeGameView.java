@@ -78,13 +78,13 @@ public class DodgeGameView extends SurfaceView implements DodgeView {
   }
 
   @Override
-  public void toMain() {
-    dodgeActivityInterface.toMain();
+  public void toScoreBoard() {
+    dodgeActivityInterface.toScoreBoard();
   }
 
   @Override
-  public void toScoreBoard() {
-    dodgeActivityInterface.toScoreBoard();
+  public void toMain() {
+    dodgeActivityInterface.toMain();
   }
 
   @Override
