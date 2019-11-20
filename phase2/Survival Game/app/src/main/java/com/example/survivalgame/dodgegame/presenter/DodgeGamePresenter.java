@@ -21,8 +21,9 @@ public class DodgeGamePresenter extends Thread {
   private Plane plane;
   private HP hp;
 
-  public DodgeGamePresenter(DodgeView dodgeView, User user, int screenWidth, int screenHeight) {
-    dodgeGameManager = new DodgeGameManager(screenWidth, screenHeight);
+  //Use dependency injection for dodge game manager
+  public DodgeGamePresenter(DodgeView dodgeView, DodgeGameManager dodgeGameManager, User user) {
+    this.dodgeGameManager = dodgeGameManager;
     plane = dodgeGameManager.getPlane();
     hp = dodgeGameManager.getHP();
     this.dodgeView = dodgeView;

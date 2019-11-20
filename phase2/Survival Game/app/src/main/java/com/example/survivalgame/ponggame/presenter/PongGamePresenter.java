@@ -17,10 +17,11 @@ public class PongGamePresenter extends Thread {
   /** the countdown of this game */
   private Duration pongDuration;
 
-  public PongGamePresenter(PongView pongView, User user, int screenWidth, int screenHeight) {
+  //Use dependency injection for pong game manager
+  public PongGamePresenter(PongView pongView, PongGameManager pongGameManager, User user) {
+    this.pongGameManager = pongGameManager;
     this.user = user;
     this.pongView = pongView;
-    pongGameManager = new PongGameManager(user, screenWidth, screenHeight);
     pongDuration = Duration.ofSeconds(30);
   }
 

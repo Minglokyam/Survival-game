@@ -13,6 +13,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.survivalgame.User;
+import com.example.survivalgame.dodgegame.model.DodgeGameManager;
 import com.example.survivalgame.dodgegame.presenter.DodgeGamePresenter;
 
 // This is the class which is responsible for rendering the game objects.
@@ -28,7 +29,7 @@ public class DodgeGameView extends SurfaceView implements DodgeView {
   public DodgeGameView(Context context, DodgeActivityInterface dodgeActivityInterface, User user) {
     super(context);
     this.dodgeActivityInterface = dodgeActivityInterface;
-    dodgeGamePresenter = new DodgeGamePresenter(this, user, screenWidth, screenHeight);
+    dodgeGamePresenter = new DodgeGamePresenter(this, new DodgeGameManager(screenWidth, screenHeight), user);
 
     paintText = new Paint();
     paintText.setColor(Color.BLACK);

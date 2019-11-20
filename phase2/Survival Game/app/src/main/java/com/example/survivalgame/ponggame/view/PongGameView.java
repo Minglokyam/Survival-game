@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.example.survivalgame.User;
+import com.example.survivalgame.ponggame.model.PongGameManager;
 import com.example.survivalgame.ponggame.presenter.PongGamePresenter;
 
 public class PongGameView extends SurfaceView implements PongView {
@@ -42,7 +43,7 @@ public class PongGameView extends SurfaceView implements PongView {
     paintText.setTextSize(36);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
 
-    pongGamePresenter = new PongGamePresenter(this, user, screenWidth, screenHeight);
+    pongGamePresenter = new PongGamePresenter(this, new PongGameManager(user, screenWidth, screenHeight), user);
 
     getHolder()
         .addCallback(

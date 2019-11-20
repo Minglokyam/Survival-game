@@ -28,14 +28,15 @@ public class RunningGamePresenter extends Thread implements RunningPresenter {
   // check whether the runner is running
   private boolean running;
 
+  //We use dependency inversion principle to inject rect factory and running game manager
   public RunningGamePresenter(
       RunningView runningView,
-      User user,
-      int screenWidth,
-      int screenHeight,
-      Map<String, List<Integer>> bmpSizeMap) {
-    rectFactory = new RectFactory();
-    runningGameManager = new RunningGameManager(this, screenWidth, screenHeight, bmpSizeMap);
+      RunningGameManager runningGameManager,
+      RectFactory rectFactory,
+      User user) {
+    this.rectFactory = rectFactory;
+    this.runningGameManager = runningGameManager;
+    runningGameManager.setRunningPresenter(this);
     this.runningView = runningView;
     this.user = user;
     runningDuration = Duration.ofSeconds(30);

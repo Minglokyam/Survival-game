@@ -16,6 +16,8 @@ import android.graphics.Paint;
 
 import com.example.survivalgame.R;
 import com.example.survivalgame.User;
+import com.example.survivalgame.runninggame.model.RectFactory;
+import com.example.survivalgame.runninggame.model.RunningGameManager;
 import com.example.survivalgame.runninggame.presenter.RunningGamePresenter;
 
 import java.util.ArrayList;
@@ -67,7 +69,12 @@ public class RunningGameView extends SurfaceView implements RunningView {
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
     this.runningActivityInterface = runningActivityInterface;
     runningGamePresenter =
-        new RunningGamePresenter(this, user, screenWidth, screenHeight, bmpSizeMap);
+        new RunningGamePresenter(
+                this,
+                new RunningGameManager(screenWidth, screenHeight, bmpSizeMap),
+                new RectFactory(),
+                user
+        );
     getHolder()
         .addCallback(
             new Callback() {
