@@ -1,6 +1,6 @@
 package com.example.survivalgame.ponggame.model;
 
-import com.example.survivalgame.User;
+import com.example.survivalgame.general.User;
 
 class Ball extends PongGameItemCircle implements Movable {
   /** The horizontal velocity of this ball */

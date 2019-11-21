@@ -1,4 +1,6 @@
-package com.example.survivalgame;
+package com.example.survivalgame.loginsystem.view;
+
+import com.example.survivalgame.general.User;
 
 public interface LoginView {
   void launchRunningGame(String name, User user);

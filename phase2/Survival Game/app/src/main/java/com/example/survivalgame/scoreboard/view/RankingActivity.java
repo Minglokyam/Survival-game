@@ -8,13 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.survivalgame.IOManager;
-import com.example.survivalgame.MainActivity;
+import com.example.survivalgame.general.IOManager;
+import com.example.survivalgame.loginsystem.view.MainActivity;
 import com.example.survivalgame.R;
 
-import com.example.survivalgame.User;
-import com.example.survivalgame.UserManager;
-import com.example.survivalgame.replay.view.PongGameReplayActivity;
+import com.example.survivalgame.general.User;
+import com.example.survivalgame.general.UserManager;
 import com.example.survivalgame.scoreboard.model.RankingInteractor;
 import com.example.survivalgame.scoreboard.presenter.RankingPresenter;
 

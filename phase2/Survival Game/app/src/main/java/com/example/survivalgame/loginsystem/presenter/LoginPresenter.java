@@ -1,10 +1,14 @@
-package com.example.survivalgame;
+package com.example.survivalgame.loginsystem.presenter;
+
+import com.example.survivalgame.loginsystem.view.LoginView;
+import com.example.survivalgame.general.User;
+import com.example.survivalgame.loginsystem.model.LoginInteractor;
 
 public class LoginPresenter implements LoginListener {
   private LoginView loginView;
   private LoginInteractor loginInteractor;
 
-  LoginPresenter(LoginView loginView, LoginInteractor loginInteractor) {
+  public LoginPresenter(LoginView loginView, LoginInteractor loginInteractor) {
     this.loginView = loginView;
     this.loginInteractor = loginInteractor;
   }
@@ -59,11 +63,11 @@ public class LoginPresenter implements LoginListener {
     loginView.launchDodgeGame(name, user);
   }
 
-  void validateRegisterCredentials(String username, String password) {
+  public void validateRegisterCredentials(String username, String password) {
     loginInteractor.register(username, password, this);
   }
 
-  void validateLoginCredentials(String username, String password) {
+  public void validateLoginCredentials(String username, String password) {
     loginInteractor.login(username, password, this);
   }
 

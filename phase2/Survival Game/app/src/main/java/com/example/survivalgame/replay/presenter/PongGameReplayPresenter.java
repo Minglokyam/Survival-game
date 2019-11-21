@@ -1,6 +1,6 @@
 package com.example.survivalgame.replay.presenter;
 
-import com.example.survivalgame.User;
+import com.example.survivalgame.general.User;
 import com.example.survivalgame.replay.view.ReplayView;
 import com.example.survivalgame.replay.model.PongGameItem;
 

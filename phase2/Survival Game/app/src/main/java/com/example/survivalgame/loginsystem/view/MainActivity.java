@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.loginsystem.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.survivalgame.general.IOManager;
+import com.example.survivalgame.R;
+import com.example.survivalgame.general.User;
 import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
+import com.example.survivalgame.loginsystem.model.LoginInteractor;
+import com.example.survivalgame.loginsystem.presenter.LoginPresenter;
 import com.example.survivalgame.ponggame.view.PongGameActivity;
 import com.example.survivalgame.runninggame.view.RunningGameActivity;
 

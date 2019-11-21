@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.example.survivalgame.User;
+import com.example.survivalgame.general.User;
 import com.example.survivalgame.dodgegame.model.DodgeGameManager;
 import com.example.survivalgame.dodgegame.presenter.DodgeGamePresenter;
 

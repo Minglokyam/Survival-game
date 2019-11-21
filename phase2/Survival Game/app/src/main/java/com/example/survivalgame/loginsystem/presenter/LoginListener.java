@@ -1,4 +1,6 @@
-package com.example.survivalgame;
+package com.example.survivalgame.loginsystem.presenter;
+
+import com.example.survivalgame.general.User;
 
 public interface LoginListener {
   void onRegisterSuccess();

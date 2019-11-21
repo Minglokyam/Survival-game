@@ -1,4 +1,6 @@
-package com.example.survivalgame;
+package com.example.survivalgame.general;
+
+import com.example.survivalgame.general.User;
 
 import java.io.Serializable;
 import java.util.HashMap;

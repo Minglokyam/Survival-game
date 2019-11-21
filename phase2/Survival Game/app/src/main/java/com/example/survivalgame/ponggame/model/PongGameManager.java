@@ -1,6 +1,6 @@
 package com.example.survivalgame.ponggame.model;
 
-import com.example.survivalgame.User;
+import com.example.survivalgame.general.User;
 
 import java.util.ArrayList;
 import java.util.List;

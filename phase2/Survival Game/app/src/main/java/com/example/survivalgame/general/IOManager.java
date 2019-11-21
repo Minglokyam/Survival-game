@@ -1,7 +1,9 @@
-package com.example.survivalgame;
+package com.example.survivalgame.general;
 
 import android.content.Context;
 import android.util.Log;
+
+import com.example.survivalgame.general.UserManager;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

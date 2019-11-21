@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.survivalgame.IOManager;
-import com.example.survivalgame.MainActivity;
-import com.example.survivalgame.User;
-import com.example.survivalgame.UserManager;
+import com.example.survivalgame.general.IOManager;
+import com.example.survivalgame.general.User;
+import com.example.survivalgame.general.UserManager;
 import com.example.survivalgame.ponggame.view.PongGameActivity;
 import com.example.survivalgame.scoreboard.view.RankingActivity;
 

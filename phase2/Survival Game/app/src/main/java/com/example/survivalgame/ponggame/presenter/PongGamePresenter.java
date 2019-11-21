@@ -1,6 +1,6 @@
 package com.example.survivalgame.ponggame.presenter;
 
-import com.example.survivalgame.User;
+import com.example.survivalgame.general.User;
 import com.example.survivalgame.ponggame.view.PongView;
 import com.example.survivalgame.ponggame.model.PongGameItem;
 import com.example.survivalgame.ponggame.model.PongGameManager;

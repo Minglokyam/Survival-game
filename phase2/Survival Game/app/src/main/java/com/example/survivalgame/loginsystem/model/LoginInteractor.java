@@ -1,14 +1,18 @@
-package com.example.survivalgame;
+package com.example.survivalgame.loginsystem.model;
+
+import com.example.survivalgame.loginsystem.presenter.LoginListener;
+import com.example.survivalgame.general.User;
+import com.example.survivalgame.general.UserManager;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class LoginInteractor {
+public class LoginInteractor {
   private static final String REGEX = "^(?=.*[A-Z])[\\w@$!%*?&]{6,}$";
 
-  void register(String username, String password, LoginListener loginListener) {
+  public void register(String username, String password, LoginListener loginListener) {
     loginListener.loadFile();
     if (checkNotEmptyCredential(username, password)) {
       if (!UserManager.userExists(username)) {
@@ -29,7 +33,7 @@ class LoginInteractor {
     }
   }
 
-  void login(String username, String password, LoginListener loginListener) {
+  public void login(String username, String password, LoginListener loginListener) {
     loginListener.loadFile();
     if (checkNotEmptyCredential(username, password)) {
       System.out.println(UserManager.userExists(username));

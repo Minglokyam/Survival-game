@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.survivalgame.R;
-import com.example.survivalgame.User;
-import com.example.survivalgame.UserManager;
+import com.example.survivalgame.general.User;
+import com.example.survivalgame.general.UserManager;
 import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 import com.example.survivalgame.replay.view.PongGameReplayActivity;
 

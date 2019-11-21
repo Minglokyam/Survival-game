@@ -1,6 +1,6 @@
 package com.example.survivalgame.dodgegame.presenter;
 
-import com.example.survivalgame.User;
+import com.example.survivalgame.general.User;
 import com.example.survivalgame.dodgegame.model.DodgeGameManager;
 import com.example.survivalgame.dodgegame.model.Plane;
 import com.example.survivalgame.dodgegame.model.HP;

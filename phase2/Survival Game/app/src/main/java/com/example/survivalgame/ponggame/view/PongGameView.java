@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.example.survivalgame.User;
+import com.example.survivalgame.general.User;
 import com.example.survivalgame.ponggame.model.PongGameManager;
 import com.example.survivalgame.ponggame.presenter.PongGamePresenter;
 

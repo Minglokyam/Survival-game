@@ -15,7 +15,7 @@
         <activity android:name=".ponggame.view.PongGameActivity" />
         <activity android:name=".replay.view.PongGameReplayActivity" />
         <activity android:name=".scoreboard.view.RankingActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".loginsystem.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

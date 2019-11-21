@@ -1,7 +1,7 @@
 package com.example.survivalgame.scoreboard.model;
 
-import com.example.survivalgame.User;
-import com.example.survivalgame.UserManager;
+import com.example.survivalgame.general.User;
+import com.example.survivalgame.general.UserManager;
 import com.example.survivalgame.scoreboard.presenter.RankingPresenterInterface;
 
 import java.util.ArrayList;

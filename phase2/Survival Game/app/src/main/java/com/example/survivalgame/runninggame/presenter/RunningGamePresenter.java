@@ -5,7 +5,7 @@ package com.example.survivalgame.runninggame.presenter;
 // redundant and unnecessarily increase the number of classes.
 import android.graphics.Rect;
 
-import com.example.survivalgame.User;
+import com.example.survivalgame.general.User;
 import com.example.survivalgame.runninggame.model.RandomItem;
 import com.example.survivalgame.runninggame.model.RectFactory;
 import com.example.survivalgame.runninggame.model.RunningGameManager;
@@ -14,7 +14,6 @@ import com.example.survivalgame.runninggame.view.RunningView;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.Map;
 
 public class RunningGamePresenter extends Thread implements RunningPresenter {
   private RectFactory rectFactory;

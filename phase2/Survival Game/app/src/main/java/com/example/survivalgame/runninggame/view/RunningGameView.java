@@ -15,7 +15,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.survivalgame.R;
-import com.example.survivalgame.User;
+import com.example.survivalgame.general.User;
 import com.example.survivalgame.runninggame.model.RectFactory;
 import com.example.survivalgame.runninggame.model.RunningGameManager;
 import com.example.survivalgame.runninggame.presenter.RunningGamePresenter;

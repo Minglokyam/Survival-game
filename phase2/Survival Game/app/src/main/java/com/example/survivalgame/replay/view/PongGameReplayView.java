@@ -8,7 +8,7 @@ import android.graphics.Typeface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.example.survivalgame.User;
+import com.example.survivalgame.general.User;
 import com.example.survivalgame.replay.presenter.PongGameReplayPresenter;
 
 public class PongGameReplayView extends SurfaceView implements ReplayView {

@@ -1,4 +1,4 @@
-package com.example.survivalgame;
+package com.example.survivalgame.general;
 
 import java.time.Duration;
 import java.io.*;
@@ -43,7 +43,7 @@ public class User implements Serializable, Comparable<User> {
    * @param username user's username
    * @param password user's password
    */
-  User(String username, String password) {
+  public User(String username, String password) {
     this.username = username;
     this.password = password;
     score = 0;
@@ -53,7 +53,7 @@ public class User implements Serializable, Comparable<User> {
   }
 
   /** get the user's password */
-  String getPassword() {
+  public String getPassword() {
     return password;
   }
 
