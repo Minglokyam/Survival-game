@@ -52,11 +52,6 @@ public class User implements Serializable, Comparable<User> {
     totalDuration = Duration.ofSeconds(0);
   }
 
-  /** get the user's username */
-  String getUsername() {
-    return username;
-  }
-
   /** get the user's password */
   String getPassword() {
     return password;
@@ -65,11 +60,6 @@ public class User implements Serializable, Comparable<User> {
   /** get the user's current score */
   public int getScore() {
     return score;
-  }
-
-  /** get the user's highest score */
-  public int getHighestScore() {
-    return highestScore;
   }
 
   /** set the user's highest score */
@@ -81,7 +71,6 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the user's score
-   *
    * @param newScore the user's new score
    */
   public void setScore(int newScore) {
@@ -95,7 +84,6 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the user's life count
-   *
    * @param newLife user's new life count
    */
   public void setLife(int newLife) {
@@ -109,7 +97,6 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the game the user's currently playing
-   *
    * @param newGameStage the game the player is playing
    */
   public void setGameStage(int newGameStage) {
@@ -123,7 +110,6 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the duration of user's playing time
-   *
    * @param newTotalDuration the new duration to be set
    */
   public void setTotalDuration(Duration newTotalDuration) {
