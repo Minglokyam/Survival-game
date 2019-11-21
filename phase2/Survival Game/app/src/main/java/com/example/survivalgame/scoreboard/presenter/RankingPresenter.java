@@ -22,11 +22,13 @@ public class RankingPresenter implements RankingPresenterInterface {
   }
 
   @Override
-  public void printRankingText(List<User> userList) {
+  public void printRankingText(List<User> userList, int size) {
     List<String> userStatementList = new ArrayList<>();
-    for (int i = 0; i < 3; i++) {
-      userStatementList.add(userList.get(i).toString());
+    String userStatement;
+    for (int i = 0; i < size; i++) {
+      userStatement = userList.get(i).toString();
+      userStatementList.add(userStatement);
     }
-    rankingView.printRankingText(userStatementList);
+    rankingView.printRankingText(userStatementList, size);
   }
 }

@@ -18,6 +18,10 @@ public class RankingInteractor {
       userList.add(UserManager.getUserMap().get(key));
     }
     Collections.sort(userList);
-    presenter.printRankingText(userList);
+    int size = userList.size();
+    if(size > 3){
+      size = 3;
+    }
+    presenter.printRankingText(userList, size);
   }
 }

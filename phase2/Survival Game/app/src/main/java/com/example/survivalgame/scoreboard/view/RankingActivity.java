@@ -72,10 +72,10 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
   }
 
   @Override
-  public void printRankingText(List<String> userStatementList) {
+  public void printRankingText(List<String> userStatementList, int size) {
     String userStatement;
     TextView textView;
-    for (int i = 0; i < userStatementList.size(); i++) {
+    for (int i = 0; i < size; i++) {
       userStatement = userStatementList.get(i);
       textView = textViews.get(i);
       textView.setText(userStatement);
