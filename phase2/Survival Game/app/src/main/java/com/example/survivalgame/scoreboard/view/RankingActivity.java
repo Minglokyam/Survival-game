@@ -9,11 +9,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.survivalgame.general.IOManager;
+import com.example.survivalgame.general.UserManagerSingleton;
 import com.example.survivalgame.loginsystem.view.MainActivity;
 import com.example.survivalgame.R;
 
 import com.example.survivalgame.general.User;
-import com.example.survivalgame.general.UserManager;
 import com.example.survivalgame.scoreboard.model.RankingInteractor;
 import com.example.survivalgame.scoreboard.presenter.RankingPresenter;
 
@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RankingActivity extends AppCompatActivity implements RankingView {
-  RankingPresenter rankingPresenter;
   private User user;
   private String name;
   private List<TextView> textViews;
@@ -31,8 +30,9 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Intent intent = getIntent();
+    UserManagerSingleton userManagerSingleton = UserManagerSingleton.getInstance();
     name = intent.getStringExtra("user");
-    user = UserManager.getUser(name);
+    user = userManagerSingleton.getUser(name);
 
     setContentView(R.layout.activity_ranking);
 
@@ -49,7 +49,7 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
           }
         });
 
-    rankingPresenter = new RankingPresenter(this, user, new RankingInteractor());
+    RankingPresenter rankingPresenter = new RankingPresenter(this, user, new RankingInteractor());
   }
 
   public void toMain() {

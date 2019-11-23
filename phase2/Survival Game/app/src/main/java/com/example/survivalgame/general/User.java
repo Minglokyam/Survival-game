@@ -71,6 +71,7 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the user's score
+   *
    * @param newScore the user's new score
    */
   public void setScore(int newScore) {
@@ -84,6 +85,7 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the user's life count
+   *
    * @param newLife user's new life count
    */
   public void setLife(int newLife) {
@@ -97,6 +99,7 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the game the user's currently playing
+   *
    * @param newGameStage the game the player is playing
    */
   public void setGameStage(int newGameStage) {
@@ -110,6 +113,7 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the duration of user's playing time
+   *
    * @param newTotalDuration the new duration to be set
    */
   public void setTotalDuration(Duration newTotalDuration) {

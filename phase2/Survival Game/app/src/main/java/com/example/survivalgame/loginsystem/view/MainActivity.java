@@ -20,7 +20,7 @@ import com.example.survivalgame.runninggame.view.RunningGameActivity;
 public class MainActivity extends AppCompatActivity implements LoginView {
   private LoginPresenter presenter;
 
-  /** Create new UserManager when this activity is created */
+  /** Create new UserManagerSingleton when this activity is created */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

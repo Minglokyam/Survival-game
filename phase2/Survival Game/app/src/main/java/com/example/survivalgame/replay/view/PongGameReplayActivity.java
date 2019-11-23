@@ -6,11 +6,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.survivalgame.general.User;
-import com.example.survivalgame.general.UserManager;
+import com.example.survivalgame.general.UserManagerSingleton;
 import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 
 public class PongGameReplayActivity extends AppCompatActivity implements ReplayActivityInterface {
   private PongGameReplayView replayView;
+  private UserManagerSingleton userManagerSingleton;
   private String name;
   private User user;
 
@@ -18,8 +19,9 @@ public class PongGameReplayActivity extends AppCompatActivity implements ReplayA
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Intent intent = getIntent();
+    userManagerSingleton = UserManagerSingleton.getInstance();
     name = intent.getStringExtra("user");
-    user = UserManager.getUser(name);
+    user = userManagerSingleton.getUser(name);
     replayView = new PongGameReplayView(this, this, user);
     setContentView(replayView);
   }

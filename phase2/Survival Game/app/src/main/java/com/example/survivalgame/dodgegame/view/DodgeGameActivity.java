@@ -6,13 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.survivalgame.scoreboard.view.RankingActivity;
-import com.example.survivalgame.general.UserManager;
+import com.example.survivalgame.general.UserManagerSingleton;
 
 import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.general.User;
 
 // MainActivity class for the dodge game
 public class DodgeGameActivity extends AppCompatActivity implements DodgeActivityInterface {
+  private UserManagerSingleton userManagerSingleton;
   private DodgeGameView dodgeGameView;
   private String name;
   private User user;
@@ -22,7 +23,8 @@ public class DodgeGameActivity extends AppCompatActivity implements DodgeActivit
     super.onCreate(savedInstanceState);
     Intent intent = getIntent();
     name = intent.getStringExtra("user");
-    user = UserManager.getUser(name);
+    userManagerSingleton = UserManagerSingleton.getInstance();
+    user = userManagerSingleton.getUser(name);
     user.setGameStage(User.DODGE);
     IOManager.saveFile(this);
     dodgeGameView = new DodgeGameView(this, this, user);

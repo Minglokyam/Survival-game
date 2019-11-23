@@ -7,12 +7,13 @@ import android.os.Bundle;
 
 import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.general.User;
-import com.example.survivalgame.general.UserManager;
+import com.example.survivalgame.general.UserManagerSingleton;
 import com.example.survivalgame.ponggame.view.PongGameActivity;
 import com.example.survivalgame.scoreboard.view.RankingActivity;
 
 public class RunningGameActivity extends AppCompatActivity implements RunningActivityInterface {
   private RunningGameView runningGameView;
+  private UserManagerSingleton userManagerSingleton;
   private String name;
   private User user;
 
@@ -21,7 +22,8 @@ public class RunningGameActivity extends AppCompatActivity implements RunningAct
     super.onCreate(savedInstanceState);
     Intent intent = getIntent();
     name = intent.getStringExtra("user");
-    user = UserManager.getUser(name);
+    userManagerSingleton = UserManagerSingleton.getInstance();
+    user = userManagerSingleton.getUser(name);
     user.setGameStage(User.RUNNING);
     IOManager.saveFile(this);
     runningGameView = new RunningGameView(this, this, user);
