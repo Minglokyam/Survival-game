@@ -101,7 +101,7 @@ public class RunningGamePresenter extends Thread implements RunningPresenter {
       runningView.toPong();
     } else if (user.getLife() == 0) {
       running = false;
-      runningView.toScoreBoard();
+      runningView.toUpload();
     }
   }
 

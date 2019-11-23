@@ -7,7 +7,7 @@ public interface PongView {
 
   void unlockCanvasAndPost();
 
-  void toScoreBoard();
+  void toUpload();
 
   void toBeforeReplay();
 

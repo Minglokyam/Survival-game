@@ -32,14 +32,6 @@ public class DodgeGameActivity extends AppCompatActivity implements DodgeActivit
     setContentView(dodgeGameView);
   }
 
-  @Override
-  public void toScoreBoard() {
-    Intent intent = new Intent(this, RankingActivity.class);
-    intent.putExtra("user", name);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(intent);
-    finish();
-  }
   public void toUpload() {
     Intent intent = new Intent(this, UploadActivity.class);
     intent.putExtra("user", name);

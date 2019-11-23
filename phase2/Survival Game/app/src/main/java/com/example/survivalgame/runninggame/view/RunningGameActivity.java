@@ -10,6 +10,7 @@ import com.example.survivalgame.general.User;
 import com.example.survivalgame.general.UserManagerSingleton;
 import com.example.survivalgame.ponggame.view.PongGameActivity;
 import com.example.survivalgame.scoreboard.view.RankingActivity;
+import com.example.survivalgame.uploadactivity.UploadActivity;
 
 public class RunningGameActivity extends AppCompatActivity implements RunningActivityInterface {
   private RunningGameView runningGameView;
@@ -40,11 +41,12 @@ public class RunningGameActivity extends AppCompatActivity implements RunningAct
   }
 
   @Override
-  public void toScoreBoard() {
-    Intent intent = new Intent(this, RankingActivity.class);
+  public void toUpload() {
+    Intent intent = new Intent(this, UploadActivity.class);
     intent.putExtra("user", name);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();
   }
+
 }

@@ -93,8 +93,8 @@ public class PongGameView extends SurfaceView implements PongView {
   }
 
   @Override
-  public void toScoreBoard() {
-    pongActivityInterface.toScoreBoard();
+  public void toUpload() {
+    pongActivityInterface.toUpload();
   }
 
   @Override

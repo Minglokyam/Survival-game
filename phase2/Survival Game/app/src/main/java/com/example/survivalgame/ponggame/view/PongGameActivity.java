@@ -10,6 +10,7 @@ import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.general.User;
 import com.example.survivalgame.beforereplay.BeforeReplayActivity;
 import com.example.survivalgame.scoreboard.view.RankingActivity;
+import com.example.survivalgame.uploadactivity.UploadActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +46,8 @@ public class PongGameActivity extends AppCompatActivity implements PongActivityI
   }
 
   @Override
-  public void toScoreBoard() {
-    Intent intent = new Intent(this, RankingActivity.class);
+  public void toUpload() {
+    Intent intent = new Intent(this, UploadActivity.class);
     intent.putExtra("user", name);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
