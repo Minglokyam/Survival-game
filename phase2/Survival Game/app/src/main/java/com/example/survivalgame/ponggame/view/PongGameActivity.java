@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.survivalgame.general.UserManager;
+import com.example.survivalgame.general.UserManagerSingleton;
 import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.general.User;
 import com.example.survivalgame.beforereplay.BeforeReplayActivity;
@@ -17,14 +17,16 @@ import java.util.List;
 public class PongGameActivity extends AppCompatActivity implements PongActivityInterface {
   private PongGameView pongGameView;
   private String name;
+  private UserManagerSingleton userManagerSingleton;
   private User user;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Intent intent = getIntent();
+    userManagerSingleton = UserManagerSingleton.getInstance();
     name = intent.getStringExtra("user");
-    user = UserManager.getUser(name);
+    user = userManagerSingleton.getUser(name);
     user.setGameStage(User.PONG);
     user.setReplay(new ArrayList<List<List<Float>>>()); // empty the replay
     IOManager.saveFile(this);

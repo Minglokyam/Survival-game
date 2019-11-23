@@ -50,7 +50,7 @@ public class PongGameReplayPresenter extends Thread {
   }
 
   /** citation: http://gamecodeschool.com/android/programming-a-pong-game-for-android/ */
-  public void checkQuit() {
+  private void checkQuit() {
     if (user.isEmptyReplay()) { // If replay ends, return to main screen.
       running = false;
       replayView.toDodge();

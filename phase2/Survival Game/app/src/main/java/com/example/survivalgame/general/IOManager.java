@@ -3,8 +3,6 @@ package com.example.survivalgame.general;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.survivalgame.general.UserManager;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -22,11 +20,12 @@ public class IOManager {
   /** read the user file and update the current userManager */
   public static void loadFile(Context context) {
     FileInputStream fis = null;
+    UserManagerSingleton userManagerSingleton = UserManagerSingleton.getInstance();
     try {
       InputStream inputStream = context.openFileInput(USER_FILE);
       if (inputStream != null) {
         ObjectInputStream input = new ObjectInputStream(inputStream);
-        UserManager.setUserMap((HashMap) input.readObject());
+        userManagerSingleton.setUserMap((HashMap) input.readObject());
         inputStream.close();
       }
     } catch (FileNotFoundException e) {
@@ -47,10 +46,11 @@ public class IOManager {
   /** replace the user file with a new file containing the latest user data */
   public static void saveFile(Context context) {
     FileOutputStream fos = null;
+    UserManagerSingleton userManagerSingleton = UserManagerSingleton.getInstance();
     try {
       fos = context.openFileOutput(USER_FILE, Context.MODE_PRIVATE);
       ObjectOutputStream os = new ObjectOutputStream(fos);
-      os.writeObject(UserManager.getUserMap());
+      os.writeObject(userManagerSingleton.getUserMap());
       os.close();
     } catch (IOException e) {
       Log.e("Exception", "File write failed: " + e.toString());

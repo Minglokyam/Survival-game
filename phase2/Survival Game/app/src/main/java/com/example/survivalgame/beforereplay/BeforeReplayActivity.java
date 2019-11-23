@@ -9,20 +9,22 @@ import android.widget.Button;
 
 import com.example.survivalgame.R;
 import com.example.survivalgame.general.User;
-import com.example.survivalgame.general.UserManager;
+import com.example.survivalgame.general.UserManagerSingleton;
 import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 import com.example.survivalgame.replay.view.PongGameReplayActivity;
 
 public class BeforeReplayActivity extends AppCompatActivity {
   private String name;
   private User user;
+  private UserManagerSingleton userManagerSingleton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Intent intent = getIntent();
     name = intent.getStringExtra("user");
-    user = UserManager.getUser(name);
+    userManagerSingleton = UserManagerSingleton.getInstance();
+    user = userManagerSingleton.getUser(name);
 
     setContentView(R.layout.activity_before_replay);
 

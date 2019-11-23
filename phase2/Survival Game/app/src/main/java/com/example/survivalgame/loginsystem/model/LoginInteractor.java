@@ -1,8 +1,8 @@
 package com.example.survivalgame.loginsystem.model;
 
+import com.example.survivalgame.general.UserManagerSingleton;
 import com.example.survivalgame.loginsystem.presenter.LoginListener;
 import com.example.survivalgame.general.User;
-import com.example.survivalgame.general.UserManager;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -14,12 +14,13 @@ public class LoginInteractor {
 
   public void register(String username, String password, LoginListener loginListener) {
     loginListener.loadFile();
+    UserManagerSingleton userManagerSingleton = UserManagerSingleton.getInstance();
     if (checkNotEmptyCredential(username, password)) {
-      if (!UserManager.userExists(username)) {
+      if (!userManagerSingleton.userExists(username)) {
         if (pwRequirement(password)) {
           String hashed = BCrypt.hashpw(password, BCrypt.gensalt(10));
           User newUser = new User(username, hashed);
-          UserManager.addUser(username, newUser);
+          userManagerSingleton.addUser(username, newUser);
           loginListener.saveFile();
           loginListener.onRegisterSuccess();
         } else {
@@ -35,10 +36,11 @@ public class LoginInteractor {
 
   public void login(String username, String password, LoginListener loginListener) {
     loginListener.loadFile();
+    UserManagerSingleton userManagerSingleton = UserManagerSingleton.getInstance();
     if (checkNotEmptyCredential(username, password)) {
-      System.out.println(UserManager.userExists(username));
-      if (UserManager.userExists(username)) {
-        User temp = UserManager.getUser(username);
+      System.out.println(userManagerSingleton.userExists(username));
+      if (userManagerSingleton.userExists(username)) {
+        User temp = userManagerSingleton.getUser(username);
         if (checkPassword(password, temp.getPassword())) {
           onLoginSuccess(username, temp, loginListener);
         } else {

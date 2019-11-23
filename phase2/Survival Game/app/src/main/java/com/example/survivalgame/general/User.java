@@ -71,6 +71,7 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the user's score
+   *
    * @param newScore the user's new score
    */
   public void setScore(int newScore) {
@@ -89,6 +90,7 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the user's life count
+   *
    * @param newLife user's new life count
    */
   public void setLife(int newLife) {
@@ -102,6 +104,7 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the game the user's currently playing
+   *
    * @param newGameStage the game the player is playing
    */
   public void setGameStage(int newGameStage) {
@@ -115,6 +118,7 @@ public class User implements Serializable, Comparable<User> {
 
   /**
    * update the duration of user's playing time
+   *
    * @param newTotalDuration the new duration to be set
    */
   public void setTotalDuration(Duration newTotalDuration) {
@@ -134,13 +138,7 @@ public class User implements Serializable, Comparable<User> {
 
   @Override
   public int compareTo(User user) {
-    if (this.highestScore > user.highestScore) {
-      return -1;
-    } else if (this.highestScore < user.highestScore) {
-      return 1;
-    } else {
-      return 0;
-    }
+    return Integer.compare(user.highestScore, this.highestScore);
   }
 
   public void addReplay(List<List<Float>> tempReplay) {
@@ -151,8 +149,8 @@ public class User implements Serializable, Comparable<User> {
     return replay;
   }
 
-  public List<List<Float>> deleteReplay() {
-    return replay.remove(0);
+  public void deleteReplay() {
+    replay.remove(0);
   }
 
   public boolean isEmptyReplay() {
