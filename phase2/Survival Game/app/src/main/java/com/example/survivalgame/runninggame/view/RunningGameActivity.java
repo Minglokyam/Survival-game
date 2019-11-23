@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.survivalgame.beforepong.BeforePongActivity;
+import com.example.survivalgame.beforerunning.BeforeRunningActivity;
 import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.general.User;
 import com.example.survivalgame.general.UserManagerSingleton;
@@ -33,7 +35,7 @@ public class RunningGameActivity extends AppCompatActivity implements RunningAct
 
   @Override
   public void toPong() {
-    Intent intent = new Intent(this, PongGameActivity.class);
+    Intent intent = new Intent(this, BeforePongActivity.class);
     intent.putExtra("user", name);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);

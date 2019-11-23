@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.survivalgame.beforedodge.BeforeDodgeActivity;
 import com.example.survivalgame.general.User;
 import com.example.survivalgame.general.UserManagerSingleton;
 import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
@@ -29,7 +30,7 @@ public class PongGameReplayActivity extends AppCompatActivity implements ReplayA
   /** reset user statistic, start MainActivity, end PongGameReplay */
   @Override
   public void toDodge() {
-    Intent intent = new Intent(this, DodgeGameActivity.class);
+    Intent intent = new Intent(this, BeforeDodgeActivity.class);
     intent.putExtra("user", name);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.survivalgame.beforerunning.BeforeRunningActivity;
 import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.R;
 import com.example.survivalgame.general.User;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements LoginView {
 
   @Override
   public void launchRunningGame(String name, User user) {
-    Intent toJumpGame = new Intent(this, RunningGameActivity.class);
+    Intent toJumpGame = new Intent(this, BeforeRunningActivity.class);
     toGame(name, toJumpGame);
   }
 
