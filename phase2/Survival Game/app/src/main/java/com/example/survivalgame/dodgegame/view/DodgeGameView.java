@@ -84,6 +84,10 @@ public class DodgeGameView extends SurfaceView implements DodgeView {
     dodgeActivityInterface.toScoreBoard();
   }
 
+  public void toUpload(){
+    dodgeActivityInterface.toUpload();
+  }
+
   @Override
   public void clearCanvas() {
     canvas = null;
@@ -123,6 +127,7 @@ public class DodgeGameView extends SurfaceView implements DodgeView {
   public void drawRectF(float xCoordinate, float yCoordinate, float width, float length) {
     RectF rectF = new RectF(xCoordinate, yCoordinate, xCoordinate + width, yCoordinate + length);
     Paint paint = new Paint();
+
     paint.setColor(Color.GREEN);
     canvas.drawRect(rectF, paint);
   }

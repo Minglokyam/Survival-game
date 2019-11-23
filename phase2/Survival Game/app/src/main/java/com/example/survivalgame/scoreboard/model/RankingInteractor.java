@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class RankingInteractor {
+
   public void generateRanking(RankingPresenterInterface presenter) {
     List<User> userList = new ArrayList<>();
     Iterator iterator = UserManager.getUserMap().keySet().iterator();

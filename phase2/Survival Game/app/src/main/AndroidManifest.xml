@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".beforereplay.BeforeReplayActivity"></activity>
+        <activity android:name=".uploadactivity.UploadActivity"></activity>
+        <activity android:name=".beforereplay.BeforeReplayActivity" />
         <activity android:name=".dodgegame.view.DodgeGameActivity" />
         <activity android:name=".runninggame.view.RunningGameActivity" />
         <activity android:name=".ponggame.view.PongGameActivity" />

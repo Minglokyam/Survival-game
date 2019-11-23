@@ -87,7 +87,7 @@ public class DodgeGamePresenter extends Thread {
     if (dodgeDuration.getSeconds() <= 0 || user.getLife() == 0) {
       // After a success or a defeat, the player will go back to the main menu.
       running = false;
-      dodgeView.toScoreBoard();
+      dodgeView.toUpload();
     }
   }
 

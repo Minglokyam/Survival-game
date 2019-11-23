@@ -10,6 +10,7 @@ import com.example.survivalgame.general.UserManager;
 
 import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.general.User;
+import com.example.survivalgame.uploadactivity.UploadActivity;
 
 // MainActivity class for the dodge game
 public class DodgeGameActivity extends AppCompatActivity implements DodgeActivityInterface {
@@ -37,4 +38,12 @@ public class DodgeGameActivity extends AppCompatActivity implements DodgeActivit
     startActivity(intent);
     finish();
   }
+  public void toUpload() {
+    Intent intent = new Intent(this, UploadActivity.class);
+    intent.putExtra("user", name);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(intent);
+    finish();
+  }
+
 }

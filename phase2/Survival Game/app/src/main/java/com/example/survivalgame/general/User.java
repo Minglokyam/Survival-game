@@ -82,6 +82,11 @@ public class User implements Serializable, Comparable<User> {
     return life;
   }
 
+
+  public String getUsername(){
+    return username;
+  }
+
   /**
    * update the user's life count
    * @param newLife user's new life count
