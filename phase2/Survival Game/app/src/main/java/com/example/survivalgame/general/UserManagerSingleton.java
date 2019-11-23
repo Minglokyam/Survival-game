@@ -51,7 +51,7 @@ public class UserManagerSingleton implements Serializable {
     return userMap;
   }
 
-  public void setUserMap(Map<String, User> newUserMap) {
+  void setUserMap(Map<String, User> newUserMap) {
     userMap = newUserMap;
   }
 }

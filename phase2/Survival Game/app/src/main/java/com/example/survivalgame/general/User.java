@@ -133,13 +133,7 @@ public class User implements Serializable, Comparable<User> {
 
   @Override
   public int compareTo(User user) {
-    if (this.highestScore > user.highestScore) {
-      return -1;
-    } else if (this.highestScore < user.highestScore) {
-      return 1;
-    } else {
-      return 0;
-    }
+    return Integer.compare(user.highestScore, this.highestScore);
   }
 
   public void addReplay(List<List<Float>> tempReplay) {
@@ -150,8 +144,8 @@ public class User implements Serializable, Comparable<User> {
     return replay;
   }
 
-  public List<List<Float>> deleteReplay() {
-    return replay.remove(0);
+  public void deleteReplay() {
+    replay.remove(0);
   }
 
   public boolean isEmptyReplay() {
