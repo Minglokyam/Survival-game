@@ -101,7 +101,6 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
     String x = editText.getText().toString()+" received " + user.getScore()+" scores";
     textView.setText(x);
     setNickNameOnBoard(x);
-
   }
 
   public void setNickNameOnBoard(String sentence){
@@ -110,7 +109,5 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
         textViews.get(i).setText(sentence);
       }
     }
-
-
   }
 }
