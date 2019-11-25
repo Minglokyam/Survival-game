@@ -13,11 +13,15 @@ public class RankingInteractor {
 
   public void generateRanking(RankingPresenterInterface presenter) {
     List<User> userList = new ArrayList<>();
+    User user;
     UserManagerSingleton userManagerSingleton = UserManagerSingleton.getInstance();
     Iterator iterator = userManagerSingleton.getUserMap().keySet().iterator();
     while (iterator.hasNext()) {
       String key = iterator.next().toString();
-      userList.add(userManagerSingleton.getUserMap().get(key));
+      user = userManagerSingleton.getUserMap().get(key);
+      if (user.isRegistered()) {
+        userList.add(user);
+      }
     }
     Collections.sort(userList);
     int size = userList.size();

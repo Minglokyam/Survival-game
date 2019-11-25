@@ -5,12 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.survivalgame.scoreboard.view.RankingActivity;
 import com.example.survivalgame.general.UserManagerSingleton;
 
 import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.general.User;
-import com.example.survivalgame.uploadactivity.UploadActivity;
+import com.example.survivalgame.uploadactivity.model.UploadActivity;
 
 // MainActivity class for the dodge game
 public class DodgeGameActivity extends AppCompatActivity implements DodgeActivityInterface {
@@ -39,5 +38,4 @@ public class DodgeGameActivity extends AppCompatActivity implements DodgeActivit
     startActivity(intent);
     finish();
   }
-
 }

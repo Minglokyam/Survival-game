@@ -27,6 +27,7 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
   private List<TextView> textViews;
   private TextView yourScore;
   private EditText enterName;
+  private RankingPresenter rankingPresenter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +44,19 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
     yourScore = findViewById(R.id.yourScore);
     enterName = findViewById(R.id.enterName);
     Button enter = findViewById(R.id.Enter);
-    enter.setOnClickListener(
-            new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                setText(yourScore,enterName);
-              }
-            });
 
     Button toMainButton = findViewById(R.id.toMain);
+
+    rankingPresenter = new RankingPresenter(this, user, new RankingInteractor());
+
+    enter.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            String nickname = enterName.getText().toString();
+            rankingPresenter.update(nickname, user);
+          }
+        });
     toMainButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
@@ -59,8 +64,6 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
             toMain();
           }
         });
-
-    RankingPresenter rankingPresenter = new RankingPresenter(this, user, new RankingInteractor());
   }
 
   public void toMain() {
@@ -95,19 +98,5 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
   @Override
   public void setUserText(int userText) {
     yourScore.setText("You received " + userText + " scores");
-  }
-
-  public void setText(TextView textView,EditText editText){
-    String x = editText.getText().toString()+" received " + user.getScore()+" scores";
-    textView.setText(x);
-    setNickNameOnBoard(x);
-  }
-
-  public void setNickNameOnBoard(String sentence){
-    for(int i=0;i<textViews.size();i++){
-      if(textViews.get(i).getText().toString().contains(user.getUsername())){
-        textViews.get(i).setText(sentence);
-      }
-    }
   }
 }

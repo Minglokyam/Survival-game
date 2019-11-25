@@ -5,7 +5,6 @@ public interface DodgeView {
 
   void unlockCanvasAndPost();
 
-
   void toUpload();
 
   void clearCanvas();

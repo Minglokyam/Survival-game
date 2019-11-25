@@ -8,17 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RankingPresenter implements RankingPresenterInterface {
+  private RankingInteractor rankingInteractor;
   private RankingView rankingView;
 
   public RankingPresenter(RankingView rankingView, User user, RankingInteractor rankingInteractor) {
     this.rankingView = rankingView;
-    updateUserScore(user);
-    rankingInteractor.generateRanking(this);
-    rankingView.setUserText(user.getScore());
+    this.rankingInteractor = rankingInteractor;
+    generateRanking(user);
   }
 
-  private void updateUserScore(User user) {
-    user.updateHighestScore(user.getScore());
+  public void update(String nickname, User user) {
+    user.setNickname(nickname);
+    generateRanking(user);
+  }
+
+  private void generateRanking(User user) {
+    rankingInteractor.generateRanking(this);
+    rankingView.setUserText(user.getScore());
   }
 
   @Override

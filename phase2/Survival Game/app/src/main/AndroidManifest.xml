@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".beforedodge.BeforeDodgeActivity"></activity>
         <activity android:name=".beforereplay.BeforeReplayActivity" />
-        <activity android:name=".uploadactivity.UploadActivity" />
+        <activity android:name=".uploadactivity.model.UploadActivity" />
         <activity android:name=".beforepong.BeforePongActivity" />
         <activity android:name=".beforerunning.BeforeRunningActivity" />
         <activity android:name=".dodgegame.view.DodgeGameActivity" />

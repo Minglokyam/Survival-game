@@ -13,6 +13,11 @@ public class User implements Serializable, Comparable<User> {
   /* user's password */
   private String password;
 
+  /* user's nickname */
+  private String nickname;
+
+  private boolean registered = false;
+
   /* user's current score */
   private int score;
 
@@ -46,6 +51,7 @@ public class User implements Serializable, Comparable<User> {
   public User(String username, String password) {
     this.username = username;
     this.password = password;
+    this.nickname = username;
     score = 0;
     life = 3;
     gameStage = RUNNING;
@@ -60,6 +66,22 @@ public class User implements Serializable, Comparable<User> {
   /** get the user's current score */
   public int getScore() {
     return score;
+  }
+
+  public String getNickname() {
+    return nickname;
+  }
+
+  public void setNickname(String newNickname) {
+    nickname = newNickname;
+  }
+
+  public boolean isRegistered() {
+    return registered;
+  }
+
+  public void setRegistered() {
+    registered = true;
   }
 
   /** set the user's highest score */
@@ -83,8 +105,7 @@ public class User implements Serializable, Comparable<User> {
     return life;
   }
 
-
-  public String getUsername(){
+  public String getUsername() {
     return username;
   }
 
@@ -163,6 +184,6 @@ public class User implements Serializable, Comparable<User> {
 
   @Override
   public String toString() {
-    return "Player " + this.username + " receives " + highestScore + " scores";
+    return "Player " + this.nickname + " receives " + highestScore + " scores";
   }
 }

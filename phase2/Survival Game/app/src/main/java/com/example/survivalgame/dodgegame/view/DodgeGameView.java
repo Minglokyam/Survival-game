@@ -79,9 +79,7 @@ public class DodgeGameView extends SurfaceView implements DodgeView {
     getHolder().unlockCanvasAndPost(canvas);
   }
 
-
-
-  public void toUpload(){
+  public void toUpload() {
     dodgeActivityInterface.toUpload();
   }
 
