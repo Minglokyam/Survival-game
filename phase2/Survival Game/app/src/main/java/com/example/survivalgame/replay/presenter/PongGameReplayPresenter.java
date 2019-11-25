@@ -53,7 +53,7 @@ public class PongGameReplayPresenter extends Thread {
   private void checkQuit() {
     if (user.isEmptyReplay()) { // If replay ends, return to main screen.
       running = false;
-      replayView.toDodge();
+      replayView.toBeforeDodge();
     }
   }
 

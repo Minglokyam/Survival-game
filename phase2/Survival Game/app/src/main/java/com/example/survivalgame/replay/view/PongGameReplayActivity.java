@@ -29,7 +29,7 @@ public class PongGameReplayActivity extends AppCompatActivity implements ReplayA
 
   /** reset user statistic, start MainActivity, end PongGameReplay */
   @Override
-  public void toDodge() {
+  public void toBeforeDodge() {
     Intent intent = new Intent(this, BeforeDodgeActivity.class);
     intent.putExtra("user", name);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

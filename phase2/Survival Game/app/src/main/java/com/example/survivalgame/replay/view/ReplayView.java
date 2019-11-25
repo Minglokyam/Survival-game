@@ -7,7 +7,7 @@ public interface ReplayView {
 
   void unlockCanvasAndPost();
 
-  void toDodge();
+  void toBeforeDodge();
 
   void drawCircle(float xCoordinate, float yCoordinate, float radius);
 

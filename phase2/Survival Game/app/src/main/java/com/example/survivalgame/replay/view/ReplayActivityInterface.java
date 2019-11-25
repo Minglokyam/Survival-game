@@ -1,5 +1,5 @@
 package com.example.survivalgame.replay.view;
 
 public interface ReplayActivityInterface {
-  void toDodge();
+  void toBeforeDodge();
 }

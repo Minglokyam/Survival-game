@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.survivalgame.R;
+import com.example.survivalgame.beforedodge.BeforeDodgeActivity;
 import com.example.survivalgame.general.User;
 import com.example.survivalgame.general.UserManagerSingleton;
-import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 import com.example.survivalgame.replay.view.PongGameReplayActivity;
 
 public class BeforeReplayActivity extends AppCompatActivity {
@@ -35,7 +35,7 @@ public class BeforeReplayActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            toDodge();
+            toBeforeDodge();
           }
         });
 
@@ -48,8 +48,8 @@ public class BeforeReplayActivity extends AppCompatActivity {
         });
   }
 
-  public void toDodge() {
-    Intent intent = new Intent(this, DodgeGameActivity.class);
+  public void toBeforeDodge() {
+    Intent intent = new Intent(this, BeforeDodgeActivity.class);
     intent.putExtra("user", name);
     user.clearReplay();
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
