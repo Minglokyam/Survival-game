@@ -8,15 +8,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.survivalgame.beforedodge.BeforeDodgeActivity;
+import com.example.survivalgame.beforepong.BeforePongActivity;
 import com.example.survivalgame.beforerunning.BeforeRunningActivity;
 import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.R;
 import com.example.survivalgame.general.User;
-import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 import com.example.survivalgame.loginsystem.model.LoginInteractor;
 import com.example.survivalgame.loginsystem.presenter.LoginPresenter;
-import com.example.survivalgame.ponggame.view.PongGameActivity;
-import com.example.survivalgame.runninggame.view.RunningGameActivity;
 
 public class MainActivity extends AppCompatActivity implements LoginView {
   private LoginPresenter presenter;
@@ -71,13 +70,13 @@ public class MainActivity extends AppCompatActivity implements LoginView {
 
   @Override
   public void launchPongGame(String name, User user) {
-    Intent toPongGame = new Intent(this, PongGameActivity.class);
+    Intent toPongGame = new Intent(this, BeforePongActivity.class);
     toGame(name, toPongGame);
   }
 
   @Override
   public void launchDodgeGame(String name, User user) {
-    Intent toDodgeGame = new Intent(this, DodgeGameActivity.class);
+    Intent toDodgeGame = new Intent(this, BeforeDodgeActivity.class);
     toGame(name, toDodgeGame);
   }
 
