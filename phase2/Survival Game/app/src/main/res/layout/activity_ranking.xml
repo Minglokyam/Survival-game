@@ -85,7 +85,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="17dp"
         android:text="Enter"
-        android:onClick="enter"
+        android:onClick="changeNickname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"

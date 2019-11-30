@@ -47,7 +47,7 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
     rankingPresenter = new RankingPresenter(this, user, new RankingInteractor());
   }
 
-  public void enter(View view) {
+  public void changeNickname(View view) {
     String nickname = enterName.getText().toString();
     rankingPresenter.update(nickname, user);
   }
