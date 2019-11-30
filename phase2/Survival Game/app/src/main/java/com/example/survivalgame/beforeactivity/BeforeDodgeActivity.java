@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.survivalgame.R;
-import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 import com.example.survivalgame.general.User;
 import com.example.survivalgame.general.UserManagerSingleton;
+import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 
 public class BeforeDodgeActivity extends AppCompatActivity {
   private String name;
