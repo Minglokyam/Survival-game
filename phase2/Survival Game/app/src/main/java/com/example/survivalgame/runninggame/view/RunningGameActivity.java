@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.survivalgame.beforepong.BeforePongActivity;
+import com.example.survivalgame.beforeactivity.BeforePongActivity;
 import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.general.User;
 import com.example.survivalgame.general.UserManagerSingleton;

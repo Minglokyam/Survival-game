@@ -43,30 +43,16 @@ public class RankingActivity extends AppCompatActivity implements RankingView {
     setTextViews();
     yourScore = findViewById(R.id.yourScore);
     enterName = findViewById(R.id.enterName);
-    Button enter = findViewById(R.id.Enter);
-
-    Button toMainButton = findViewById(R.id.toMain);
 
     rankingPresenter = new RankingPresenter(this, user, new RankingInteractor());
-
-    enter.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            String nickname = enterName.getText().toString();
-            rankingPresenter.update(nickname, user);
-          }
-        });
-    toMainButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            toMain();
-          }
-        });
   }
 
-  public void toMain() {
+  public void enter(View view) {
+    String nickname = enterName.getText().toString();
+    rankingPresenter.update(nickname, user);
+  }
+
+  public void toMain(View view) {
     Intent intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     user.reset();

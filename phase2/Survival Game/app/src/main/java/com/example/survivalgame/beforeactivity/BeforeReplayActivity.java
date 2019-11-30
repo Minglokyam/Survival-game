@@ -1,18 +1,17 @@
-package com.example.survivalgame.beforerunning;
+package com.example.survivalgame.beforeactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.example.survivalgame.R;
 import com.example.survivalgame.general.User;
 import com.example.survivalgame.general.UserManagerSingleton;
-import com.example.survivalgame.runninggame.view.RunningGameActivity;
+import com.example.survivalgame.replay.view.PongGameReplayActivity;
 
-public class BeforeRunningActivity extends AppCompatActivity {
+public class BeforeReplayActivity extends AppCompatActivity {
   private String name;
   private User user;
   private UserManagerSingleton userManagerSingleton;
@@ -25,23 +24,21 @@ public class BeforeRunningActivity extends AppCompatActivity {
     userManagerSingleton = UserManagerSingleton.getInstance();
     user = userManagerSingleton.getUser(name);
 
-    setContentView(R.layout.activity_before_running);
-
-    Button nextButton = findViewById(R.id.torunningbutton);
-
-    nextButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            toRunning();
-          }
-        });
+    setContentView(R.layout.activity_before_replay);
   }
 
-  public void toRunning() {
-    Intent intent = new Intent(this, RunningGameActivity.class);
+  public void toBeforeDodge(View view) {
+    Intent intent = new Intent(this, BeforeDodgeActivity.class);
     intent.putExtra("user", name);
     user.clearReplay();
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(intent);
+    finish();
+  }
+
+  public void toReplay(View view) {
+    Intent intent = new Intent(this, PongGameReplayActivity.class);
+    intent.putExtra("user", name);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);
     finish();

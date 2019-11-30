@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.survivalgame.beforedodge.BeforeDodgeActivity;
-import com.example.survivalgame.beforepong.BeforePongActivity;
-import com.example.survivalgame.beforerunning.BeforeRunningActivity;
+import com.example.survivalgame.beforeactivity.BeforeDodgeActivity;
+import com.example.survivalgame.beforeactivity.BeforePongActivity;
+import com.example.survivalgame.beforeactivity.BeforeRunningActivity;
 import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.R;
 import com.example.survivalgame.general.User;

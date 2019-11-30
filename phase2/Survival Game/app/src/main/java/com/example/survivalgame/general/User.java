@@ -6,16 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable, Comparable<User> {
-
-  /* user's username */
-  private String username;
-
   /* user's password */
   private String password;
 
   /* user's nickname */
   private String nickname;
 
+  /* indicate that whether the user has registered his/her score to the scoreboard */
   private boolean registered = false;
 
   /* user's current score */
@@ -49,7 +46,6 @@ public class User implements Serializable, Comparable<User> {
    * @param password user's password
    */
   public User(String username, String password) {
-    this.username = username;
     this.password = password;
     this.nickname = username;
     score = 0;
@@ -66,10 +62,6 @@ public class User implements Serializable, Comparable<User> {
   /** get the user's current score */
   public int getScore() {
     return score;
-  }
-
-  public String getNickname() {
-    return nickname;
   }
 
   public void setNickname(String newNickname) {
@@ -103,10 +95,6 @@ public class User implements Serializable, Comparable<User> {
   /** get the user's current life count */
   public int getLife() {
     return life;
-  }
-
-  public String getUsername() {
-    return username;
   }
 
   /**

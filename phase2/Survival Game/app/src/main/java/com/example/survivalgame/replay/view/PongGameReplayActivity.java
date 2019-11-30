@@ -5,10 +5,9 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.survivalgame.beforedodge.BeforeDodgeActivity;
+import com.example.survivalgame.beforeactivity.BeforeDodgeActivity;
 import com.example.survivalgame.general.User;
 import com.example.survivalgame.general.UserManagerSingleton;
-import com.example.survivalgame.dodgegame.view.DodgeGameActivity;
 
 public class PongGameReplayActivity extends AppCompatActivity implements ReplayActivityInterface {
   private PongGameReplayView replayView;

@@ -8,7 +8,7 @@ import android.os.Bundle;
 import com.example.survivalgame.general.UserManagerSingleton;
 import com.example.survivalgame.general.IOManager;
 import com.example.survivalgame.general.User;
-import com.example.survivalgame.beforereplay.BeforeReplayActivity;
+import com.example.survivalgame.beforeactivity.BeforeReplayActivity;
 import com.example.survivalgame.uploadactivity.model.UploadActivity;
 
 import java.util.ArrayList;

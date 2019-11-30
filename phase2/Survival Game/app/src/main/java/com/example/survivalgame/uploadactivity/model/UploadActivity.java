@@ -30,29 +30,9 @@ public class UploadActivity extends AppCompatActivity {
     uploadPresenter = new UploadPresenter();
 
     setContentView(R.layout.activity_upload);
-
-    Button toMain = findViewById(R.id.toMain);
-    Button toScoreBoard = findViewById(R.id.toSc);
-
-    toMain.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            toMain();
-          }
-        });
-
-    toScoreBoard.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            uploadPresenter.updateUser(user);
-            toScoreBoard();
-          }
-        });
   }
 
-  public void toMain() {
+  public void toMain(View view) {
     Intent intent = new Intent(this, MainActivity.class);
     intent.putExtra("user", name);
     user.clearReplay();
@@ -61,7 +41,8 @@ public class UploadActivity extends AppCompatActivity {
     finish();
   }
 
-  private void toScoreBoard() {
+  public void toScoreBoard(View view) {
+    uploadPresenter.updateUser(user);
     Intent intent = new Intent(this, RankingActivity.class);
     intent.putExtra("user", name);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
