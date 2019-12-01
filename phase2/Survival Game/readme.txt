@@ -38,17 +38,31 @@ The codes of the game manager, game thread and game view take assignment 1 fish 
 reference.
 
 https://www.mindrot.org/projects/jBCrypt/
-We imported jBCrypt to encrypt password.
+We imported jBCrypt to encrypt the password.
+We added the dependency to build.gradle.
 
-####################### Phase 2 #########################
-We have restructured all games and the login system to conform MVP. Noted that some model and
+####################### Change in Phase 2 #########################
+We have restructured all games and the login system to implement MVP structure. Noted that some model and
 presenter classes in dodge and running games import android Rect and RectF classes.
 It violates the rule of MVP. We can solve this by creating our Rect and RectF classes.
 But it will unnecessarily increase the number of classes.
 
-####################### Known bug #######################
+We added a scoreboard and a replay function for the pong game as our extra features.
+
+I received feedback for phase 1 that the HP feature in the dodge game is difficult to understand.
+We added introduction pages before starting the games. It contains a screenshot of the game to illustrate a brief picture to the player.
+
+We used jBCrypt to encrypt the password.
+We used regex to ensure the complexity of the password. The password must contain at least one uppercase letter.
+
+The usermanager becomes a singleton class.
+
+We implemented package by feature and subpackage by layer.
+
+####################### Known bug in Phase 1 #######################
 *********************** update **************************
 This bug has been fixed during phase 2.
+
 *********************************************************
 When the player starts the second round, if he or she leaves the running game, the app
 will proceed to the pong game. This bug does not affect the functioning of
