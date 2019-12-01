@@ -37,6 +37,9 @@ objects in the game are constructed.
 The codes of the game manager, game thread and game view take assignment 1 fish tank as a
 reference.
 
+https://www.mindrot.org/projects/jBCrypt/
+We imported jBCrypt to encrypt password.
+
 ####################### Phase 2 #########################
 We have restructured all games and the login system to conform MVP. Noted that some model and
 presenter classes in dodge and running games import android Rect and RectF classes.
