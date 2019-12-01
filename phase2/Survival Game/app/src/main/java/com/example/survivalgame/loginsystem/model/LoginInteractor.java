@@ -4,6 +4,7 @@ import com.example.survivalgame.general.UserManagerSingleton;
 import com.example.survivalgame.loginsystem.presenter.LoginListener;
 import com.example.survivalgame.general.User;
 
+/** reference: https://www.mindrot.org/projects/jBCrypt/ */
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.regex.Matcher;
