@@ -35,7 +35,7 @@ public abstract class PongGameItem {
   }
 
   /** A getter of xCoordinate */
-  public float getXCoordinate() {
+  float getXCoordinate() {
     return xCoordinate;
   }
 
